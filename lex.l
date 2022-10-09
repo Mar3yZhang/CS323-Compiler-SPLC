@@ -1,4 +1,5 @@
 %{
+    // macro 
     #define EXIT_OK 0
     #define EXIT_FAIL 1
 
@@ -6,24 +7,41 @@
     int identifiers = 0;
     int lines = 0;
 %}
+
+%option yylineno
+
 letter [a-zA-Z]
 letter_ {letter}|_
 digit [0-9]
+hexadecimal_int 0[xX][0-9a-fA-F]+
+hex_form_char \x
+
 
 %%
-[0-9']{letter_}({letter_}|{digit})* {/* invalid identifier: do nothing */}
-{letter_}({letter_}|{digit})* {
-    if(lines==0) lines++;
-    if(strcmp(yytext,"char") && strcmp(yytext,"int") && strcmp(yytext,"return") && 
-        strcmp(yytext,"while") && strcmp(yytext,"if") && strcmp(yytext,"else")){
-        identifiers++; 
-        printf("line %d: %s\n", lines, yytext);
-    }
-} 
-\n {lines++;}
-[\t\r ]+ { /* does nothing when seeing white spaces except new line */ }
-. { /* a final rule that matches when seeing any character but new line */ }
-<<EOF>> { printf("There are %d occurrences of valid identifiers\n", identifiers); yyterminate(); }
+[\t\r\n ]+ { /* does nothing when seeing white spaces or new line */ }
+int|float|char {printf("TYPE %s\n", yytext);}
+struct {printf("STRUCT\n");}
+if {printf("IF\n");}
+else {printf("ELSE\n");}
+while {printf("WHILE\n");}
+return {printf("RETURN\n");}
+"." {printf("DOT\n");}
+";" {printf("SEMI\n");}
+"," {printf("COMMA\n");}
+"==" {printf("EQ\n");}
+"=" {printf("ASSIGN\n");}
+"<=" {printf("LE\n");}
+"<" {printf("LT\n");}
+">=" {printf("GE\n");}
+">" {printf("GT\n");}
+"!=" {printf("NE\n");}
+"+" {printf("PLUS\n");}
+"-" {printf("MINUS\n");}
+"*" {printf("MUL\n");}
+"/" {printf("DIV\n");}
+
+// . { /* a final rule that matches when seeing any character but new line */ }
+// <<EOF>> { printf("There are %d occurrences of valid identifiers\n", identifiers); yyterminate(); }
 
 %%
 int main(int argc, char **argv){
