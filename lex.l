@@ -6,27 +6,45 @@
     // global variables
     int identifiers = 0;
     int lines = 0;
-
-    %token INT,TYPE,STRUCT,IF,ELSE,WHILE,RETURN,DOT,SEMI,COMMA
 %}
 
 %option yylineno
 
-letter  [a-zA-Z]
+delim   [ \t\n\r]
 ws      {delim}+
-letter_ {letter}|_
-digit [0-9]
-hexadecimal_int 0[xX][0-9a-fA-F]+
+letter_  [a-zA-Z_]
+digit   [0-9]
+id      {letter_}({letter_}|{digit})*
+number  {digit}+(\.{digit}+)?(E[+-]?{digit}+)?
 
 
 %%
-[\t\r\n ]+ { /* does nothing when seeing white spaces or new line */ }
+"//" { 
+    char c;
+    // ignore the following chars until seeing a newline character
+    while((c = input()) != '\n'); 
+    // put the newline character back to the input buffer
+    unput(c); 
+}
+
+{ws} { /*no action and no return*/ }
 int|float|char {
     printf("TYPE %s\n", yytext);
-    if(strcmp(yytext,"int")){
-        return INT
-    }
+    // if (strcmp(yytext, "int"))
+    // {
+    //     return INT;
+    // }
+    // else if (strcmp(yytext, "float"))
+    // {
+    //     return FLOAT;
+    // }
+    // else
+    // {
+    //     return CHAR;
+    // }
 }
+"{" {printf("LC\n");}
+"}" {printf("RC\n");}
 "struct" {printf("STRUCT\n");}
 "if" {printf("IF\n");}
 "else" {printf("ELSE\n");}
@@ -45,9 +63,19 @@ int|float|char {
 "+" {printf("PLUS\n");}
 "-" {printf("MINUS\n");}
 "*" {printf("MUL\n");}
-"/" {printf("DIV\n");}
-. { /* a final rule that matches when seeing any character but new line */ }
-<<EOF>> { printf("There are %d occurrences of valid identifiers\n", identifiers); yyterminate(); }
+"/" {printf("DIV\n");} 
+"&&" {printf("AND\n");} 
+"||" {printf("DIV\n");} 
+"!" {printf("NOT\n");}
+"(" {printf("LP\n");}
+")" {printf("RP\n");}
+"[" {printf("LB\n");}
+"]" {printf("RB\n");}
+{id} {
+    // yylval = atoi(yytext);
+    printf("ID %s\n", yytext);
+}
+. {printf("Error type A at Line %d: Unknown characters %s \n",yylineno, yytext);}
 
 %%
 int main(int argc, char **argv){
