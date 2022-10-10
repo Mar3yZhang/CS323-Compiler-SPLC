@@ -6,16 +6,24 @@
     // global variables
     int identifiers = 0;
     int lines = 0;
+
+    //  should be ableto detect illegal form of hex-int, like 0x5gg, and report lexical errors.
 %}
 
 %option yylineno
 
 delim   [ \t\n\r]
 ws      {delim}+
-letter_  [a-zA-Z_]
+letter_ [a-zA-Z_]
+hex     (0|[1-9a-fA-F][0-9a-fA-F]*)
 digit   [0-9]
 id      {letter_}({letter_}|{digit})*
-number  {digit}+(\.{digit}+)?(E[+-]?{digit}+)?
+decimal_uint  {digit}+
+hexadecimal_uint 0xX{hex}
+int {decimal_uint}|{hexadecimal_uint}
+normal_char  (?<=').*(?=')
+hex_form_char \xX{hex}
+char {normal_char}|{hex_form_char}
 
 
 %%
@@ -71,6 +79,10 @@ int|float|char {
 ")" {printf("RP\n");}
 "[" {printf("LB\n");}
 "]" {printf("RB\n");}
+{int} {
+    // yylval = atoi(yytext);
+    printf("INT %s\n", yytext);
+}
 {id} {
     // yylval = atoi(yytext);
     printf("ID %s\n", yytext);

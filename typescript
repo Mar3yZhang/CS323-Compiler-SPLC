@@ -1,0 +1,3342 @@
+Script started on 2022-10-10 21:28:47+08:00 [TERM="xterm-256color" TTY="/dev/pts/1" COLUMNS="86" LINES="23"]
+[1m[7m%[27m[1m[0m                                                                                      ]2;marsy@Marsy-LAPTOP:/mnt/e/SUSTech学习资料/CS323-编译原理/2022F/Project/CS323-Compiler-SPLC]1;..Compiler-SPLC[0m[27m[24m[J[39m[0m[49m[40m[39m marsy@Marsy-LAPTOP [44m[30m[30m /mnt/e/SUSTech学习资料/CS323-编译原理/2022F/Project/CS323-Compiler-SPLC [43m[34m[30m  main ± [49m[33m[39m [K[?1h=[?2004hccd 
+[J[34;42mbin[0m/      [J[34;42mreport[0m/   [J[34;42mscript[0m/   [J[34;42mtest[0m/     [J[34;42mtest-ex[0m/[J[A[0m[27m[24m[0m[39m[49m[21Ccd[K[0m[39m[49m[1Cbin[1m/[0m
+[J[7mbin/    [0m  [J[34;42mreport[0m/   [J[34;42mscript[0m/   [J[34;42mtest[0m/     [J[34;42mtest-ex[0m/[J[A[0m[27m[24m[0m[39m[49m[21Ccd bin[1m/[0m[K[0m[39m[49m
+[7mbin/    [0m  [7mbin/    [0m  [A[0m[27m[24m[0m[39m[49m[21Ccd bin[1m/[0m[K[0m[39m[49mrep[0mort[1m/[0m
+[10C[7mreport/ [0m  [34;42mbin[0m/      [A[0m[27m[24m[0m[39m[49m[21Ccd report[1m/[0m[K[0m[39m[49mscrip[2C
+[20C[7mscript/ [0m  [10C[34;42mreport[0m/   [A[0m[27m[24m[0m[39m[49m[21Ccd script[1m/[0m[K[0m[39m[49m
+[J[A[31C[0m [?1l>[?2004l
+[J]2;cd script]1;cd[1m[7m%[27m[1m[0m                                                                                      ]2;marsy@Marsy-LAPTOP:/mnt/e/SUSTech学习资料/CS323-编译原理/2022F/Project/CS323-Compiler-SPLC/script]1;..r-SPLC/script[0m[27m[24m[J[39m[0m[49m[40m[39m marsy@Marsy-LAPTOP [44m[30m[30m /mnt/e/SUSTech学习资料/CS323-编译原理/2022F/Project/CS323-Compiler-SPLC/script [43m[34m[30m  main ± [49m[33m[39m [K[?1h=[?2004hooyo  yypy  ppytho test_flex.py[1m [0m[0m             n test_flex.py[1m [0m[0m [?1l>[?2004l
+]2;python test_flex.py]1;pythonplease input the # of test_case: 1
+TYPE int
+ID test_1_r01
+LP
+TYPE int
+ID a
+COMMA
+TYPE int
+ID b
+RP
+LC
+ID c
+ASSIGN
+Error type A at Line 3: Unknown characters ' 
+ID c
+Error type A at Line 3: Unknown characters ' 
+SEMI
+IF
+LP
+ID a
+GT
+ID b
+RP
+LC
+RETURN
+ID a
+SEMI
+RC
+ELSE
+LC
+RETURN
+ID b
+SEMI
+RC
+RC
+please input the # of test_case: 2
+TYPE int
+ID global
+SEMI
+STRUCT
+ID my_struct
+LC
+TYPE int
+ID code
+SEMI
+TYPE char
+ID data
+SEMI
+RC
+SEMI
+TYPE int
+ID test_1_r02
+LP
+RP
+LC
+STRUCT
+ID my_struct
+ID obj
+SEMI
+ID obj
+DOT
+ID code
+ASSIGN
+ID global
+SEMI
+ID global
+ASSIGN
+ID global
+PLUS
+INT 1
+SEMI
+RC
+please input the # of test_case: 3
+TYPE int
+ID test_1_r03
+LP
+RP
+LC
+TYPE int
+ID i
+ASSIGN
+INT 0
+COMMA
+ID j
+ASSIGN
+INT 1
+SEMI
+TYPE float
+ID i
+ASSIGN
+Error type A at Line 4: Unknown characters $ 
+SEMI
+IF
+LP
+ID i
+LT
+INT 9
+DOT
+INT 0
+RP
+LC
+RETURN
+INT 1
+RC
+RETURN
+Error type A at Line 8: Unknown characters @ 
+SEMI
+RC
+please input the # of test_case: 4
+TYPE int
+ID func_1
+LP
+TYPE int
+ID a
+RP
+LC
+RETURN
+INT 3
+MUL
+ID a
+SEMI
+RC
+TYPE int
+ID func_2
+LP
+TYPE int
+ID x
+COMMA
+TYPE int
+ID y
+RP
+LC
+RETURN
+ID x
+PLUS
+ID y
+SEMI
+RC
+TYPE int
+ID test_1_r04
+LP
+LC
+TYPE int
+ID a
+COMMA
+ID b
+COMMA
+ID c
+SEMI
+ID c
+ASSIGN
+ID func_2
+LP
+ID func_1
+LP
+ID func_1
+LP
+ID a
+PLUS
+ID b
+MUL
+ID func_1
+LP
+ID b
+RP
+RP
+COMMA
+INT 1
+DOT
+INT 7
+RP
+SEMI
+RETURN
+ID c
+SEMI
+RC
+please input the # of test_case: 5
+TYPE int
+ID test_1_r05
+LP
+TYPE int
+ID n
+RP
+LC
+TYPE int
+ID res
+ASSIGN
+INT 1
+SEMI
+WHILE
+LP
+ID n
+GT
+INT 0
+RP
+LC
+ID res
+ASSIGN
+ID res
+MUL
+ID n
+SEMI
+ID n
+ASSIGN
+ID n
+MINUS
+INT 1
+SEMI
+RC
+RETURN
+ID res
+SEMI
+RC
+please input the # of test_case: 6
+TYPE int
+ID test_1_r06
+LP
+RP
+LC
+TYPE int
+ID right_id_1
+COMMA
+ID _right_id_2
+SEMI
+TYPE float
+INT 3
+ID _wrong_id
+SEMI
+RC
+please input the # of test_case: 7
+TYPE int
+ID test_1_r07
+LP
+RP
+LC
+TYPE int
+ID a
+COMMA
+ID b
+COMMA
+ID c
+SEMI
+ID a
+ASSIGN
+INT 1
+SEMI
+ID b
+ASSIGN
+ID a
+AND
+INT 2
+SEMI
+ID c
+ASSIGN
+ID b
+DIV
+INT 3
+SEMI
+ID a
+ASSIGN
+ID c
+Error type A at Line 7: Unknown characters | 
+INT 4
+SEMI
+ID b
+ASSIGN
+ID a
+Error type A at Line 8: Unknown characters & 
+INT 5
+SEMI
+RC
+please input the # of test_case: 8
+TYPE int
+ID test_1_r08
+LP
+RP
+LC
+TYPE int
+ID a
+COMMA
+ID bb
+IF
+LP
+ID a
+GT
+INT 4
+RP
+RETURN
+ID bb
+SEMI
+RC
+please input the # of test_case: 9
+TYPE int
+ID test_1_r09
+LP
+RP
+LC
+TYPE int
+ID m
+ASSIGN
+INT 1
+SEMI
+TYPE float
+ID n
+ASSIGN
+INT 2
+DOT
+INT 2
+SEMI
+TYPE int
+ID x
+LB
+INT 5
+RB
+COMMA
+ID y
+LB
+INT 10
+RB
+SEMI
+ID x
+LB
+ID m
+RB
+ASSIGN
+INT 7
+SEMI
+ID y
+LB
+ID n
+RB
+ASSIGN
+INT 8
+SEMI
+RETURN
+ID x
+LB
+ID y
+RB
+SEMI
+RC
+please input the # of test_case: 10
+TYPE int
+ID test_1_r10
+LP
+RP
+LC
+TYPE int
+ID a
+COMMA
+ID b
+ASSIGN
+INT 1
+SEMI
+ID a
+ASSIGN
+INT 10
+SEMI
+TYPE int
+ID i
+ASSIGN
+INT 0
+SEMI
+WHILE
+LP
+ID i
+LT
+ID a
+RP
+LC
+ID b
+ASSIGN
+ID b
+PLUS
+ID i
+SEMI
+ID i
+ASSIGN
+ID i
+PLUS
+INT 1
+SEMI
+RC
+RC
+please input the # of test_case: 11
+TYPE int
+ID test_1_o01
+LP
+RP
+LC
+TYPE int
+ID _wrong_hex_int_1
+ASSIGN
+INT 0x77
+ID G
+SEMI
+TYPE int
+ID _wrong_hex_int_2
+ASSIGN
+INT 0xC
+ID S
+SEMI
+TYPE int
+ID _right_hex_int
+ASSIGN
+INT 0xdeadbeef
+SEMI
+TYPE char
+ID _right_hex_char
+ASSIGN
+Error type A at Line 6: Unknown characters ' 
+Error type A at Line 6: Unknown characters \ 
+ID xa0
+Error type A at Line 6: Unknown characters ' 
+SEMI
+TYPE char
+ID _wrong_hex_char_1
+ASSIGN
+Error type A at Line 7: Unknown characters ' 
+Error type A at Line 7: Unknown characters \ 
+ID x6u
+Error type A at Line 7: Unknown characters ' 
+SEMI
+TYPE char
+ID _wrong_hex_char_2
+ASSIGN
+Error type A at Line 8: Unknown characters ' 
+Error type A at Line 8: Unknown characters \ 
+ID x910
+Error type A at Line 8: Unknown characters ' 
+SEMI
+RC
+please input the # of test_case: 1 10
+TYPE int
+ID test_1_r10
+LP
+RP
+LC
+TYPE int
+ID a
+COMMA
+ID b
+ASSIGN
+INT 1
+SEMI
+ID a
+ASSIGN
+INT 10
+SEMI
+TYPE int
+ID i
+ASSIGN
+INT 0
+SEMI
+WHILE
+LP
+ID i
+LT
+ID a
+RP
+LC
+ID b
+ASSIGN
+ID b
+PLUS
+ID i
+SEMI
+ID i
+ASSIGN
+ID i
+PLUS
+INT 1
+SEMI
+RC
+RC
+please input the # of test_case: 9
+TYPE int
+ID test_1_r09
+LP
+RP
+LC
+TYPE int
+ID m
+ASSIGN
+INT 1
+SEMI
+TYPE float
+ID n
+ASSIGN
+INT 2
+DOT
+INT 2
+SEMI
+TYPE int
+ID x
+LB
+INT 5
+RB
+COMMA
+ID y
+LB
+INT 10
+RB
+SEMI
+ID x
+LB
+ID m
+RB
+ASSIGN
+INT 7
+SEMI
+ID y
+LB
+ID n
+RB
+ASSIGN
+INT 8
+SEMI
+RETURN
+ID x
+LB
+ID y
+RB
+SEMI
+RC
+please input the # of test_case: 8
+TYPE int
+ID test_1_r08
+LP
+RP
+LC
+TYPE int
+ID a
+COMMA
+ID bb
+IF
+LP
+ID a
+GT
+INT 4
+RP
+RETURN
+ID bb
+SEMI
+RC
+please input the # of test_case: 7
+TYPE int
+ID test_1_r07
+LP
+RP
+LC
+TYPE int
+ID a
+COMMA
+ID b
+COMMA
+ID c
+SEMI
+ID a
+ASSIGN
+INT 1
+SEMI
+ID b
+ASSIGN
+ID a
+AND
+INT 2
+SEMI
+ID c
+ASSIGN
+ID b
+DIV
+INT 3
+SEMI
+ID a
+ASSIGN
+ID c
+Error type A at Line 7: Unknown characters | 
+INT 4
+SEMI
+ID b
+ASSIGN
+ID a
+Error type A at Line 8: Unknown characters & 
+INT 5
+SEMI
+RC
+please input the # of test_case: 6
+TYPE int
+ID test_1_r06
+LP
+RP
+LC
+TYPE int
+ID right_id_1
+COMMA
+ID _right_id_2
+SEMI
+TYPE float
+INT 3
+ID _wrong_id
+SEMI
+RC
+please input the # of test_case: 5
+TYPE int
+ID test_1_r05
+LP
+TYPE int
+ID n
+RP
+LC
+TYPE int
+ID res
+ASSIGN
+INT 1
+SEMI
+WHILE
+LP
+ID n
+GT
+INT 0
+RP
+LC
+ID res
+ASSIGN
+ID res
+MUL
+ID n
+SEMI
+ID n
+ASSIGN
+ID n
+MINUS
+INT 1
+SEMI
+RC
+RETURN
+ID res
+SEMI
+RC
+please input the # of test_case: 4
+TYPE int
+ID func_1
+LP
+TYPE int
+ID a
+RP
+LC
+RETURN
+INT 3
+MUL
+ID a
+SEMI
+RC
+TYPE int
+ID func_2
+LP
+TYPE int
+ID x
+COMMA
+TYPE int
+ID y
+RP
+LC
+RETURN
+ID x
+PLUS
+ID y
+SEMI
+RC
+TYPE int
+ID test_1_r04
+LP
+LC
+TYPE int
+ID a
+COMMA
+ID b
+COMMA
+ID c
+SEMI
+ID c
+ASSIGN
+ID func_2
+LP
+ID func_1
+LP
+ID func_1
+LP
+ID a
+PLUS
+ID b
+MUL
+ID func_1
+LP
+ID b
+RP
+RP
+COMMA
+INT 1
+DOT
+INT 7
+RP
+SEMI
+RETURN
+ID c
+SEMI
+RC
+please input the # of test_case: 6
+TYPE int
+ID test_1_r06
+LP
+RP
+LC
+TYPE int
+ID right_id_1
+COMMA
+ID _right_id_2
+SEMI
+TYPE float
+INT 3
+ID _wrong_id
+SEMI
+RC
+please input the # of test_case: 7
+TYPE int
+ID test_1_r07
+LP
+RP
+LC
+TYPE int
+ID a
+COMMA
+ID b
+COMMA
+ID c
+SEMI
+ID a
+ASSIGN
+INT 1
+SEMI
+ID b
+ASSIGN
+ID a
+AND
+INT 2
+SEMI
+ID c
+ASSIGN
+ID b
+DIV
+INT 3
+SEMI
+ID a
+ASSIGN
+ID c
+Error type A at Line 7: Unknown characters | 
+INT 4
+SEMI
+ID b
+ASSIGN
+ID a
+Error type A at Line 8: Unknown characters & 
+INT 5
+SEMI
+RC
+please input the # of test_case: 8
+TYPE int
+ID test_1_r08
+LP
+RP
+LC
+TYPE int
+ID a
+COMMA
+ID bb
+IF
+LP
+ID a
+GT
+INT 4
+RP
+RETURN
+ID bb
+SEMI
+RC
+please input the # of test_case: 9
+TYPE int
+ID test_1_r09
+LP
+RP
+LC
+TYPE int
+ID m
+ASSIGN
+INT 1
+SEMI
+TYPE float
+ID n
+ASSIGN
+INT 2
+DOT
+INT 2
+SEMI
+TYPE int
+ID x
+LB
+INT 5
+RB
+COMMA
+ID y
+LB
+INT 10
+RB
+SEMI
+ID x
+LB
+ID m
+RB
+ASSIGN
+INT 7
+SEMI
+ID y
+LB
+ID n
+RB
+ASSIGN
+INT 8
+SEMI
+RETURN
+ID x
+LB
+ID y
+RB
+SEMI
+RC
+please input the # of test_case: 0
+../test/test_1_r00.spl: No such file or directory
+please input the # of test_case: 19=  0
+TYPE int
+ID test_1_r10
+LP
+RP
+LC
+TYPE int
+ID a
+COMMA
+ID b
+ASSIGN
+INT 1
+SEMI
+ID a
+ASSIGN
+INT 10
+SEMI
+TYPE int
+ID i
+ASSIGN
+INT 0
+SEMI
+WHILE
+LP
+ID i
+LT
+ID a
+RP
+LC
+ID b
+ASSIGN
+ID b
+PLUS
+ID i
+SEMI
+ID i
+ASSIGN
+ID i
+PLUS
+INT 1
+SEMI
+RC
+RC
+please input the # of test_case: 1
+TYPE int
+ID test_1_r01
+LP
+TYPE int
+ID a
+COMMA
+TYPE int
+ID b
+RP
+LC
+ID c
+ASSIGN
+Error type A at Line 3: Unknown characters ' 
+ID c
+Error type A at Line 3: Unknown characters ' 
+SEMI
+IF
+LP
+ID a
+GT
+ID b
+RP
+LC
+RETURN
+ID a
+SEMI
+RC
+ELSE
+LC
+RETURN
+ID b
+SEMI
+RC
+RC
+please input the # of test_case: 2
+TYPE int
+ID global
+SEMI
+STRUCT
+ID my_struct
+LC
+TYPE int
+ID code
+SEMI
+TYPE char
+ID data
+SEMI
+RC
+SEMI
+TYPE int
+ID test_1_r02
+LP
+RP
+LC
+STRUCT
+ID my_struct
+ID obj
+SEMI
+ID obj
+DOT
+ID code
+ASSIGN
+ID global
+SEMI
+ID global
+ASSIGN
+ID global
+PLUS
+INT 1
+SEMI
+RC
+please input the # of test_case: 1
+TYPE int
+ID test_1_r01
+LP
+TYPE int
+ID a
+COMMA
+TYPE int
+ID b
+RP
+LC
+ID c
+ASSIGN
+Error type A at Line 3: Unknown characters ' 
+ID c
+Error type A at Line 3: Unknown characters ' 
+SEMI
+IF
+LP
+ID a
+GT
+ID b
+RP
+LC
+RETURN
+ID a
+SEMI
+RC
+ELSE
+LC
+RETURN
+ID b
+SEMI
+RC
+RC
+please input the # of test_case: 2
+TYPE int
+ID global
+SEMI
+STRUCT
+ID my_struct
+LC
+TYPE int
+ID code
+SEMI
+TYPE char
+ID data
+SEMI
+RC
+SEMI
+TYPE int
+ID test_1_r02
+LP
+RP
+LC
+STRUCT
+ID my_struct
+ID obj
+SEMI
+ID obj
+DOT
+ID code
+ASSIGN
+ID global
+SEMI
+ID global
+ASSIGN
+ID global
+PLUS
+INT 1
+SEMI
+RC
+please input the # of test_case: 1
+TYPE int
+ID test_1_r01
+LP
+TYPE int
+ID a
+COMMA
+TYPE int
+ID b
+RP
+LC
+ID c
+ASSIGN
+Error type A at Line 3: Unknown characters ' 
+ID c
+Error type A at Line 3: Unknown characters ' 
+SEMI
+IF
+LP
+ID a
+GT
+ID b
+RP
+LC
+RETURN
+ID a
+SEMI
+RC
+ELSE
+LC
+RETURN
+ID b
+SEMI
+RC
+RC
+please input the # of test_case: ^F  3
+TYPE int
+ID test_1_r03
+LP
+RP
+LC
+TYPE int
+ID i
+ASSIGN
+INT 0
+COMMA
+ID j
+ASSIGN
+INT 1
+SEMI
+TYPE float
+ID i
+ASSIGN
+Error type A at Line 4: Unknown characters $ 
+SEMI
+IF
+LP
+ID i
+LT
+INT 9
+DOT
+INT 0
+RP
+LC
+RETURN
+INT 1
+RC
+RETURN
+Error type A at Line 8: Unknown characters @ 
+SEMI
+RC
+please input the # of test_case: 4
+TYPE int
+ID func_1
+LP
+TYPE int
+ID a
+RP
+LC
+RETURN
+INT 3
+MUL
+ID a
+SEMI
+RC
+TYPE int
+ID func_2
+LP
+TYPE int
+ID x
+COMMA
+TYPE int
+ID y
+RP
+LC
+RETURN
+ID x
+PLUS
+ID y
+SEMI
+RC
+TYPE int
+ID test_1_r04
+LP
+LC
+TYPE int
+ID a
+COMMA
+ID b
+COMMA
+ID c
+SEMI
+ID c
+ASSIGN
+ID func_2
+LP
+ID func_1
+LP
+ID func_1
+LP
+ID a
+PLUS
+ID b
+MUL
+ID func_1
+LP
+ID b
+RP
+RP
+COMMA
+INT 1
+DOT
+INT 7
+RP
+SEMI
+RETURN
+ID c
+SEMI
+RC
+please input the # of test_case: 12
+TYPE int
+ID test_1_o02
+LP
+RP
+LC
+TYPE int
+ID dec_int
+ASSIGN
+INT 323
+SEMI
+TYPE int
+ID hex_int
+ASSIGN
+INT 0xFFF
+SEMI
+TYPE char
+ID ch
+ASSIGN
+Error type A at Line 5: Unknown characters ' 
+Error type A at Line 5: Unknown characters \ 
+ID xC0
+Error type A at Line 5: Unknown characters ' 
+SEMI
+RETURN
+ID hex_int
+MINUS
+ID dec_int
+SEMI
+RC
+please input the # of test_case: MAKE
+Traceback (most recent call last):
+  File "test_flex.py", line 5, in <module>
+    test_case = input("please input the # of test_case: ")
+  File "<string>", line 1, in <module>
+NameError: name 'MAKE' is not defined
+[1m[7m%[27m[1m[0m                                                                                                    ]2;marsy@Marsy-LAPTOP:/mnt/e/SUSTech学习资料/CS323-编译原理/2022F/Project/CS323-Compiler-SPLC/script]1;..r-SPLC/script[0m[27m[24m[J[39m[0m[49m[40m[39m [31m✘[40m[39m marsy@Marsy-LAPTOP [44m[30m[30m /mnt/e/SUSTech学习资料/CS323-编译原理/2022F/Project/CS323-Compiler-SPLC/script [43m[34m[30m  main ± [49m[33m[39m [K[?1h=[?2004hccdc  .../[?1l>[?2004l
+]2;../]1;../[1m[7m%[27m[1m[0m                                                                                                    ]2;marsy@Marsy-LAPTOP:/mnt/e/SUSTech学习资料/CS323-编译原理/2022F/Project/CS323-Compiler-SPLC]1;..Compiler-SPLCc[0m[27m[24m[J[39m[0m[49m[40m[39m marsy@Marsy-LAPTOP [44m[30m[30m /mnt/e/SUSTech学习资料/CS323-编译原理/2022F/Project/CS323-Compiler-SPLC [43m[34m[30m  main ± [49m[33m[39m [K[?1h=[?2004hccd[?1l>[?2004l
+]2;cd]1;cd[1m[7m%[27m[1m[0m                                                                                                    ]2;marsy@Marsy-LAPTOP:~]1;~[0m[27m[24m[J[39m[0m[49m[40m[39m marsy@Marsy-LAPTOP [44m[30m[30m ~ [49m[34m[39m [K[?1h=[?2004h[7mcd & cd ../ & cd ../ & cd /mnt/e/SUSTech学习资料/CS323-编译原理/2022F/Proj[7me[7mct/CS323-Compiler-SPLC[27m[K[A[3C[27mc[27md[27m [27m&[27m [27mc[27md[27m [27m.[27m.[27m/[27m [27m&[27m [27mc[27md[27m [27m.[27m.[27m/[27m [27m&[27m [27mc[27md[27m [27m/[27mm[27mn[27mt[27m/[27me[27m/[27mS[27mU[27mS[27mT[27me[27mc[27mh[27m学[27m[27m习[27m[27m资[27m[27m料[27m[27m/[27mC[27mS[27m3[27m2[27m3[27m-[27m编[27m[27m译[27m[27m原[27m[27m理[27m[27m/[27m2[27m0[27m2[27m2[27mF[27m/[27mP[27mr[27mo[27mje[27mc[27mt[27m/[27mC[27mS[27m3[27m2[27m3[27m-[27mC[27mo[27mm[27mp[27mi[27ml[27me[27mr[27m-[27mS[27mP[27mL[27mC[?1l>[?2004l
+]2;cd & cd ../ & cd ../ & cd ]1;cd[1] 21672
+[2] 21673
+[3] 21674
+[1]    21672 done       cd
+[2]  - 21673 done       cd ../
+[1m[7m%[27m[1m[0m                                                                                                    [3]  + 21674 done       cd ../
+]2;marsy@Marsy-LAPTOP:/mnt/e/SUSTech学习资料/CS323-编译原理/2022F/Project/CS323-Compiler-SPLC]1;..Compiler-SPLC[0m[27m[24m[J[39m[0m[49m[40m[39m marsy@Marsy-LAPTOP [44m[30m[30m /mnt/e/SUSTech学习资料/CS323-编译原理/2022F/Project/CS323-Compiler-SPLC [43m[34m[30m  main ± [49m[33m[39m [K[?1h=[?2004hc lll[?1l>[?2004l
+]2;ls --color=tty -lh]1;lltotal 76K
+-rwxrwxrwx 1 marsy marsy 1.1K Oct  9 20:09 [0m[01;32mLICENSE[0m
+-rwxrwxrwx 1 marsy marsy  180 Oct 10 17:02 [01;32mMakefile[0m
+-rwxrwxrwx 1 marsy marsy  430 Oct  9 21:38 [01;32mREADME.md[0m
+drwxrwxrwx 1 marsy marsy 4.0K Oct 10 21:14 [34;42mbin[0m
+-rwxrwxrwx 1 marsy marsy   28 Oct 10 16:40 [01;32mformat.c[0m
+-rwxrwxrwx 1 marsy marsy 2.6K Oct 10 21:34 [01;32mlex.l[0m
+-rwxrwxrwx 1 marsy marsy  52K Oct 10 21:14 [01;32mlex.yy.c[0m
+drwxrwxrwx 1 marsy marsy 4.0K Oct  9 21:34 [34;42mreport[0m
+drwxrwxrwx 1 marsy marsy 4.0K Oct 10 20:38 [34;42mscript[0m
+drwxrwxrwx 1 marsy marsy 4.0K Oct  9 21:39 [34;42mtest[0m
+drwxrwxrwx 1 marsy marsy 4.0K Oct  9 21:35 [34;42mtest-ex[0m
+-rwxrwxrwx 1 marsy marsy  12K Oct 10 21:33 [01;32mtypescript[0m
+[1m[7m%[27m[1m[0m                                                                                                    ]2;marsy@Marsy-LAPTOP:/mnt/e/SUSTech学习资料/CS323-编译原理/2022F/Project/CS323-Compiler-SPLC]1;..Compiler-SPLC[0m[27m[24m[J[39m[0m[49m[40m[39m marsy@Marsy-LAPTOP [44m[30m[30m /mnt/e/SUSTech学习资料/CS323-编译原理/2022F/Project/CS323-Compiler-SPLC [43m[34m[30m  main ± [49m[33m[39m [K[?1h=[?2004hmmake[?1l>[?2004l
+]2;make]1;maketouch bin/splc
+flex lex.l
+lex.l:90: bad character: <
+lex.l:90: bad character: =
+lex.l:90: bad character: '
+lex.l:90: bad character: )
+lex.l:90: bad character: .
+lex.l:90: bad character: (
+lex.l:90: bad character: ?
+lex.l:90: bad character: =
+lex.l:90: bad character: '
+lex.l:90: bad character: )
+lex.l:90: bad character: )
+lex.l:90: bad character: |
+lex.l:90: bad character: {
+lex.l:90: bad character: h
+lex.l:90: bad character: e
+lex.l:90: bad character: _
+lex.l:90: bad character: f
+lex.l:90: bad character: o
+lex.l:90: bad character: r
+lex.l:90: bad character: m
+lex.l:90: bad character: _
+lex.l:90: bad character: c
+lex.l:90: bad character: h
+lex.l:90: bad character: a
+lex.l:90: bad character: r
+lex.l:90: bad character: }
+lex.l:90: bad character: )
+lex.l:90: bad character:  
+lex.l:90: bad character: {
+lex.l:90: bad character: 
+lex.l:90: bad character: 
+
+lex.l:90: bad character:  
+lex.l:90: bad character:  
+lex.l:90: bad character:  
+lex.l:90: bad character:  
+lex.l:90: bad character: /
+lex.l:90: bad character: /
+lex.l:90: bad character:  
+lex.l:90: bad character: y
+lex.l:90: bad character: y
+lex.l:90: bad character: l
+lex.l:90: bad character: v
+lex.l:90: bad character: a
+lex.l:90: bad character: l
+lex.l:90: bad character:  
+lex.l:90: bad character: =
+lex.l:90: bad character:  
+lex.l:90: bad character: a
+lex.l:90: bad character: t
+lex.l:90: bad character: o
+lex.l:90: bad character: (
+lex.l:90: bad character: y
+lex.l:90: bad character: y
+lex.l:90: bad character: t
+lex.l:90: bad character: e
+lex.l:90: bad character: t
+lex.l:90: bad character: )
+lex.l:90: bad character: ;
+lex.l:90: bad character: 
+lex.l:90: bad character: 
+
+lex.l:90: bad character:  
+lex.l:90: bad character:  
+lex.l:90: bad character:  
+lex.l:90: bad character:  
+lex.l:90: bad character: p
+lex.l:90: bad character: r
+lex.l:90: bad character: n
+lex.l:90: bad character: t
+lex.l:90: bad character: f
+lex.l:90: bad character: (
+lex.l:90: bad character: "
+lex.l:90: bad character: C
+lex.l:90: bad character: H
+lex.l:90: bad character: A
+lex.l:90: bad character: R
+lex.l:90: bad character:  
+lex.l:90: bad character: %
+lex.l:90: bad character: \
+lex.l:90: bad character: n
+lex.l:90: bad character: "
+lex.l:90: bad character: ,
+lex.l:90: bad character:  
+lex.l:90: bad character: y
+lex.l:90: bad character: y
+lex.l:90: bad character: t
+lex.l:90: bad character: e
+lex.l:90: bad character: t
+lex.l:90: bad character: )
+lex.l:90: bad character: ;
+lex.l:90: bad character: 
+lex.l:90: bad character: 
+
+lex.l:90: bad character: }
+lex.l:90: bad character: 
+lex.l:90: bad character: 
+
+lex.l:90: bad character: .
+lex.l:90: bad character:  
+lex.l:90: bad character: {
+lex.l:90: bad character: p
+lex.l:90: bad character: r
+lex.l:90: bad character: n
+lex.l:90: bad character: t
+lex.l:90: bad character: f
+lex.l:90: bad character: (
+lex.l:90: bad character: "
+lex.l:90: bad character: E
+lex.l:90: bad character: r
+lex.l:90: bad character: r
+lex.l:90: bad character: o
+lex.l:90: bad character: r
+lex.l:90: bad character:  
+lex.l:90: bad character: t
+lex.l:90: bad character: y
+lex.l:90: bad character: p
+lex.l:90: bad character: e
+lex.l:90: bad character:  
+lex.l:90: bad character: A
+lex.l:90: bad character:  
+lex.l:90: bad character: a
+lex.l:90: bad character: t
+lex.l:90: bad character:  
+lex.l:90: bad character: L
+lex.l:90: bad character: n
+lex.l:90: bad character: e
+lex.l:90: bad character:  
+lex.l:90: bad character: %
+lex.l:90: bad character: d
+lex.l:90: missing quote
+lex.l:92: unrecognized rule
+lex.l:92: fatal parse error
+make: *** [Makefile:8: splc] Error 1
+[1m[7m%[27m[1m[0m                                                                                                    ]2;marsy@Marsy-LAPTOP:/mnt/e/SUSTech学习资料/CS323-编译原理/2022F/Project/CS323-Compiler-SPLC]1;..Compiler-SPLC[0m[27m[24m[J[39m[0m[49m[40m[39m [31m✘[40m[39m marsy@Marsy-LAPTOP [44m[30m[30m /mnt/e/SUSTech学习资料/CS323-编译原理/2022F/Project/CS323-Compiler-SPLC [43m[34m[30m  main ± [49m[33m[39m [K[?1h=[?2004hmmake[?1l>[?2004l
+]2;make]1;maketouch bin/splc
+flex lex.l
+lex.l:90: bad character: <
+lex.l:90: bad character: =
+lex.l:90: bad character: '
+lex.l:90: bad character: )
+lex.l:90: bad character: .
+lex.l:90: bad character: (
+lex.l:90: bad character: ?
+lex.l:90: bad character: =
+lex.l:90: bad character: '
+lex.l:90: bad character: )
+lex.l:90: bad character: )
+lex.l:90: bad character: |
+lex.l:90: bad character: {
+lex.l:90: bad character: h
+lex.l:90: bad character: e
+lex.l:90: bad character: _
+lex.l:90: bad character: f
+lex.l:90: bad character: o
+lex.l:90: bad character: r
+lex.l:90: bad character: m
+lex.l:90: bad character: _
+lex.l:90: bad character: c
+lex.l:90: bad character: h
+lex.l:90: bad character: a
+lex.l:90: bad character: r
+lex.l:90: bad character: }
+lex.l:90: bad character: )
+lex.l:90: bad character:  
+lex.l:90: bad character: {
+lex.l:90: bad character: 
+lex.l:90: bad character: 
+
+lex.l:90: bad character:  
+lex.l:90: bad character:  
+lex.l:90: bad character:  
+lex.l:90: bad character:  
+lex.l:90: bad character: /
+lex.l:90: bad character: /
+lex.l:90: bad character:  
+lex.l:90: bad character: y
+lex.l:90: bad character: y
+lex.l:90: bad character: l
+lex.l:90: bad character: v
+lex.l:90: bad character: a
+lex.l:90: bad character: l
+lex.l:90: bad character:  
+lex.l:90: bad character: =
+lex.l:90: bad character:  
+lex.l:90: bad character: a
+lex.l:90: bad character: t
+lex.l:90: bad character: o
+lex.l:90: bad character: (
+lex.l:90: bad character: y
+lex.l:90: bad character: y
+lex.l:90: bad character: t
+lex.l:90: bad character: e
+lex.l:90: bad character: t
+lex.l:90: bad character: )
+lex.l:90: bad character: ;
+lex.l:90: bad character: 
+lex.l:90: bad character: 
+
+lex.l:90: bad character:  
+lex.l:90: bad character:  
+lex.l:90: bad character:  
+lex.l:90: bad character:  
+lex.l:90: bad character: p
+lex.l:90: bad character: r
+lex.l:90: bad character: n
+lex.l:90: bad character: t
+lex.l:90: bad character: f
+lex.l:90: bad character: (
+lex.l:90: bad character: "
+lex.l:90: bad character: C
+lex.l:90: bad character: H
+lex.l:90: bad character: A
+lex.l:90: bad character: R
+lex.l:90: bad character:  
+lex.l:90: bad character: %
+lex.l:90: bad character: \
+lex.l:90: bad character: n
+lex.l:90: bad character: "
+lex.l:90: bad character: ,
+lex.l:90: bad character:  
+lex.l:90: bad character: y
+lex.l:90: bad character: y
+lex.l:90: bad character: t
+lex.l:90: bad character: e
+lex.l:90: bad character: t
+lex.l:90: bad character: )
+lex.l:90: bad character: ;
+lex.l:90: bad character: 
+lex.l:90: bad character: 
+
+lex.l:90: bad character: }
+lex.l:90: bad character: 
+lex.l:90: bad character: 
+
+lex.l:90: bad character: .
+lex.l:90: bad character:  
+lex.l:90: bad character: {
+lex.l:90: bad character: p
+lex.l:90: bad character: r
+lex.l:90: bad character: n
+lex.l:90: bad character: t
+lex.l:90: bad character: f
+lex.l:90: bad character: (
+lex.l:90: bad character: "
+lex.l:90: bad character: E
+lex.l:90: bad character: r
+lex.l:90: bad character: r
+lex.l:90: bad character: o
+lex.l:90: bad character: r
+lex.l:90: bad character:  
+lex.l:90: bad character: t
+lex.l:90: bad character: y
+lex.l:90: bad character: p
+lex.l:90: bad character: e
+lex.l:90: bad character:  
+lex.l:90: bad character: A
+lex.l:90: bad character:  
+lex.l:90: bad character: a
+lex.l:90: bad character: t
+lex.l:90: bad character:  
+lex.l:90: bad character: L
+lex.l:90: bad character: n
+lex.l:90: bad character: e
+lex.l:90: bad character:  
+lex.l:90: bad character: %
+lex.l:90: bad character: d
+lex.l:90: missing quote
+lex.l:92: unrecognized rule
+lex.l:92: fatal parse error
+make: *** [Makefile:8: splc] Error 1
+[1m[7m%[27m[1m[0m                                                                                                    ]2;marsy@Marsy-LAPTOP:/mnt/e/SUSTech学习资料/CS323-编译原理/2022F/Project/CS323-Compiler-SPLC]1;..Compiler-SPLC[0m[27m[24m[J[39m[0m[49m[40m[39m [31m✘[40m[39m marsy@Marsy-LAPTOP [44m[30m[30m /mnt/e/SUSTech学习资料/CS323-编译原理/2022F/Project/CS323-Compiler-SPLC [43m[34m[30m  main ± [49m[33m[39m [K[?1h=[?2004hmmake[?1l>[?2004l
+]2;make]1;maketouch bin/splc
+flex lex.l
+lex.l:90: bad character: <
+lex.l:90: bad character: =
+lex.l:90: bad character: '
+lex.l:90: bad character: )
+lex.l:90: bad character: .
+lex.l:90: bad character: (
+lex.l:90: bad character: ?
+lex.l:90: bad character: =
+lex.l:90: bad character: '
+lex.l:90: bad character: )
+lex.l:90: bad character: )
+lex.l:90: bad character: |
+lex.l:90: bad character: {
+lex.l:90: bad character: h
+lex.l:90: bad character: e
+lex.l:90: bad character: _
+lex.l:90: bad character: f
+lex.l:90: bad character: o
+lex.l:90: bad character: r
+lex.l:90: bad character: m
+lex.l:90: bad character: _
+lex.l:90: bad character: c
+lex.l:90: bad character: h
+lex.l:90: bad character: a
+lex.l:90: bad character: r
+lex.l:90: bad character: }
+lex.l:90: bad character: )
+lex.l:90: bad character:  
+lex.l:90: bad character: {
+lex.l:90: bad character: 
+lex.l:90: bad character: 
+
+lex.l:90: bad character:  
+lex.l:90: bad character:  
+lex.l:90: bad character:  
+lex.l:90: bad character:  
+lex.l:90: bad character: /
+lex.l:90: bad character: /
+lex.l:90: bad character:  
+lex.l:90: bad character: y
+lex.l:90: bad character: y
+lex.l:90: bad character: l
+lex.l:90: bad character: v
+lex.l:90: bad character: a
+lex.l:90: bad character: l
+lex.l:90: bad character:  
+lex.l:90: bad character: =
+lex.l:90: bad character:  
+lex.l:90: bad character: a
+lex.l:90: bad character: t
+lex.l:90: bad character: o
+lex.l:90: bad character: (
+lex.l:90: bad character: y
+lex.l:90: bad character: y
+lex.l:90: bad character: t
+lex.l:90: bad character: e
+lex.l:90: bad character: t
+lex.l:90: bad character: )
+lex.l:90: bad character: ;
+lex.l:90: bad character: 
+lex.l:90: bad character: 
+
+lex.l:90: bad character:  
+lex.l:90: bad character:  
+lex.l:90: bad character:  
+lex.l:90: bad character:  
+lex.l:90: bad character: p
+lex.l:90: bad character: r
+lex.l:90: bad character: n
+lex.l:90: bad character: t
+lex.l:90: bad character: f
+lex.l:90: bad character: (
+lex.l:90: bad character: "
+lex.l:90: bad character: C
+lex.l:90: bad character: H
+lex.l:90: bad character: A
+lex.l:90: bad character: R
+lex.l:90: bad character:  
+lex.l:90: bad character: %
+lex.l:90: bad character: \
+lex.l:90: bad character: n
+lex.l:90: bad character: "
+lex.l:90: bad character: ,
+lex.l:90: bad character:  
+lex.l:90: bad character: y
+lex.l:90: bad character: y
+lex.l:90: bad character: t
+lex.l:90: bad character: e
+lex.l:90: bad character: t
+lex.l:90: bad character: )
+lex.l:90: bad character: ;
+lex.l:90: bad character: 
+lex.l:90: bad character: 
+
+lex.l:90: bad character: }
+lex.l:90: bad character: 
+lex.l:90: bad character: 
+
+lex.l:90: bad character: /
+lex.l:90: bad character: /
+lex.l:90: bad character:  
+lex.l:90: bad character: .
+lex.l:90: bad character:  
+lex.l:90: bad character: {
+lex.l:90: bad character: p
+lex.l:90: bad character: r
+lex.l:90: bad character: n
+lex.l:90: bad character: t
+lex.l:90: bad character: f
+lex.l:90: bad character: (
+lex.l:90: bad character: "
+lex.l:90: bad character: E
+lex.l:90: bad character: r
+lex.l:90: bad character: r
+lex.l:90: bad character: o
+lex.l:90: bad character: r
+lex.l:90: bad character:  
+lex.l:90: bad character: t
+lex.l:90: bad character: y
+lex.l:90: bad character: p
+lex.l:90: bad character: e
+lex.l:90: bad character:  
+lex.l:90: bad character: A
+lex.l:90: bad character:  
+lex.l:90: bad character: a
+lex.l:90: bad character: t
+lex.l:90: bad character:  
+lex.l:90: bad character: L
+lex.l:90: bad character: n
+lex.l:90: bad character: e
+lex.l:90: bad character:  
+lex.l:90: bad character: %
+lex.l:90: bad character: d
+lex.l:90: missing quote
+lex.l:92: unrecognized rule
+lex.l:92: fatal parse error
+make: *** [Makefile:8: splc] Error 1
+[1m[7m%[27m[1m[0m                                                                                                    ]2;marsy@Marsy-LAPTOP:/mnt/e/SUSTech学习资料/CS323-编译原理/2022F/Project/CS323-Compiler-SPLC]1;..Compiler-SPLC[0m[27m[24m[J[39m[0m[49m[40m[39m [31m✘[40m[39m marsy@Marsy-LAPTOP [44m[30m[30m /mnt/e/SUSTech学习资料/CS323-编译原理/2022F/Project/CS323-Compiler-SPLC [43m[34m[30m  main ± [49m[33m[39m [K[?1h=[?2004hmmake[?1l>[?2004l
+]2;make]1;maketouch bin/splc
+flex lex.l
+lex.l:90: bad character: <
+lex.l:90: bad character: =
+lex.l:90: bad character: '
+lex.l:90: bad character: )
+lex.l:90: bad character: .
+lex.l:90: bad character: *
+lex.l:90: bad character: (
+lex.l:90: bad character: ?
+lex.l:90: bad character: =
+lex.l:90: bad character: '
+lex.l:90: bad character: )
+lex.l:90: bad character: )
+lex.l:90: bad character: |
+lex.l:90: bad character: {
+lex.l:90: bad character: h
+lex.l:90: bad character: e
+lex.l:90: bad character: _
+lex.l:90: bad character: f
+lex.l:90: bad character: o
+lex.l:90: bad character: r
+lex.l:90: bad character: m
+lex.l:90: bad character: _
+lex.l:90: bad character: c
+lex.l:90: bad character: h
+lex.l:90: bad character: a
+lex.l:90: bad character: r
+lex.l:90: bad character: }
+lex.l:90: bad character: )
+lex.l:90: bad character:  
+lex.l:90: bad character: {
+lex.l:90: bad character: 
+lex.l:90: bad character: 
+
+lex.l:90: bad character:  
+lex.l:90: bad character:  
+lex.l:90: bad character:  
+lex.l:90: bad character:  
+lex.l:90: bad character: /
+lex.l:90: bad character: /
+lex.l:90: bad character:  
+lex.l:90: bad character: y
+lex.l:90: bad character: y
+lex.l:90: bad character: l
+lex.l:90: bad character: v
+lex.l:90: bad character: a
+lex.l:90: bad character: l
+lex.l:90: bad character:  
+lex.l:90: bad character: =
+lex.l:90: bad character:  
+lex.l:90: bad character: a
+lex.l:90: bad character: t
+lex.l:90: bad character: o
+lex.l:90: bad character: (
+lex.l:90: bad character: y
+lex.l:90: bad character: y
+lex.l:90: bad character: t
+lex.l:90: bad character: e
+lex.l:90: bad character: t
+lex.l:90: bad character: )
+lex.l:90: bad character: ;
+lex.l:90: bad character: 
+lex.l:90: bad character: 
+
+lex.l:90: bad character:  
+lex.l:90: bad character:  
+lex.l:90: bad character:  
+lex.l:90: bad character:  
+lex.l:90: bad character: p
+lex.l:90: bad character: r
+lex.l:90: bad character: n
+lex.l:90: bad character: t
+lex.l:90: bad character: f
+lex.l:90: bad character: (
+lex.l:90: bad character: "
+lex.l:90: bad character: C
+lex.l:90: bad character: H
+lex.l:90: bad character: A
+lex.l:90: bad character: R
+lex.l:90: bad character:  
+lex.l:90: bad character: %
+lex.l:90: bad character: \
+lex.l:90: bad character: n
+lex.l:90: bad character: "
+lex.l:90: bad character: ,
+lex.l:90: bad character:  
+lex.l:90: bad character: y
+lex.l:90: bad character: y
+lex.l:90: bad character: t
+lex.l:90: bad character: e
+lex.l:90: bad character: t
+lex.l:90: bad character: )
+lex.l:90: bad character: ;
+lex.l:90: bad character: 
+lex.l:90: bad character: 
+
+lex.l:90: bad character: }
+lex.l:90: bad character: 
+lex.l:90: bad character: 
+
+lex.l:90: bad character: .
+lex.l:90: bad character:  
+lex.l:90: bad character: {
+lex.l:90: bad character: p
+lex.l:90: bad character: r
+lex.l:90: bad character: n
+lex.l:90: bad character: t
+lex.l:90: bad character: f
+lex.l:90: bad character: (
+lex.l:90: bad character: "
+lex.l:90: bad character: E
+lex.l:90: bad character: r
+lex.l:90: bad character: r
+lex.l:90: bad character: o
+lex.l:90: bad character: r
+lex.l:90: bad character:  
+lex.l:90: bad character: t
+lex.l:90: bad character: y
+lex.l:90: bad character: p
+lex.l:90: bad character: e
+lex.l:90: bad character:  
+lex.l:90: bad character: A
+lex.l:90: bad character:  
+lex.l:90: bad character: a
+lex.l:90: bad character: t
+lex.l:90: bad character:  
+lex.l:90: bad character: L
+lex.l:90: bad character: n
+lex.l:90: bad character: e
+lex.l:90: bad character:  
+lex.l:90: bad character: %
+lex.l:90: bad character: d
+lex.l:90: missing quote
+lex.l:92: unrecognized rule
+lex.l:92: fatal parse error
+make: *** [Makefile:8: splc] Error 1
+[1m[7m%[27m[1m[0m                                                                                                    ]2;marsy@Marsy-LAPTOP:/mnt/e/SUSTech学习资料/CS323-编译原理/2022F/Project/CS323-Compiler-SPLC]1;..Compiler-SPLC[0m[27m[24m[J[39m[0m[49m[40m[39m [31m✘[40m[39m marsy@Marsy-LAPTOP [44m[30m[30m /mnt/e/SUSTech学习资料/CS323-编译原理/2022F/Project/CS323-Compiler-SPLC [43m[34m[30m  main ± [49m[33m[39m [K[?1h=[?2004hmmake[?1l>[?2004l
+]2;make]1;maketouch bin/splc
+flex lex.l
+lex.l:90: bad character: <
+lex.l:90: bad character: =
+lex.l:90: bad character: '
+lex.l:90: bad character: )
+lex.l:90: bad character: .
+lex.l:90: bad character: *
+lex.l:90: bad character: (
+lex.l:90: bad character: ?
+lex.l:90: bad character: =
+lex.l:90: bad character: '
+lex.l:90: bad character: )
+lex.l:90: bad character: )
+lex.l:90: bad character: |
+lex.l:90: bad character: {
+lex.l:90: bad character: h
+lex.l:90: bad character: e
+lex.l:90: bad character: _
+lex.l:90: bad character: f
+lex.l:90: bad character: o
+lex.l:90: bad character: r
+lex.l:90: bad character: m
+lex.l:90: bad character: _
+lex.l:90: bad character: c
+lex.l:90: bad character: h
+lex.l:90: bad character: a
+lex.l:90: bad character: r
+lex.l:90: bad character: }
+lex.l:90: bad character: )
+lex.l:90: bad character:  
+lex.l:90: bad character: {
+lex.l:90: bad character: 
+lex.l:90: bad character: 
+
+lex.l:90: bad character:  
+lex.l:90: bad character:  
+lex.l:90: bad character:  
+lex.l:90: bad character:  
+lex.l:90: bad character: /
+lex.l:90: bad character: /
+lex.l:90: bad character:  
+lex.l:90: bad character: y
+lex.l:90: bad character: y
+lex.l:90: bad character: l
+lex.l:90: bad character: v
+lex.l:90: bad character: a
+lex.l:90: bad character: l
+lex.l:90: bad character:  
+lex.l:90: bad character: =
+lex.l:90: bad character:  
+lex.l:90: bad character: a
+lex.l:90: bad character: t
+lex.l:90: bad character: o
+lex.l:90: bad character: (
+lex.l:90: bad character: y
+lex.l:90: bad character: y
+lex.l:90: bad character: t
+lex.l:90: bad character: e
+lex.l:90: bad character: t
+lex.l:90: bad character: )
+lex.l:90: bad character: ;
+lex.l:90: bad character: 
+lex.l:90: bad character: 
+
+lex.l:90: bad character:  
+lex.l:90: bad character:  
+lex.l:90: bad character:  
+lex.l:90: bad character:  
+lex.l:90: bad character: p
+lex.l:90: bad character: r
+lex.l:90: bad character: n
+lex.l:90: bad character: t
+lex.l:90: bad character: f
+lex.l:90: bad character: (
+lex.l:90: bad character: "
+lex.l:90: bad character: C
+lex.l:90: bad character: H
+lex.l:90: bad character: A
+lex.l:90: bad character: R
+lex.l:90: bad character:  
+lex.l:90: bad character: %
+lex.l:90: bad character: \
+lex.l:90: bad character: n
+lex.l:90: bad character: "
+lex.l:90: bad character: ,
+lex.l:90: bad character:  
+lex.l:90: bad character: y
+lex.l:90: bad character: y
+lex.l:90: bad character: t
+lex.l:90: bad character: e
+lex.l:90: bad character: t
+lex.l:90: bad character: )
+lex.l:90: bad character: ;
+lex.l:90: bad character: 
+lex.l:90: bad character: 
+
+lex.l:90: bad character: }
+lex.l:90: bad character: 
+lex.l:90: bad character: 
+
+lex.l:90: bad character: .
+lex.l:90: bad character:  
+lex.l:90: bad character: {
+lex.l:90: bad character: p
+lex.l:90: bad character: r
+lex.l:90: bad character: n
+lex.l:90: bad character: t
+lex.l:90: bad character: f
+lex.l:90: bad character: (
+lex.l:90: bad character: "
+lex.l:90: bad character: E
+lex.l:90: bad character: r
+lex.l:90: bad character: r
+lex.l:90: bad character: o
+lex.l:90: bad character: r
+lex.l:90: bad character:  
+lex.l:90: bad character: t
+lex.l:90: bad character: y
+lex.l:90: bad character: p
+lex.l:90: bad character: e
+lex.l:90: bad character:  
+lex.l:90: bad character: A
+lex.l:90: bad character:  
+lex.l:90: bad character: a
+lex.l:90: bad character: t
+lex.l:90: bad character:  
+lex.l:90: bad character: L
+lex.l:90: bad character: n
+lex.l:90: bad character: e
+lex.l:90: bad character:  
+lex.l:90: bad character: %
+lex.l:90: bad character: d
+lex.l:90: missing quote
+lex.l:92: unrecognized rule
+lex.l:92: fatal parse error
+make: *** [Makefile:8: splc] Error 1
+[1m[7m%[27m[1m[0m                                                                                                    ]2;marsy@Marsy-LAPTOP:/mnt/e/SUSTech学习资料/CS323-编译原理/2022F/Project/CS323-Compiler-SPLC]1;..Compiler-SPLC[0m[27m[24m[J[39m[0m[49m[40m[39m [31m✘[40m[39m marsy@Marsy-LAPTOP [44m[30m[30m /mnt/e/SUSTech学习资料/CS323-编译原理/2022F/Project/CS323-Compiler-SPLC [43m[34m[30m  main ± [49m[33m[39m [K[?1h=[?2004hmmake[?1l>[?2004l
+]2;make]1;maketouch bin/splc
+flex lex.l
+lex.l:90: bad character: <
+lex.l:90: bad character: =
+lex.l:90: bad character: '
+lex.l:90: bad character: )
+lex.l:90: bad character: .
+lex.l:90: bad character: *
+lex.l:90: bad character: (
+lex.l:90: bad character: ?
+lex.l:90: bad character: =
+lex.l:90: bad character: '
+lex.l:90: bad character: )
+lex.l:90: bad character: )
+lex.l:90: bad character: |
+lex.l:90: bad character: {
+lex.l:90: bad character: h
+lex.l:90: bad character: e
+lex.l:90: bad character: _
+lex.l:90: bad character: f
+lex.l:90: bad character: o
+lex.l:90: bad character: r
+lex.l:90: bad character: m
+lex.l:90: bad character: _
+lex.l:90: bad character: c
+lex.l:90: bad character: h
+lex.l:90: bad character: a
+lex.l:90: bad character: r
+lex.l:90: bad character: }
+lex.l:90: bad character: )
+lex.l:90: bad character:  
+lex.l:90: bad character: {
+lex.l:90: bad character: 
+lex.l:90: bad character: 
+
+lex.l:90: bad character:  
+lex.l:90: bad character:  
+lex.l:90: bad character:  
+lex.l:90: bad character:  
+lex.l:90: bad character: 
+lex.l:90: bad character: 
+
+lex.l:90: bad character: }
+lex.l:90: bad character: 
+lex.l:90: bad character: 
+
+lex.l:90: bad character: .
+lex.l:90: bad character:  
+lex.l:90: bad character: {
+lex.l:90: bad character: p
+lex.l:90: bad character: r
+lex.l:90: bad character: n
+lex.l:90: bad character: t
+lex.l:90: bad character: f
+lex.l:90: bad character: (
+lex.l:90: bad character: "
+lex.l:90: bad character: E
+lex.l:90: bad character: r
+lex.l:90: bad character: r
+lex.l:90: bad character: o
+lex.l:90: bad character: r
+lex.l:90: bad character:  
+lex.l:90: bad character: t
+lex.l:90: bad character: y
+lex.l:90: bad character: p
+lex.l:90: bad character: e
+lex.l:90: bad character:  
+lex.l:90: bad character: A
+lex.l:90: bad character:  
+lex.l:90: bad character: a
+lex.l:90: bad character: t
+lex.l:90: bad character:  
+lex.l:90: bad character: L
+lex.l:90: bad character: n
+lex.l:90: bad character: e
+lex.l:90: bad character:  
+lex.l:90: bad character: %
+lex.l:90: bad character: d
+lex.l:90: missing quote
+lex.l:92: unrecognized rule
+lex.l:92: fatal parse error
+make: *** [Makefile:8: splc] Error 1
+[1m[7m%[27m[1m[0m                                                                                                    ]2;marsy@Marsy-LAPTOP:/mnt/e/SUSTech学习资料/CS323-编译原理/2022F/Project/CS323-Compiler-SPLC]1;..Compiler-SPLC[0m[27m[24m[J[39m[0m[49m[40m[39m [31m✘[40m[39m marsy@Marsy-LAPTOP [44m[30m[30m /mnt/e/SUSTech学习资料/CS323-编译原理/2022F/Project/CS323-Compiler-SPLC [43m[34m[30m  main ± [49m[33m[39m [K[?1h=[?2004hmmake[?1l>[?2004l
+]2;make]1;maketouch bin/splc
+flex lex.l
+gcc lex.yy.c -lfl -o bin/splc.out
+[1m[7m%[27m[1m[0m                                                                                                    ]2;marsy@Marsy-LAPTOP:/mnt/e/SUSTech学习资料/CS323-编译原理/2022F/Project/CS323-Compiler-SPLC]1;..Compiler-SPLC[0m[27m[24m[J[39m[0m[49m[40m[39m marsy@Marsy-LAPTOP [44m[30m[30m /mnt/e/SUSTech学习资料/CS323-编译原理/2022F/Project/CS323-Compiler-SPLC [43m[34m[30m  main ± [49m[33m[39m [K[?1h=[?2004hMMAKE[?1l>[?2004l
+]2;MAKE]1;MAKEzsh: command not found: MAKE
+[1m[7m%[27m[1m[0m                                                                                                    ]2;marsy@Marsy-LAPTOP:/mnt/e/SUSTech学习资料/CS323-编译原理/2022F/Project/CS323-Compiler-SPLC]1;..Compiler-SPLC[0m[27m[24m[J[39m[0m[49m[40m[39m [31m✘[40m[39m marsy@Marsy-LAPTOP [44m[30m[30m /mnt/e/SUSTech学习资料/CS323-编译原理/2022F/Project/CS323-Compiler-SPLC [43m[34m[30m  main ± [49m[33m[39m [K[?1h=[?2004hmmake[?1l>[?2004l
+]2;make]1;maketouch bin/splc
+flex lex.l
+lex.l:90: bad character: <
+lex.l:90: bad character: =
+lex.l:90: bad character: '
+lex.l:90: bad character: )
+lex.l:90: bad character: .
+lex.l:90: bad character: *
+lex.l:90: bad character: (
+lex.l:90: bad character: ?
+lex.l:90: bad character: =
+lex.l:90: bad character: '
+lex.l:90: bad character: )
+lex.l:90: bad character: )
+lex.l:90: bad character: |
+lex.l:90: bad character: {
+lex.l:90: bad character: h
+lex.l:90: bad character: e
+lex.l:90: bad character: _
+lex.l:90: bad character: f
+lex.l:90: bad character: o
+lex.l:90: bad character: r
+lex.l:90: bad character: m
+lex.l:90: bad character: _
+lex.l:90: bad character: c
+lex.l:90: bad character: h
+lex.l:90: bad character: a
+lex.l:90: bad character: r
+lex.l:90: bad character: }
+lex.l:90: bad character: )
+lex.l:90: bad character: {
+lex.l:90: bad character: 
+lex.l:90: bad character: 
+
+lex.l:90: bad character:  
+lex.l:90: bad character:  
+lex.l:90: bad character:  
+lex.l:90: bad character:  
+lex.l:90: bad character: p
+lex.l:90: bad character: r
+lex.l:90: bad character: n
+lex.l:90: bad character: t
+lex.l:90: bad character: f
+lex.l:90: bad character: (
+lex.l:90: bad character: "
+lex.l:90: bad character: C
+lex.l:90: bad character: H
+lex.l:90: bad character: A
+lex.l:90: bad character: R
+lex.l:90: bad character:  
+lex.l:90: bad character: %
+lex.l:90: bad character: \
+lex.l:90: bad character: n
+lex.l:90: bad character: "
+lex.l:90: bad character: ,
+lex.l:90: bad character:  
+lex.l:90: bad character: y
+lex.l:90: bad character: y
+lex.l:90: bad character: t
+lex.l:90: bad character: e
+lex.l:90: bad character: t
+lex.l:90: bad character: )
+lex.l:90: bad character: ;
+lex.l:90: bad character: 
+lex.l:90: bad character: 
+
+lex.l:90: bad character: }
+lex.l:90: bad character: 
+lex.l:90: bad character: 
+
+lex.l:90: bad character: .
+lex.l:90: bad character:  
+lex.l:90: bad character: {
+lex.l:90: bad character: p
+lex.l:90: bad character: r
+lex.l:90: bad character: n
+lex.l:90: bad character: t
+lex.l:90: bad character: f
+lex.l:90: bad character: (
+lex.l:90: bad character: "
+lex.l:90: bad character: E
+lex.l:90: bad character: r
+lex.l:90: bad character: r
+lex.l:90: bad character: o
+lex.l:90: bad character: r
+lex.l:90: bad character:  
+lex.l:90: bad character: t
+lex.l:90: bad character: y
+lex.l:90: bad character: p
+lex.l:90: bad character: e
+lex.l:90: bad character:  
+lex.l:90: bad character: A
+lex.l:90: bad character:  
+lex.l:90: bad character: a
+lex.l:90: bad character: t
+lex.l:90: bad character:  
+lex.l:90: bad character: L
+lex.l:90: bad character: n
+lex.l:90: bad character: e
+lex.l:90: bad character:  
+lex.l:90: bad character: %
+lex.l:90: bad character: d
+lex.l:90: missing quote
+lex.l:92: unrecognized rule
+lex.l:92: fatal parse error
+make: *** [Makefile:8: splc] Error 1
+[1m[7m%[27m[1m[0m                                                                                                    ]2;marsy@Marsy-LAPTOP:/mnt/e/SUSTech学习资料/CS323-编译原理/2022F/Project/CS323-Compiler-SPLC]1;..Compiler-SPLC[0m[27m[24m[J[39m[0m[49m[40m[39m [31m✘[40m[39m marsy@Marsy-LAPTOP [44m[30m[30m /mnt/e/SUSTech学习资料/CS323-编译原理/2022F/Project/CS323-Compiler-SPLC [43m[34m[30m  main ± [49m[33m[39m [K[?1h=[?2004hmmake[?1l>[?2004l
+]2;make]1;maketouch bin/splc
+flex lex.l
+lex.l:90: bad character: <
+lex.l:90: bad character: =
+lex.l:90: bad character: '
+lex.l:90: bad character: )
+lex.l:90: bad character: .
+lex.l:90: bad character: *
+lex.l:90: bad character: (
+lex.l:90: bad character: ?
+lex.l:90: bad character: =
+lex.l:90: bad character: '
+lex.l:90: bad character: )
+lex.l:90: bad character: )
+lex.l:90: bad character: |
+lex.l:90: bad character: {
+lex.l:90: bad character: h
+lex.l:90: bad character: e
+lex.l:90: bad character: _
+lex.l:90: bad character: f
+lex.l:90: bad character: o
+lex.l:90: bad character: r
+lex.l:90: bad character: m
+lex.l:90: bad character: _
+lex.l:90: bad character: c
+lex.l:90: bad character: h
+lex.l:90: bad character: a
+lex.l:90: bad character: r
+lex.l:90: bad character: }
+lex.l:90: bad character: )
+lex.l:90: bad character: {
+lex.l:90: bad character: 
+lex.l:90: bad character: 
+
+lex.l:90: bad character:  
+lex.l:90: bad character:  
+lex.l:90: bad character:  
+lex.l:90: bad character:  
+lex.l:90: bad character: /
+lex.l:90: bad character: /
+lex.l:90: bad character:  
+lex.l:90: bad character: p
+lex.l:90: bad character: r
+lex.l:90: bad character: n
+lex.l:90: bad character: t
+lex.l:90: bad character: f
+lex.l:90: bad character: (
+lex.l:90: bad character: "
+lex.l:90: bad character: C
+lex.l:90: bad character: H
+lex.l:90: bad character: A
+lex.l:90: bad character: R
+lex.l:90: bad character:  
+lex.l:90: bad character: %
+lex.l:90: bad character: \
+lex.l:90: bad character: n
+lex.l:90: bad character: "
+lex.l:90: bad character: ,
+lex.l:90: bad character:  
+lex.l:90: bad character: y
+lex.l:90: bad character: y
+lex.l:90: bad character: t
+lex.l:90: bad character: e
+lex.l:90: bad character: t
+lex.l:90: bad character: )
+lex.l:90: bad character: ;
+lex.l:90: bad character: 
+lex.l:90: bad character: 
+
+lex.l:90: bad character: }
+lex.l:90: bad character: 
+lex.l:90: bad character: 
+
+lex.l:90: bad character: .
+lex.l:90: bad character:  
+lex.l:90: bad character: {
+lex.l:90: bad character: p
+lex.l:90: bad character: r
+lex.l:90: bad character: n
+lex.l:90: bad character: t
+lex.l:90: bad character: f
+lex.l:90: bad character: (
+lex.l:90: bad character: "
+lex.l:90: bad character: E
+lex.l:90: bad character: r
+lex.l:90: bad character: r
+lex.l:90: bad character: o
+lex.l:90: bad character: r
+lex.l:90: bad character:  
+lex.l:90: bad character: t
+lex.l:90: bad character: y
+lex.l:90: bad character: p
+lex.l:90: bad character: e
+lex.l:90: bad character:  
+lex.l:90: bad character: A
+lex.l:90: bad character:  
+lex.l:90: bad character: a
+lex.l:90: bad character: t
+lex.l:90: bad character:  
+lex.l:90: bad character: L
+lex.l:90: bad character: n
+lex.l:90: bad character: e
+lex.l:90: bad character:  
+lex.l:90: bad character: %
+lex.l:90: bad character: d
+lex.l:90: missing quote
+lex.l:92: unrecognized rule
+lex.l:92: fatal parse error
+make: *** [Makefile:8: splc] Error 1
+[1m[7m%[27m[1m[0m                                                                                                    ]2;marsy@Marsy-LAPTOP:/mnt/e/SUSTech学习资料/CS323-编译原理/2022F/Project/CS323-Compiler-SPLC]1;..Compiler-SPLC[0m[27m[24m[J[39m[0m[49m[40m[39m [31m✘[40m[39m marsy@Marsy-LAPTOP [44m[30m[30m /mnt/e/SUSTech学习资料/CS323-编译原理/2022F/Project/CS323-Compiler-SPLC [43m[34m[30m  main ± [49m[33m[39m [K[?1h=[?2004hmmake[?1l>[?2004l
+]2;make]1;maketouch bin/splc
+flex lex.l
+lex.l:90: bad character: <
+lex.l:90: bad character: =
+lex.l:90: bad character: '
+lex.l:90: bad character: )
+lex.l:90: bad character: .
+lex.l:90: bad character: *
+lex.l:90: bad character: (
+lex.l:90: bad character: ?
+lex.l:90: bad character: =
+lex.l:90: bad character: '
+lex.l:90: bad character: )
+lex.l:90: bad character: )
+lex.l:90: bad character: |
+lex.l:90: bad character: {
+lex.l:90: bad character: h
+lex.l:90: bad character: e
+lex.l:90: bad character: _
+lex.l:90: bad character: f
+lex.l:90: bad character: o
+lex.l:90: bad character: r
+lex.l:90: bad character: m
+lex.l:90: bad character: _
+lex.l:90: bad character: c
+lex.l:90: bad character: h
+lex.l:90: bad character: a
+lex.l:90: bad character: r
+lex.l:90: bad character: }
+lex.l:90: bad character: )
+lex.l:90: bad character: {
+lex.l:90: bad character: 
+lex.l:90: bad character: 
+
+lex.l:90: bad character:  
+lex.l:90: bad character:  
+lex.l:90: bad character:  
+lex.l:90: bad character:  
+lex.l:90: bad character: 
+lex.l:90: bad character: 
+
+lex.l:90: bad character: }
+lex.l:90: bad character: 
+lex.l:90: bad character: 
+
+lex.l:90: bad character: .
+lex.l:90: bad character:  
+lex.l:90: bad character: {
+lex.l:90: bad character: p
+lex.l:90: bad character: r
+lex.l:90: bad character: n
+lex.l:90: bad character: t
+lex.l:90: bad character: f
+lex.l:90: bad character: (
+lex.l:90: bad character: "
+lex.l:90: bad character: E
+lex.l:90: bad character: r
+lex.l:90: bad character: r
+lex.l:90: bad character: o
+lex.l:90: bad character: r
+lex.l:90: bad character:  
+lex.l:90: bad character: t
+lex.l:90: bad character: y
+lex.l:90: bad character: p
+lex.l:90: bad character: e
+lex.l:90: bad character:  
+lex.l:90: bad character: A
+lex.l:90: bad character:  
+lex.l:90: bad character: a
+lex.l:90: bad character: t
+lex.l:90: bad character:  
+lex.l:90: bad character: L
+lex.l:90: bad character: n
+lex.l:90: bad character: e
+lex.l:90: bad character:  
+lex.l:90: bad character: %
+lex.l:90: bad character: d
+lex.l:90: missing quote
+lex.l:92: unrecognized rule
+lex.l:92: fatal parse error
+make: *** [Makefile:8: splc] Error 1
+[1m[7m%[27m[1m[0m                                                                                                    ]2;marsy@Marsy-LAPTOP:/mnt/e/SUSTech学习资料/CS323-编译原理/2022F/Project/CS323-Compiler-SPLC]1;..Compiler-SPLC[0m[27m[24m[J[39m[0m[49m[40m[39m [31m✘[40m[39m marsy@Marsy-LAPTOP [44m[30m[30m /mnt/e/SUSTech学习资料/CS323-编译原理/2022F/Project/CS323-Compiler-SPLC [43m[34m[30m  main ± [49m[33m[39m [K[?1h=[?2004hmmake[?1l>[?2004l
+]2;make]1;maketouch bin/splc
+flex lex.l
+gcc lex.yy.c -lfl -o bin/splc.out
+[1m[7m%[27m[1m[0m                                                                                                    ]2;marsy@Marsy-LAPTOP:/mnt/e/SUSTech学习资料/CS323-编译原理/2022F/Project/CS323-Compiler-SPLC]1;..Compiler-SPLC[0m[27m[24m[J[39m[0m[49m[40m[39m marsy@Marsy-LAPTOP [44m[30m[30m /mnt/e/SUSTech学习资料/CS323-编译原理/2022F/Project/CS323-Compiler-SPLC [43m[34m[30m  main ± [49m[33m[39m [K[?1h=[?2004h  make[?1l>[?2004l
+]2;make]1;maketouch bin/splc
+flex lex.l
+lex.l:82: bad character: <
+lex.l:82: bad character: =
+lex.l:82: bad character: '
+lex.l:82: bad character: )
+lex.l:82: bad character: .
+lex.l:82: bad character: *
+lex.l:82: bad character: (
+lex.l:82: bad character: ?
+lex.l:82: bad character: =
+lex.l:82: bad character: '
+lex.l:82: bad character: )
+lex.l:82: bad character: )
+lex.l:82: bad character: |
+lex.l:82: bad character: {
+lex.l:82: bad character: h
+lex.l:82: bad character: e
+lex.l:82: bad character: _
+lex.l:82: bad character: f
+lex.l:82: bad character: o
+lex.l:82: bad character: r
+lex.l:82: bad character: m
+lex.l:82: bad character: _
+lex.l:82: bad character: c
+lex.l:82: bad character: h
+lex.l:82: bad character: a
+lex.l:82: bad character: r
+lex.l:82: bad character: }
+lex.l:82: bad character: )
+lex.l:82: bad character: {
+lex.l:82: bad character: 
+lex.l:82: bad character: 
+
+lex.l:82: bad character:  
+lex.l:82: bad character:  
+lex.l:82: bad character:  
+lex.l:82: bad character:  
+lex.l:82: bad character: p
+lex.l:82: bad character: r
+lex.l:82: bad character: n
+lex.l:82: bad character: t
+lex.l:82: bad character: f
+lex.l:82: bad character: (
+lex.l:82: bad character: "
+lex.l:82: bad character: C
+lex.l:82: bad character: H
+lex.l:82: bad character: A
+lex.l:82: bad character: R
+lex.l:82: bad character:  
+lex.l:82: bad character: %
+lex.l:82: bad character: \
+lex.l:82: bad character: n
+lex.l:82: bad character: "
+lex.l:82: bad character: ,
+lex.l:82: bad character:  
+lex.l:82: bad character: y
+lex.l:82: bad character: y
+lex.l:82: bad character: t
+lex.l:82: bad character: e
+lex.l:82: bad character: t
+lex.l:82: bad character: )
+lex.l:82: bad character: ;
+lex.l:82: bad character: 
+lex.l:82: bad character: 
+
+lex.l:82: bad character: }
+lex.l:82: bad character: 
+lex.l:82: bad character: 
+
+lex.l:82: bad character: {
+lex.l:82: bad character: n
+lex.l:82: bad character: t
+lex.l:82: bad character: }
+lex.l:82: bad character:  
+lex.l:82: bad character: {
+lex.l:82: bad character: 
+lex.l:82: bad character: 
+
+lex.l:82: bad character:  
+lex.l:82: bad character:  
+lex.l:82: bad character:  
+lex.l:82: bad character:  
+lex.l:82: bad character: /
+lex.l:82: bad character: /
+lex.l:82: bad character:  
+lex.l:82: bad character: y
+lex.l:82: bad character: y
+lex.l:82: bad character: l
+lex.l:82: bad character: v
+lex.l:82: bad character: a
+lex.l:82: bad character: l
+lex.l:82: bad character:  
+lex.l:82: bad character: =
+lex.l:82: bad character:  
+lex.l:82: bad character: a
+lex.l:82: bad character: t
+lex.l:82: bad character: o
+lex.l:82: bad character: (
+lex.l:82: bad character: y
+lex.l:82: bad character: y
+lex.l:82: bad character: t
+lex.l:82: bad character: e
+lex.l:82: bad character: t
+lex.l:82: bad character: )
+lex.l:82: bad character: ;
+lex.l:82: bad character: 
+lex.l:82: bad character: 
+
+lex.l:82: bad character:  
+lex.l:82: bad character:  
+lex.l:82: bad character:  
+lex.l:82: bad character:  
+lex.l:82: bad character: p
+lex.l:82: bad character: r
+lex.l:82: bad character: n
+lex.l:82: bad character: t
+lex.l:82: bad character: f
+lex.l:82: bad character: (
+lex.l:82: bad character: "
+lex.l:82: bad character: N
+lex.l:82: bad character: T
+lex.l:82: bad character:  
+lex.l:82: bad character: %
+lex.l:82: bad character: \
+lex.l:82: bad character: n
+lex.l:82: bad character: "
+lex.l:82: bad character: ,
+lex.l:82: bad character:  
+lex.l:82: bad character: y
+lex.l:82: bad character: y
+lex.l:82: bad character: t
+lex.l:82: bad character: e
+lex.l:82: bad character: t
+lex.l:82: bad character: )
+lex.l:82: bad character: ;
+lex.l:82: bad character: 
+lex.l:82: bad character: 
+
+lex.l:82: bad character: }
+lex.l:82: bad character: 
+lex.l:82: bad character: 
+
+lex.l:82: bad character: {
+lex.l:82: bad character: d
+lex.l:82: bad character: }
+lex.l:82: bad character:  
+lex.l:82: bad character: {
+lex.l:82: bad character: 
+lex.l:82: bad character: 
+
+lex.l:82: bad character:  
+lex.l:82: bad character:  
+lex.l:82: bad character:  
+lex.l:82: bad character:  
+lex.l:82: bad character: /
+lex.l:82: bad character: /
+lex.l:82: bad character:  
+lex.l:82: bad character: y
+lex.l:82: bad character: y
+lex.l:82: bad character: l
+lex.l:82: bad character: v
+lex.l:82: bad character: a
+lex.l:82: bad character: l
+lex.l:82: bad character:  
+lex.l:82: bad character: =
+lex.l:82: bad character:  
+lex.l:82: bad character: a
+lex.l:82: bad character: t
+lex.l:82: bad character: o
+lex.l:82: bad character: (
+lex.l:82: bad character: y
+lex.l:82: bad character: y
+lex.l:82: bad character: t
+lex.l:82: bad character: e
+lex.l:82: bad character: t
+lex.l:82: bad character: )
+lex.l:82: bad character: ;
+lex.l:82: bad character: 
+lex.l:82: bad character: 
+
+lex.l:82: bad character:  
+lex.l:82: bad character:  
+lex.l:82: bad character:  
+lex.l:82: bad character:  
+lex.l:82: bad character: p
+lex.l:82: bad character: r
+lex.l:82: bad character: n
+lex.l:82: bad character: t
+lex.l:82: bad character: f
+lex.l:82: bad character: (
+lex.l:82: bad character: "
+lex.l:82: bad character: D
+lex.l:82: bad character:  
+lex.l:82: bad character: %
+lex.l:82: bad character: \
+lex.l:82: bad character: n
+lex.l:82: bad character: "
+lex.l:82: bad character: ,
+lex.l:82: bad character:  
+lex.l:82: bad character: y
+lex.l:82: bad character: y
+lex.l:82: bad character: t
+lex.l:82: bad character: e
+lex.l:82: bad character: t
+lex.l:82: bad character: )
+lex.l:82: bad character: ;
+lex.l:82: bad character: 
+lex.l:82: bad character: 
+
+lex.l:82: bad character: }
+lex.l:82: bad character: 
+lex.l:82: bad character: 
+
+lex.l:82: bad character: .
+lex.l:82: bad character:  
+lex.l:82: bad character: {
+lex.l:82: bad character: p
+lex.l:82: bad character: r
+lex.l:82: bad character: n
+lex.l:82: bad character: t
+lex.l:82: bad character: f
+lex.l:82: bad character: (
+lex.l:82: bad character: "
+lex.l:82: bad character: E
+lex.l:82: bad character: r
+lex.l:82: bad character: r
+lex.l:82: bad character: o
+lex.l:82: bad character: r
+lex.l:82: bad character:  
+lex.l:82: bad character: t
+lex.l:82: bad character: y
+lex.l:82: bad character: p
+lex.l:82: bad character: e
+lex.l:82: bad character:  
+lex.l:82: bad character: A
+lex.l:82: bad character:  
+lex.l:82: bad character: a
+lex.l:82: bad character: t
+lex.l:82: bad character:  
+lex.l:82: bad character: L
+lex.l:82: bad character: n
+lex.l:82: bad character: e
+lex.l:82: bad character:  
+lex.l:82: bad character: %
+lex.l:82: bad character: d
+lex.l:82: missing quote
+lex.l:84: unrecognized rule
+lex.l:84: fatal parse error
+make: *** [Makefile:8: splc] Error 1
+[1m[7m%[27m[1m[0m                                                                                                    ]2;marsy@Marsy-LAPTOP:/mnt/e/SUSTech学习资料/CS323-编译原理/2022F/Project/CS323-Compiler-SPLC]1;..Compiler-SPLC[0m[27m[24m[J[39m[0m[49m[40m[39m [31m✘[40m[39m marsy@Marsy-LAPTOP [44m[30m[30m /mnt/e/SUSTech学习资料/CS323-编译原理/2022F/Project/CS323-Compiler-SPLC [43m[34m[30m  main ± [49m[33m[39m [K[?1h=[?2004hmmake[?1l>[?2004l
+]2;make]1;maketouch bin/splc
+flex lex.l
+lex.l:86: bad character: <
+lex.l:86: bad character: =
+lex.l:86: bad character: '
+lex.l:86: bad character: )
+lex.l:86: bad character: .
+lex.l:86: bad character: *
+lex.l:86: bad character: (
+lex.l:86: bad character: ?
+lex.l:86: bad character: =
+lex.l:86: bad character: '
+lex.l:86: bad character: )
+lex.l:86: bad character: )
+lex.l:86: bad character: |
+lex.l:86: bad character: {
+lex.l:86: bad character: h
+lex.l:86: bad character: e
+lex.l:86: bad character: _
+lex.l:86: bad character: f
+lex.l:86: bad character: o
+lex.l:86: bad character: r
+lex.l:86: bad character: m
+lex.l:86: bad character: _
+lex.l:86: bad character: c
+lex.l:86: bad character: h
+lex.l:86: bad character: a
+lex.l:86: bad character: r
+lex.l:86: bad character: }
+lex.l:86: bad character: )
+lex.l:86: bad character:  
+lex.l:86: bad character: {
+lex.l:86: bad character: 
+lex.l:86: bad character: 
+
+lex.l:86: bad character:  
+lex.l:86: bad character:  
+lex.l:86: bad character:  
+lex.l:86: bad character:  
+lex.l:86: bad character: /
+lex.l:86: bad character: /
+lex.l:86: bad character:  
+lex.l:86: bad character: y
+lex.l:86: bad character: y
+lex.l:86: bad character: l
+lex.l:86: bad character: v
+lex.l:86: bad character: a
+lex.l:86: bad character: l
+lex.l:86: bad character:  
+lex.l:86: bad character: =
+lex.l:86: bad character:  
+lex.l:86: bad character: a
+lex.l:86: bad character: t
+lex.l:86: bad character: o
+lex.l:86: bad character: (
+lex.l:86: bad character: y
+lex.l:86: bad character: y
+lex.l:86: bad character: t
+lex.l:86: bad character: e
+lex.l:86: bad character: t
+lex.l:86: bad character: )
+lex.l:86: bad character: ;
+lex.l:86: bad character: 
+lex.l:86: bad character: 
+
+lex.l:86: bad character:  
+lex.l:86: bad character:  
+lex.l:86: bad character:  
+lex.l:86: bad character:  
+lex.l:86: bad character: p
+lex.l:86: bad character: r
+lex.l:86: bad character: n
+lex.l:86: bad character: t
+lex.l:86: bad character: f
+lex.l:86: bad character: (
+lex.l:86: bad character: "
+lex.l:86: bad character: C
+lex.l:86: bad character: H
+lex.l:86: bad character: A
+lex.l:86: bad character: R
+lex.l:86: bad character:  
+lex.l:86: bad character: %
+lex.l:86: bad character: \
+lex.l:86: bad character: n
+lex.l:86: bad character: "
+lex.l:86: bad character: ,
+lex.l:86: bad character:  
+lex.l:86: bad character: y
+lex.l:86: bad character: y
+lex.l:86: bad character: t
+lex.l:86: bad character: e
+lex.l:86: bad character: t
+lex.l:86: bad character: )
+lex.l:86: bad character: ;
+lex.l:86: bad character: 
+lex.l:86: bad character: 
+
+lex.l:86: bad character: }
+lex.l:86: bad character: 
+lex.l:86: bad character: 
+
+lex.l:86: bad character: {
+lex.l:86: bad character: d
+lex.l:86: bad character: }
+lex.l:86: bad character:  
+lex.l:86: bad character: {
+lex.l:86: bad character: 
+lex.l:86: bad character: 
+
+lex.l:86: bad character:  
+lex.l:86: bad character:  
+lex.l:86: bad character:  
+lex.l:86: bad character:  
+lex.l:86: bad character: /
+lex.l:86: bad character: /
+lex.l:86: bad character:  
+lex.l:86: bad character: y
+lex.l:86: bad character: y
+lex.l:86: bad character: l
+lex.l:86: bad character: v
+lex.l:86: bad character: a
+lex.l:86: bad character: l
+lex.l:86: bad character:  
+lex.l:86: bad character: =
+lex.l:86: bad character:  
+lex.l:86: bad character: a
+lex.l:86: bad character: t
+lex.l:86: bad character: o
+lex.l:86: bad character: (
+lex.l:86: bad character: y
+lex.l:86: bad character: y
+lex.l:86: bad character: t
+lex.l:86: bad character: e
+lex.l:86: bad character: t
+lex.l:86: bad character: )
+lex.l:86: bad character: ;
+lex.l:86: bad character: 
+lex.l:86: bad character: 
+
+lex.l:86: bad character:  
+lex.l:86: bad character:  
+lex.l:86: bad character:  
+lex.l:86: bad character:  
+lex.l:86: bad character: p
+lex.l:86: bad character: r
+lex.l:86: bad character: n
+lex.l:86: bad character: t
+lex.l:86: bad character: f
+lex.l:86: bad character: (
+lex.l:86: bad character: "
+lex.l:86: bad character: D
+lex.l:86: bad character:  
+lex.l:86: bad character: %
+lex.l:86: bad character: \
+lex.l:86: bad character: n
+lex.l:86: bad character: "
+lex.l:86: bad character: ,
+lex.l:86: bad character:  
+lex.l:86: bad character: y
+lex.l:86: bad character: y
+lex.l:86: bad character: t
+lex.l:86: bad character: e
+lex.l:86: bad character: t
+lex.l:86: bad character: )
+lex.l:86: bad character: ;
+lex.l:86: bad character: 
+lex.l:86: bad character: 
+
+lex.l:86: bad character: }
+lex.l:86: bad character: 
+lex.l:86: bad character: 
+
+lex.l:86: bad character: .
+lex.l:86: bad character:  
+lex.l:86: bad character: {
+lex.l:86: bad character: p
+lex.l:86: bad character: r
+lex.l:86: bad character: n
+lex.l:86: bad character: t
+lex.l:86: bad character: f
+lex.l:86: bad character: (
+lex.l:86: bad character: "
+lex.l:86: bad character: E
+lex.l:86: bad character: r
+lex.l:86: bad character: r
+lex.l:86: bad character: o
+lex.l:86: bad character: r
+lex.l:86: bad character:  
+lex.l:86: bad character: t
+lex.l:86: bad character: y
+lex.l:86: bad character: p
+lex.l:86: bad character: e
+lex.l:86: bad character:  
+lex.l:86: bad character: A
+lex.l:86: bad character:  
+lex.l:86: bad character: a
+lex.l:86: bad character: t
+lex.l:86: bad character:  
+lex.l:86: bad character: L
+lex.l:86: bad character: n
+lex.l:86: bad character: e
+lex.l:86: bad character:  
+lex.l:86: bad character: %
+lex.l:86: bad character: d
+lex.l:86: missing quote
+lex.l:88: unrecognized rule
+lex.l:88: fatal parse error
+make: *** [Makefile:8: splc] Error 1
+[1m[7m%[27m[1m[0m                                                                                                    ]2;marsy@Marsy-LAPTOP:/mnt/e/SUSTech学习资料/CS323-编译原理/2022F/Project/CS323-Compiler-SPLC]1;..Compiler-SPLC[0m[27m[24m[J[39m[0m[49m[40m[39m [31m✘[40m[39m marsy@Marsy-LAPTOP [44m[30m[30m /mnt/e/SUSTech学习资料/CS323-编译原理/2022F/Project/CS323-Compiler-SPLC [43m[34m[30m  main ± [49m[33m[39m [K[?1h=[?2004hmmake[?1l>[?2004l
+]2;make]1;maketouch bin/splc
+flex lex.l
+lex.l:86: bad character: <
+lex.l:86: bad character: =
+lex.l:86: bad character: '
+lex.l:86: bad character: )
+lex.l:86: bad character: .
+lex.l:86: bad character: *
+lex.l:86: bad character: (
+lex.l:86: bad character: ?
+lex.l:86: bad character: =
+lex.l:86: bad character: '
+lex.l:86: bad character: )
+lex.l:86: bad character: )
+lex.l:86: bad character: |
+lex.l:86: bad character: {
+lex.l:86: bad character: h
+lex.l:86: bad character: e
+lex.l:86: bad character: _
+lex.l:86: bad character: f
+lex.l:86: bad character: o
+lex.l:86: bad character: r
+lex.l:86: bad character: m
+lex.l:86: bad character: _
+lex.l:86: bad character: c
+lex.l:86: bad character: h
+lex.l:86: bad character: a
+lex.l:86: bad character: r
+lex.l:86: bad character: }
+lex.l:86: bad character: )
+lex.l:86: bad character:  
+lex.l:86: bad character: {
+lex.l:86: bad character: 
+lex.l:86: bad character: 
+
+lex.l:86: bad character:  
+lex.l:86: bad character:  
+lex.l:86: bad character:  
+lex.l:86: bad character:  
+lex.l:86: bad character: /
+lex.l:86: bad character: /
+lex.l:86: bad character:  
+lex.l:86: bad character: y
+lex.l:86: bad character: y
+lex.l:86: bad character: l
+lex.l:86: bad character: v
+lex.l:86: bad character: a
+lex.l:86: bad character: l
+lex.l:86: bad character:  
+lex.l:86: bad character: =
+lex.l:86: bad character:  
+lex.l:86: bad character: a
+lex.l:86: bad character: t
+lex.l:86: bad character: o
+lex.l:86: bad character: (
+lex.l:86: bad character: y
+lex.l:86: bad character: y
+lex.l:86: bad character: t
+lex.l:86: bad character: e
+lex.l:86: bad character: t
+lex.l:86: bad character: )
+lex.l:86: bad character: ;
+lex.l:86: bad character: 
+lex.l:86: bad character: 
+
+lex.l:86: bad character:  
+lex.l:86: bad character:  
+lex.l:86: bad character:  
+lex.l:86: bad character:  
+lex.l:86: bad character: p
+lex.l:86: bad character: r
+lex.l:86: bad character: n
+lex.l:86: bad character: t
+lex.l:86: bad character: f
+lex.l:86: bad character: (
+lex.l:86: bad character: "
+lex.l:86: bad character: C
+lex.l:86: bad character: H
+lex.l:86: bad character: A
+lex.l:86: bad character: R
+lex.l:86: bad character:  
+lex.l:86: bad character: %
+lex.l:86: bad character: \
+lex.l:86: bad character: n
+lex.l:86: bad character: "
+lex.l:86: bad character: ,
+lex.l:86: bad character:  
+lex.l:86: bad character: y
+lex.l:86: bad character: y
+lex.l:86: bad character: t
+lex.l:86: bad character: e
+lex.l:86: bad character: t
+lex.l:86: bad character: )
+lex.l:86: bad character: ;
+lex.l:86: bad character: 
+lex.l:86: bad character: 
+
+lex.l:86: bad character: }
+lex.l:86: bad character: 
+lex.l:86: bad character: 
+
+lex.l:86: bad character: {
+lex.l:86: bad character: d
+lex.l:86: bad character: }
+lex.l:86: bad character:  
+lex.l:86: bad character: {
+lex.l:86: bad character: 
+lex.l:86: bad character: 
+
+lex.l:86: bad character:  
+lex.l:86: bad character:  
+lex.l:86: bad character:  
+lex.l:86: bad character:  
+lex.l:86: bad character: /
+lex.l:86: bad character: /
+lex.l:86: bad character:  
+lex.l:86: bad character: y
+lex.l:86: bad character: y
+lex.l:86: bad character: l
+lex.l:86: bad character: v
+lex.l:86: bad character: a
+lex.l:86: bad character: l
+lex.l:86: bad character:  
+lex.l:86: bad character: =
+lex.l:86: bad character:  
+lex.l:86: bad character: a
+lex.l:86: bad character: t
+lex.l:86: bad character: o
+lex.l:86: bad character: (
+lex.l:86: bad character: y
+lex.l:86: bad character: y
+lex.l:86: bad character: t
+lex.l:86: bad character: e
+lex.l:86: bad character: t
+lex.l:86: bad character: )
+lex.l:86: bad character: ;
+lex.l:86: bad character: 
+lex.l:86: bad character: 
+
+lex.l:86: bad character:  
+lex.l:86: bad character:  
+lex.l:86: bad character:  
+lex.l:86: bad character:  
+lex.l:86: bad character: p
+lex.l:86: bad character: r
+lex.l:86: bad character: n
+lex.l:86: bad character: t
+lex.l:86: bad character: f
+lex.l:86: bad character: (
+lex.l:86: bad character: "
+lex.l:86: bad character: D
+lex.l:86: bad character:  
+lex.l:86: bad character: %
+lex.l:86: bad character: \
+lex.l:86: bad character: n
+lex.l:86: bad character: "
+lex.l:86: bad character: ,
+lex.l:86: bad character:  
+lex.l:86: bad character: y
+lex.l:86: bad character: y
+lex.l:86: bad character: t
+lex.l:86: bad character: e
+lex.l:86: bad character: t
+lex.l:86: bad character: )
+lex.l:86: bad character: ;
+lex.l:86: bad character: 
+lex.l:86: bad character: 
+
+lex.l:86: bad character: }
+lex.l:86: bad character: 
+lex.l:86: bad character: 
+
+lex.l:86: bad character: .
+lex.l:86: bad character:  
+lex.l:86: bad character: {
+lex.l:86: bad character: p
+lex.l:86: bad character: r
+lex.l:86: bad character: n
+lex.l:86: bad character: t
+lex.l:86: bad character: f
+lex.l:86: bad character: (
+lex.l:86: bad character: "
+lex.l:86: bad character: E
+lex.l:86: bad character: r
+lex.l:86: bad character: r
+lex.l:86: bad character: o
+lex.l:86: bad character: r
+lex.l:86: bad character:  
+lex.l:86: bad character: t
+lex.l:86: bad character: y
+lex.l:86: bad character: p
+lex.l:86: bad character: e
+lex.l:86: bad character:  
+lex.l:86: bad character: A
+lex.l:86: bad character:  
+lex.l:86: bad character: a
+lex.l:86: bad character: t
+lex.l:86: bad character:  
+lex.l:86: bad character: L
+lex.l:86: bad character: n
+lex.l:86: bad character: e
+lex.l:86: bad character:  
+lex.l:86: bad character: %
+lex.l:86: bad character: d
+lex.l:86: missing quote
+lex.l:88: unrecognized rule
+lex.l:88: fatal parse error
+make: *** [Makefile:8: splc] Error 1
+[1m[7m%[27m[1m[0m                                                                                                    ]2;marsy@Marsy-LAPTOP:/mnt/e/SUSTech学习资料/CS323-编译原理/2022F/Project/CS323-Compiler-SPLC]1;..Compiler-SPLC[0m[27m[24m[J[39m[0m[49m[40m[39m [31m✘[40m[39m marsy@Marsy-LAPTOP [44m[30m[30m /mnt/e/SUSTech学习资料/CS323-编译原理/2022F/Project/CS323-Compiler-SPLC [43m[34m[30m  main ± [49m[33m[39m [K[?1h=[?2004hmmake[?1l>[?2004l
+]2;make]1;maketouch bin/splc
+flex lex.l
+lex.l:86: bad character: <
+lex.l:86: bad character: =
+lex.l:86: bad character: '
+lex.l:86: bad character: )
+lex.l:86: bad character: .
+lex.l:86: bad character: *
+lex.l:86: bad character: (
+lex.l:86: bad character: ?
+lex.l:86: bad character: =
+lex.l:86: bad character: '
+lex.l:86: bad character: )
+lex.l:86: bad character: )
+lex.l:86: bad character: |
+lex.l:86: bad character: {
+lex.l:86: bad character: h
+lex.l:86: bad character: e
+lex.l:86: bad character: _
+lex.l:86: bad character: f
+lex.l:86: bad character: o
+lex.l:86: bad character: r
+lex.l:86: bad character: m
+lex.l:86: bad character: _
+lex.l:86: bad character: c
+lex.l:86: bad character: h
+lex.l:86: bad character: a
+lex.l:86: bad character: r
+lex.l:86: bad character: }
+lex.l:86: bad character: )
+lex.l:86: bad character:  
+lex.l:86: bad character: {
+lex.l:86: bad character: 
+lex.l:86: bad character: 
+
+lex.l:86: bad character:  
+lex.l:86: bad character:  
+lex.l:86: bad character:  
+lex.l:86: bad character:  
+lex.l:86: bad character: /
+lex.l:86: bad character: /
+lex.l:86: bad character:  
+lex.l:86: bad character: y
+lex.l:86: bad character: y
+lex.l:86: bad character: l
+lex.l:86: bad character: v
+lex.l:86: bad character: a
+lex.l:86: bad character: l
+lex.l:86: bad character:  
+lex.l:86: bad character: =
+lex.l:86: bad character:  
+lex.l:86: bad character: a
+lex.l:86: bad character: t
+lex.l:86: bad character: o
+lex.l:86: bad character: (
+lex.l:86: bad character: y
+lex.l:86: bad character: y
+lex.l:86: bad character: t
+lex.l:86: bad character: e
+lex.l:86: bad character: t
+lex.l:86: bad character: )
+lex.l:86: bad character: ;
+lex.l:86: bad character: 
+lex.l:86: bad character: 
+
+lex.l:86: bad character:  
+lex.l:86: bad character:  
+lex.l:86: bad character:  
+lex.l:86: bad character:  
+lex.l:86: bad character: p
+lex.l:86: bad character: r
+lex.l:86: bad character: n
+lex.l:86: bad character: t
+lex.l:86: bad character: f
+lex.l:86: bad character: (
+lex.l:86: bad character: "
+lex.l:86: bad character: C
+lex.l:86: bad character: H
+lex.l:86: bad character: A
+lex.l:86: bad character: R
+lex.l:86: bad character:  
+lex.l:86: bad character: %
+lex.l:86: bad character: \
+lex.l:86: bad character: n
+lex.l:86: bad character: "
+lex.l:86: bad character: ,
+lex.l:86: bad character:  
+lex.l:86: bad character: y
+lex.l:86: bad character: y
+lex.l:86: bad character: t
+lex.l:86: bad character: e
+lex.l:86: bad character: t
+lex.l:86: bad character: )
+lex.l:86: bad character: ;
+lex.l:86: bad character: 
+lex.l:86: bad character: 
+
+lex.l:86: bad character: }
+lex.l:86: bad character: 
+lex.l:86: bad character: 
+
+lex.l:86: bad character: {
+lex.l:86: bad character: d
+lex.l:86: bad character: }
+lex.l:86: bad character:  
+lex.l:86: bad character: {
+lex.l:86: bad character: 
+lex.l:86: bad character: 
+
+lex.l:86: bad character:  
+lex.l:86: bad character:  
+lex.l:86: bad character:  
+lex.l:86: bad character:  
+lex.l:86: bad character: /
+lex.l:86: bad character: /
+lex.l:86: bad character:  
+lex.l:86: bad character: y
+lex.l:86: bad character: y
+lex.l:86: bad character: l
+lex.l:86: bad character: v
+lex.l:86: bad character: a
+lex.l:86: bad character: l
+lex.l:86: bad character:  
+lex.l:86: bad character: =
+lex.l:86: bad character:  
+lex.l:86: bad character: a
+lex.l:86: bad character: t
+lex.l:86: bad character: o
+lex.l:86: bad character: (
+lex.l:86: bad character: y
+lex.l:86: bad character: y
+lex.l:86: bad character: t
+lex.l:86: bad character: e
+lex.l:86: bad character: t
+lex.l:86: bad character: )
+lex.l:86: bad character: ;
+lex.l:86: bad character: 
+lex.l:86: bad character: 
+
+lex.l:86: bad character:  
+lex.l:86: bad character:  
+lex.l:86: bad character:  
+lex.l:86: bad character:  
+lex.l:86: bad character: p
+lex.l:86: bad character: r
+lex.l:86: bad character: n
+lex.l:86: bad character: t
+lex.l:86: bad character: f
+lex.l:86: bad character: (
+lex.l:86: bad character: "
+lex.l:86: bad character: D
+lex.l:86: bad character:  
+lex.l:86: bad character: %
+lex.l:86: bad character: \
+lex.l:86: bad character: n
+lex.l:86: bad character: "
+lex.l:86: bad character: ,
+lex.l:86: bad character:  
+lex.l:86: bad character: y
+lex.l:86: bad character: y
+lex.l:86: bad character: t
+lex.l:86: bad character: e
+lex.l:86: bad character: t
+lex.l:86: bad character: )
+lex.l:86: bad character: ;
+lex.l:86: bad character: 
+lex.l:86: bad character: 
+
+lex.l:86: bad character: }
+lex.l:86: bad character: 
+lex.l:86: bad character: 
+
+lex.l:86: bad character: .
+lex.l:86: bad character:  
+lex.l:86: bad character: {
+lex.l:86: bad character: p
+lex.l:86: bad character: r
+lex.l:86: bad character: n
+lex.l:86: bad character: t
+lex.l:86: bad character: f
+lex.l:86: bad character: (
+lex.l:86: bad character: "
+lex.l:86: bad character: E
+lex.l:86: bad character: r
+lex.l:86: bad character: r
+lex.l:86: bad character: o
+lex.l:86: bad character: r
+lex.l:86: bad character:  
+lex.l:86: bad character: t
+lex.l:86: bad character: y
+lex.l:86: bad character: p
+lex.l:86: bad character: e
+lex.l:86: bad character:  
+lex.l:86: bad character: A
+lex.l:86: bad character:  
+lex.l:86: bad character: a
+lex.l:86: bad character: t
+lex.l:86: bad character:  
+lex.l:86: bad character: L
+lex.l:86: bad character: n
+lex.l:86: bad character: e
+lex.l:86: bad character:  
+lex.l:86: bad character: %
+lex.l:86: bad character: d
+lex.l:86: missing quote
+lex.l:88: unrecognized rule
+lex.l:88: fatal parse error
+make: *** [Makefile:8: splc] Error 1
+[1m[7m%[27m[1m[0m                                                                                                    ]2;marsy@Marsy-LAPTOP:/mnt/e/SUSTech学习资料/CS323-编译原理/2022F/Project/CS323-Compiler-SPLC]1;..Compiler-SPLCma[0m[27m[24m[J[39m[0m[49m[40m[39m [31m✘[40m[39m marsy@Marsy-LAPTOP [44m[30m[30m /mnt/e/SUSTech学习资料/CS323-编译原理/2022F/Project/CS323-Compiler-SPLC [43m[34m[30m  main ± [49m[33m[39m [K[?1h=[?2004hmmaek  m  mmake[?1l>[?2004l
+]2;make]1;maketouch bin/splc
+flex lex.l
+lex.l:85: bad character: <
+lex.l:85: bad character: =
+lex.l:85: bad character: '
+lex.l:85: bad character: )
+lex.l:85: bad character: .
+lex.l:85: bad character: *
+lex.l:85: bad character: (
+lex.l:85: bad character: ?
+lex.l:85: bad character: =
+lex.l:85: bad character: '
+lex.l:85: bad character: )
+lex.l:85: bad character: )
+lex.l:85: bad character: |
+lex.l:85: bad character: {
+lex.l:85: bad character: h
+lex.l:85: bad character: e
+lex.l:85: bad character: _
+lex.l:85: bad character: f
+lex.l:85: bad character: o
+lex.l:85: bad character: r
+lex.l:85: bad character: m
+lex.l:85: bad character: _
+lex.l:85: bad character: c
+lex.l:85: bad character: h
+lex.l:85: bad character: a
+lex.l:85: bad character: r
+lex.l:85: bad character: }
+lex.l:85: bad character: )
+lex.l:85: bad character:  
+lex.l:85: bad character: {
+lex.l:85: bad character: 
+lex.l:85: bad character: 
+
+lex.l:85: bad character:  
+lex.l:85: bad character:  
+lex.l:85: bad character:  
+lex.l:85: bad character:  
+lex.l:85: bad character: p
+lex.l:85: bad character: r
+lex.l:85: bad character: n
+lex.l:85: bad character: t
+lex.l:85: bad character: f
+lex.l:85: bad character: (
+lex.l:85: bad character: "
+lex.l:85: bad character: C
+lex.l:85: bad character: H
+lex.l:85: bad character: A
+lex.l:85: bad character: R
+lex.l:85: bad character:  
+lex.l:85: bad character: %
+lex.l:85: bad character: \
+lex.l:85: bad character: n
+lex.l:85: bad character: "
+lex.l:85: bad character: ,
+lex.l:85: bad character:  
+lex.l:85: bad character: y
+lex.l:85: bad character: y
+lex.l:85: bad character: t
+lex.l:85: bad character: e
+lex.l:85: bad character: t
+lex.l:85: bad character: )
+lex.l:85: bad character: ;
+lex.l:85: bad character: 
+lex.l:85: bad character: 
+
+lex.l:85: bad character: }
+lex.l:85: bad character: 
+lex.l:85: bad character: 
+
+lex.l:85: bad character: {
+lex.l:85: bad character: d
+lex.l:85: bad character: }
+lex.l:85: bad character:  
+lex.l:85: bad character: {
+lex.l:85: bad character: 
+lex.l:85: bad character: 
+
+lex.l:85: bad character:  
+lex.l:85: bad character:  
+lex.l:85: bad character:  
+lex.l:85: bad character:  
+lex.l:85: bad character: p
+lex.l:85: bad character: r
+lex.l:85: bad character: n
+lex.l:85: bad character: t
+lex.l:85: bad character: f
+lex.l:85: bad character: (
+lex.l:85: bad character: "
+lex.l:85: bad character: D
+lex.l:85: bad character:  
+lex.l:85: bad character: %
+lex.l:85: bad character: \
+lex.l:85: bad character: n
+lex.l:85: bad character: "
+lex.l:85: bad character: ,
+lex.l:85: bad character:  
+lex.l:85: bad character: y
+lex.l:85: bad character: y
+lex.l:85: bad character: t
+lex.l:85: bad character: e
+lex.l:85: bad character: t
+lex.l:85: bad character: )
+lex.l:85: bad character: ;
+lex.l:85: bad character: 
+lex.l:85: bad character: 
+
+lex.l:85: bad character: }
+lex.l:85: bad character: 
+lex.l:85: bad character: 
+
+lex.l:85: bad character: .
+lex.l:85: bad character:  
+lex.l:85: bad character: {
+lex.l:85: bad character: p
+lex.l:85: bad character: r
+lex.l:85: bad character: n
+lex.l:85: bad character: t
+lex.l:85: bad character: f
+lex.l:85: bad character: (
+lex.l:85: bad character: "
+lex.l:85: bad character: E
+lex.l:85: bad character: r
+lex.l:85: bad character: r
+lex.l:85: bad character: o
+lex.l:85: bad character: r
+lex.l:85: bad character:  
+lex.l:85: bad character: t
+lex.l:85: bad character: y
+lex.l:85: bad character: p
+lex.l:85: bad character: e
+lex.l:85: bad character:  
+lex.l:85: bad character: A
+lex.l:85: bad character:  
+lex.l:85: bad character: a
+lex.l:85: bad character: t
+lex.l:85: bad character:  
+lex.l:85: bad character: L
+lex.l:85: bad character: n
+lex.l:85: bad character: e
+lex.l:85: bad character:  
+lex.l:85: bad character: %
+lex.l:85: bad character: d
+lex.l:85: missing quote
+lex.l:87: unrecognized rule
+lex.l:87: fatal parse error
+make: *** [Makefile:8: splc] Error 1
+[1m[7m%[27m[1m[0m                                                                                                    ]2;marsy@Marsy-LAPTOP:/mnt/e/SUSTech学习资料/CS323-编译原理/2022F/Pro
