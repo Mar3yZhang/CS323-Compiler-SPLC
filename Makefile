@@ -6,7 +6,7 @@ splc:
 	touch bin/splc
 	@chmod +x bin/splc
 	$(FLEX) lex.l
-	$(CC) lex.yy.c -lfl -o bin/idcount.out
+	$(CC) lex.yy.c -lfl -o bin/splc.out
 clean:
 	@rm -rf bin/
 .PHONY: spl
