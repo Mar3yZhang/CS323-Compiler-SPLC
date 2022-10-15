@@ -30,6 +30,15 @@ float  (0|[1-9][0-9]*)(\.){digit}+
 
 
 %%
+"/*" {
+    char c;
+    while(1){
+    while ((c = input()) != '/'){};
+    if(yytext[yyleng-1] == '*') {
+        break;
+        }
+    }  
+}
 "//" { 
     char c;
     // ignore the following chars until seeing a newline character
@@ -67,6 +76,8 @@ float  (0|[1-9][0-9]*)(\.){digit}+
 "]" {printf("RB\n");}
 "{" {printf("LC\n");}
 "}" {printf("RC\n");}
+"\"" {printf("DQ\n");}
+"%" {printf("PS\n");}
 {int} {printf("INT: %s\n",yytext);}
 {digit}+{id} {printf("Error type A at Line %d: unknown lexeme %s\n",yylineno,yytext);}
 {id} {printf("ID %s\n",yytext);}
