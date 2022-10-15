@@ -53,6 +53,7 @@ float  (0|[1-9][0-9]*)(\.){digit}+
 "else" {printf("ELSE\n");}
 "while" {printf("WHILE\n");}
 "return" {printf("RETURN\n");}
+"for" {printf("FOR\n");}
 "." {printf("DOT\n");}
 ";" {printf("SEMI\n");}
 "," {printf("COMMA\n");}
