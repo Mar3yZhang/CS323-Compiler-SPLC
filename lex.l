@@ -79,6 +79,7 @@ float  (0|[1-9][0-9]*)(\.){digit}+
 "}" {printf("RC\n");}
 "\"" {printf("DQ\n");}
 "%" {printf("PS\n");}
+"&" {printf("Addr\n");}
 {int} {printf("INT: %s\n",yytext);}
 {digit}+{id} {printf("Error type A at Line %d: unknown lexeme %s\n",yylineno,yytext);}
 {id} {printf("ID %s\n",yytext);}
