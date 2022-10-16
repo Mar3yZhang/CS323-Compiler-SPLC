@@ -2,7 +2,9 @@
     // macro 
     #define EXIT_OK 0
     #define EXIT_FAIL 1
-
+    #define YYSTYPE char *
+    //#include "syntax.tab.h"
+    #include "string.h"
     // global variables
     int identifiers = 0;
     int lines = 0;
@@ -19,14 +21,24 @@ hex     (0|[1-9a-fA-F][0-9a-fA-F]*)
 digit   [0-9]
 id      {letter_}({letter_}|{digit})*
 decimal_uint  {digit}+
-hexadecimal_uint 0xX{hex}
+hexadecimal_uint 0(x|X){hex}
 int {decimal_uint}|{hexadecimal_uint}
-normal_char  (?<=').*(?=')
-hex_form_char \xX{hex}
+normal_char  (\').(\')
+hex_form_char (\')(\\)x{hex}(\')
 char {normal_char}|{hex_form_char}
+float  (0|[1-9][0-9]*)(\.){digit}+
 
 
 %%
+"/*" {
+    char c;
+    while(1){
+    while ((c = input()) != '/'){};
+    if(yytext[yyleng-1] == '*') {
+        break;
+        }
+    }  
+}
 "//" { 
     char c;
     // ignore the following chars until seeing a newline character
@@ -34,30 +46,14 @@ char {normal_char}|{hex_form_char}
     // put the newline character back to the input buffer
     unput(c); 
 }
-
 {ws} { /*no action and no return*/ }
-int|float|char {
-    printf("TYPE %s\n", yytext);
-    // if (strcmp(yytext, "int"))
-    // {
-    //     return INT;
-    // }
-    // else if (strcmp(yytext, "float"))
-    // {
-    //     return FLOAT;
-    // }
-    // else
-    // {
-    //     return CHAR;
-    // }
-}
-"{" {printf("LC\n");}
-"}" {printf("RC\n");}
+"int"|"float"|"char" {printf("TYPE: %s\n",yytext);}
 "struct" {printf("STRUCT\n");}
 "if" {printf("IF\n");}
 "else" {printf("ELSE\n");}
 "while" {printf("WHILE\n");}
 "return" {printf("RETURN\n");}
+"for" {printf("FOR\n");}
 "." {printf("DOT\n");}
 ";" {printf("SEMI\n");}
 "," {printf("COMMA\n");}
@@ -71,24 +67,27 @@ int|float|char {
 "+" {printf("PLUS\n");}
 "-" {printf("MINUS\n");}
 "*" {printf("MUL\n");}
-"/" {printf("DIV\n");} 
-"&&" {printf("AND\n");} 
-"||" {printf("DIV\n");} 
+"/" {printf("DIV\n");}
+"&&" {printf("AND\n");}
+"||" {printf("OR\n");}
 "!" {printf("NOT\n");}
 "(" {printf("LP\n");}
 ")" {printf("RP\n");}
 "[" {printf("LB\n");}
 "]" {printf("RB\n");}
-{int} {
-    // yylval = atoi(yytext);
-    printf("INT %s\n", yytext);
-}
-{id} {
-    // yylval = atoi(yytext);
-    printf("ID %s\n", yytext);
-}
-. {printf("Error type A at Line %d: Unknown characters %s \n",yylineno, yytext);}
-
+"{" {printf("LC\n");}
+"}" {printf("RC\n");}
+"\"" {printf("DQ\n");}
+"%" {printf("PS\n");}
+"&" {printf("Addr\n");}
+{int} {printf("INT: %s\n",yytext);}
+{digit}+{id} {printf("Error type A at Line %d: unknown lexeme %s\n",yylineno,yytext);}
+{id} {printf("ID %s\n",yytext);}
+{float} {printf("FLOAT: %s\n",yytext);}
+{hex_form_char} {if ((int)strlen(yytext)>6) printf("Error type A at Line %d: unknown lexeme %s\n",yylineno,yytext);} 
+{char} { printf("CHAR: %s\n",yytext);}
+(\').*(\') {printf("Error type A at Line %d: unknown lexeme %s\n",yylineno,yytext);}
+. {printf("Error type A at Line %d: unknown lexeme %s\n",yylineno,yytext);}
 %%
 int main(int argc, char **argv){
     char *file_path;
