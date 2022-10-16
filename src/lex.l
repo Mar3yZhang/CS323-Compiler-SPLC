@@ -9,10 +9,13 @@
     int identifiers = 0;
     int lines = 0;
 
+
+    extern "C" int yylex(void);
+
     //  should be ableto detect illegal form of hex-int, like 0x5gg, and report lexical errors.
 %}
-
 %option yylineno
+%option noyywrap
 
 delim   [ \t\n\r]
 ws      {delim}+
@@ -33,7 +36,7 @@ float  (0|[1-9][0-9]*)(\.){digit}+
 "/*" {
     char c;
     while(1){
-    while ((c = input()) != '/'){};
+    while ((c = yyinput()) != '/'){};
     if(yytext[yyleng-1] == '*') {
         break;
         }
@@ -42,7 +45,7 @@ float  (0|[1-9][0-9]*)(\.){digit}+
 "//" { 
     char c;
     // ignore the following chars until seeing a newline character
-    while((c = input()) != '\n'); 
+    while((c = yyinput()) != '\n'); 
     // put the newline character back to the input buffer
     unput(c); 
 }
