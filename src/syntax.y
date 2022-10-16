@@ -1,83 +1,111 @@
 %{
-    // #define YYSTYPE char *
-    #include "lex.yy.cc"
+    #define YYSTYPE char *
+    #include "lex.yy.c"
     int yyerror(char* s);
 %}
+    %locations
 
-%token INT,FLOAT,CHAR,ID,TYPE,STRUCT,IF,ELSE,WHILE,RETURN
-%token DOT,SEMI,COMMA,ASSIGN,LT,LE,GT,GE,NE,EQ
-%token PLUS,MINUS,MUL,DIV,AND,OR,NOT,LP,RP,LB,RB,LC,RC
+%token INT FLOAT CHAR ID TYPE STRUCT IF ELSE WHILE RETURN
+%token DOT SEMI COMMA ASSIGN LT LE GT GE NE EQ
+%token PLUS MINUS MUL DIV AND OR NOT LP RP LB RB LC RC
 
 
+%type Program ExtDefList
+%type ExtDef ExtDecList Specifier StructSpecifier VarDec
+%type FunDec VarList ParamDec CompSt StmtList Stmt DefList
+%type Def DecList Dec Args Exp
 
 %%
 /* high-level definition : The dollar sign “$” represents the empty string terminal  */
-Program -> ExtDefList
-ExtDefList -> ExtDef ExtDefList
-| $
-ExtDef -> Specifier ExtDecList SEMI
-| Specifier SEMI
-| Specifier FunDec CompSt
-ExtDecList -> VarDec
-| VarDec COMMA ExtDecList
+
+Program: ExtDefList
+;
+ExtDefList: /* to allow empty input */
+    | ExtDef ExtDefList
+;
+ExtDef: Specifier ExtDecList SEMI
+    | Specifier SEMI
+    | Specifier FunDec CompSt
+;
+ExtDecList: VarDec
+    | VarDec COMMA ExtDecList
+;
 /* specifier */
-Specifier -> TYPE
-| StructSpecifier
-StructSpecifier -> STRUCT ID LC DefList RC
-| STRUCT ID
+
+Specifier: TYPE
+    | StructSpecifier
+;
+StructSpecifier: STRUCT ID LC DefList RC
+    | STRUCT ID
+;;
 /* declarator */
-VarDec -> ID
-| VarDec LB INT RB
-FunDec -> ID LP VarList RP
-| ID LP RP
-VarList -> ParamDec COMMA VarList
-| ParamDec
-ParamDec -> Specifier VarDec
+
+VarDec: ID
+    | VarDec LB INT RB
+;
+FunDec: ID LP VarList RP
+    | ID LP RP
+;
+VarList: ParamDec COMMA VarList
+    | ParamDec
+;
+ParamDec: Specifier VarDec
+;
 /* statement */
-CompSt -> LC DefList StmtList RC
-StmtList -> Stmt StmtList
-| $
-Stmt -> Exp SEMI
-| CompSt
-| RETURN Exp SEMI
-| IF LP Exp RP Stmt
-| IF LP Exp RP Stmt ELSE Stmt
-| WHILE LP Exp RP Stmt
+
+CompSt: LC DefList StmtList RC
+;
+StmtList: /* to allow empty input */
+    |Stmt StmtList
+;
+Stmt: Exp SEMI
+    | CompSt
+    | RETURN Exp SEMI
+    | IF LP Exp RP Stmt
+    | IF LP Exp RP Stmt ELSE Stmt
+    | WHILE LP Exp RP Stmt
+;
 /* local definition */
-DefList -> Def DefList
-| $
-Def -> Specifier DecList SEMI
-DecList -> Dec
-| Dec COMMA DecList
-Dec -> VarDec
-| VarDec ASSIGN Exp
+DefList: /* to allow empty input */
+    | Def DefList
+;
+Def: Specifier DecList SEMI
+;
+DecList: Dec
+    | Dec COMMA DecList
+;
+Dec: VarDec
+    | VarDec ASSIGN Exp
+;
 /* Expression */
-Exp -> Exp ASSIGN Exp
-| Exp AND Exp
-| Exp OR Exp
-| Exp LT Exp
-| Exp LE Exp
-| Exp GT Exp
-| Exp GE Exp
-| Exp NE Exp
-| Exp EQ Exp
-| Exp PLUS Exp
-| Exp MINUS Exp
-| Exp MUL Exp
-| Exp DIV Exp
-| LP Exp RP
-| MINUS Exp
-| NOT Exp
-| ID LP Args RP
-| ID LP RP
-| Exp LB Exp RB
-| Exp DOT ID
-| ID
-| INT
-| FLOAT
-| CHAR
-Args -> Exp COMMA Args
-| Exp   
+Exp: Exp ASSIGN Exp
+    | Exp AND Exp
+    | Exp OR Exp
+    | Exp LT Exp
+    | Exp LE Exp
+    | Exp GT Exp
+    | Exp GE Exp
+    | Exp NE Exp
+    | Exp EQ Exp
+    | Exp PLUS Exp
+    | Exp MINUS Exp
+    | Exp MUL Exp
+    | Exp DIV Exp
+    | LP Exp RP
+    | MINUS Exp
+    | NOT Exp
+    | ID LP Args RP
+    | ID LP RP
+    | Exp LB Exp RB
+    | Exp DOT ID
+    | ID
+    | INT
+    | FLOAT
+    | CHAR
+;
+Args: Exp COMMA Args
+    | Exp   
+;
 // please design a grammar for the valid ip addresses and provide necessary semantic actions for production rules
 %%
 
@@ -85,7 +113,8 @@ int yyerror(char* s) {
     fprintf(stderr, "%s\n", "Invalid");
     return 1;
 }
+
+
 int main() {
     yyparse();
 }
-

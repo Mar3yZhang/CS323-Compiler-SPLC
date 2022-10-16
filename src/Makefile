@@ -9,8 +9,9 @@ splc:
 	@mkdir ../bin
 	touch ../bin/splc
 	@chmod +x ../bin/splc
+	$(BISON) -d syntax.y
 	$(FLEX) lex.l
-	$(CPP) lex.yy.c -lfl -o ../bin/splc.out
+	$(CPP) syntax.tab.c -lfl -ly -o ../bin/splc.out
 clean:
 	@rm -rf ../bin/
 .PHONY: spl
