@@ -10,7 +10,6 @@
     int identifiers = 0;
     int lines = 0;
 
-
     extern "C" int yylex(void);
 
     //  should be ableto detect illegal form of hex-int, like 0x5gg, and report lexical errors.
