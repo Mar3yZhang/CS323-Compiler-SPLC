@@ -2,7 +2,6 @@
     // macro 
     #define EXIT_OK 0
     #define EXIT_FAIL 1
-    #define YYSTYPE char *
     
     #include "syntax.tab.h"
     #include "string.h"
@@ -50,45 +49,45 @@ float  (0|[1-9][0-9]*)(\.){digit}+
     unput(c); 
 }
 {ws} { /*no action and no return*/ }
-"int"|"float"|"char" {printf("TYPE: %s\n",yytext);}
-"struct" {printf("STRUCT\n");}
-"if" {printf("IF\n");}
-"else" {printf("ELSE\n");}
-"while" {printf("WHILE\n");}
-"return" {printf("RETURN\n");}
-"for" {printf("FOR\n");}
-"." {printf("DOT\n");}
-";" {printf("SEMI\n");}
-"," {printf("COMMA\n");}
-"==" {printf("EQ\n");}
-"=" {printf("ASSIGN\n");}
-"<=" {printf("LE\n");}
-"<" {printf("LT\n");}
-">=" {printf("GE\n");}
-">" {printf("GT\n");}
-"!=" {printf("NE\n");}
-"+" {printf("PLUS\n");}
-"-" {printf("MINUS\n");}
-"*" {printf("MUL\n");}
-"/" {printf("DIV\n");}
-"&&" {printf("AND\n");}
-"||" {printf("OR\n");}
-"!" {printf("NOT\n");}
-"(" {printf("LP\n");}
-")" {printf("RP\n");}
-"[" {printf("LB\n");}
-"]" {printf("RB\n");}
-"{" {printf("LC\n");}
-"}" {printf("RC\n");}
-"\"" {printf("DQ\n");}
-"%" {printf("PS\n");}
-"&" {printf("Addr\n");}
-{int} {printf("INT: %s\n",yytext);}
-{digit}+{id} {printf("Error type A at Line %d: unknown lexeme %s\n",yylineno,yytext);}
-{id} {printf("ID %s\n",yytext);}
-{float} {printf("FLOAT: %s\n",yytext);}
-{hex_form_char} {if ((int)strlen(yytext)>6) printf("Error type A at Line %d: unknown lexeme %s\n",yylineno,yytext);} 
-{char} { printf("CHAR: %s\n",yytext);}
-(\').*(\') {printf("Error type A at Line %d: unknown lexeme %s\n",yylineno,yytext);}
-. {printf("Error type A at Line %d: unknown lexeme %s\n",yylineno,yytext);}
+"int"|"float"|"char" {printf("TYPE: %s\n",yytext); return TYPE;}
+"struct"             {printf("STRUCT\n"); return STRUCT;}
+"if"                 {printf("IF\n"); return IF;}
+"else"               {printf("ELSE\n"); return ELSE;}
+"while"              {printf("WHILE\n"); return WHILE;}
+"return"             {printf("RETURN\n"); return RETURN;}
+"for"                {printf("FOR\n");}
+"."                  {printf("DOT\n"); return DOT;}
+";"                  {printf("SEMI\n"); return SEMI;}
+","                  {printf("COMMA\n"); return COMMA;}
+"=="                 {printf("EQ\n"); return EQ;}
+"="                  {printf("ASSIGN\n"); return ASSIGN;}
+"<="                 {printf("LE\n"); return LE;}
+"<"                  {printf("LT\n"); return LT;}
+">="                 {printf("GE\n"); return GE;}
+">"                  {printf("GT\n"); return GT;}
+"!="                 {printf("NE\n"); return NE;}
+"+"                  {printf("PLUS\n"); return PLUS;}
+"-"                  {printf("MINUS\n"); return MINUS;}
+"*"                  {printf("MUL\n"); return MUL;}
+"/"                  {printf("DIV\n"); return DIV;}
+"&&"                 {printf("AND\n"); return AND;}
+"||"                 {printf("OR\n"); return OR;}
+"!"                  {printf("NOT\n"); return NOT;}
+"("                  {printf("LP\n"); return LP;}
+")"                  {printf("RP\n"); return RP;}
+"["                  {printf("LB\n"); return LB;}
+"]"                  {printf("RB\n"); return RB;}
+"{"                  {printf("LC\n"); return LC;}
+"}"                  {printf("RC\n"); return RC;}
+"\""                 {printf("DQ\n");}
+"%"                  {printf("PS\n");}
+"&"                  {printf("Addr\n");}
+{int}                {printf("INT: %s\n",yytext); return INT;}
+{digit}+{id}         {printf("Error type A at Line %d: unknown lexeme %s\n",yylineno,yytext);}
+{id}                 {printf("ID %s\n",yytext); return ID;}
+{float}              {printf("FLOAT: %s\n",yytext); return FLOAT;}
+{hex_form_char}      {if ((int)strlen(yytext)>6) printf("Error type A at Line %d: unknown lexeme %s\n",yylineno,yytext);} 
+{char}               {printf("CHAR: %s\n",yytext); return CHAR;}
+(\').*(\')           {printf("Error type A at Line %d: unknown lexeme %s\n",yylineno,yytext);}
+.                    {printf("Error type A at Line %d: unknown lexeme %s\n",yylineno,yytext);}
 %%
