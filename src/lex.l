@@ -2,9 +2,10 @@
     // macro 
     #define EXIT_OK 0
     #define EXIT_FAIL 1
-    
-
+    #include "Node.hpp"
+    #include "string.h"
     #include "syntax.tab.h"
+
 
     // help to keep track of the location of tokens in Bison
     // ref: https://www.gnu.org/software/bison/manual/html_node/Token-Locations.html
@@ -16,7 +17,6 @@
         yylloc.last_column = yycolumn + yyleng;\
         yycolumn += yyleng;
 
-    #include "string.h"
     // global variables
     int identifiers = 0;
     int lines = 0;

@@ -1,24 +1,30 @@
 %{
-    #define YYSTYPE char *
     #include "lex.yy.c"
     void yyerror(const char *s);
+    Node* root;
 %}
 
 %locations
+
+%union{
+    Node* node;
+}
 
 %token INT FLOAT CHAR ID TYPE STRUCT IF ELSE WHILE RETURN
 %token DOT SEMI COMMA ASSIGN LT LE GT GE NE EQ
 %token PLUS MINUS MUL DIV AND OR NOT LP RP LB RB LC RC
 
 
-%type Program ExtDefList
-%type ExtDef ExtDecList Specifier StructSpecifier VarDec
-%type FunDec VarList ParamDec CompSt StmtList Stmt DefList
-%type Def DecList Dec Args Exp
+%type <node> Program ExtDefList
+%type <node> ExtDef ExtDecList Specifier StructSpecifier VarDec
+%type <node> FunDec VarList ParamDec CompSt StmtList Stmt DefList
+%type <node> Def DecList Dec Args Exp
 
 %%
 /* high-level definition : The dollar sign “$” represents the empty string terminal  */
-Program: ExtDefList{}
+Program: ExtDefList{
+    root=$$;
+}
 ;
 ExtDefList: /* to allow empty input */{}
     | ExtDef ExtDefList{}
