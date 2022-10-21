@@ -3,13 +3,27 @@
     #define EXIT_OK 0
     #define EXIT_FAIL 1
     
+
     #include "syntax.tab.h"
+
+    // help to keep track of the location of tokens in Bison
+    // ref: https://www.gnu.org/software/bison/manual/html_node/Token-Locations.html
+    int yycolumn = 1;
+    #define YY_USER_ACTION \
+        yylloc.first_line = yylineno; \
+        yylloc.last_line = yylineno; \
+        yylloc.first_column = yycolumn; \
+        yylloc.last_column = yycolumn + yyleng;\
+        yycolumn += yyleng;
+
     #include "string.h"
     // global variables
     int identifiers = 0;
     int lines = 0;
 
     extern "C" int yylex(void);
+
+
 
     //  should be ableto detect illegal form of hex-int, like 0x5gg, and report lexical errors.
 %}

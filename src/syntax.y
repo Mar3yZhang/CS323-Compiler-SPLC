@@ -130,7 +130,11 @@ int main(int argc, char **argv) {
             return 1;
         }
         yyrestart(f);
-        yyparse();
+        if(!yyparse()){
+            printf("\nParsing complete\n");
+        }else{
+            printf("\nParsing failed\n");
+        }
     }
     return 0;
 }
