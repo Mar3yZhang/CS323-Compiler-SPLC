@@ -1,32 +1,31 @@
 #include "Node.hpp"
 
-Node::Node(int type, std::string name, std::string content, int line)
+Node::Node(TYPE type, std::string name, std::string content, int line)
     : name(name), content(content), line_num(line)
 {
     switch (type)
     {
-    case (int)(TYPE::NOTHING):
-        this->type = (int)TYPE::NOTHING;
+    case (TYPE::NOTHING):
+        this->type = TYPE::NOTHING;
         break;
-    case (int)TYPE::MEDIAN:
-        this->type = (int)TYPE::MEDIAN;
+    case TYPE::MEDIAN:
+        this->type = TYPE::MEDIAN;
         break;
-    case (int)TYPE::INT:
-        this->type = (int)TYPE::INT;
+    case TYPE::INT:
+        this->type = TYPE::INT;
         break;
-    case (int)TYPE::CHAR:
-        this->type = (int)TYPE::CHAR;
+    case TYPE::CHAR:
+        this->type = TYPE::CHAR;
         break;
-    case (int)TYPE::FLOAT:
-        this->type = (int)TYPE::FLOAT;
+    case TYPE::FLOAT:
+        this->type = TYPE::FLOAT;
         break;
-    case (int)TYPE::ID:
-        this->type = (int)TYPE::ID;
+    case TYPE::ID:
+        this->type = TYPE::ID;
         break;
     }
 }
 
-void Node::addChild(Node *childern)
-{
+void Node::addChild(Node *childern){
     this->child.push_back(childern);
 }

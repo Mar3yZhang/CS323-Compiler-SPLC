@@ -1,7 +1,7 @@
 %{
     #include "lex.yy.c"
     void yyerror(const char *s);
-    Node* root;
+    Node* ast_root;
 %}
 
 %locations
@@ -23,7 +23,9 @@
 %%
 /* high-level definition : The dollar sign “$” represents the empty string terminal  */
 Program: ExtDefList{
-    root=$$;
+    $$ = new Node(TYPE::MEDIAN,"Program","",@$.first_line);
+    $$->addChild($1);
+    ast_root = $$;
 }
 ;
 ExtDefList: /* to allow empty input */{}
