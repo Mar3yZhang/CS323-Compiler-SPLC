@@ -9,11 +9,18 @@
 %union{
     Node* node;
 }
-
-%token INT FLOAT CHAR ID TYPE STRUCT IF ELSE WHILE RETURN
-%token DOT SEMI COMMA ASSIGN LT LE GT GE NE EQ
-%token PLUS MINUS MUL DIV AND OR NOT LP RP LB RB LC RC
-
+%nonassoc LOWER_ELSE
+%nonassoc ELSE
+%token INT FLOAT CHAR ID TYPE STRUCT IF WHILE RETURN
+%token SEMI COMMA 
+%token LC RC
+%right ASSIGN 
+%left AND OR
+%left LT LE GT GE NE EQ
+%left PLUS MINUS
+%left MUL DIV
+%right NOT 
+%left LP RP LB RB DOT
 
 %type <node> Program ExtDefList
 %type <node> ExtDef ExtDecList Specifier StructSpecifier VarDec
@@ -69,7 +76,7 @@ StmtList: /* to allow empty input */{}
 Stmt: Exp SEMI{}
     | CompSt{}
     | RETURN Exp SEMI{}
-    | IF LP Exp RP Stmt{}
+    | IF LP Exp RP Stmt %prec LOWER_ELSE{}
     | IF LP Exp RP Stmt ELSE Stmt{}
     | WHILE LP Exp RP Stmt{}
     ;
