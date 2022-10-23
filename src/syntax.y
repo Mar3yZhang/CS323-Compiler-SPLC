@@ -9,121 +9,122 @@
 %union{
     Node* node;
 }
-%nonassoc LOWER_ELSE
-%nonassoc ELSE
-%token INT FLOAT CHAR ID TYPE STRUCT IF WHILE RETURN
-%token SEMI COMMA 
-%token LC RC
-%right ASSIGN 
-%left AND OR
-%left LT LE GT GE NE EQ
-%left PLUS MINUS
-%left MUL DIV
-%right NOT 
-%left LP RP LB RB DOT
+
+%token INT FLOAT CHAR ID TYPE STRUCT IF ELSE WHILE RETURN
+%token DOT SEMI COMMA ASSIGN LT LE GT GE NE EQ
+%token PLUS MINUS MUL DIV AND OR NOT LP RP LB RB LC RC
+
 
 %type <node> Program ExtDefList
 %type <node> ExtDef ExtDecList Specifier StructSpecifier VarDec
 %type <node> FunDec VarList ParamDec CompSt StmtList Stmt DefList
 %type <node> Def DecList Dec Args Exp
 
+%nonassoc UELSE
+%nonassoc ELSE
+%nonassoc UMINUS
+%right ASSIGN 
+%left OR AND 
+%left LT LE GT GE NE EQ
+%left PLUS MINUS
+%left MUL DIV
+%right NOT
+%left LP RP LB RB DOT
+
 %%
-/* high-level definition : The dollar sign “$” represents the empty string terminal  */
 Program: ExtDefList{
     $$ = new Node(TYPE::MEDIAN,"Program","",@$.first_line);
-    $$->addChild($1);
+    $$->addChild({$1});
     ast_root = $$;
 }
-;
-ExtDefList: /* to allow empty input */{}
-    | ExtDef ExtDefList{}
-    ;
-ExtDef: Specifier ExtDecList SEMI{}
-    | Specifier SEMI{}
-    | Specifier FunDec CompSt{}
-    ;
-ExtDecList: VarDec{}
-    | VarDec COMMA ExtDecList{}
-    ;
-/* specifier */
-
-Specifier: TYPE{}
-    | StructSpecifier{}
-    ;
-StructSpecifier: STRUCT ID LC DefList RC{}
-    | STRUCT ID{}
-    ;
-/* declarator */
-
-VarDec: ID{}
-    | VarDec LB INT RB{}
-    ;
-FunDec: ID LP VarList RP{}
-    | ID LP RP{}
-    ;
-VarList: ParamDec COMMA VarList{}
-    | ParamDec{}
-    ;
-ParamDec: Specifier VarDec{}
-;
-/* statement */
-
-CompSt: LC DefList StmtList RC{}
-;
-StmtList: /* to allow empty input */{}
-    |Stmt StmtList{}
-    ;
-Stmt: Exp SEMI{}
-    | CompSt{}
-    | RETURN Exp SEMI{}
-    | IF LP Exp RP Stmt %prec LOWER_ELSE{}
-    | IF LP Exp RP Stmt ELSE Stmt{}
-    | WHILE LP Exp RP Stmt{}
-    ;
-/* local definition */
-DefList: /* to allow empty input */{}
-    | Def DefList{}
-    ;
-Def: Specifier DecList SEMI{}
-    ;
-DecList: Dec{}
-    | Dec COMMA DecList{}
-    ;
-Dec: VarDec{}
-    | VarDec ASSIGN Exp{}
-    ;
-/* Expression */
-Args: Exp COMMA Args{}
-    | Exp{}
-    ;
-Exp: Exp ASSIGN Exp{}
-    | Exp AND Exp{}
-    | Exp OR Exp{}
-    | Exp LT Exp{}
-    | Exp LE Exp{}
-    | Exp GT Exp{}
-    | Exp GE Exp{}
-    | Exp NE Exp{}
-    | Exp EQ Exp{}
-    | Exp PLUS Exp{}
-    | Exp MINUS Exp{}
-    | Exp MUL Exp{}
-    | Exp DIV Exp{}
-    | LP Exp RP{}
-    | MINUS Exp{}
-    | NOT Exp{}
-    | ID LP Args RP{}
-    | ID LP RP{}
-    | Exp LB Exp RB{}
-    | Exp DOT ID{}
-    | ID{}
-    | INT{}
-    | FLOAT{}
-    | CHAR{}
-    ;
-// please design a grammar for the valid ip addresses and provide necessary semantic actions for production rules
+;       
+ExtDefList: /* to allow empty input */        {$$=new Node(TYPE::MEDIAN,"ExtDefList","",@$.first_line);}
+    | ExtDef ExtDefList                       {$$=new Node(TYPE::MEDIAN,"ExtDefList","",@$.first_line); $$->addChild({$1,$2});}
+    ;         
+ExtDef: Specifier ExtDecList SEMI             {$$=new Node(TYPE::MEDIAN,"ExtDef","",@$.first_line); $$->addChild({$1,$2,$3});}
+    | Specifier SEMI                          {$$=new Node(TYPE::MEDIAN,"ExtDef","",@$.first_line); $$->addChild({$1,$2});}
+    | Specifier FunDec CompSt                 {$$=new Node(TYPE::MEDIAN,"ExtDef","",@$.first_line); $$->addChild({$1,$2,$3});}
+    ;         
+ExtDecList: VarDec                            {$$=new Node(TYPE::MEDIAN,"ExtDecList","",@$.first_line); $$->addChild({$1});}
+    | VarDec COMMA ExtDecList                 {$$=new Node(TYPE::MEDIAN,"ExtDecList","",@$.first_line); $$->addChild({$1,$2,$3});}
+    ;         
+/* specifier */       
+    
+Specifier: TYPE                               {$$=new Node(TYPE::MEDIAN,"Specifier","",@$.first_line); $$->addChild({$1});}
+    | StructSpecifier                         {$$=new Node(TYPE::MEDIAN,"Specifier","",@$.first_line); $$->addChild({$1});}
+    ;         
+StructSpecifier: STRUCT ID LC DefList         RC{$$=new Node(TYPE::MEDIAN,"StructSpecifier","",@$.first_line); $$->addChild({$1,$2,$3,$4,$5});}
+    | STRUCT ID                               {$$=new Node(TYPE::MEDIAN,"StructSpecifier","",@$.first_line); $$->addChild({$1,$2});}
+    ;         
+/* declarator */          
+    
+VarDec: ID                                    {$$=new Node(TYPE::MEDIAN,"VarDec","",@$.first_line); $$->addChild({$1});}
+    | VarDec LB INT RB                        {$$=new Node(TYPE::MEDIAN,"VarDec","",@$.first_line); $$->addChild({$1,$2,$3,$4});}
+    ;         
+FunDec: ID LP VarList RP                      {$$=new Node(TYPE::MEDIAN,"FunDec","",@$.first_line); $$->addChild({$1,$2,$3,$4});}
+    | ID LP RP                                {$$=new Node(TYPE::MEDIAN,"FunDec","",@$.first_line); $$->addChild({$1,$2,$3});}
+    ;         
+VarList: ParamDec COMMA VarList               {$$=new Node(TYPE::MEDIAN,"VarList","",@$.first_line); $$->addChild({$1,$2,$3});}
+    | ParamDec                                {$$=new Node(TYPE::MEDIAN,"VarList","",@$.first_line); $$->addChild({$1});}
+    ;         
+ParamDec: Specifier VarDec                    {$$=new Node(TYPE::MEDIAN,"ParamDec","",@$.first_line); $$->addChild({$1,$2});}
+;         
+/* statement */       
+    
+CompSt: LC DefList StmtList RC                {$$=new Node(TYPE::MEDIAN,"CompSt","",@$.first_line); $$->addChild({$1,$2,$3,$4});}
+;         
+StmtList: /* to allow empty input */          {$$=new Node(TYPE::MEDIAN,"StmtList","",@$.first_line);}
+    |Stmt StmtList                            {$$=new Node(TYPE::MEDIAN,"StmtList","",@$.first_line); $$->addChild({$1,$2});}
+    ;         
+Stmt: Exp SEMI                                {$$=new Node(TYPE::MEDIAN,"Stmt","",@$.first_line); $$->addChild({$1,$2});}
+    | CompSt                                  {$$=new Node(TYPE::MEDIAN,"Stmt","",@$.first_line); $$->addChild({$1});}
+    | RETURN Exp SEMI                         {$$=new Node(TYPE::MEDIAN,"Stmt","",@$.first_line); $$->addChild({$1,$2,$3});}
+    | IF LP Exp RP Stmt  %prec UELSE          {$$=new Node(TYPE::MEDIAN,"Stmt","",@$.first_line); $$->addChild({$1,$2,$3,$4,$5});}
+    | IF LP Exp RP Stmt ELSE Stmt             {$$=new Node(TYPE::MEDIAN,"Stmt","",@$.first_line); $$->addChild({$1,$2,$3,$4,$5,$6,$7});}
+    | WHILE LP Exp RP Stmt                    {$$=new Node(TYPE::MEDIAN,"Stmt","",@$.first_line); $$->addChild({$1,$2,$3,$4,$5});}
+    ;         
+/* local definition */        
+DefList: /* to allow empty input */           {$$=new Node(TYPE::MEDIAN,"DefList","",@$.first_line);}
+    | Def DefList                             {$$=new Node(TYPE::MEDIAN,"DefList","",@$.first_line); $$->addChild({$1,$2});}
+    ;         
+Def: Specifier DecList SEMI                   {$$=new Node(TYPE::MEDIAN,"Def","",@$.first_line); $$->addChild({$1,$2,$3});}
+    ;         
+DecList: Dec                                  {$$=new Node(TYPE::MEDIAN,"DecList","",@$.first_line); $$->addChild({$1});}
+    | Dec COMMA DecList                       {$$=new Node(TYPE::MEDIAN,"DecList","",@$.first_line); $$->addChild({$1,$2,$3});}
+    ;         
+Dec: VarDec                                   {$$=new Node(TYPE::MEDIAN,"Dec","",@$.first_line); $$->addChild({$1});}
+    | VarDec ASSIGN Exp                       {$$=new Node(TYPE::MEDIAN,"Dec","",@$.first_line); $$->addChild({$1,$2,$3});}
+    ;         
+/* Expression */          
+Args: Exp COMMA Args                          {$$=new Node(TYPE::MEDIAN,"Args","",@$.first_line); $$->addChild({$1,$2,$3});}
+    | Exp                                     {$$=new Node(TYPE::MEDIAN,"Args","",@$.first_line); $$->addChild({$1});}
+    ;         
+Exp: Exp ASSIGN Exp                           {$$=new Node(TYPE::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1,$2,$3});}
+    | Exp AND Exp                             {$$=new Node(TYPE::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1,$2,$3});}
+    | Exp OR Exp                              {$$=new Node(TYPE::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1,$2,$3});}
+    | Exp LT Exp                              {$$=new Node(TYPE::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1,$2,$3});}
+    | Exp LE Exp                              {$$=new Node(TYPE::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1,$2,$3});}
+    | Exp GT Exp                              {$$=new Node(TYPE::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1,$2,$3});}
+    | Exp GE Exp                              {$$=new Node(TYPE::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1,$2,$3});}
+    | Exp NE Exp                              {$$=new Node(TYPE::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1,$2,$3});}
+    | Exp EQ Exp                              {$$=new Node(TYPE::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1,$2,$3});}
+    | Exp PLUS Exp                            {$$=new Node(TYPE::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1,$2,$3});}
+    | Exp MINUS Exp                           {$$=new Node(TYPE::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1,$2,$3});}
+    | Exp MUL Exp                             {$$=new Node(TYPE::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1,$2,$3});}
+    | Exp DIV Exp                             {$$=new Node(TYPE::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1,$2,$3});}
+    | LP Exp RP                               {$$=new Node(TYPE::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1,$2,$3});}
+    | MINUS Exp %prec UMINUS                  {$$=new Node(TYPE::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1,$2});}
+    | NOT Exp                                 {$$=new Node(TYPE::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1,$2});}
+    | ID LP Args RP                           {$$=new Node(TYPE::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1,$2,$3,$4});}
+    | ID LP RP                                {$$=new Node(TYPE::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1,$2,$3});}
+    | Exp LB Exp RB                           {$$=new Node(TYPE::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1,$2,$3,$4});}
+    | Exp DOT ID                              {$$=new Node(TYPE::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1,$2,$3});}
+    | ID                                      {$$=new Node(TYPE::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1});}
+    | INT                                     {$$=new Node(TYPE::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1});}
+    | FLOAT                                   {$$=new Node(TYPE::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1});}
+    | CHAR                                    {$$=new Node(TYPE::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1});}
+    ;       
 %%
-
 void yyerror(const char *s){
     // printf("Error type B at Line %d: \n",yylineno);
 
@@ -144,12 +145,15 @@ int main(int argc, char **argv) {
             printf("error of path %s", argv[1]);
             return 1;
         }
+        printf("\nTokens: \n");
         yyrestart(f);
         if(!yyparse()){
             printf("\nParsing complete\n");
         }else{
             printf("\nParsing failed\n");
         }
+        printf("\n\nAbstract Syntex Tree: \n");
+        Node::print(ast_root,0);
     }
     return 0;
 }

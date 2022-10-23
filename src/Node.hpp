@@ -1,16 +1,18 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include <initializer_list>
 
 enum class TYPE
 {
-    NOTHING, // 0 exp: /*empty here*/
     MEDIAN,  // 1 exp: StmtList (4)
-    Other,   // 2 exp: SEMI
-    INT,     // 3 exp: INT: 30
-    CHAR,    // 4 exp: CHAR: 'c'
-    FLOAT,   // 5 exp: FLOAT: 30.5
-    ID,      // 6 exp: ID: b
+    OTHER,   // 2 exp: SEMI
+    TYPE,    // 3 exp: TYPE: int
+    INT,     // 4 exp: INT: 30
+    CHAR,    // 5 exp: CHAR: 'c'
+    FLOAT,   // 6 exp: FLOAT: 30.5
+    ID,      // 7 exp: ID: b
+    NOTHING, // 0 exp: /*empty here*/
 };
 
 class Node
@@ -23,7 +25,8 @@ public:
     std::vector<Node *> child; // the children of the node
 
 public:
-    explicit Node(enum TYPE type, std::string name, std::string content, int line);
+    explicit Node(enum TYPE type, std::string name, const char *content, int line);
     ~Node() = default;
-    void addChild(Node *childern);
+    void addChild(std::initializer_list<Node *> childs);
+    static void print(Node *node, long depth);
 };

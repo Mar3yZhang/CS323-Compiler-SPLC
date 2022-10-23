@@ -12,7 +12,7 @@ splc:
 	$(BISON) -d syntax.y
 	$(FLEX) lex.l
 	
-	$(CPP) syntax.tab.c Node.hpp Node.cpp -lfl -ly -o ../bin/splc
+	$(CPP) Node.hpp Node.cpp syntax.tab.c -lfl -ly -o ../bin/splc.out
 clean:
 	@rm -rf ../bin/
 .PHONY: spl
