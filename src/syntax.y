@@ -10,9 +10,9 @@
     Node* node;
 }
 
-%token INT FLOAT CHAR ID TYPE STRUCT IF ELSE WHILE RETURN
-%token DOT SEMI COMMA ASSIGN LT LE GT GE NE EQ
-%token PLUS MINUS MUL DIV AND OR NOT LP RP LB RB LC RC
+%token <node> INT FLOAT CHAR ID TYPE STRUCT IF ELSE WHILE FOR RETURN
+%token <node> DOT SEMI COMMA ASSIGN LT LE GT GE NE EQ
+%token <node> PLUS MINUS MUL DIV AND OR NOT LP RP LB RB LC RC
 
 
 %type <node> Program ExtDefList
@@ -82,6 +82,8 @@ Stmt: Exp SEMI                                {$$=new Node(TYPE::MEDIAN,"Stmt","
     | IF LP Exp RP Stmt  %prec UELSE          {$$=new Node(TYPE::MEDIAN,"Stmt","",@$.first_line); $$->addChild({$1,$2,$3,$4,$5});}
     | IF LP Exp RP Stmt ELSE Stmt             {$$=new Node(TYPE::MEDIAN,"Stmt","",@$.first_line); $$->addChild({$1,$2,$3,$4,$5,$6,$7});}
     | WHILE LP Exp RP Stmt                    {$$=new Node(TYPE::MEDIAN,"Stmt","",@$.first_line); $$->addChild({$1,$2,$3,$4,$5});}
+    | FOR LP Exp SEMI Exp SEMI Exp RP Stmt    {$$=new Node(TYPE::MEDIAN,"Stmt","",@$.first_line); $$->addChild({$1,$2,$3,$4,$5,$6,$7,$8,$9});}
+
     ;         
 /* local definition */        
 DefList: /* to allow empty input */           {$$=new Node(TYPE::MEDIAN,"DefList","",@$.first_line);}

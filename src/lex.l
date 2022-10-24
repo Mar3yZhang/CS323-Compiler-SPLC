@@ -69,7 +69,7 @@ float  (0|[1-9][0-9]*)(\.){digit}+
 "else"               {printf("ELSE\n"); yylval.node = new Node(TYPE::OTHER,"ELSE","else",yylineno); return ELSE;}
 "while"              {printf("WHILE\n"); yylval.node = new Node(TYPE::OTHER,"WHILE","while",yylineno); return WHILE;}
 "return"             {printf("RETURN\n"); yylval.node = new Node(TYPE::OTHER,"RETURN","return",yylineno); return RETURN;}
-"for"                {printf("FOR\n");}
+"for"                {printf("FOR\n");yylval.node = new Node(TYPE::OTHER,"FOR","for",yylineno);return FOR;}
 "."                  {printf("DOT\n"); yylval.node = new Node(TYPE::OTHER,"DOT",".",yylineno); return DOT;}
 ";"                  {printf("SEMI\n"); yylval.node = new Node(TYPE::OTHER,"SEMI",";",yylineno); return SEMI;}
 ","                  {printf("COMMA\n"); yylval.node = new Node(TYPE::OTHER,"COMMA",",",yylineno); return COMMA;}
@@ -105,3 +105,9 @@ float  (0|[1-9][0-9]*)(\.){digit}+
 (\').*(\')           {printf("Error type A at Line %d: unknown lexeme %s\n",yylineno,yytext);}
 .                    {printf("Error type A at Line %d: unknown lexeme %s\n",yylineno,yytext);}
 %%
+
+
+
+
+
+

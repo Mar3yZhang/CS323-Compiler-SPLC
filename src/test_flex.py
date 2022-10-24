@@ -2,7 +2,7 @@ import os,sys
 
 # python test_flex  +  number of test_case you want to check
 while True:
-    test_case = input("please input the # of test_case: ")
+    test_case = int(input("please input the # of test_case: "))
     FILE_NAME = "test_1_r"
     if test_case <=9: 
         FILE_NAME = FILE_NAME + "0" + str(test_case)
