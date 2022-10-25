@@ -43,7 +43,7 @@ Program: ExtDefList{
 ExtDefList: /* to allow empty input */        {$$=new Node(TYPE::NOTHING,"ExtDefList","",@$.first_line);}
     | ExtDef ExtDefList                       {$$=new Node(TYPE::MEDIAN,"ExtDefList","",@$.first_line); $$->addChild({$1,$2});}
     ;         
-ExtDef: error ExtDecList SEMI                 {printf("Missing specifier\n"); type_B_error=1;}
+ExtDef: error ExtDecList SEMI                 {printf("Error type B at Line %d:Missing specifier\n",@$.first_line); type_B_error=1;}
     |Specifier ExtDecList SEMI                {$$=new Node(TYPE::MEDIAN,"ExtDef","",@$.first_line); $$->addChild({$1,$2,$3});}
     | Specifier SEMI                          {$$=new Node(TYPE::MEDIAN,"ExtDef","",@$.first_line); $$->addChild({$1,$2});}
     | Specifier FunDec CompSt                 {$$=new Node(TYPE::MEDIAN,"ExtDef","",@$.first_line); $$->addChild({$1,$2,$3});}
