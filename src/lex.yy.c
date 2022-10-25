@@ -914,17 +914,17 @@ YY_RULE_SETUP
 case 6:
 YY_RULE_SETUP
 #line 68 "lex.l"
-{ yylval.node =  new Node(TYPE::OTHER,"IF","if",yylineno); return IF;}
+{yylval.node =  new Node(TYPE::OTHER,"IF","if",yylineno); return IF;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
 #line 69 "lex.l"
-{ yylval.node = new Node(TYPE::OTHER,"ELSE","else",yylineno); return ELSE;}
+{yylval.node = new Node(TYPE::OTHER,"ELSE","else",yylineno); return ELSE;}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
 #line 70 "lex.l"
-{ yylval.node = new Node(TYPE::OTHER,"WHILE","while",yylineno); return WHILE;}
+{yylval.node = new Node(TYPE::OTHER,"WHILE","while",yylineno); return WHILE;}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
@@ -949,12 +949,12 @@ YY_RULE_SETUP
 case 13:
 YY_RULE_SETUP
 #line 75 "lex.l"
-{ yylval.node = new Node(TYPE::OTHER,"COMMA",",",yylineno); return COMMA;}
+{yylval.node = new Node(TYPE::OTHER,"COMMA",",",yylineno); return COMMA;}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
 #line 76 "lex.l"
-{ yylval.node = new Node(TYPE::OTHER,"EQ","==",yylineno); return EQ;}
+{yylval.node = new Node(TYPE::OTHER,"EQ","==",yylineno); return EQ;}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
@@ -989,27 +989,27 @@ YY_RULE_SETUP
 case 21:
 YY_RULE_SETUP
 #line 83 "lex.l"
-{ yylval.node = new Node(TYPE::OTHER,"PLUS","+",yylineno); return PLUS;}
+{yylval.node = new Node(TYPE::OTHER,"PLUS","+",yylineno); return PLUS;}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
 #line 84 "lex.l"
-{ yylval.node = new Node(TYPE::OTHER,"MINUS","-",yylineno); return MINUS;}
+{yylval.node = new Node(TYPE::OTHER,"MINUS","-",yylineno); return MINUS;}
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
 #line 85 "lex.l"
-{ yylval.node = new Node(TYPE::OTHER,"MUL","*",yylineno); return MUL;}
+{yylval.node = new Node(TYPE::OTHER,"MUL","*",yylineno); return MUL;}
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
 #line 86 "lex.l"
-{ yylval.node = new Node(TYPE::OTHER,"DIV","/",yylineno); return DIV;}
+{yylval.node = new Node(TYPE::OTHER,"DIV","/",yylineno); return DIV;}
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
 #line 87 "lex.l"
-{ yylval.node = new Node(TYPE::OTHER,"AND","&&",yylineno); return AND;}
+{yylval.node = new Node(TYPE::OTHER,"AND","&&",yylineno); return AND;}
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
@@ -1019,7 +1019,7 @@ YY_RULE_SETUP
 case 27:
 YY_RULE_SETUP
 #line 89 "lex.l"
-{ yylval.node = new Node(TYPE::OTHER,"NOT","!",yylineno); return NOT;}
+{yylval.node = new Node(TYPE::OTHER,"NOT","!",yylineno); return NOT;}
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
@@ -1039,17 +1039,17 @@ YY_RULE_SETUP
 case 31:
 YY_RULE_SETUP
 #line 93 "lex.l"
-{ yylval.node = new Node(TYPE::OTHER,"RB","]",yylineno); return RB;}
+{yylval.node = new Node(TYPE::OTHER,"RB","]",yylineno); return RB;}
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
 #line 94 "lex.l"
-{ yylval.node = new Node(TYPE::OTHER,"LC","{",yylineno); return LC;}
+{yylval.node = new Node(TYPE::OTHER,"LC","{",yylineno); return LC;}
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
 #line 95 "lex.l"
-{ yylval.node = new Node(TYPE::OTHER,"RC","}",yylineno); return RC;}
+{yylval.node = new Node(TYPE::OTHER,"RC","}",yylineno); return RC;}
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
@@ -1059,7 +1059,7 @@ YY_RULE_SETUP
 case 35:
 YY_RULE_SETUP
 #line 98 "lex.l"
-{ yylval.node = new Node(TYPE::INT,"INT",yytext,yylineno); return INT;}
+{yylval.node = new Node(TYPE::INT,"INT",yytext,yylineno); return INT;}
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
@@ -1069,7 +1069,7 @@ YY_RULE_SETUP
 case 37:
 YY_RULE_SETUP
 #line 100 "lex.l"
-{ yylval.node = new Node(TYPE::ID,"ID",yytext,yylineno); return ID;}
+{yylval.node = new Node(TYPE::ID,"ID",yytext,yylineno); return ID;}
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
@@ -1084,7 +1084,7 @@ YY_RULE_SETUP
 case 40:
 YY_RULE_SETUP
 #line 103 "lex.l"
-{ yylval.node = new Node(TYPE::CHAR,"CHAR",yytext,yylineno); return CHAR;}
+{yylval.node = new Node(TYPE::CHAR,"CHAR",yytext,yylineno); return CHAR;}
 	YY_BREAK
 case 41:
 YY_RULE_SETUP

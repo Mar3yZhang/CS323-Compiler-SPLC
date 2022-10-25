@@ -71,8 +71,8 @@
     #include "lex.yy.c"
     void yyerror(const char *s);
     Node* ast_root;
-    bool type_A_error;
-    bool type_B_error;
+    bool type_A_error = 0;
+    bool type_B_error = 0;
 
 #line 78 "syntax.tab.c"
 
@@ -1677,7 +1677,7 @@ yyreduce:
 
   case 17:
 #line 67 "syntax.y"
-                                            {(yyval.node)=new Node(TYPE::MEDIAN,"FunDec","",(yyloc).first_line); (yyval.node)->addChild({(yyvsp[-2].node),(yyvsp[-1].node)});printf("Missing closing parenthesis ')'\n");type_B_error=1;}
+                                            {(yyval.node)=new Node(TYPE::MEDIAN,"FunDec","",(yyloc).first_line); (yyval.node)->addChild({(yyvsp[-2].node),(yyvsp[-1].node)});printf("Error type B at Line %d:Missing closing parenthesis ')'\n",(yyloc).first_line);type_B_error=1;}
 #line 1682 "syntax.tab.c"
     break;
 
@@ -1743,7 +1743,7 @@ yyreduce:
 
   case 28:
 #line 86 "syntax.y"
-                                              {(yyval.node)=new Node(TYPE::MEDIAN,"Stmt","",(yyloc).first_line); (yyval.node)->addChild({(yyvsp[-2].node),(yyvsp[-1].node)});printf("Missing semicolon ';'\n");type_B_error = 1;}
+                                              {(yyval.node)=new Node(TYPE::MEDIAN,"Stmt","",(yyloc).first_line); (yyval.node)->addChild({(yyvsp[-2].node),(yyvsp[-1].node)});printf("Error type B at Line %d:Missing semicolon ';'\n",(yyloc).first_line);type_B_error = 1;}
 #line 1748 "syntax.tab.c"
     break;
 
@@ -1791,7 +1791,7 @@ yyreduce:
 
   case 36:
 #line 99 "syntax.y"
-                                             {(yyval.node)=new Node(TYPE::MEDIAN,"Def","",(yyloc).first_line); (yyval.node)->addChild({(yyvsp[-2].node),(yyvsp[-1].node)});printf("Missing semicolon ';'\n");type_B_error=1;}
+                                             {(yyval.node)=new Node(TYPE::MEDIAN,"Def","",(yyloc).first_line); (yyval.node)->addChild({(yyvsp[-2].node),(yyvsp[-1].node)});printf("Error type B at Line %d:Missing semicolon ';'\n",(yyloc).first_line);type_B_error=1;}
 #line 1796 "syntax.tab.c"
     break;
 
@@ -1935,7 +1935,7 @@ yyreduce:
 
   case 60:
 #line 128 "syntax.y"
-                                              {(yyval.node)=new Node(TYPE::MEDIAN,"Exp","",(yyloc).first_line); (yyval.node)->addChild({(yyvsp[-3].node),(yyvsp[-2].node),(yyvsp[-1].node)});printf("Missing closing parenthesis ')'\n");type_B_error = 1;}
+                                              {(yyval.node)=new Node(TYPE::MEDIAN,"Exp","",(yyloc).first_line); (yyval.node)->addChild({(yyvsp[-3].node),(yyvsp[-2].node),(yyvsp[-1].node)});printf("Error type B at Line %d:Missing closing parenthesis ')'\n",(yyloc).first_line);type_B_error = 1;}
 #line 1940 "syntax.tab.c"
     break;
 
@@ -1989,7 +1989,7 @@ yyreduce:
 
   case 69:
 #line 137 "syntax.y"
-                                              {(yyval.node)=new Node(TYPE::MEDIAN,"Exp","",(yyloc).first_line); (yyval.node)->addChild({(yyvsp[0].node)});type_A_error = 1;}
+                                              {type_A_error = 1;}
 #line 1994 "syntax.tab.c"
     break;
 
@@ -2235,9 +2235,11 @@ yyreturn:
 #line 139 "syntax.y"
 
 void yyerror(const char *s){
-
-        printf("Error type B at Line %d: ",yylineno);
-
+    if (type_B_error){
+        // printf("------------------------------\n");
+        // printf("Error type B at Line %d: \n",yylineno);
+        // printf("------------------------------\n");
+    }
 	// printf("ERROR: %s at symbol '%s' on line %d\n", s, yytext, yylineno);
 }
 
