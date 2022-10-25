@@ -1,0 +1,8 @@
+//error recovery, missing ; after an expression
+int test_2(int a, int b){
+    b = b + 1
+    if (a > b){
+        a = b
+        a = a + 1;
+    }
+}

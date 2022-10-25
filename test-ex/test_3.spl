@@ -1,0 +1,5 @@
+int test_3(){
+    int a;
+    a = sum(sum(3,4),2;
+    return a;
+}
