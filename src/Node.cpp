@@ -18,18 +18,22 @@ void Node::addChild(std::initializer_list<Node *> childs)
 /// @param node
 void Node::print(Node *node, long depth)
 {
-    for (long i = depth; i > 0; i--)
-    {
-        std::cout << "  ";
-    }
-
-    std::cout << node->name;
     switch (node->type)
     {
     case TYPE::MEDIAN:
+        for (long i = depth; i > 0; i--)
+        {
+            std::cout << "  ";
+        }
+        std::cout << node->name;
         std::cout << " (" << node->line_num << ")" << std::endl;
         break;
     case TYPE::OTHER:
+        for (long i = depth; i > 0; i--)
+        {
+            std::cout << "  ";
+        }
+        std::cout << node->name;
         std::cout << std::endl;
         break;
     case TYPE::TYPE:
@@ -37,6 +41,11 @@ void Node::print(Node *node, long depth)
     case TYPE::CHAR:
     case TYPE::ID:
     case TYPE::FLOAT:
+        for (long i = depth; i > 0; i--)
+        {
+            std::cout << "  ";
+        }
+        std::cout << node->name;
         std::cout << ": " << node->content << std::endl;
         break;
     default:

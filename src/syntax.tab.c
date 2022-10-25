@@ -1565,7 +1565,7 @@ yyreduce:
 
   case 3:
 #line 41 "syntax.y"
-                                              {(yyval.node)=new Node(TYPE::MEDIAN,"ExtDefList","",(yyloc).first_line);}
+                                              {(yyval.node)=new Node(TYPE::NOTHING,"ExtDefList","",(yyloc).first_line);}
 #line 1570 "syntax.tab.c"
     break;
 
@@ -1679,7 +1679,7 @@ yyreduce:
 
   case 22:
 #line 76 "syntax.y"
-                                              {(yyval.node)=new Node(TYPE::MEDIAN,"StmtList","",(yyloc).first_line);}
+                                              {(yyval.node)=new Node(TYPE::NOTHING,"StmtList","",(yyloc).first_line);}
 #line 1684 "syntax.tab.c"
     break;
 
@@ -1727,7 +1727,7 @@ yyreduce:
 
   case 30:
 #line 87 "syntax.y"
-                                              {(yyval.node)=new Node(TYPE::MEDIAN,"DefList","",(yyloc).first_line);}
+                                              {(yyval.node)=new Node(TYPE::NOTHING,"DefList","",(yyloc).first_line);}
 #line 1732 "syntax.tab.c"
     break;
 
