@@ -58,32 +58,34 @@ extern int yydebug;
     IF = 264,
     ELSE = 265,
     WHILE = 266,
-    RETURN = 267,
-    DOT = 268,
-    SEMI = 269,
-    COMMA = 270,
-    ASSIGN = 271,
-    LT = 272,
-    LE = 273,
-    GT = 274,
-    GE = 275,
-    NE = 276,
-    EQ = 277,
-    PLUS = 278,
-    MINUS = 279,
-    MUL = 280,
-    DIV = 281,
-    AND = 282,
-    OR = 283,
-    NOT = 284,
-    LP = 285,
-    RP = 286,
-    LB = 287,
-    RB = 288,
-    LC = 289,
-    RC = 290,
-    UELSE = 291,
-    UMINUS = 292
+    FOR = 267,
+    RETURN = 268,
+    DOT = 269,
+    SEMI = 270,
+    COMMA = 271,
+    ASSIGN = 272,
+    LT = 273,
+    LE = 274,
+    GT = 275,
+    GE = 276,
+    NE = 277,
+    EQ = 278,
+    PLUS = 279,
+    MINUS = 280,
+    MUL = 281,
+    DIV = 282,
+    AND = 283,
+    OR = 284,
+    NOT = 285,
+    LP = 286,
+    RP = 287,
+    LB = 288,
+    RB = 289,
+    LC = 290,
+    RC = 291,
+    UNKNOWN = 292,
+    UELSE = 293,
+    UMINUS = 294
   };
 #endif
 
@@ -91,11 +93,11 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 9 "syntax.y"
+#line 11 "syntax.y"
 
     Node* node;
 
-#line 99 "syntax.tab.h"
+#line 101 "syntax.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

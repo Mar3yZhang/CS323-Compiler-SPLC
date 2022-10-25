@@ -40,7 +40,7 @@ Program: ExtDefList{
     ast_root = $$;
 }
 ;       
-ExtDefList: /* to allow empty input */        {$$=new Node(TYPE::MEDIAN,"ExtDefList","",@$.first_line);}
+ExtDefList: /* to allow empty input */        {$$=new Node(TYPE::NOTHING,"ExtDefList","",@$.first_line);}
     | ExtDef ExtDefList                       {$$=new Node(TYPE::MEDIAN,"ExtDefList","",@$.first_line); $$->addChild({$1,$2});}
     ;         
 ExtDef: error ExtDecList SEMI              {printf("Missing specifier\n"); type_B_error=1;}
@@ -78,7 +78,7 @@ ParamDec: Specifier VarDec                    {$$=new Node(TYPE::MEDIAN,"ParamDe
     
 CompSt: LC DefList StmtList RC                {$$=new Node(TYPE::MEDIAN,"CompSt","",@$.first_line); $$->addChild({$1,$2,$3,$4});}
 ;         
-StmtList: /* to allow empty input */          {$$=new Node(TYPE::MEDIAN,"StmtList","",@$.first_line);}
+StmtList: /* to allow empty input */          {$$=new Node(TYPE::NOTHING,"StmtList","",@$.first_line);}
     |Stmt StmtList                            {$$=new Node(TYPE::MEDIAN,"StmtList","",@$.first_line); $$->addChild({$1,$2});}
     ;         
 Stmt: Exp SEMI                                {$$=new Node(TYPE::MEDIAN,"Stmt","",@$.first_line); $$->addChild({$1,$2});}
@@ -92,7 +92,7 @@ Stmt: Exp SEMI                                {$$=new Node(TYPE::MEDIAN,"Stmt","
 
     ;         
 /* local definition */        
-DefList: /* to allow empty input */           {$$=new Node(TYPE::MEDIAN,"DefList","",@$.first_line);}
+DefList: /* to allow empty input */           {$$=new Node(TYPE::NOTHING,"DefList","",@$.first_line);}
     | Def DefList                             {$$=new Node(TYPE::MEDIAN,"DefList","",@$.first_line); $$->addChild({$1,$2});}
     ;         
 Def: 
@@ -160,7 +160,7 @@ int main(int argc, char **argv) {
         }
         // printf("\nTokens: \n");
         yyrestart(f);
-        if(!yyparse() & (!type_A_error)&(!type_B_error)){
+        if(!yyparse() && (!type_A_error) && (!type_B_error)){
             printf("\nParsing complete\n");
             printf("\n\nAbstract Syntex Tree: \n");
             Node::print(ast_root,0);
