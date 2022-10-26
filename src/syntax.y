@@ -163,8 +163,8 @@ int main(int argc, char **argv) {
         // printf("\nTokens: \n");
         yyrestart(f);
         if(!yyparse() && (!type_A_error) && (!type_B_error)){
-            printf("\nParsing complete\n");
-            printf("\n\nAbstract Syntex Tree: \n");
+            //printf("\nParsing complete\n");
+            //printf("\n\nAbstract Syntex Tree: \n");
             Node::print(ast_root,0);
         }else{
             // printf("\nParsing failed\n");
