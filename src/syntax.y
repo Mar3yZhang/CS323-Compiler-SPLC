@@ -43,7 +43,7 @@ Program: ExtDefList{
 ExtDefList: /* to allow empty input */        {$$=new Node(TYPE::NOTHING,"ExtDefList","",@$.first_line);}
     | ExtDef ExtDefList                       {$$=new Node(TYPE::MEDIAN,"ExtDefList","",@$.first_line); $$->addChild({$1,$2});}
     ;         
-ExtDef: error ExtDecList SEMI                 {printf("Error type B at Line %d:Missing specifier\n",@$.first_line); type_B_error=1;}
+ExtDef: error ExtDecList SEMI                 {printf("Error type B at Line %d: Missing specifier\n",@$.first_line); type_B_error=1;}
     |Specifier ExtDecList SEMI                {$$=new Node(TYPE::MEDIAN,"ExtDef","",@$.first_line); $$->addChild({$1,$2,$3});}
     | Specifier SEMI                          {$$=new Node(TYPE::MEDIAN,"ExtDef","",@$.first_line); $$->addChild({$1,$2});}
     | Specifier FunDec CompSt                 {$$=new Node(TYPE::MEDIAN,"ExtDef","",@$.first_line); $$->addChild({$1,$2,$3});}
@@ -64,7 +64,7 @@ StructSpecifier: STRUCT ID LC DefList         RC{$$=new Node(TYPE::MEDIAN,"Struc
 VarDec: ID                                    {$$=new Node(TYPE::MEDIAN,"VarDec","",@$.first_line); $$->addChild({$1});}
     | VarDec LB INT RB                        {$$=new Node(TYPE::MEDIAN,"VarDec","",@$.first_line); $$->addChild({$1,$2,$3,$4});}
     ;         
-FunDec: ID LP error                         {$$=new Node(TYPE::MEDIAN,"FunDec","",@$.first_line); $$->addChild({$1,$2}); printf("Error type B at Line %d:Missing closing parenthesis ')'\n",@$.first_line); type_B_error=1;}
+FunDec: ID LP error                         {$$=new Node(TYPE::MEDIAN,"FunDec","",@$.first_line); $$->addChild({$1,$2}); printf("Error type B at Line %d: Missing closing parenthesis ')'\n",@$.first_line); type_B_error=1;}
     | ID LP VarList RP                      {$$=new Node(TYPE::MEDIAN,"FunDec","",@$.first_line); $$->addChild({$1,$2,$3,$4});}
     | ID LP RP                                {$$=new Node(TYPE::MEDIAN,"FunDec","",@$.first_line); $$->addChild({$1,$2,$3});}
     ;         
@@ -83,7 +83,7 @@ StmtList: /* to allow empty input */          {$$=new Node(TYPE::NOTHING,"StmtLi
     ;         
 Stmt: Exp SEMI                                {$$=new Node(TYPE::MEDIAN,"Stmt","",@$.first_line); $$->addChild({$1,$2});}
     | CompSt                                  {$$=new Node(TYPE::MEDIAN,"Stmt","",@$.first_line); $$->addChild({$1});}
-    | RETURN Exp error                        {$$=new Node(TYPE::MEDIAN,"Stmt","",@$.first_line); $$->addChild({$1,$2}); printf("Error type B at Line %d:Missing semicolon ';'\n",@$.first_line); type_B_error = 1;}
+    | RETURN Exp error                        {$$=new Node(TYPE::MEDIAN,"Stmt","",@$.first_line); $$->addChild({$1,$2}); printf("Error type B at Line %d: Missing semicolon ';'\n",@$.first_line); type_B_error = 1;}
     | RETURN Exp SEMI                         {$$=new Node(TYPE::MEDIAN,"Stmt","",@$.first_line); $$->addChild({$1,$2,$3});}
     | IF LP Exp RP Stmt  %prec UELSE          {$$=new Node(TYPE::MEDIAN,"Stmt","",@$.first_line); $$->addChild({$1,$2,$3,$4,$5});}
     | IF LP Exp RP Stmt ELSE Stmt             {$$=new Node(TYPE::MEDIAN,"Stmt","",@$.first_line); $$->addChild({$1,$2,$3,$4,$5,$6,$7});}
@@ -96,7 +96,7 @@ DefList: /* to allow empty input */           {$$=new Node(TYPE::NOTHING,"DefLis
     | Def DefList                             {$$=new Node(TYPE::MEDIAN,"DefList","",@$.first_line); $$->addChild({$1,$2});}
     ;         
 Def: 
-    Specifier DecList error                  {$$=new Node(TYPE::MEDIAN,"Def","",@$.first_line); $$->addChild({$1,$2}); printf("Error type B at Line %d:Missing semicolon ';'\n",@$.first_line); type_B_error=1;}
+    Specifier DecList error                  {$$=new Node(TYPE::MEDIAN,"Def","",@$.first_line); $$->addChild({$1,$2}); printf("Error type B at Line %d: Missing semicolon ';'\n",@$.first_line); type_B_error=1;}
     |Specifier DecList SEMI                   {$$=new Node(TYPE::MEDIAN,"Def","",@$.first_line); $$->addChild({$1,$2,$3});}
     ;         
 DecList: Dec                                  {$$=new Node(TYPE::MEDIAN,"DecList","",@$.first_line); $$->addChild({$1});}
@@ -125,7 +125,7 @@ Exp: Exp ASSIGN Exp                           {$$=new Node(TYPE::MEDIAN,"Exp",""
     | LP Exp RP                               {$$=new Node(TYPE::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1,$2,$3});}
     | MINUS Exp %prec UMINUS                  {$$=new Node(TYPE::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1,$2});}
     | NOT Exp                                 {$$=new Node(TYPE::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1,$2});}
-    | ID LP Args error                        {$$=new Node(TYPE::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1,$2,$3}); printf("Error type B at Line %d:Missing closing parenthesis ')'\n",@$.first_line); type_B_error = 1;}
+    | ID LP Args error                        {$$=new Node(TYPE::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1,$2,$3}); printf("Error type B at Line %d: Missing closing parenthesis ')'\n",@$.first_line); type_B_error = 1;}
     | ID LP Args RP                           {$$=new Node(TYPE::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1,$2,$3,$4});}
     | ID LP RP                                {$$=new Node(TYPE::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1,$2,$3});}
     | Exp LB Exp RB                           {$$=new Node(TYPE::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1,$2,$3,$4});}

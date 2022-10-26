@@ -1,0 +1,9 @@
+// Error type A at Line 5: unknown lexeme &
+int test_4()
+{
+    int i = 0;
+    while (&i <= 10 ) 
+    {
+        i = i + 1;
+    }
+}
