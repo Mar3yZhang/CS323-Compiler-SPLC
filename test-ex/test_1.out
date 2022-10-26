@@ -1,0 +1,100 @@
+Program (2)
+  ExtDefList (2)
+    ExtDef (2)
+      Specifier (2)
+        TYPE: int
+      FunDec (2)
+        ID: test_1
+        LP
+        VarList (2)
+          ParamDec (2)
+            Specifier (2)
+              TYPE: int
+            VarDec (2)
+              ID: n
+        RP
+      CompSt (2)
+        LC
+        DefList (3)
+          Def (3)
+            Specifier (3)
+              TYPE: int
+            DecList (3)
+              Dec (3)
+                VarDec (3)
+                  ID: res
+                ASSIGN
+                Exp (3)
+                  INT: 0
+            SEMI
+          DefList (4)
+            Def (4)
+              Specifier (4)
+                TYPE: int
+              DecList (4)
+                Dec (4)
+                  VarDec (4)
+                    ID: i
+                  ASSIGN
+                  Exp (4)
+                    INT: 0
+              SEMI
+            DefList (5)
+              Def (5)
+                Specifier (5)
+                  TYPE: int
+                DecList (5)
+                  Dec (5)
+                    VarDec (5)
+                      ID: n
+                    ASSIGN
+                    Exp (5)
+                      INT: 5
+                SEMI
+        StmtList (6)
+          Stmt (6)
+            FOR
+            LP
+            Exp (6)
+              Exp (6)
+                ID: i
+              ASSIGN
+              Exp (6)
+                INT: 0
+            SEMI
+            Exp (6)
+              Exp (6)
+                ID: i
+              LT
+              Exp (6)
+                ID: n
+            SEMI
+            Exp (6)
+              Exp (6)
+                ID: i
+              ASSIGN
+              Exp (6)
+                Exp (6)
+                  ID: i
+                PLUS
+                Exp (6)
+                  INT: 1
+            RP
+            Stmt (6)
+              CompSt (6)
+                LC
+                StmtList (7)
+                  Stmt (7)
+                    Exp (7)
+                      Exp (7)
+                        ID: res
+                      ASSIGN
+                      Exp (7)
+                        Exp (7)
+                          ID: res
+                        PLUS
+                        Exp (7)
+                          ID: i
+                    SEMI
+                RC
+        RC
