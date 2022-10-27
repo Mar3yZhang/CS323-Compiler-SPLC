@@ -1,4 +1,5 @@
 //for loop
+/* multi-line comment test */
 int test_1(int n){
     int res = 0;
     int i = 0;
