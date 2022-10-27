@@ -96,7 +96,11 @@ float  (0|[1-9][0-9]*)(\.){digit}+
 "\""                 {}
 
 {int}                {yylval.node = new Node(TYPE::INT,"INT",yytext,yylineno); return INT;}
-{digit}+{id}         {printf("Error type A at Line %d: unknown lexeme %s\n",yylineno,yytext);}
+{int}+{id}         {printf("Error type A at Line %d: unknown lexeme %s\n",yylineno,yytext);}
+{char}+{id}         {printf("Error type A at Line %d: unknown lexeme %s\n",yylineno,yytext);}
+{float}+{id}         {printf("Error type A at Line %d: unknown lexeme %s\n",yylineno,yytext);}
+{id}{char}+{id}*         {printf("Error type A at Line %d: unknown lexeme %s\n",yylineno,yytext);}
+{id}{float}+{id}*         {printf("Error type A at Line %d: unknown lexeme %s\n",yylineno,yytext);}
 {id}                 {yylval.node = new Node(TYPE::ID,"ID",yytext,yylineno); return ID;}
 {float}              {yylval.node = new Node(TYPE::FLOAT,"FLOAT",yytext,yylineno); return FLOAT;}
 {hex_form_char}      {if ((int)strlen(yytext)>6) {printf("Error type A at Line %d: unknown lexeme %s\n",yylineno,yytext);return UNKNOWN;}else { yylval.node = new Node(TYPE::CHAR,"CHAR",yytext,yylineno); return CHAR;};} 

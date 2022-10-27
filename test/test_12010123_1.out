@@ -1,0 +1,7 @@
+Error type A at Line 4: unknown lexeme 3_wrong_id
+Error type A at Line 5: unknown lexeme 3.3_wrong_id
+Error type A at Line 6: unknown lexeme 'c'_wrong_id
+Error type A at Line 7: unknown lexeme _wrong_id3.3
+Error type A at Line 8: unknown lexeme _wrong_id'c'
+Error type A at Line 9: unknown lexeme 0x00_woron
+Error type A at Line 10: unknown lexeme _wor3.22on

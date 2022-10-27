@@ -9,5 +9,5 @@ while True:
     else:
         print("Invalid test_case: " + test_case)
         sys.exit(1)
-    command = "../bin/splc.out ../test-ex/" + FILE_NAME + ".spl"
+    command = "../bin/splc ../test-ex/" + FILE_NAME + ".spl"
     os.system(command)
