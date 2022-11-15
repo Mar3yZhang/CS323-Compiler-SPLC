@@ -63,48 +63,48 @@ float  (0|[1-9][0-9]*)(\.){digit}+
     unput(c); 
 }
 {ws} { /*no action and no return*/ }
-"int"|"float"|"char" {yylval.node = new Node(TYPE::TYPE,"TYPE",yytext,yylineno); return TYPE;}
-"struct"             {yylval.node = new Node(TYPE::OTHER,"STRUCT","struct",yylineno); return STRUCT;}
-"if"                 {yylval.node = new Node(TYPE::OTHER,"IF","if",yylineno); return IF;}
-"else"               {yylval.node = new Node(TYPE::OTHER,"ELSE","else",yylineno); return ELSE;}
-"while"              {yylval.node = new Node(TYPE::OTHER,"WHILE","while",yylineno); return WHILE;}
-"return"             {yylval.node = new Node(TYPE::OTHER,"RETURN","return",yylineno); return RETURN;}
-"for"                {yylval.node = new Node(TYPE::OTHER,"FOR","for",yylineno);return FOR;}
-"."                  {yylval.node = new Node(TYPE::OTHER,"DOT",".",yylineno); return DOT;}
-";"                  {yylval.node = new Node(TYPE::OTHER,"SEMI",";",yylineno); return SEMI;}
-","                  {yylval.node = new Node(TYPE::OTHER,"COMMA",",",yylineno); return COMMA;}
-"=="                 {yylval.node = new Node(TYPE::OTHER,"EQ","==",yylineno); return EQ;}
-"="                  {yylval.node = new Node(TYPE::OTHER,"ASSIGN","=",yylineno); return ASSIGN;}
-"<="                 {yylval.node = new Node(TYPE::OTHER,"LE","<=",yylineno); return LE;}
-"<"                  {yylval.node = new Node(TYPE::OTHER,"LT","<",yylineno); return LT;}
-">="                 {yylval.node = new Node(TYPE::OTHER,"GE",">=",yylineno); return GE;}
-">"                  {yylval.node = new Node(TYPE::OTHER,"GT",">",yylineno); return GT;}
-"!="                 {yylval.node = new Node(TYPE::OTHER,"NE","!=",yylineno); return NE;}
-"+"                  {yylval.node = new Node(TYPE::OTHER,"PLUS","+",yylineno); return PLUS;}
-"-"                  {yylval.node = new Node(TYPE::OTHER,"MINUS","-",yylineno); return MINUS;}
-"*"                  {yylval.node = new Node(TYPE::OTHER,"MUL","*",yylineno); return MUL;}
-"/"                  {yylval.node = new Node(TYPE::OTHER,"DIV","/",yylineno); return DIV;}
-"&&"                 {yylval.node = new Node(TYPE::OTHER,"AND","&&",yylineno); return AND;}
-"||"                 {yylval.node = new Node(TYPE::OTHER,"OR","||",yylineno); return OR;}
-"!"                  {yylval.node = new Node(TYPE::OTHER,"NOT","!",yylineno); return NOT;}
-"("                  {yylval.node = new Node(TYPE::OTHER,"LP","(",yylineno); return LP;}
-")"                  {yylval.node = new Node(TYPE::OTHER,"RP",")",yylineno); return RP;}
-"["                  {yylval.node = new Node(TYPE::OTHER,"LB","[",yylineno); return LB;}
-"]"                  {yylval.node = new Node(TYPE::OTHER,"RB","]",yylineno); return RB;}
-"{"                  {yylval.node = new Node(TYPE::OTHER,"LC","{",yylineno); return LC;}
-"}"                  {yylval.node = new Node(TYPE::OTHER,"RC","}",yylineno); return RC;}
+"int"|"float"|"char" {yylval.node = new Node(Node_Type::TYPE,"TYPE",yytext,yylineno); return TYPE;}
+"struct"             {yylval.node = new Node(Node_Type::OTHER,"STRUCT","struct",yylineno); return STRUCT;}
+"if"                 {yylval.node = new Node(Node_Type::OTHER,"IF","if",yylineno); return IF;}
+"else"               {yylval.node = new Node(Node_Type::OTHER,"ELSE","else",yylineno); return ELSE;}
+"while"              {yylval.node = new Node(Node_Type::OTHER,"WHILE","while",yylineno); return WHILE;}
+"return"             {yylval.node = new Node(Node_Type::OTHER,"RETURN","return",yylineno); return RETURN;}
+"for"                {yylval.node = new Node(Node_Type::OTHER,"FOR","for",yylineno);return FOR;}
+"."                  {yylval.node = new Node(Node_Type::OTHER,"DOT",".",yylineno); return DOT;}
+";"                  {yylval.node = new Node(Node_Type::OTHER,"SEMI",";",yylineno); return SEMI;}
+","                  {yylval.node = new Node(Node_Type::OTHER,"COMMA",",",yylineno); return COMMA;}
+"=="                 {yylval.node = new Node(Node_Type::OTHER,"EQ","==",yylineno); return EQ;}
+"="                  {yylval.node = new Node(Node_Type::OTHER,"ASSIGN","=",yylineno); return ASSIGN;}
+"<="                 {yylval.node = new Node(Node_Type::OTHER,"LE","<=",yylineno); return LE;}
+"<"                  {yylval.node = new Node(Node_Type::OTHER,"LT","<",yylineno); return LT;}
+">="                 {yylval.node = new Node(Node_Type::OTHER,"GE",">=",yylineno); return GE;}
+">"                  {yylval.node = new Node(Node_Type::OTHER,"GT",">",yylineno); return GT;}
+"!="                 {yylval.node = new Node(Node_Type::OTHER,"NE","!=",yylineno); return NE;}
+"+"                  {yylval.node = new Node(Node_Type::OTHER,"PLUS","+",yylineno); return PLUS;}
+"-"                  {yylval.node = new Node(Node_Type::OTHER,"MINUS","-",yylineno); return MINUS;}
+"*"                  {yylval.node = new Node(Node_Type::OTHER,"MUL","*",yylineno); return MUL;}
+"/"                  {yylval.node = new Node(Node_Type::OTHER,"DIV","/",yylineno); return DIV;}
+"&&"                 {yylval.node = new Node(Node_Type::OTHER,"AND","&&",yylineno); return AND;}
+"||"                 {yylval.node = new Node(Node_Type::OTHER,"OR","||",yylineno); return OR;}
+"!"                  {yylval.node = new Node(Node_Type::OTHER,"NOT","!",yylineno); return NOT;}
+"("                  {yylval.node = new Node(Node_Type::OTHER,"LP","(",yylineno); return LP;}
+")"                  {yylval.node = new Node(Node_Type::OTHER,"RP",")",yylineno); return RP;}
+"["                  {yylval.node = new Node(Node_Type::OTHER,"LB","[",yylineno); return LB;}
+"]"                  {yylval.node = new Node(Node_Type::OTHER,"RB","]",yylineno); return RB;}
+"{"                  {yylval.node = new Node(Node_Type::OTHER,"LC","{",yylineno); return LC;}
+"}"                  {yylval.node = new Node(Node_Type::OTHER,"RC","}",yylineno); return RC;}
 "\""                 {}
 
-{int}                {yylval.node = new Node(TYPE::INT,"INT",yytext,yylineno); return INT;}
+{int}                {yylval.node = new Node(Node_Type::INT,"INT",yytext,yylineno); return INT;}
 {int}+{id}         {printf("Error type A at Line %d: unknown lexeme %s\n",yylineno,yytext);}
 {char}+{id}         {printf("Error type A at Line %d: unknown lexeme %s\n",yylineno,yytext);}
 {float}+{id}         {printf("Error type A at Line %d: unknown lexeme %s\n",yylineno,yytext);}
 {id}{char}+{id}*         {printf("Error type A at Line %d: unknown lexeme %s\n",yylineno,yytext);}
 {id}{float}+{id}*         {printf("Error type A at Line %d: unknown lexeme %s\n",yylineno,yytext);}
-{id}                 {yylval.node = new Node(TYPE::ID,"ID",yytext,yylineno); return ID;}
-{float}              {yylval.node = new Node(TYPE::FLOAT,"FLOAT",yytext,yylineno); return FLOAT;}
-{hex_form_char}      {if ((int)strlen(yytext)>6) {printf("Error type A at Line %d: unknown lexeme %s\n",yylineno,yytext);return UNKNOWN;}else { yylval.node = new Node(TYPE::CHAR,"CHAR",yytext,yylineno); return CHAR;};} 
-{char}               {yylval.node = new Node(TYPE::CHAR,"CHAR",yytext,yylineno); return CHAR;}
+{id}                 {yylval.node = new Node(Node_Type::ID,"ID",yytext,yylineno); return ID;}
+{float}              {yylval.node = new Node(Node_Type::FLOAT,"FLOAT",yytext,yylineno); return FLOAT;}
+{hex_form_char}      {if ((int)strlen(yytext)>6) {printf("Error type A at Line %d: unknown lexeme %s\n",yylineno,yytext);return UNKNOWN;}else { yylval.node = new Node(Node_Type::CHAR,"CHAR",yytext,yylineno); return CHAR;};} 
+{char}               {yylval.node = new Node(Node_Type::CHAR,"CHAR",yytext,yylineno); return CHAR;}
 (\').*(\')           {printf("Error type A at Line %d: unknown lexeme %s\n",yylineno,yytext);return UNKNOWN;}
 .                    {printf("Error type A at Line %d: unknown lexeme %s\n",yylineno,yytext);return UNKNOWN;}
 %%

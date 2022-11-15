@@ -1,7 +1,7 @@
 #include "Node.hpp"
 #include <iostream>
 
-Node::Node(TYPE type, std::string name, const char *content, int line)
+Node::Node(Node_Type type, std::string name, const char *content, int line)
     : type(type), name(name), content(content), line_num(line) {}
 
 /// @brief add children to this node
@@ -29,19 +29,19 @@ void Node::print(Node *node, long depth)
 {
     switch (node->type)
     {
-    case TYPE::MEDIAN:
+    case Node_Type::MEDIAN:
         print_name(depth, node->name);
         std::cout << " (" << node->line_num << ")" << std::endl;
         break;
-    case TYPE::OTHER:
+    case Node_Type::OTHER:
         print_name(depth, node->name);
         std::cout << std::endl;
         break;
-    case TYPE::TYPE:
-    case TYPE::INT:
-    case TYPE::CHAR:
-    case TYPE::ID:
-    case TYPE::FLOAT:
+    case Node_Type::TYPE:
+    case Node_Type::INT:
+    case Node_Type::CHAR:
+    case Node_Type::ID:
+    case Node_Type::FLOAT:
         print_name(depth, node->name);
         std::cout << ": " << node->content << std::endl;
         break;

@@ -1,12 +1,13 @@
 #include <string>
-#include <variant>
 #include <vector>
-#include "node.hpp"
 using std::string;
 using std::vector;
 
+
 class Array;
 class FieldList;
+
+/// @brief 用来在参数符号表中表示数据类型的结构体
 class Type
 {
 public:
@@ -15,8 +16,8 @@ public:
     {
         PRIMITIVE,
         ARRAY,
-        STRUCTURE
-    } category;
+        STRUCTURE,
+    } category = PRIMITIVE;
     union
     {
         enum
@@ -30,18 +31,19 @@ public:
     };
 
 public:
-    Type();
+    Type() = default;
     ~Type() = default;
 };
 
 class Array
 {
 public:
-    Type *base;
     int size;
+    Type *base = nullptr;
 
 public:
-    Array();
+    Array() = default;
+    Array(int size, Type *base);
     ~Array() = default;
 };
 
@@ -49,10 +51,11 @@ class FieldList
 {
 public:
     string name;
-    Type *type;
-    FieldList *next;
+    Type *type = nullptr;
+    FieldList *next = nullptr;
 
 public:
-    FieldList(/* args */);
+    FieldList() = default;
+    FieldList(string name, Type *type, FieldList *next);
     ~FieldList() = default;
 };

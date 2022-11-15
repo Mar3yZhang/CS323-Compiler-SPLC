@@ -3,7 +3,7 @@
 #include <vector>
 #include <initializer_list>
 
-enum class TYPE
+enum class Node_Type
 {
     MEDIAN,  // 1 exp: StmtList (4)
     OTHER,   // 2 exp: SEMI
@@ -18,14 +18,14 @@ enum class TYPE
 class Node
 {
 public:
-    enum TYPE type;
+    enum Node_Type type;
     std::string name;          // AST: node's name
     std::string content;       // possible cotent: 'c',30.0,2193,abcd
     int line_num;              // the line in the context
     std::vector<Node *> child; // the children of the node
 
 public:
-    explicit Node(enum TYPE type, std::string name, const char *content, int line);
+    explicit Node(enum Node_Type type, std::string name, const char *content, int line);
     ~Node() = default;
     void addChild(std::initializer_list<Node *> childs);
     static void print(Node *node, long depth);

@@ -56,7 +56,7 @@ ExtDecList: VarDec                            {$$=new Node(TYPE::MEDIAN,"ExtDecL
 Specifier: TYPE                               {$$=new Node(TYPE::MEDIAN,"Specifier","",@$.first_line); $$->addChild({$1});}
     | StructSpecifier                         {$$=new Node(TYPE::MEDIAN,"Specifier","",@$.first_line); $$->addChild({$1});}
     ;         
-StructSpecifier: STRUCT ID LC DefList         RC{$$=new Node(TYPE::MEDIAN,"StructSpecifier","",@$.first_line); $$->addChild({$1,$2,$3,$4,$5});}
+StructSpecifier: STRUCT ID LC DefList RC      {$$=new Node(TYPE::MEDIAN,"StructSpecifier","",@$.first_line); $$->addChild({$1,$2,$3,$4,$5});}
     | STRUCT ID                               {$$=new Node(TYPE::MEDIAN,"StructSpecifier","",@$.first_line); $$->addChild({$1,$2});}
     ;         
 /* declarator */          

@@ -1,5 +1,11 @@
 {
     "files.associations": {
-        "variant": "cpp"
+        "variant": "cpp",
+        "exception": "cpp",
+        "new": "cpp",
+        "type_traits": "cpp",
+        "typeinfo": "cpp",
+        "utility": "cpp",
+        "string": "cpp"
     }
 }
