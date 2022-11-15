@@ -1,8 +1,0 @@
-// Error type B at Line 3: Missing closing parenthesis ')'
-int test_5(int a, int b{
-    b = b + 1;
-    while (a > b){
-        a = b;
-        a = a + 1;
-    }
-}
