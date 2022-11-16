@@ -5,34 +5,46 @@ using std::string;
 using std::unordered_map;
 using std::vector;
 
+enum class PRIM;
+enum class CATEGORY;
 class Array;
 class FieldList;
+class Type;
+
+
+enum class PRIM
+{
+    INT,
+    FLOAT,
+    CHAR
+};
+enum class CATEGORY
+{
+    PRIMITIVE,
+    ARRAY,
+    STRUCTURE,
+};
 
 /// @brief 用来在参数符号表中表示数据类型的结构体
 class Type
 {
 public:
     string name;
-    enum
-    {
-        PRIMITIVE,
-        ARRAY,
-        STRUCTURE,
-    } category = PRIMITIVE;
+    enum CATEGORY category;
     union
     {
-        enum
-        {
-            INT,
-            FLOAT,
-            CHAR
-        } primitive;
+        enum PRIM primitive;
         Array *array;
         FieldList *structure;
-    };
+    } foo;
 
 public:
-    Type() = default;
+    explicit Type(string name, enum CATEGORY category, enum PRIM primitive);
+    explicit Type(string name, enum CATEGORY category, Array *array);
+    explicit Type(string name, enum CATEGORY category, FieldList *structure);
+    static Type *getPrimitiveINT();
+    static Type *getPrimitiveFLOAT();
+    static Type *getPrimitiveCHAR();
     ~Type() = default;
 };
 
@@ -60,5 +72,3 @@ public:
     FieldList(string name, Type *type, FieldList *next);
     ~FieldList() = default;
 };
-
-bool hasSuchVariable(unordered_map<string, Type> &varSymbolTable, Type var);

@@ -572,7 +572,7 @@ static const yytype_uint8 yyrline[] =
       88,    89,    90,    91,    95,    96,    99,   100,   102,   103,
      105,   106,   109,   110,   112,   113,   114,   115,   116,   117,
      118,   119,   120,   121,   122,   123,   124,   125,   126,   127,
-     128,   129,   130,   131,   132,   133,   134,   135,   136,   137
+     128,   129,   130,   131,   132,   133,   134,   138,   142,   146
 };
 #endif
 
@@ -1971,30 +1971,39 @@ yyreduce:
 
   case 66:
 #line 134 "syntax.y"
-                                              {(yyval.node)=new Node(Node_Type::MEDIAN,"Exp","",(yyloc).first_line); (yyval.node)->addChild({(yyvsp[0].node)});}
-#line 1976 "syntax.tab.c"
+            {(yyval.node)=new Node(Node_Type::MEDIAN,"Exp","",(yyloc).first_line); 
+             (yyval.node)->addChild({(yyvsp[0].node)});
+             (yyval.node)->var = Type::getPrimitiveINT();
+    }
+#line 1979 "syntax.tab.c"
     break;
 
   case 67:
-#line 135 "syntax.y"
-                                              {(yyval.node)=new Node(Node_Type::MEDIAN,"Exp","",(yyloc).first_line); (yyval.node)->addChild({(yyvsp[0].node)});}
-#line 1982 "syntax.tab.c"
-    break;
-
-  case 68:
-#line 136 "syntax.y"
-                                              {(yyval.node)=new Node(Node_Type::MEDIAN,"Exp","",(yyloc).first_line); (yyval.node)->addChild({(yyvsp[0].node)});}
+#line 138 "syntax.y"
+            {(yyval.node)=new Node(Node_Type::MEDIAN,"Exp","",(yyloc).first_line); 
+             (yyval.node)->addChild({(yyvsp[0].node)});
+             (yyval.node)->var = Type::getPrimitiveFLOAT();
+    }
 #line 1988 "syntax.tab.c"
     break;
 
+  case 68:
+#line 142 "syntax.y"
+           {(yyval.node)=new Node(Node_Type::MEDIAN,"Exp","",(yyloc).first_line); 
+            (yyval.node)->addChild({(yyvsp[0].node)}); 
+            (yyval.node)->var = Type::getPrimitiveCHAR();
+    }
+#line 1997 "syntax.tab.c"
+    break;
+
   case 69:
-#line 137 "syntax.y"
+#line 146 "syntax.y"
                                               {type_A_error = 1;}
-#line 1994 "syntax.tab.c"
+#line 2003 "syntax.tab.c"
     break;
 
 
-#line 1998 "syntax.tab.c"
+#line 2007 "syntax.tab.c"
 
       default: break;
     }
@@ -2232,7 +2241,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 139 "syntax.y"
+#line 148 "syntax.y"
 
 void yyerror(const char *s){
     // if (type_B_error){

@@ -131,9 +131,18 @@ Exp: Exp ASSIGN Exp                           {$$=new Node(Node_Type::MEDIAN,"Ex
     | Exp LB Exp RB                           {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1,$2,$3,$4});}
     | Exp DOT ID                              {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1,$2,$3});}
     | ID                                      {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1});}
-    | INT                                     {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1});}
-    | FLOAT                                   {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1});}
-    | CHAR                                    {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1});}
+    | INT   {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); 
+             $$->addChild({$1});
+             $$->var = Type::getPrimitiveINT();
+    }
+    | FLOAT {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); 
+             $$->addChild({$1});
+             $$->var = Type::getPrimitiveFLOAT();
+    }
+    | CHAR {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); 
+            $$->addChild({$1}); 
+            $$->var = Type::getPrimitiveCHAR();
+    }
     | UNKNOWN                                 {type_A_error = 1;}
     ;       
 %%

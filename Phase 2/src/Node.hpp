@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <initializer_list>
+#include "Function.hpp"
 
 enum class Node_Type
 {
@@ -23,6 +24,8 @@ public:
     std::string content;       // possible cotent: 'c',30.0,2193,abcd
     int line_num;              // the line in the context
     std::vector<Node *> child; // the children of the node
+    Type *var = nullptr;
+    Function *func = nullptr;
 
 public:
     explicit Node(enum Node_Type type, std::string name, const char *content, int line);
