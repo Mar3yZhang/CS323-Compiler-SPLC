@@ -1,10 +1,5 @@
 #include "type.hpp"
 
-
-
-
-
-
 Array::Array(int size, Type *base)
     : size(size), base(base){};
 

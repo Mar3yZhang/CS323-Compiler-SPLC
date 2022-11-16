@@ -114,7 +114,7 @@ float  (0|[1-9][0-9]*)(\.){digit}+
 "%"                  {printf("PS\n");}
 "&"                  {printf("Addr\n");}
 
-
+ 
 "int"|"float"|"char" {printf("TYPE: %s\n",yytext); yylval.node = new Node(TYPE::TYPE,"TYPE",yytext,yylineno); return TYPE;}
 "struct"             {printf("STRUCT\n"); yylval.node = new Node(TYPE::OTHER,"STRUCT","struct",yylineno); return STRUCT;}
 "if"                 {printf("IF\n"); yylval.node =  new Node(TYPE::OTHER,"IF","if",yylineno); return IF;}

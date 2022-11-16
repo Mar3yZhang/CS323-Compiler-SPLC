@@ -1,8 +1,9 @@
 #include <string>
 #include <vector>
+#include <unordered_map>
 using std::string;
+using std::unordered_map;
 using std::vector;
-
 
 class Array;
 class FieldList;
@@ -59,3 +60,5 @@ public:
     FieldList(string name, Type *type, FieldList *next);
     ~FieldList() = default;
 };
+
+bool hasSuchVariable(unordered_map<string, Type> &varSymbolTable, Type var);
