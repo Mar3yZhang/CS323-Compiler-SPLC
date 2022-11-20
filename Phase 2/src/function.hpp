@@ -1,3 +1,5 @@
+#ifndef _function_HPP_
+#define _function_HPP_
 #include <string>
 #include <vector>
 #include "Type.hpp"
@@ -21,3 +23,4 @@ public:
 };
 
 // bool hasSuchFunction(unordered_map<string, Function> &funcSymbolTable, Function func);
+#endif

@@ -1,9 +1,20 @@
 %{
+    #include <string>
+    #include <unordered_map>
+    
     #include "lex.yy.c"
+    #include "syntaxTree.hpp"
+    using std::string;
+    using std::unordered_map;
+    #define YY_NO_UNPUT
     void yyerror(const char *s);
     Node* ast_root;
     bool type_A_error = 0;
     bool type_B_error = 0;
+    void lineinfor(void);
+    Node* root_node;
+    extern int isError;
+    #define PARSER_error_OUTPUT stdout
 %}
 
 %locations
@@ -97,7 +108,9 @@ DefList: /* to allow empty input */           {$$=new Node(Node_Type::NOTHING,"D
     ;         
 Def: 
     Specifier DecList error                   {$$=new Node(Node_Type::MEDIAN,"Def","",@$.first_line); $$->addChild({$1,$2}); printf("Error type B at Line %d: Missing semicolon ';'\n",@$.first_line); type_B_error=1;}
-    |Specifier DecList SEMI                   {$$=new Node(Node_Type::MEDIAN,"Def","",@$.first_line); $$->addChild({$1,$2,$3});}
+    |Specifier DecList SEMI                   {$$=new Node(Node_Type::MEDIAN,"Def","",@$.first_line); $$->addChild({$1,$2,$3});
+    defVisit($$);
+    }
     ;         
 DecList: Dec                                  {$$=new Node(Node_Type::MEDIAN,"DecList","",@$.first_line); $$->addChild({$1});}
     | Dec COMMA DecList                       {$$=new Node(Node_Type::MEDIAN,"DecList","",@$.first_line); $$->addChild({$1,$2,$3});}
@@ -177,7 +190,7 @@ int main(int argc, char **argv) {
 
 
             // 是否选择打印语法分析树：
-            Node::print(ast_root,0);
+            //Node::print(ast_root,0);
         }else{
             // printf("\nParsing failed\n");
         }

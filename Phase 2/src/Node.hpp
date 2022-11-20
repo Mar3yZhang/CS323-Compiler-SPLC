@@ -1,3 +1,5 @@
+#ifndef _NODE_HPP_
+#define _NODE_HPP_
 #include <string>
 #include <iostream>
 #include <vector>
@@ -33,3 +35,4 @@ public:
     void addChild(std::initializer_list<Node *> childs);
     static void print(Node *node, long depth);
 };
+#endif

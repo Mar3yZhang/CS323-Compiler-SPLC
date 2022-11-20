@@ -1,3 +1,5 @@
+#ifndef _TYPE_H
+#define _TYPE_H
 #include <string>
 #include <vector>
 #include <unordered_map>
@@ -72,3 +74,4 @@ public:
     FieldList(string name, Type *type, FieldList *next);
     ~FieldList() = default;
 };
+#endif
