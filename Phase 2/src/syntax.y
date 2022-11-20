@@ -13,6 +13,7 @@
     bool type_B_error = 0;
     void lineinfor(void);
     Node* root_node;
+    unordered_map<string,Type*> symbolTable;
     extern int isError;
     #define PARSER_error_OUTPUT stdout
 %}
@@ -76,8 +77,8 @@ VarDec: ID                                    {$$=new Node(Node_Type::MEDIAN,"Va
     | VarDec LB INT RB                        {$$=new Node(Node_Type::MEDIAN,"VarDec","",@$.first_line); $$->addChild({$1,$2,$3,$4});}
     ;         
 FunDec: ID LP error                           {$$=new Node(Node_Type::MEDIAN,"FunDec","",@$.first_line); $$->addChild({$1,$2}); printf("Error type B at Line %d: Missing closing parenthesis ')'\n",@$.first_line); type_B_error=1;}
-    | ID LP VarList RP                        {$$=new Node(Node_Type::MEDIAN,"FunDec","",@$.first_line); $$->addChild({$1,$2,$3,$4});}
-    | ID LP RP                                {$$=new Node(Node_Type::MEDIAN,"FunDec","",@$.first_line); $$->addChild({$1,$2,$3});}
+    | ID LP VarList RP                        {$$=new Node(Node_Type::MEDIAN,"FunDec","",@$.first_line); $$->addChild({$1,$2,$3,$4});FunDecVisit($$);}
+    | ID LP RP                                {$$=new Node(Node_Type::MEDIAN,"FunDec","",@$.first_line); $$->addChild({$1,$2,$3});FunDecVisit($$);}
     ;         
 VarList:  
     ParamDec COMMA VarList                    {$$=new Node(Node_Type::MEDIAN,"VarList","",@$.first_line); $$->addChild({$1,$2,$3});}
@@ -139,11 +140,11 @@ Exp: Exp ASSIGN Exp                           {$$=new Node(Node_Type::MEDIAN,"Ex
     | MINUS Exp %prec UMINUS                  {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1,$2});}
     | NOT Exp                                 {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1,$2});}
     | ID LP Args error                        {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1,$2,$3}); printf("Error type B at Line %d: Missing closing parenthesis ')'\n",@$.first_line); type_B_error = 1;}
-    | ID LP Args RP                           {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1,$2,$3,$4});}
-    | ID LP RP                                {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1,$2,$3});}
+    | ID LP Args RP                           {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1,$2,$3,$4});checkExist_FUN($1);}
+    | ID LP RP                                {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1,$2,$3});checkExist_FUN($1);}
     | Exp LB Exp RB                           {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1,$2,$3,$4});}
     | Exp DOT ID                              {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1,$2,$3});}
-    | ID                                      {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1});}
+    | ID                                      {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1});checkExists_ID($1);}
     | INT   {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); 
              $$->addChild({$1});
              $$->var = Type::getPrimitiveINT();

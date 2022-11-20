@@ -16,6 +16,8 @@ Array *getArray(Node *node, Type *type);
 
 void checkExists_ID(Node *node);
 
+void checkExist_FUN(Node *node);
+
 void extDefVisit(Node *node);
 
 void getExtDecList(Node *node);
