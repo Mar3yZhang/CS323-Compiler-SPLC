@@ -25,6 +25,7 @@ enum class CATEGORY
     PRIMITIVE,
     ARRAY,
     STRUCTURE,
+    FUNCTION,
 };
 
 /// @brief 用来在参数符号表中表示数据类型的结构体
