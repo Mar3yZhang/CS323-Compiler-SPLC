@@ -12,6 +12,10 @@ extern unordered_map<string, Type *> symbolTable;
 
 string getName(Node *node,string nodeName);
 
+Array *getArray(Node *node, Type *type);
+
+void checkExists_ID(Node *node);
+
 void extDefVisit(Node *node);
 
 void getExtDecList(Node *node);

@@ -20,6 +20,16 @@ string getName(Node *node,string nodeName) {
 Array *getArray(Node *node, Type *type) {
 
 }
+
+void checkExists_ID(Node *node) {
+    if (node->name != "ID") {
+        return;
+    }
+    string name = node->content;
+    if (symbolTable.count(name) == 0) {
+        printf("Error type 1 at Line %d: undefined variable: %s\n", node->line_num, name.c_str());
+    }
+}
 void extDefVisit(Node *node);
 
 void getExtDecList(Node *node);
