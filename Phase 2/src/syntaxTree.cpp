@@ -1,6 +1,7 @@
 #include <iterator>
 #include "syntaxTree.hpp"
 
+
 string getName(Node *node,string nodeName) {
     if (nodeName == "DecList") {
         Node *VarDec = node->child[0]->child[0];
@@ -16,6 +17,9 @@ string getName(Node *node,string nodeName) {
     }
 } 
 
+Array *getArray(Node *node, Type *type) {
+
+}
 void extDefVisit(Node *node);
 
 void getExtDecList(Node *node);
@@ -42,6 +46,17 @@ void defVisit(Node *node) {
     Node *decList = node->child[1];
     string name = getName(decList,"DecList");
     printf(name.c_str());
+    if (symbolTable.count(name) != 0) { 
+        printf("Error type 3 at Line %d: redefine variable: %s\n", node->line_num, name.c_str());
+    }
+    string type_name = node->child[0]->child[0]->content;
+    if (type_name == "int") {
+        symbolTable[name] = Type::getPrimitiveINT();
+    } else if (type_name == "float") {
+        symbolTable[name] = Type::getPrimitiveFLOAT();
+    } else if (type_name == "char") {
+        symbolTable[name] = Type::getPrimitiveCHAR();
+    }
     //while (true) {
        
         //const auto &PrimitiveType = Type::getPrimitiveType(_type);
