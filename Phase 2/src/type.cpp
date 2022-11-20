@@ -18,6 +18,13 @@ Type::Type(string name, CATEGORY category, FieldList *structure)
     this->category = category;
     this->foo.structure = structure;
 }
+Type::Type(string name, CATEGORY category, FieldList *structure, Type *returnType)
+{
+    this->name = name;
+    this->category = category;
+    this->foo.structure = structure;
+    this->returnType = returnType;
+}
 
 Type *Type::getPrimitiveINT()
 {

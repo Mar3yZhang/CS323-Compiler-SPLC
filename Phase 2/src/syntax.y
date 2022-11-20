@@ -140,24 +140,35 @@ Exp: Exp ASSIGN Exp                           {$$=new Node(Node_Type::MEDIAN,"Ex
     | MINUS Exp %prec UMINUS                  {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1,$2});}
     | NOT Exp                                 {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1,$2});}
     | ID LP Args error                        {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1,$2,$3}); printf("Error type B at Line %d: Missing closing parenthesis ')'\n",@$.first_line); type_B_error = 1;}
-    | ID LP Args RP                           {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1,$2,$3,$4});checkExist_FUN($1);}
-    | ID LP RP                                {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1,$2,$3});checkExist_FUN($1);}
-    | Exp LB Exp RB                           {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1,$2,$3,$4});}
-    | Exp DOT ID                              {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1,$2,$3});}
-    | ID                                      {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1});checkExists_ID($1);}
+    | ID LP Args RP {checkExist_FUN($1);
+                     checkParam_FUN($1,$3)
+                     $$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); 
+                     $$->addChild({$1,$2,$3,$4});
+                    }
+    | ID LP RP  {checkExist_FUN($1);
+                 checkParam_FUN($1,nullptr)
+                 $$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); 
+                 $$->addChild({$1,$2,$3});
+                 }
+    | Exp LB Exp RB  {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1,$2,$3,$4});}
+    | Exp DOT ID     {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1,$2,$3});}
+    | ID    {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); 
+            $$->addChild({$1});
+            checkExists_ID($1);
+            }
     | INT   {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); 
              $$->addChild({$1});
              $$->var = Type::getPrimitiveINT();
-    }
+            }
     | FLOAT {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); 
              $$->addChild({$1});
              $$->var = Type::getPrimitiveFLOAT();
-    }
-    | CHAR {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); 
+            }
+    | CHAR  {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); 
             $$->addChild({$1}); 
             $$->var = Type::getPrimitiveCHAR();
-    }
-    | UNKNOWN                                 {type_A_error = 1;}
+            }
+    | UNKNOWN  {type_A_error = 1;}
     ;       
 %%
 void yyerror(const char *s){
@@ -167,7 +178,7 @@ void yyerror(const char *s){
         // printf("------------------------------\n");
     // }
 	// printf("ERROR: %s at symbol '%s' on line %d\n", s, yytext, yylineno);
-}
+}   
 
 
 int main(int argc, char **argv) {

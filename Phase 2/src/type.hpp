@@ -13,7 +13,6 @@ class Array;
 class FieldList;
 class Type;
 
-
 enum class PRIM
 {
     INT,
@@ -40,11 +39,13 @@ public:
         Array *array;
         FieldList *structure;
     } foo;
+    Type *returnType = nullptr;
 
 public:
     explicit Type(string name, enum CATEGORY category, enum PRIM primitive);
     explicit Type(string name, enum CATEGORY category, Array *array);
     explicit Type(string name, enum CATEGORY category, FieldList *structure);
+    explicit Type(string name, enum CATEGORY category, FieldList *structure, Type *returnType);
     static Type *getPrimitiveINT();
     static Type *getPrimitiveFLOAT();
     static Type *getPrimitiveCHAR();
