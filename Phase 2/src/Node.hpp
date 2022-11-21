@@ -27,7 +27,6 @@ public:
     int line_num;              // the line in the context
     std::vector<Node *> child; // the children of the node
     Type *var = nullptr;
-    Function *func = nullptr;
 
 public:
     explicit Node(enum Node_Type type, std::string name, const char *content, int line);

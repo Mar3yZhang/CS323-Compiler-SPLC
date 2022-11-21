@@ -18,11 +18,11 @@ Type::Type(string name, CATEGORY category, FieldList *structure)
     this->category = category;
     this->foo.structure = structure;
 }
-Type::Type(string name, CATEGORY category, FieldList *structure, Type *returnType)
+Type::Type(string name, CATEGORY category, FieldList *param, Type *returnType)
 {
     this->name = name;
     this->category = category;
-    this->foo.structure = structure;
+    this->foo.param = param;
     this->returnType = returnType;
 }
 

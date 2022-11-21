@@ -22,3 +22,12 @@ void functionRedefined_4(int lineNum, const std::string &name)
 {
     printf("Error type 4 at Line %d: redefine function: %s\n", lineNum, name.c_str());
 }
+
+
+
+// error type 9
+void invalidArgumentNumber_9(int lineNum, const std::string &name, int expect, int actually)
+{
+    printf("Error type 9 at Line %d: invalid argument number for %s, expect %d, got %d\n", lineNum, name.c_str(),
+           expect, actually);
+}

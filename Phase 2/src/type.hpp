@@ -38,6 +38,7 @@ public:
         enum PRIM primitive;
         Array *array;
         FieldList *structure;
+        FieldList *param;
     } foo;
     Type *returnType = nullptr;
 
@@ -45,7 +46,7 @@ public:
     explicit Type(string name, enum CATEGORY category, enum PRIM primitive);
     explicit Type(string name, enum CATEGORY category, Array *array);
     explicit Type(string name, enum CATEGORY category, FieldList *structure);
-    explicit Type(string name, enum CATEGORY category, FieldList *structure, Type *returnType);
+    explicit Type(string name, enum CATEGORY category, FieldList *param, Type *returnType);
     static Type *getPrimitiveINT();
     static Type *getPrimitiveFLOAT();
     static Type *getPrimitiveCHAR();

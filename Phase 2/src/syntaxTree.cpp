@@ -44,16 +44,16 @@ void checkExists_ID(Node *node)
     }
 }
 
-void checkExist_FUN(Node *node)
+void checkExist_FUN(Node *id)
 {
-    string name = node->content;
+    string name = id->content;
     if (symbolTable.count(name) == 0)
     {
-        functionNoDefinition_2(node->line_num, name.c_str());
+        functionNoDefinition_2(id->line_num, name.c_str());
     }
 }
 
-/// @brief 检查函数的参数列表是否满足 ID LP Args RP & ID LP RP
+/// @brief 检查函数的参数列表是否满足符号表中的要求  ID LP Args RP & ID LP RP
 void checkParam_FUN(Node *id, Node *args)
 {
     string functionName = id->content;
@@ -62,7 +62,22 @@ void checkParam_FUN(Node *id, Node *args)
         return;
     }
     Type *function = symbolTable[functionName];
-    
+
+    if (function == nullptr)
+    {
+        return;
+    }
+
+    FieldList *param_c = function->foo.param;
+    FieldList *param = (args == nullptr) ? nullptr : args->var->foo.param;
+
+    int expect_num = countParamNum(param_c);
+    int act_num = countParamNum(param_c);
+
+    if (countParamNum(param_c) != countParamNum(param))
+    {
+        invalidArgumentNumber_9(id->line_num, functionName.c_str(), expect_num, act_num);
+    }
 }
 
 void extDefVisit(Node *node);
@@ -97,28 +112,38 @@ void getStmt(Node *node);
 
 void getExp(Node *node);
 // def
-void defVisit(Node *node)
+void defVisit(Node *def)
 {
-    Node *decList = node->child[1];
+    Node *decList = def->child[1];
     string name = getName(decList, "DecList");
-    std::cout << name.c_str() << std::endl;
+    // std::cout << name.c_str() << std::endl;
     if (symbolTable.count(name) != 0)
     {
-        printf("Error type 3 at Line %d: redefine variable: %s\n", node->line_num, name.c_str());
+        variableRedefined_3(def->line_num, name.c_str());
     }
-    string type_name = node->child[0]->child[0]->content;
-    if (type_name == "int")
+
+    /// 暂时不考虑结构体的情况
+
+    string type_name = def->child[0]->child[0]->content;
+
+    if (type_name == "INT")
     {
         symbolTable[name] = Type::getPrimitiveINT();
     }
-    else if (type_name == "float")
+    else if (type_name == "FLOAT")
     {
         symbolTable[name] = Type::getPrimitiveFLOAT();
     }
-    else if (type_name == "char")
+    else if (type_name == "CHAR")
     {
         symbolTable[name] = Type::getPrimitiveCHAR();
     }
+
+    
+
+    
+
+
     // while (true) {
 
     // const auto &PrimitiveType = Type::getPrimitiveType(_type);

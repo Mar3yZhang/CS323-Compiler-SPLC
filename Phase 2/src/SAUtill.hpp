@@ -3,4 +3,4 @@
 #include "Node.hpp"
 #endif
 
-
+int countParamNum(FieldList *param);

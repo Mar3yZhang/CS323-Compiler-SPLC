@@ -6,6 +6,7 @@
 #include <iterator>
 #include "Type.hpp"
 #include "Node.hpp"
+#include "SAUtill.hpp"
 #include "semanticError.hpp"
 
 using std::string;
@@ -18,7 +19,7 @@ Array *getArray(Node *node, Type *type);
 
 void checkExists_ID(Node *node);
 
-void checkExist_FUN(Node *node);
+void checkExist_FUN(Node *id);
 
 void checkParam_FUN(Node *id, Node *args);
 
