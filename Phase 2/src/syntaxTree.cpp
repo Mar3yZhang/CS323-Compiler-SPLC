@@ -56,28 +56,28 @@ void checkExist_FUN(Node *id)
 /// @brief 检查函数的参数列表是否满足符号表中的要求  ID LP Args RP & ID LP RP
 void checkParam_FUN(Node *id, Node *args)
 {
-    string functionName = id->content;
-    if (symbolTable.count(functionName) == 0 || symbolTable[functionName]->category != CATEGORY::FUNCTION)
-    {
-        return;
-    }
-    Type *function = symbolTable[functionName];
+    // string functionName = id->content;
+    // if (symbolTable.count(functionName) == 0 || symbolTable[functionName]->category != CATEGORY::FUNCTION)
+    // {
+    //     return;
+    // }
+    // Type *function = symbolTable[functionName];
 
-    if (function == nullptr)
-    {
-        return;
-    }
+    // if (function == nullptr)
+    // {
+    //     return;
+    // }
 
-    FieldList *param_c = function->foo.param;
-    FieldList *param = (args == nullptr) ? nullptr : args->var->foo.param;
+    // FieldList *param_c = function->foo.param;
+    // FieldList *param = (args == nullptr) ? nullptr : args->var->foo.param;
 
-    int expect_num = countParamNum(param_c);
-    int act_num = countParamNum(param_c);
+    // int expect_num = countParamNum(param_c);
+    // int act_num = countParamNum(param_c);
 
-    if (countParamNum(param_c) != countParamNum(param))
-    {
-        invalidArgumentNumber_9(id->line_num, functionName.c_str(), expect_num, act_num);
-    }
+    // if (countParamNum(param_c) != countParamNum(param))
+    // {
+    //     invalidArgumentNumber_9(id->line_num, functionName.c_str(), expect_num, act_num);
+    // }
 }
 
 void extDefVisit(Node *node);
@@ -86,16 +86,68 @@ void getExtDecList(Node *node);
 
 void getSpecifier_FunDec_Recv(Node *node);
 // function
-void FunDecVisit(Node *node)
+
+/// @brief FunDec -> ID LP VarList RP | ID LP RP
+/// 这里只拿到了函数的名字，没有拿到参数列表的具体内容
+/// TODO: 将函数的内容填充完整
+/* declarator
+VarDec -> ID | VarDec LB INT RB
+FunDec -> ID LP VarList RP | ID LP RP
+VarList -> ParamDec COMMA VarList| ParamDec
+ParamDec -> Specifier VarDec
+*/
+void FunDecVisit(Node *FunDec)
 {
-    Type *functionType = new Type("", CATEGORY::FUNCTION, PRIM::INT);
-    functionType->name = node->child[0]->content;
-    if (symbolTable.count(functionType->name) != 0)
+    Type *function = new Type("", CATEGORY::FUNCTION, nullptr);
+
+    Node *ID = FunDec->child[0];
+    function->name = ID->content;
+
+    if (symbolTable.count(function->name) != 0)
     {
-        printf("Error type 4 at Line %d: redefine function: %s\n", node->line_num, functionType->name.c_str());
+        functionRedefined_4(FunDec->line_num, function->name.c_str());
         return;
     }
-    symbolTable[functionType->name] = functionType;
+
+    if (FunDec->child.size() == 3) /// 没有参数列表 ID LP RP
+    {
+        symbolTable[function->name] = function;
+        return;
+    }
+    else /// 有参数列表 ID LP VarList RP TODO:从VarList中获取信息
+    {
+        vector<Node *> ParamsDecs;
+        Node *cur_VarList = FunDec->child[2];
+        while (cur_VarList->child.size() != 1) //还没有到最后一个ParamDec
+        {
+            ParamsDecs.push_back(cur_VarList->child[0]); // VarList -> ParamDec COMMA VarList| ParamDec
+            cur_VarList = cur_VarList->child[2];
+        }
+        ParamsDecs.push_back(cur_VarList->child[0]);
+
+        for (auto &&cur_ParamsDec : ParamsDecs)
+        {
+            Node *cur_Specifier = cur_ParamsDec->child[0]; // ParamDec -> Specifier VarDec
+            Node *VarDec = cur_ParamsDec->child[1];
+            if (VarDec->child.size() == 1) // 是普通类型
+            {
+            }
+            else //是数组类型
+            {
+                vector<Node *> VarDecs;
+                while (cur_VarList->child.size() != 1) //还没有到最后的ID
+                {
+                    ParamsDecs.push_back(cur_VarList->child[0]); // VarDec -> ID | VarDec LB INT RB
+                    cur_VarList = cur_VarList->child[2];
+                }
+                ParamsDecs.push_back(cur_VarList->child[0]);
+                VarDecs.clear();
+            }
+        }
+
+        symbolTable[function->name] = function;
+        ParamsDecs.clear();
+    }
 }
 
 void getVarList(Node *node);
@@ -138,11 +190,6 @@ void defVisit(Node *def)
     {
         symbolTable[name] = Type::getPrimitiveCHAR();
     }
-
-    
-
-    
-
 
     // while (true) {
 

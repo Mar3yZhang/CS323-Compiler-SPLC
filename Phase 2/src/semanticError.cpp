@@ -23,8 +23,6 @@ void functionRedefined_4(int lineNum, const std::string &name)
     printf("Error type 4 at Line %d: redefine function: %s\n", lineNum, name.c_str());
 }
 
-
-
 // error type 9
 void invalidArgumentNumber_9(int lineNum, const std::string &name, int expect, int actually)
 {

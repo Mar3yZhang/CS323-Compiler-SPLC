@@ -1,5 +1,5 @@
 CC=gcc
-CPP = g++
+CPP = g++ -std=c++17
 FLEX=flex
 BISON=bison
 SRC_PATH=src
