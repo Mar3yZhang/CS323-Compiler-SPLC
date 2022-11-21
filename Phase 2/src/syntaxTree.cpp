@@ -125,12 +125,31 @@ void FunDecVisit(Node *FunDec)
         }
         ParamsDecs.push_back(cur_VarList->child[0]);
 
+        vector<FieldList *> param; //暂存函数的参数列表
         for (auto &&cur_ParamsDec : ParamsDecs)
         {
             Node *cur_Specifier = cur_ParamsDec->child[0]; // ParamDec -> Specifier VarDec
             Node *VarDec = cur_ParamsDec->child[1];
             if (VarDec->child.size() == 1) // 是普通类型
             {
+                string ID = VarDec->child[0]->content;
+                CATEGORY category = cur_Specifier->child[0]->name == "TYPE" ? CATEGORY::PRIMITIVE : CATEGORY::STRUCTURE;
+                switch (category)
+                {
+                case CATEGORY::PRIMITIVE:
+                {
+                    Type *param_type = new Type(ID, CATEGORY::PRIMITIVE, string_to_prim[cur_Specifier->child[0]->content]);
+                    param.push_back(new FieldList((string) "", param_type)); // 基础类型的名字用不上
+                    break;
+                }
+                case CATEGORY::STRUCTURE:
+                {
+                    // TODO: 结构体还没有实现
+                    break;
+                }
+                default:
+                    break;
+                }
             }
             else //是数组类型
             {
@@ -144,6 +163,7 @@ void FunDecVisit(Node *FunDec)
                 VarDecs.clear();
             }
         }
+        // TODO: 将param拆包
 
         symbolTable[function->name] = function;
         ParamsDecs.clear();

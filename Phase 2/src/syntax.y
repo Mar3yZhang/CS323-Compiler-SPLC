@@ -56,7 +56,7 @@ ExtDefList: /* to allow empty input */        {$$=new Node(Node_Type::NOTHING,"E
     | ExtDef ExtDefList                       {$$=new Node(Node_Type::MEDIAN,"ExtDefList","",@$.first_line); $$->addChild({$1,$2});}
     ;         
 ExtDef: error ExtDecList SEMI                 {printf("Error type B at Line %d: Missing specifier\n",@$.first_line); type_B_error=1;}
-    |Specifier ExtDecList SEMI                {$$=new Node(Node_Type::MEDIAN,"ExtDef","",@$.first_line); $$->addChild({$1,$2,$3});}
+    | Specifier ExtDecList SEMI                {$$=new Node(Node_Type::MEDIAN,"ExtDef","",@$.first_line); $$->addChild({$1,$2,$3});}
     | Specifier SEMI                          {$$=new Node(Node_Type::MEDIAN,"ExtDef","",@$.first_line); $$->addChild({$1,$2});}
     | Specifier FunDec CompSt                 {$$=new Node(Node_Type::MEDIAN,"ExtDef","",@$.first_line); $$->addChild({$1,$2,$3});}
     ;         
@@ -68,7 +68,9 @@ ExtDecList: VarDec                            {$$=new Node(Node_Type::MEDIAN,"Ex
 Specifier: TYPE   {$$=new Node(Node_Type::MEDIAN,"Specifier","",@$.first_line); 
                    $$->addChild({$1});
                   }
-    | StructSpecifier                         {$$=new Node(Node_Type::MEDIAN,"Specifier","",@$.first_line); $$->addChild({$1});}
+    | StructSpecifier {$$=new Node(Node_Type::MEDIAN,"Specifier","",@$.first_line); 
+                       $$->addChild({$1});
+                       }
     ;         
 StructSpecifier: STRUCT ID LC DefList RC      {$$=new Node(Node_Type::MEDIAN,"StructSpecifier","",@$.first_line); $$->addChild({$1,$2,$3,$4,$5});}
     | STRUCT ID                               {$$=new Node(Node_Type::MEDIAN,"StructSpecifier","",@$.first_line); $$->addChild({$1,$2});}

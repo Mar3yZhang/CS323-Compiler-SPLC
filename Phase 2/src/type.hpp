@@ -74,7 +74,7 @@ public:
 
 public:
     FieldList() = default;
-    FieldList(string name, Type *type, FieldList *next);
+    FieldList(string name, Type *type);
     ~FieldList() = default;
 };
 #endif
