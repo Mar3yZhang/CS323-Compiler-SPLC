@@ -98,7 +98,7 @@ ParamDec -> Specifier VarDec
 */
 void FunDecVisit(Node *FunDec)
 {
-    Type *function = new Type("", CATEGORY::FUNCTION, nullptr);
+    Type *function = new Type("", CATEGORY::FUNCTION, nullptr, nullptr);
 
     Node *ID = FunDec->child[0];
     function->name = ID->content;
