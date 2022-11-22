@@ -56,28 +56,30 @@ void checkExist_FUN(Node *id)
 /// @brief 检查函数的参数列表是否满足符号表中的要求  ID LP Args RP & ID LP RP
 void checkParam_FUN(Node *id, Node *args)
 {
-    // string functionName = id->content;
-    // if (symbolTable.count(functionName) == 0 || symbolTable[functionName]->category != CATEGORY::FUNCTION)
-    // {
-    //     return;
-    // }
-    // Type *function = symbolTable[functionName];
+    string functionName = id->content;
 
-    // if (function == nullptr)
-    // {
-    //     return;
-    // }
+    // 符号表中没有该函数
+    if (symbolTable.count(functionName) == 0 || symbolTable[functionName]->category != CATEGORY::FUNCTION)
+    {
+        return;
+    }
+    else
+    {
+        //这里先处理数字不匹配的问题
+        Type *function = symbolTable[functionName];
+        if (get_expect_param_num(function->foo.param) == 0 && args == nullptr) //都是不需要参数
+        {
+            return;
+        }
+        else //参数个数匹配不上 报错
+        {
+            int real = get_expect_param_num(function->foo.param);
+            int expect = get_real_param_num(args);
+            invalidArgumentNumber_9(id->line_num, functionName, expect, real);
+        }
 
-    // FieldList *param_c = function->foo.param;
-    // FieldList *param = (args == nullptr) ? nullptr : args->var->foo.param;
-
-    // int expect_num = countParamNum(param_c);
-    // int act_num = countParamNum(param_c);
-
-    // if (countParamNum(param_c) != countParamNum(param))
-    // {
-    //     invalidArgumentNumber_9(id->line_num, functionName.c_str(), expect_num, act_num);
-    // }
+        ///  TODO: 这里需要处理类型不匹配的问题，建议先把Args展开成vector
+    }
 }
 
 void extDefVisit(Node *node);
@@ -147,7 +149,7 @@ void FunDecVisit(Node *FunDec)
                     param.push_back(new FieldList((string) "", param_type)); // 基础类型的名字用不上
                     break;
                 }
-                case CATEGORY::STRUCTURE:
+                case CATEGORY::STRUCTURE: //是结构体类型
                 {
                     // TODO: 结构体还没有实现
                     break;

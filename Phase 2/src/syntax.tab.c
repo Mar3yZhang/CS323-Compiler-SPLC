@@ -1961,7 +1961,7 @@ yyreduce:
   case 61:
 #line 148 "syntax.y"
                     {checkExist_FUN((yyvsp[-3].node));
-                    //  checkParam_FUN($1,$3);
+                     checkParam_FUN((yyvsp[-3].node),(yyvsp[-1].node));
                      (yyval.node)=new Node(Node_Type::MEDIAN,"Exp","",(yyloc).first_line); 
                      (yyval.node)->addChild({(yyvsp[-3].node),(yyvsp[-2].node),(yyvsp[-1].node),(yyvsp[0].node)});
                     }
@@ -1971,7 +1971,7 @@ yyreduce:
   case 62:
 #line 153 "syntax.y"
                 {checkExist_FUN((yyvsp[-2].node));
-                //  checkParam_FUN($1,nullptr);
+                 checkParam_FUN((yyvsp[-2].node),nullptr);
                  (yyval.node)=new Node(Node_Type::MEDIAN,"Exp","",(yyloc).first_line); 
                  (yyval.node)->addChild({(yyvsp[-2].node),(yyvsp[-1].node),(yyvsp[0].node)});
                  }

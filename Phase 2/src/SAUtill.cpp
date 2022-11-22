@@ -37,3 +37,36 @@ FieldList *vector_to_fieldlist(vector<FieldList *> param)
     }
     return ans;
 }
+
+int get_expect_param_num(FieldList *param)
+{
+    int counter = 0;
+    FieldList *temp = param;
+    while (temp != nullptr)
+    {
+        temp = temp->next;
+        counter++;
+    }
+    return counter;
+}
+
+// Args -> Exp COMMA Args | Exp
+int get_real_param_num(Node *args)
+{
+    if (args == nullptr)
+    {
+        return 0;
+    }
+    else
+    {
+        int counter = 0;
+        Node *temp = args;
+        while (temp->child.size() != 1) //还没有到最后一个参数
+        {
+            counter++;
+            temp = temp->child[2];
+        }
+        counter++;
+        return counter;
+    }
+}

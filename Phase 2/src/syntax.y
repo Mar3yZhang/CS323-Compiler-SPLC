@@ -146,12 +146,12 @@ Exp: Exp ASSIGN Exp                           {$$=new Node(Node_Type::MEDIAN,"Ex
     | NOT Exp                                 {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1,$2});}
     | ID LP Args error                        {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1,$2,$3}); printf("Error type B at Line %d: Missing closing parenthesis ')'\n",@$.first_line); type_B_error = 1;}
     | ID LP Args RP {checkExist_FUN($1);
-                    //  checkParam_FUN($1,$3);
+                     checkParam_FUN($1,$3);
                      $$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); 
                      $$->addChild({$1,$2,$3,$4});
                     }
     | ID LP RP  {checkExist_FUN($1);
-                //  checkParam_FUN($1,nullptr);
+                 checkParam_FUN($1,nullptr);
                  $$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); 
                  $$->addChild({$1,$2,$3});
                  }
