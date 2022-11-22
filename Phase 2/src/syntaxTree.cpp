@@ -14,15 +14,6 @@ void print_map_keys()
     return;
 }
 
-// void idToExp(Node *exp, Node *id)
-// {
-//     if (exp->name != "Exp" || id->name != "ID")
-//     {
-//         return;
-//     }
-//     exp->type = symbolTable[id->name];
-// }
-
 string getName(Node *node, string nodeName)
 {
     if (nodeName == "DecList")
@@ -236,7 +227,7 @@ Def
 void defVisit(Node *def)
 {
 
-    print_map_keys();
+    // print_map_keys();
 
     Node *decList = def->child[1];
     string name = getName(decList, "DecList");
@@ -268,6 +259,10 @@ void defVisit(Node *def)
     {
         symbolTable[name] = Type::getPrimitiveCHAR(name);
     }
+
+    /// TODO: 完成结构体的访问
+
+    /// TODO: 完成数组的访问
 }
 
 void getDecList(Node *node);
