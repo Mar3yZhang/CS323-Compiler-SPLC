@@ -23,6 +23,17 @@ void functionRedefined_4(int lineNum, const std::string &name)
     printf("Error type 4 at Line %d: redefine function: %s\n", lineNum, name.c_str());
 }
 
+// error type 5
+void nonMatchTypeBothSide_5(int lineNum)
+{
+    printf("Error type 5 at Line %d: unmatching types on both sides of assignment\n", lineNum);
+}
+
+void rvalueLeftSetError_6(int lineNum)
+{
+    printf("Error type 6 at Line %d: left side in assignment is rvalue\n", lineNum);
+}
+
 // error type 9
 void invalidArgumentNumber_9(int lineNum, const std::string &name, int expect, int actually)
 {

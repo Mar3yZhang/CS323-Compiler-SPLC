@@ -57,4 +57,6 @@ void getVarDec(Node *node);
 
 void getReturnTypeOfFunction(Node *expOut, Node *ID);
 
+void checkRvalueInLeftSide(Node *Exp);
+
 #endif

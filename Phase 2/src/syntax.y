@@ -128,7 +128,10 @@ Dec: VarDec                                   {$$=new Node(Node_Type::MEDIAN,"De
 Args: Exp COMMA Args                          {$$=new Node(Node_Type::MEDIAN,"Args","",@$.first_line); $$->addChild({$1,$2,$3});}
     | Exp                                     {$$=new Node(Node_Type::MEDIAN,"Args","",@$.first_line); $$->addChild({$1});}
     ;         
-Exp: Exp ASSIGN Exp                           {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1,$2,$3});}
+Exp: Exp ASSIGN Exp  {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); 
+                      $$->addChild({$1,$2,$3});
+                      checkRvalueInLeftSide($$);
+                     }
     | Exp AND Exp                             {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1,$2,$3});}
     | Exp OR Exp                              {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1,$2,$3});}
     | Exp LT Exp                              {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1,$2,$3});}

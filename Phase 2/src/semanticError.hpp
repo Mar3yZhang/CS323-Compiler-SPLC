@@ -14,6 +14,12 @@ void variableRedefined_3(int lineNum, const std::string &name);
 // error type 4
 void functionRedefined_4(int lineNum, const std::string &name);
 
+// error type 5
+void nonMatchTypeBothSide_5(int lineNum);
+
+// error type 6
+void rvalueLeftSetError_6(int lineNum);
+
 // error type 9
 void invalidArgumentNumber_9(int lineNum, const std::string &name, int expect, int actually);
 

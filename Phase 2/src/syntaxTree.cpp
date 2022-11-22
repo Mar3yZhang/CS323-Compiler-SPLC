@@ -321,3 +321,44 @@ void getReturnTypeOfFunction(Node *expOut, Node *ID)
     Type *returnType = symbolTable[functionName]->returnType;
     expOut->var = returnType;
 }
+
+// Exp: Exp ASSIGN Exp
+// error type: 6
+void checkRvalueInLeftSide(Node *Exp)
+{
+    if (Exp->name != "Exp")
+    {
+        return;
+    }
+    Node *leftExp = Exp->child[0];
+    switch (leftExp->child.size())
+    {
+    case 1:
+    {
+        if (leftExp->child[0]->name == "ID")
+        {
+            return;
+        }
+        break;
+    }
+    case 3:
+    {
+        if (leftExp->child[0]->name == "Exp" && leftExp->child[2]->name == "ID" &&
+            leftExp->child[1]->name == "DOT")
+        {
+            return;
+        }
+        break;
+    }
+    case 4:
+    {
+        if (leftExp->child[0]->name == "Exp" && leftExp->child[2]->name == "Exp" &&
+            leftExp->child[1]->name == "LB" && leftExp->child[3]->name == "RB")
+        {
+            return;
+        }
+        break;
+    }
+    }
+    rvalueLeftSetError_6(Exp->line_num);
+}
