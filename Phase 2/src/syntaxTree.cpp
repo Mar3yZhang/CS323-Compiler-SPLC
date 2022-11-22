@@ -106,7 +106,7 @@ void FunDecVisit(Node *FunDec)
     if (symbolTable.count(function->name) != 0)
     {
         functionRedefined_4(FunDec->line_num, function->name.c_str());
-        return;
+        // return;
     }
 
     if (FunDec->child.size() == 3) /// 没有参数列表 ID LP RP
@@ -138,7 +138,12 @@ void FunDecVisit(Node *FunDec)
                 {
                 case CATEGORY::PRIMITIVE:
                 {
+
                     Type *param_type = new Type(ID, CATEGORY::PRIMITIVE, string_to_prim[cur_Specifier->child[0]->content]);
+
+                    //注册参数列表中的参数到符号表上
+                    symbolTable[ID] = param_type;
+
                     param.push_back(new FieldList((string) "", param_type)); // 基础类型的名字用不上
                     break;
                 }
@@ -153,18 +158,21 @@ void FunDecVisit(Node *FunDec)
             }
             else //是数组类型
             {
-                vector<Node *> VarDecs;
-                while (cur_VarList->child.size() != 1) //还没有到最后的ID
-                {
-                    ParamsDecs.push_back(cur_VarList->child[0]); // VarDec -> ID | VarDec LB INT RB
-                    cur_VarList = cur_VarList->child[2];
-                }
-                ParamsDecs.push_back(cur_VarList->child[0]);
-                VarDecs.clear();
+                // TODO: 数组还没有实现
+
+                // vector<Node *> VarDecs;
+                // while (cur_VarList->child.size() != 1) //还没有到最后的ID
+                // {
+                //     ParamsDecs.push_back(cur_VarList->child[0]); // VarDec -> ID | VarDec LB INT RB
+                //     cur_VarList = cur_VarList->child[2];
+                // }
+                // ParamsDecs.push_back(cur_VarList->child[0]);
+                // VarDecs.clear();
             }
         }
-        // TODO: 将param拆包
+        // TODO: 将param拆包 封装为一个 fieldlist链表
 
+        function->foo.param = vector_to_fieldlist(param);
         symbolTable[function->name] = function;
         ParamsDecs.clear();
     }

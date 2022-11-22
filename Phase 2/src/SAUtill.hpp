@@ -16,3 +16,5 @@ static unordered_map<PRIM, string> prim_to_string = {
     {PRIM::FLOAT, string("FLOAT")},
     {PRIM::CHAR, string("CHAR")},
 };
+
+FieldList *vector_to_fieldlist(vector<FieldList *> param);
