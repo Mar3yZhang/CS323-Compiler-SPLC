@@ -13,6 +13,8 @@ using std::string;
 using std::unordered_map;
 extern unordered_map<string, Type *> symbolTable;
 
+void print_map_keys();
+
 string getName(Node *node, string nodeName);
 
 Array *getArray(Node *node, Type *type);

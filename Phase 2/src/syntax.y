@@ -56,7 +56,7 @@ ExtDefList: /* to allow empty input */        {$$=new Node(Node_Type::NOTHING,"E
     | ExtDef ExtDefList                       {$$=new Node(Node_Type::MEDIAN,"ExtDefList","",@$.first_line); $$->addChild({$1,$2});}
     ;         
 ExtDef: error ExtDecList SEMI                 {printf("Error type B at Line %d: Missing specifier\n",@$.first_line); type_B_error=1;}
-    | Specifier ExtDecList SEMI                {$$=new Node(Node_Type::MEDIAN,"ExtDef","",@$.first_line); $$->addChild({$1,$2,$3});}
+    | Specifier ExtDecList SEMI               {$$=new Node(Node_Type::MEDIAN,"ExtDef","",@$.first_line); $$->addChild({$1,$2,$3});}
     | Specifier SEMI                          {$$=new Node(Node_Type::MEDIAN,"ExtDef","",@$.first_line); $$->addChild({$1,$2});}
     | Specifier FunDec CompSt                 {$$=new Node(Node_Type::MEDIAN,"ExtDef","",@$.first_line); $$->addChild({$1,$2,$3});}
     ;         

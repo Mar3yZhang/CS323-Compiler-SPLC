@@ -1,5 +1,28 @@
 #include "syntaxTree.hpp"
 
+/// @brief debug 用
+void print_map_keys()
+{
+    std::cout << "----------------------------" << std::endl;
+    int counter = 0;
+    for (auto &kv : symbolTable)
+    {
+        counter++;
+        std::cout << "key" << counter << ": " << kv.first << std::endl;
+    }
+    std::cout << "----------------------------" << std::endl;
+    return;
+}
+
+// void idToExp(Node *exp, Node *id)
+// {
+//     if (exp->name != "Exp" || id->name != "ID")
+//     {
+//         return;
+//     }
+//     exp->type = symbolTable[id->name];
+// }
+
 string getName(Node *node, string nodeName)
 {
     if (nodeName == "DecList")
@@ -75,10 +98,14 @@ void checkParam_FUN(Node *id, Node *args)
         {
             int real = get_expect_param_num(function->foo.param);
             int expect = get_real_param_num(args);
-            invalidArgumentNumber_9(id->line_num, functionName, expect, real);
+            if (real != expect)
+            {
+                invalidArgumentNumber_9(id->line_num, functionName, expect, real);
+            }
         }
 
-        ///  TODO: 这里需要处理类型不匹配的问题，建议先把Args展开成vector
+        ///  TODO: 这里需要处理类型不匹配的问题 type 9.2，建议先把Args展开成vector
+        ///  TODO: 这里需要处理执行非函数的问题 type 11 需要先向符号表注册非函数变量
     }
 }
 
@@ -151,7 +178,7 @@ void FunDecVisit(Node *FunDec)
                 }
                 case CATEGORY::STRUCTURE: //是结构体类型
                 {
-                    // TODO: 结构体还没有实现
+                    ///  TODO: 实现结构体在符号表和函数中的注册
                     break;
                 }
                 default:
@@ -160,7 +187,7 @@ void FunDecVisit(Node *FunDec)
             }
             else //是数组类型
             {
-                // TODO: 数组还没有实现
+                ///  TODO:  实现数组在符号表和函数中的注册
 
                 // vector<Node *> VarDecs;
                 // while (cur_VarList->child.size() != 1) //还没有到最后的ID
@@ -172,7 +199,7 @@ void FunDecVisit(Node *FunDec)
                 // VarDecs.clear();
             }
         }
-        // TODO: 将param拆包 封装为一个 fieldlist链表
+        // 将param拆包 封装为一个 fieldlist链表
 
         function->foo.param = vector_to_fieldlist(param);
         symbolTable[function->name] = function;
@@ -193,48 +220,54 @@ void getStmtList(Node *node);
 void getStmt(Node *node);
 
 void getExp(Node *node);
-// def
+
+/*
+Def
+  Specifier
+    TYPE
+  DecList
+    Dec
+      VarDec
+        ID: code
+  SEMI
+  // DO not forget VarDec can contain array
+ * */
+
 void defVisit(Node *def)
 {
+
+    print_map_keys();
+
     Node *decList = def->child[1];
     string name = getName(decList, "DecList");
+    // std::cout << "-----------" << std::endl;
     // std::cout << name.c_str() << std::endl;
+    // std::cout << "-----------" << std::endl;
     if (symbolTable.count(name) != 0)
     {
         variableRedefined_3(def->line_num, name.c_str());
     }
 
-    /// 暂时不考虑结构体的情况
+    /// 暂时不考虑结构体和数组的情况
 
     string type_name = def->child[0]->child[0]->content;
 
-    if (type_name == "INT")
+    // std::cout << "++++++++++++" << std::endl;
+    // std::cout << name.c_str() << std::endl;
+    // std::cout << "++++++++++++" << std::endl;
+
+    if (type_name == "int")
     {
-        symbolTable[name] = Type::getPrimitiveINT();
+        symbolTable[name] = Type::getPrimitiveINT(name);
     }
-    else if (type_name == "FLOAT")
+    else if (type_name == "float")
     {
-        symbolTable[name] = Type::getPrimitiveFLOAT();
+        symbolTable[name] = Type::getPrimitiveFLOAT(name);
     }
-    else if (type_name == "CHAR")
+    else if (type_name == "char")
     {
-        symbolTable[name] = Type::getPrimitiveCHAR();
+        symbolTable[name] = Type::getPrimitiveCHAR(name);
     }
-
-    // while (true) {
-
-    // const auto &PrimitiveType = Type::getPrimitiveType(_type);
-    // if {
-    //     Type * type = PrimitiveType;
-    // }
-    // else if {
-    //     Type * type = new Type(name,CATEGORY::Array,array);
-
-    //} else {
-
-    // Type * type = new Type(name,CATEGORY::STRUCTURE);
-    // }
-    //}
 }
 
 void getDecList(Node *node);
