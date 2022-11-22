@@ -16,3 +16,6 @@ void functionRedefined_4(int lineNum, const std::string &name);
 
 // error type 9
 void invalidArgumentNumber_9(int lineNum, const std::string &name, int expect, int actually);
+
+// error type 11
+void invokeNonFunctionVariable_11(int lineNum, const std::string &name);

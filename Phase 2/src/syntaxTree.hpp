@@ -27,10 +27,12 @@ void checkParam_FUN(Node *id, Node *args);
 
 void extDefVisit(Node *node);
 
-void getExtDecList(Node *node);
+void ExtDefVisit_SES(Node *node);
 
-void getSpecifier_FunDec_Recv(Node *node);
-// function
+void ExtDefVisit_SS(Node *node);
+
+void ExtDefVisit_SFC(Node *node);
+
 void FunDecVisit(Node *node);
 
 void getVarList(Node *node);
@@ -52,5 +54,7 @@ void defVisit(Node *node);
 void getDecList(Node *node);
 
 void getVarDec(Node *node);
+
+void getReturnTypeOfFunction(Node *expOut, Node *ID);
 
 #endif

@@ -29,3 +29,8 @@ void invalidArgumentNumber_9(int lineNum, const std::string &name, int expect, i
     printf("Error type 9 at Line %d: invalid argument number for %s, expect %d, got %d\n", lineNum, name.c_str(),
            expect, actually);
 }
+
+void invokeNonFunctionVariable_11(int lineNum, const std::string &name)
+{
+    printf("Error type 11 at Line %d: invoking non-function variable: %s\n", lineNum, name.c_str());
+}

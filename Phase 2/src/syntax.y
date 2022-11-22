@@ -149,14 +149,20 @@ Exp: Exp ASSIGN Exp                           {$$=new Node(Node_Type::MEDIAN,"Ex
                      checkParam_FUN($1,$3);
                      $$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); 
                      $$->addChild({$1,$2,$3,$4});
+                     getReturnTypeOfFunction($$,$1);
                     }
     | ID LP RP  {checkExist_FUN($1);
                  checkParam_FUN($1,nullptr);
                  $$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); 
                  $$->addChild({$1,$2,$3});
+                 getReturnTypeOfFunction($$,$1);
                  }
-    | Exp LB Exp RB  {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1,$2,$3,$4});}
-    | Exp DOT ID     {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1,$2,$3});}
+    | Exp LB Exp RB  {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line);
+                      $$->addChild({$1,$2,$3,$4});
+                     }
+    | Exp DOT ID  {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); 
+                   $$->addChild({$1,$2,$3});
+                  }
     | ID    {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); 
             $$->addChild({$1});
             checkExists_ID($1);

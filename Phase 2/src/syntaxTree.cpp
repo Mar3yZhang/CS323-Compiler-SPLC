@@ -34,6 +34,11 @@ string getName(Node *node, string nodeName)
         Node *VarDec = node->child[0];
         return getName(VarDec, "VarDec");
     }
+    else if (nodeName == "FunDec")
+    {
+        Node *ID = node->child[0];
+        return ID->content;
+    }
     else
     {
         return "";
@@ -45,16 +50,16 @@ Array *getArray(Node *node, Type *type)
     return nullptr;
 }
 
-void checkExists_ID(Node *node)
+void checkExists_ID(Node *ID)
 {
-    if (node->name != "ID")
+    if (ID->name != "ID")
     {
         return;
     }
-    string name = node->content;
+    string name = ID->content;
     if (symbolTable.count(name) == 0)
     {
-        variableNoDefinition_1(node->line_num, name.c_str());
+        variableNoDefinition_1(ID->line_num, name.c_str());
     }
 }
 
@@ -64,6 +69,10 @@ void checkExist_FUN(Node *id)
     if (symbolTable.count(name) == 0)
     {
         functionNoDefinition_2(id->line_num, name.c_str());
+    }
+    else if (symbolTable[name]->category != CATEGORY::FUNCTION)
+    {
+        invokeNonFunctionVariable_11(id->line_num, name);
     }
 }
 
@@ -96,16 +105,48 @@ void checkParam_FUN(Node *id, Node *args)
         }
 
         ///  TODO: 这里需要处理类型不匹配的问题 type 9.2，建议先把Args展开成vector
-        ///  TODO: 这里需要处理执行非函数的问题 type 11 需要先向符号表注册非函数变量
+        ///  TODO: type 11 需要先向符号表注册非函数变量
     }
 }
 
 void extDefVisit(Node *node);
+/*
+ExtDef: error ExtDecList SEMI
+    | Specifier ExtDecList SEMI
+    | Specifier SEMI
+    | Specifier FunDec CompSt
+*/
+/// @brief 给函数添加上返回值类型
+void ExtDefVisit_SES(Node *ExtDef)
+{
+    Node *Specifier = ExtDef->child[0]; //表示返回值
+    CATEGORY category = Specifier->child[0]->name == "TYPE" ? CATEGORY::PRIMITIVE : CATEGORY::STRUCTURE;
+    switch (category)
+    {
+    case CATEGORY::PRIMITIVE:
+    {
 
-void getExtDecList(Node *node);
-
-void getSpecifier_FunDec_Recv(Node *node);
-// function
+        Type *return_type = new Type("", CATEGORY::PRIMITIVE, string_to_prim[Specifier->child[0]->content]);
+        Node *FunDec = ExtDef->child[2];
+        if (symbolTable.count(getName(FunDec, "FunDec")) == 0)
+        {
+            printf("找不到目标函数");
+        }
+        else
+        {
+            Type *function = symbolTable[getName(FunDec, "FunDec")];
+            function->returnType = return_type;
+        }
+    }
+    case CATEGORY::STRUCTURE: //是结构体类型
+    {
+        ///  TODO: 将结构体返回值添加到目标函数
+        break;
+    }
+    default:
+        break;
+    }
+}
 
 /// @brief FunDec -> ID LP VarList RP | ID LP RP
 /// 这里只拿到了函数的名字，没有拿到参数列表的具体内容
@@ -120,8 +161,9 @@ void FunDecVisit(Node *FunDec)
 {
     Type *function = new Type("", CATEGORY::FUNCTION, nullptr, nullptr);
 
-    Node *ID = FunDec->child[0];
-    function->name = ID->content;
+    // Node *ID = FunDec->child[0];
+    // function->name = ID->content;
+    function->name = getName(FunDec, "FunDec");
 
     if (symbolTable.count(function->name) != 0)
     {
@@ -268,3 +310,14 @@ void defVisit(Node *def)
 void getDecList(Node *node);
 
 void getVarDec(Node *node);
+
+void getReturnTypeOfFunction(Node *expOut, Node *ID)
+{
+    string functionName = ID->content;
+    if (symbolTable.count(functionName) == 0 || symbolTable[functionName]->category != CATEGORY::FUNCTION)
+    {
+        return;
+    }
+    Type *returnType = symbolTable[functionName]->returnType;
+    expOut->var = returnType;
+}

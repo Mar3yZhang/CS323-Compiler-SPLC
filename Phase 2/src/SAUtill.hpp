@@ -21,6 +21,4 @@ FieldList *vector_to_fieldlist(vector<FieldList *> param);
 
 int get_expect_param_num(FieldList *param);
 
-int get_param_num(FieldList *param);
-
 int get_real_param_num(Node *args);

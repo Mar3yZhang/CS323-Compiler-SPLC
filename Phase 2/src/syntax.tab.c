@@ -584,7 +584,7 @@ static const yytype_uint8 yyrline[] =
      104,   105,   106,   107,   111,   112,   115,   116,   121,   122,
      124,   125,   128,   129,   131,   132,   133,   134,   135,   136,
      137,   138,   139,   140,   141,   142,   143,   144,   145,   146,
-     147,   148,   153,   158,   159,   160,   164,   168,   172,   176
+     147,   148,   154,   160,   163,   166,   170,   174,   178,   182
 };
 #endif
 
@@ -1964,76 +1964,82 @@ yyreduce:
                      checkParam_FUN((yyvsp[-3].node),(yyvsp[-1].node));
                      (yyval.node)=new Node(Node_Type::MEDIAN,"Exp","",(yyloc).first_line); 
                      (yyval.node)->addChild({(yyvsp[-3].node),(yyvsp[-2].node),(yyvsp[-1].node),(yyvsp[0].node)});
+                     getReturnTypeOfFunction((yyval.node),(yyvsp[-3].node));
                     }
-#line 1969 "syntax.tab.c"
+#line 1970 "syntax.tab.c"
     break;
 
   case 62:
-#line 153 "syntax.y"
+#line 154 "syntax.y"
                 {checkExist_FUN((yyvsp[-2].node));
                  checkParam_FUN((yyvsp[-2].node),nullptr);
                  (yyval.node)=new Node(Node_Type::MEDIAN,"Exp","",(yyloc).first_line); 
                  (yyval.node)->addChild({(yyvsp[-2].node),(yyvsp[-1].node),(yyvsp[0].node)});
+                 getReturnTypeOfFunction((yyval.node),(yyvsp[-2].node));
                  }
-#line 1979 "syntax.tab.c"
+#line 1981 "syntax.tab.c"
     break;
 
   case 63:
-#line 158 "syntax.y"
-                     {(yyval.node)=new Node(Node_Type::MEDIAN,"Exp","",(yyloc).first_line); (yyval.node)->addChild({(yyvsp[-3].node),(yyvsp[-2].node),(yyvsp[-1].node),(yyvsp[0].node)});}
-#line 1985 "syntax.tab.c"
+#line 160 "syntax.y"
+                     {(yyval.node)=new Node(Node_Type::MEDIAN,"Exp","",(yyloc).first_line);
+                      (yyval.node)->addChild({(yyvsp[-3].node),(yyvsp[-2].node),(yyvsp[-1].node),(yyvsp[0].node)});
+                     }
+#line 1989 "syntax.tab.c"
     break;
 
   case 64:
-#line 159 "syntax.y"
-                     {(yyval.node)=new Node(Node_Type::MEDIAN,"Exp","",(yyloc).first_line); (yyval.node)->addChild({(yyvsp[-2].node),(yyvsp[-1].node),(yyvsp[0].node)});}
-#line 1991 "syntax.tab.c"
+#line 163 "syntax.y"
+                  {(yyval.node)=new Node(Node_Type::MEDIAN,"Exp","",(yyloc).first_line); 
+                   (yyval.node)->addChild({(yyvsp[-2].node),(yyvsp[-1].node),(yyvsp[0].node)});
+                  }
+#line 1997 "syntax.tab.c"
     break;
 
   case 65:
-#line 160 "syntax.y"
+#line 166 "syntax.y"
             {(yyval.node)=new Node(Node_Type::MEDIAN,"Exp","",(yyloc).first_line); 
             (yyval.node)->addChild({(yyvsp[0].node)});
             checkExists_ID((yyvsp[0].node));
             }
-#line 2000 "syntax.tab.c"
+#line 2006 "syntax.tab.c"
     break;
 
   case 66:
-#line 164 "syntax.y"
+#line 170 "syntax.y"
             {(yyval.node)=new Node(Node_Type::MEDIAN,"Exp","",(yyloc).first_line); 
              (yyval.node)->addChild({(yyvsp[0].node)});
              (yyval.node)->var = Type::getPrimitiveINT();
             }
-#line 2009 "syntax.tab.c"
+#line 2015 "syntax.tab.c"
     break;
 
   case 67:
-#line 168 "syntax.y"
+#line 174 "syntax.y"
             {(yyval.node)=new Node(Node_Type::MEDIAN,"Exp","",(yyloc).first_line); 
              (yyval.node)->addChild({(yyvsp[0].node)});
              (yyval.node)->var = Type::getPrimitiveFLOAT();
             }
-#line 2018 "syntax.tab.c"
+#line 2024 "syntax.tab.c"
     break;
 
   case 68:
-#line 172 "syntax.y"
+#line 178 "syntax.y"
             {(yyval.node)=new Node(Node_Type::MEDIAN,"Exp","",(yyloc).first_line); 
             (yyval.node)->addChild({(yyvsp[0].node)}); 
             (yyval.node)->var = Type::getPrimitiveCHAR();
             }
-#line 2027 "syntax.tab.c"
-    break;
-
-  case 69:
-#line 176 "syntax.y"
-               {type_A_error = 1;}
 #line 2033 "syntax.tab.c"
     break;
 
+  case 69:
+#line 182 "syntax.y"
+               {type_A_error = 1;}
+#line 2039 "syntax.tab.c"
+    break;
 
-#line 2037 "syntax.tab.c"
+
+#line 2043 "syntax.tab.c"
 
       default: break;
     }
@@ -2271,7 +2277,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 178 "syntax.y"
+#line 184 "syntax.y"
 
 void yyerror(const char *s){
     // if (type_B_error){
