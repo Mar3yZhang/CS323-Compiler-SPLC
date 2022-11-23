@@ -166,15 +166,19 @@ Exp: Exp ASSIGN Exp {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line);
                     }
     | Exp PLUS Exp  {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); 
                      $$->addChild({$1,$2,$3});
+                     setAlrthOperatorType($$,$1,$3);
                     }
     | Exp MINUS Exp {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); 
                      $$->addChild({$1,$2,$3});
+                     setAlrthOperatorType($$,$1,$3);
                     }
     | Exp MUL Exp   {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); 
                      $$->addChild({$1,$2,$3});
+                     setAlrthOperatorType($$,$1,$3);
                     }
     | Exp DIV Exp   {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); 
                      $$->addChild({$1,$2,$3});
+                     setAlrthOperatorType($$,$1,$3);
                     }
     | LP Exp RP     {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); 
                      $$->addChild({$1,$2,$3});
@@ -182,10 +186,12 @@ Exp: Exp ASSIGN Exp {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line);
                     }
     | MINUS Exp %prec UMINUS {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); 
                               $$->addChild({$1,$2});
+                              setAlrthOperatorType($$,$2);
                              }
     | NOT Exp                {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line);
                               $$->addChild({$1,$2});
-                              $$->type=$2->type; 
+                              setAlrthOperatorType($$,$2);
+                            //   $$->type=$2->type; 
                              }
     | ID LP Args error       {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1,$2,$3}); printf("Error type B at Line %d: Missing closing parenthesis ')'\n",@$.first_line); type_B_error = 1;}
     | ID LP Args RP {checkExist_FUN($1);

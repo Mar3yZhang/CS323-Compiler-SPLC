@@ -23,6 +23,9 @@ void rvalueLeftSetError_6(int lineNum);
 // error type 7
 void binaryOperatorNotValid_7(int lineNum);
 
+// error type 7
+void singleOperatorNotValid_7(int lineNum);
+
 // error type 9
 void invalidArgumentNumber_9(int lineNum, const std::string &name, int expect, int actually);
 

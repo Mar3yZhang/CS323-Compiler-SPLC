@@ -138,7 +138,7 @@ bool checkIntegerType(Node *exp)
 
     if (exp->var == nullptr)
     {
-        printf("当前EXP节点的var类型还未初始化!");
+        // printf("当前EXP节点的var类型: Integer 还未初始化!\n");
         // 即内部嵌套的exp存在类型错误
         return false;
     }
@@ -161,7 +161,7 @@ bool checkFloatType(Node *exp)
 
     if (exp->var == nullptr)
     {
-        printf("当前EXP节点的var类型还未初始化!");
+        // printf("当前EXP节点的var类型: Float 还未初始化!\n");
         // 即内部嵌套的exp存在类型错误
         return false;
     }
@@ -191,7 +191,10 @@ void setBoolOperatorType(Node *expOut, Node *expLeft, Node *expRight)
     }
     else
     {
-        binaryOperatorNotValid_7(expOut->line_num);
+        if (expLeft->var != nullptr && expRight->var != nullptr)
+        {
+            binaryOperatorNotValid_7(expOut->line_num);
+        }
     }
 }
 
@@ -202,16 +205,79 @@ void setCompareOperatorType(Node *expOut, Node *expLeft, Node *expRight)
     bool c = checkFloatType(expLeft);
     bool d = checkFloatType(expRight);
 
-    std::cout << "a: " << a << " b :" << b << std::endl;
-
-    std::cout << "c: " << c << " d :" << d << std::endl;
-
     if ((a && b) || (c && d))
     {
         expOut->var = new Type("", CATEGORY::PRIMITIVE, PRIM::INT);
+    else
+    {
+        if (expLeft->var != nullptr && expRight->var != nullptr)
+        {
+            binaryOperatorNotValid_7(expOut->line_num);
+        }
+    }
+}
+
+void setAlrthOperatorType(Node *expOut, Node *expLeft, Node *expRight)
+{
+    bool a = checkIntegerType(expLeft);
+    bool b = checkIntegerType(expRight);
+    bool c = checkFloatType(expLeft);
+    bool d = checkFloatType(expRight);
+
+    if (a && b)
+    {
+        expOut->var = new Type("", CATEGORY::PRIMITIVE, PRIM::INT);
+    }
+    else if (c && d)
+    {
+        expOut->var = new Type("", CATEGORY::PRIMITIVE, PRIM::FLOAT);
     }
     else
     {
-        binaryOperatorNotValid_7(expOut->line_num);
+        if (expLeft->var != nullptr && expRight->var != nullptr)
+        {
+            binaryOperatorNotValid_7(expOut->line_num);
+        }
+    }
+}
+
+void setAlrthOperatorType(Node *expOut, Node *innerExp)
+{
+    if (expOut->name == "MINUS")
+    {
+        bool a = checkIntegerType(innerExp);
+        bool b = checkFloatType(innerExp);
+
+        if (a)
+        {
+            expOut->var = new Type("", CATEGORY::PRIMITIVE, PRIM::INT);
+        }
+        else if (b)
+        {
+            expOut->var = new Type("", CATEGORY::PRIMITIVE, PRIM::FLOAT);
+        }
+        else
+        {
+            if (innerExp == nullptr)
+            {
+                singleOperatorNotValid_7(expOut->line_num);
+            }
+        }
+    }
+    else if (expOut->name == "NOT")
+    {
+        bool a = checkIntegerType(innerExp);
+
+        if (a)
+        {
+            expOut->var = new Type("", CATEGORY::PRIMITIVE, PRIM::INT);
+        }
+        else
+        {
+            if (innerExp == nullptr)
+            {
+                singleOperatorNotValid_7(expOut->line_num);
+            }
+        }
     }
 }

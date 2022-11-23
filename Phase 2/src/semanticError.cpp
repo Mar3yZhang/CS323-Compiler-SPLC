@@ -39,6 +39,11 @@ void binaryOperatorNotValid_7(int lineNum)
     printf("Error type 7 at Line %d: binary operation on invalid variables\n", lineNum);
 }
 
+void singleOperatorNotValid_7(int lineNum)
+{
+    printf("Error type 7 at Line %d: single operation on invalid variables\n", lineNum);
+}
+
 // error type 9
 void invalidArgumentNumber_9(int lineNum, const std::string &name, int expect, int actually)
 {
