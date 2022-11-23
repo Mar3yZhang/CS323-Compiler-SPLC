@@ -37,8 +37,6 @@ void getNamesOfDefList(Node *node, vector<Node *> &namesofFileds);
 
 FieldList *getFiledListFromNodesVector(const vector<Node *> &vec);
 
-// void ExtDefVisit_SFC(Node *node);
-
 void FunDecVisit(Node *node);
 
 void getVarList(Node *node);

@@ -193,7 +193,7 @@ void ExtDefVisit_SFC(Node *ExtDef)
 {
 
      
-    // printf("22222222222");
+    printf("22222222222");
     
     Node *Specifier = ExtDef->child[0]; //表示返回值
 
