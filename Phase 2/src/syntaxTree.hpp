@@ -31,11 +31,15 @@ void ExtDefVisit_SES(Node *node);
 
 void ExtDefVisit_SS(Node *node);
 
-void ExtDefVisit_SFC(Node *ExtDef);
+void ExtDefVisit_SFC(Node *node);
+
+void Specifier_FunDec_Recv_SF(Node *node);
 
 void getNamesOfDefList(Node *node, vector<Node *> &namesofFileds);
 
 FieldList *getFiledListFromNodesVector(const vector<Node *> &vec);
+
+
 
 void FunDecVisit(Node *node);
 

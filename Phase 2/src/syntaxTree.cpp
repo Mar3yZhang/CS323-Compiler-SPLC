@@ -117,13 +117,71 @@ void checkParam_FUN(Node *id, Node *args)
         ///  TODO: type 11 需要先向符号表注册非函数变量
     }
 }
-
-void ExtDefVisit_SS(Node *node)
-{
+void ExtDefVisit_SES(Node *node) {
+    if (node->child[0]->child[0]->child.empty()) {
+        Node *extDecList = node->child[1];
+        string name = getName(extDecList,"ExtDecList");
+        string type_name = node->child[0]->child[0]->content;
+        do {
+            if (symbolTable.count(name) != 0) {
+                variableRedefined_3(node->line_num, name);
+            }
+            if (extDecList->child[0]->child[0]->child.empty()) {
+                if (type_name == "int")
+                {
+                    symbolTable[name] = Type::getPrimitiveINT();
+                }
+                else if (type_name == "float")
+                {
+                    symbolTable[name] = Type::getPrimitiveFLOAT();
+                }
+                else if (type_name == "char")
+                {
+                    symbolTable[name] = Type::getPrimitiveCHAR();
+                }
+            } else {
+                //TODO 
+            }
+            if (extDecList->child.size() == 1) {
+                break;
+            }
+            extDecList = extDecList->child[2];
+            name = getName(extDecList,"ExtDecList");
+        } while (true);
+    }else {
+        string structName = node->child[0]->child[0]->child[1]->content;
+        Node *extDecList = node->child[1];
+        string variableName = getName(extDecList,"ExtDecList");
+        ExtDefVisit_SS(node);
+        if (symbolTable.count(structName) == 0) {
+            structNoDefinition_16(node->line_num,structName);
+            // but this do not need to print, it use to happen is extDefVisit_SS;
+            // do not match there
+            //structRedefined(std::get<int>(node->value), structName);
+        } else {
+            do {
+                if (symbolTable.count(variableName) != 0) {
+                    variableRedefined_3(node->line_num, variableName);
+                }
+                if (extDecList->child[0]->child.size() == 1) {
+                    //Struct with variable definition
+                    symbolTable[variableName] = symbolTable[structName];
+                } else {
+                    //Struct with variable definition - with Array
+                }
+                if (extDecList->child.size() == 1) {
+                    return;
+                }
+                extDecList = extDecList->child[2];
+                variableName = getName(extDecList,"ExtDecList");
+            } while (true);
+        }
+    }
+}
+void ExtDefVisit_SS(Node *node) {
     // definition of Struct
-    // std::cout << "SS\n";
-    if (node->child[0]->child[0]->name == "TYPE")
-    {
+    //std::cout << "SS\n";
+    if (node->child[0]->child[0]->name == "TYPE") {
         // ignore the pureType's def likt `float;`
         return;
     }
@@ -131,33 +189,23 @@ void ExtDefVisit_SS(Node *node)
     vector<Node *> namesofFileds;
     getNamesOfDefList(node, namesofFileds);
     auto fieldListOfType = getFiledListFromNodesVector(namesofFileds);
-    if (symbolTable.count(name) != 0)
-    {
-        structRedefined_15(node->line_num, name.c_str());
-    }
-    else
-    {
+    if (symbolTable.count(name) != 0) {
+        structRedefined_15(node->line_num,name.c_str());
+    } else {
         symbolTable[name] = new Type{name, CATEGORY::STRUCTURE, fieldListOfType};
     }
 }
 
-void getNamesOfDefList(Node *node, vector<Node *> &namesofFileds)
-{
-    if (!node->child[0]->child[0]->child[3]->child.empty())
-    {
+void getNamesOfDefList(Node *node, vector<Node *> &namesofFileds) {
+    if (!node->child[0]->child[0]->child[3]->child.empty()) {
         auto nodeofField = node->child[0]->child[0]->child[3];
-        while (nodeofField != nullptr && !nodeofField->child.empty() && nodeofField->name == "DefList")
-        {
+        while (nodeofField != nullptr && !nodeofField->child.empty() && nodeofField->name == "DefList") {
             auto declistNode = nodeofField->child[0]->child[1];
-            while (declistNode != nullptr && declistNode->name == "DecList")
-            {
+            while (declistNode != nullptr && declistNode->name == "DecList") {
                 namesofFileds.push_back(declistNode);
-                if (declistNode->child.size() == 3)
-                {
+                if (declistNode->child.size() == 3) {
                     declistNode = declistNode->child[2];
-                }
-                else
-                {
+                } else {
                     break;
                 }
             }
@@ -166,21 +214,17 @@ void getNamesOfDefList(Node *node, vector<Node *> &namesofFileds)
     }
 }
 
-FieldList *getFiledListFromNodesVector(const vector<Node *> &vec)
-{
-    if (vec.empty())
-    {
+FieldList *getFiledListFromNodesVector(const vector<Node *> &vec) {
+    if (vec.empty()) {
         return nullptr;
     }
     vector<FieldList *> fieldVec;
-    for (const auto &item : vec)
-    {
-        const auto name = getName(item, "decList");
+    for (const auto &item : vec) {
+        const auto name = getName(item,"DecList");
         fieldVec.push_back(new FieldList{name, symbolTable[name]});
         symbolTable.erase(name);
     }
-    for (auto i = static_cast<size_t>(0); i < vec.size() - 1; ++i)
-    {
+    for (auto i = static_cast<size_t>(0); i < vec.size() - 1; ++i) {
         fieldVec[i]->next = fieldVec[i + 1];
     }
     return fieldVec.front();
@@ -355,52 +399,60 @@ Def
 
 void defVisit(Node *def)
 {
-
-    // print_map_keys();
-
     Node *decList = def->child[1];
+    // print_map_keys();  
     string name = getName(decList, "DecList");
-    if (symbolTable.count(name) != 0)
-    {
-        variableRedefined_3(def->line_num, name.c_str());
-    }
+    while (true) {
+        if (symbolTable.count(name) != 0)
+        {
+            variableRedefined_3(def->line_num, name.c_str());
+        }
 
     /// 暂时不考虑结构体和数组的情况
-
-    string type_name = def->child[0]->child[0]->content;
-    if (type_name == "int")
-    {
-        symbolTable[name] = Type::getPrimitiveINT();
-    }
-    else if (type_name == "float")
-    {
-        symbolTable[name] = Type::getPrimitiveFLOAT();
-    }
-    else if (type_name == "char")
-    {
-        symbolTable[name] = Type::getPrimitiveCHAR();
-    }
-
-    /// TODO: 完成结构体的访问
-    if (!def->child[0]->child[0]->child.empty())
-    {
-        string structName = def->child[0]->child[0]->child[1]->content;
-        if (symbolTable.count(structName) == 0)
-        {
-            structNoDefinition_16(def->line_num, structName.c_str());
+        if (decList->child[0]->child[0]->child.size() == 1) {
+            string type_name = def->child[0]->child[0]->content;
+            if (type_name == "int")
+            {
+                symbolTable[name] = Type::getPrimitiveINT();
+            }
+            else if (type_name == "float")
+            {
+                symbolTable[name] = Type::getPrimitiveFLOAT();
+            }
+            else if (type_name == "char")
+            {
+                symbolTable[name] = Type::getPrimitiveCHAR();
+            }
         }
-        if (decList->child[0]->child[0]->child.size() == 1)
-        {
-            symbolTable[name] = symbolTable[structName];
+        if (decList->child.size() == 1) {
+            break;
+        }
+        decList = decList->child[2];
+        name = getName(decList,"DecList");
+    }
+    Node *defList = def->child[1];
+    /// TODO: 完成结构体的访问
+    if (!def->child[0]->child[0]->child.empty()) {
+        string structName = def->child[0]->child[0]->child[1]->content;
+        string variableName = getName(defList,"DecList");
+        if (symbolTable.count(structName) == 0) {
+            structNoDefinition_16(def->line_num,structName.c_str());
+        }else {
+            do{
+            if (defList->child[0]->child[0]->child.size() == 1) {
+                symbolTable[variableName] = symbolTable[structName];
+            }
+            if (decList->child.size() == 1) {
+                break;
+            }
+            decList = decList->child[2];
+            variableName = getName(decList,"DecList");
+            }while(true);
         }
     }
 
     /// TODO: 完成数组的访问
 }
-
-void getDecList(Node *node);
-
-void getVarDec(Node *node);
 
 void getReturnTypeOfFunction(Node *expOut, Node *ID)
 {
@@ -464,7 +516,7 @@ void checkAssignmentTypeMatching(Node *leftExp, Node *rightExp)
     if (leftType == nullptr || rightType == nullptr) // 说明左表达式或右表达式存在运算符错误
     {
 
-        // printf("有左值或右值为空");
+        printf("有左值或右值为空");
         return;
     }
     else if (leftType == rightType) // 说明赋值不存在错误
@@ -519,28 +571,27 @@ void checkAssignmentTypeMatching(Node *leftExp, Node *rightExp)
 }
 
 void checkTypeOfDot(Node *expOut, Node *expIn, Node *ID) {
-    if (expOut->name != "Exp") {
-        return;
-    }
-    if (expOut->child[0]->var == nullptr) {
-        return;
-    }
-    std::cout<<expOut->child[0]->var<<std::endl;
-    if (expOut->child[0]->var->category != CATEGORY::STRUCTURE) {
+    //std::cout<<expOut->child[0]->var<<std::endl;
+    if (expOut->name == "Exp" && expOut->child[0]->var != nullptr &&
+    expOut->child[0]->var->category != CATEGORY::STRUCTURE) {
         nonStructFVariable_13(expOut->line_num);
     }
-    if (expIn->var->category != CATEGORY::STRUCTURE) {
+    if (expIn->var == nullptr) {
         nonStructFVariable_13(expIn->line_num);
         return;
     }
-    /*FieldList *fieldList = std::get<FieldList *>(expIn->type->category);
+    if (expIn->var->foo.structure == nullptr) {
+        return;
+    }
+    FieldList *fieldList = expIn->var->foo.structure;
     string idName = ID->content;
     while (fieldList != nullptr) {
         if (fieldList->name == idName) {
-            expOut->type = fieldList->type;
+            expOut->var = fieldList->type;
             return;
         }
+        
         fieldList = fieldList->next;
     }
-    noSuchMember_14(expOut->line_num, idName);*/
+    noSuchMember_14(expOut->line_num, idName);
 }
