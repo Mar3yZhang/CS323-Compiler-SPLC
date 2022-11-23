@@ -25,19 +25,6 @@ Type::Type(string name, CATEGORY category, FieldList *param, Type *returnType)
     this->foo.param = param;
     this->returnType = returnType;
 }
-
-Type *Type::getPrimitiveINT(string name)
-{
-    return new Type(name, CATEGORY::PRIMITIVE, PRIM::INT);
-}
-Type *Type::getPrimitiveCHAR(string name)
-{
-    return new Type(name, CATEGORY::PRIMITIVE, PRIM::CHAR);
-}
-Type *Type::getPrimitiveFLOAT(string name)
-{
-    return new Type(name, CATEGORY::PRIMITIVE, PRIM::FLOAT);
-}
 Type *Type::getPrimitiveINT()
 {
     return new Type("", CATEGORY::PRIMITIVE, PRIM::INT);

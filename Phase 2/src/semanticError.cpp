@@ -34,6 +34,11 @@ void rvalueLeftSetError_6(int lineNum)
     printf("Error type 6 at Line %d: left side in assignment is rvalue\n", lineNum);
 }
 
+void binaryOperatorNotValid_7(int lineNum)
+{
+    printf("Error type 7 at Line %d: binary operation on invalid variables\n", lineNum);
+}
+
 // error type 9
 void invalidArgumentNumber_9(int lineNum, const std::string &name, int expect, int actually)
 {

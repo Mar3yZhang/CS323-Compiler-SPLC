@@ -14,6 +14,15 @@ void print_map_keys()
     return;
 }
 
+void idToExp(Node *exp, Node *id)
+{
+    if (exp->name != "Exp" || id->name != "ID")
+    {
+        return;
+    }
+    exp->var = symbolTable[id->content];
+}
+
 string getName(Node *node, string nodeName)
 {
     if (nodeName == "DecList")
@@ -273,9 +282,6 @@ void defVisit(Node *def)
 
     Node *decList = def->child[1];
     string name = getName(decList, "DecList");
-    // std::cout << "-----------" << std::endl;
-    // std::cout << name.c_str() << std::endl;
-    // std::cout << "-----------" << std::endl;
     if (symbolTable.count(name) != 0)
     {
         variableRedefined_3(def->line_num, name.c_str());
@@ -284,22 +290,17 @@ void defVisit(Node *def)
     /// 暂时不考虑结构体和数组的情况
 
     string type_name = def->child[0]->child[0]->content;
-
-    // std::cout << "++++++++++++" << std::endl;
-    // std::cout << name.c_str() << std::endl;
-    // std::cout << "++++++++++++" << std::endl;
-
     if (type_name == "int")
     {
-        symbolTable[name] = Type::getPrimitiveINT(name);
+        symbolTable[name] = Type::getPrimitiveINT();
     }
     else if (type_name == "float")
     {
-        symbolTable[name] = Type::getPrimitiveFLOAT(name);
+        symbolTable[name] = Type::getPrimitiveFLOAT();
     }
     else if (type_name == "char")
     {
-        symbolTable[name] = Type::getPrimitiveCHAR(name);
+        symbolTable[name] = Type::getPrimitiveCHAR();
     }
 
     /// TODO: 完成结构体的访问
@@ -361,4 +362,10 @@ void checkRvalueInLeftSide(Node *Exp)
     }
     }
     rvalueLeftSetError_6(Exp->line_num);
+}
+
+// Exp: TYPE 5
+// Exp: Exp ASSIGN Exp 要先保证左右EXP的 var类型是有内容的 才能进行比较
+void checkAssignmentTypeMatching(Node *leftExp, Node *rightExp)
+{
 }

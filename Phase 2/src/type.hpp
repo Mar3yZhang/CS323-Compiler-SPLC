@@ -47,9 +47,6 @@ public:
     explicit Type(string name, enum CATEGORY category, Array *array);
     explicit Type(string name, enum CATEGORY category, FieldList *structure);
     explicit Type(string name, enum CATEGORY category, FieldList *param, Type *returnType);
-    static Type *getPrimitiveINT(string name);
-    static Type *getPrimitiveFLOAT(string name);
-    static Type *getPrimitiveCHAR(string name);
     static Type *getPrimitiveINT();
     static Type *getPrimitiveCHAR();
     static Type *getPrimitiveFLOAT();

@@ -1,6 +1,8 @@
 #ifndef _sautill_HPP_
 #define _sautill_HPP_
 #include "Node.hpp"
+#include "semanticError.hpp"
+#include "type.hpp"
 #endif
 
 int countParamNum(FieldList *param);
@@ -22,3 +24,11 @@ FieldList *vector_to_fieldlist(vector<FieldList *> param);
 int get_expect_param_num(FieldList *param);
 
 int get_real_param_num(Node *args);
+
+bool checkTypeMatching(Type *leftType, Type *rightType);
+
+void setBoolOperatorType(Node *expOut, Node *expLeft, Node *expRight);
+
+void setCompareOperatorType(Node *expOut, Node *expLeft, Node *expRight);
+
+bool checkIntegerType(Node *exp);

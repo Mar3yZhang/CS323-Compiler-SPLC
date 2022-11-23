@@ -70,3 +70,148 @@ int get_real_param_num(Node *args)
         return counter;
     }
 }
+
+// 检查传入的两个type是否完全相同
+bool checkTypeMatching(Type *leftType, Type *rightType)
+{
+    if (leftType == nullptr || rightType == nullptr)
+    {
+        return false;
+    }
+    else if (leftType == rightType)
+    {
+        return true;
+    }
+    else if (leftType->category != rightType->category)
+    {
+        return false;
+    }
+
+    /// TODO: 对数组和结构体类型判断的处理
+
+    // }
+    // else if (leftType->category == CATEGORY::STRUCTURE &&
+    //          symbolTable[leftType->name]->name != symbolTable[rightType->name]->name)
+    // {
+    //     return false;
+    // }
+    // else if (leftType->category == CATEGORY::ARRAY)
+    // {
+    //     vector<int> demensionLeftArray, demensionRightArray;
+    //     Type *insideLeftType, *insideRightType;
+    //     std::tie(demensionLeftArray, insideLeftType) = getArrayDemensionAndType(leftType);
+    //     std::tie(demensionRightArray, insideRightType) = getArrayDemensionAndType(rightType);
+    //     if (demensionLeftArray.size() != demensionRightArray.size() ||
+    //         std::equal(demensionLeftArray.cbegin(), demensionLeftArray.cend(), demensionRightArray.cbegin()))
+    //     {
+    //         return false;
+    //     }
+    //     else if (insideLeftType == nullptr || insideRightType == nullptr)
+    //     {
+    //         return false;
+    //     }
+    //     else if (insideRightType->category != insideLeftType->category)
+    //     {
+    //         return false;
+    //     }
+    //     else if (insideRightType->category == CATEGORY::PRIMITIVE && insideLeftType != insideRightType)
+    //     {
+    //         return false;
+    //     }
+    //     else if (insideRightType->category == CATEGORY::STRUCTURE)
+    //     {
+    //         if (insideLeftType->name != insideRightType->name)
+    //         {
+    //             return false;
+    //         }
+    //     }
+    // }
+    else
+    {
+        return false;
+    }
+}
+
+/// @brief 检查EXP的var是否是整数类型
+bool checkIntegerType(Node *exp)
+{
+
+    if (exp->var == nullptr)
+    {
+        printf("当前EXP节点的var类型还未初始化!");
+        // 即内部嵌套的exp存在类型错误
+        return false;
+    }
+    else
+    {
+        if (exp->var->category == CATEGORY::PRIMITIVE &&
+            exp->var->foo.primitive == PRIM::INT)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+}
+
+bool checkFloatType(Node *exp)
+{
+
+    if (exp->var == nullptr)
+    {
+        printf("当前EXP节点的var类型还未初始化!");
+        // 即内部嵌套的exp存在类型错误
+        return false;
+    }
+    else
+    {
+        if (exp->var->category == CATEGORY::PRIMITIVE &&
+            exp->var->foo.primitive == PRIM::FLOAT)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+}
+
+/// @brief 将外层的EXP的var设置为布尔类型 否则出错
+void setBoolOperatorType(Node *expOut, Node *expLeft, Node *expRight)
+{
+    bool a = checkIntegerType(expLeft);
+    bool b = checkIntegerType(expRight);
+
+    if (a && b)
+    {
+        expOut->var = expLeft->var;
+    }
+    else
+    {
+        binaryOperatorNotValid_7(expOut->line_num);
+    }
+}
+
+void setCompareOperatorType(Node *expOut, Node *expLeft, Node *expRight)
+{
+    bool a = checkIntegerType(expLeft);
+    bool b = checkIntegerType(expRight);
+    bool c = checkFloatType(expLeft);
+    bool d = checkFloatType(expRight);
+
+    std::cout << "a: " << a << " b :" << b << std::endl;
+
+    std::cout << "c: " << c << " d :" << d << std::endl;
+
+    if ((a && b) || (c && d))
+    {
+        expOut->var = new Type("", CATEGORY::PRIMITIVE, PRIM::INT);
+    }
+    else
+    {
+        binaryOperatorNotValid_7(expOut->line_num);
+    }
+}

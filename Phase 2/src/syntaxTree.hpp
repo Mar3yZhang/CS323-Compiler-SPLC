@@ -15,6 +15,8 @@ extern unordered_map<string, Type *> symbolTable;
 
 void print_map_keys();
 
+void idToExp(Node *exp, Node *id);
+
 string getName(Node *node, string nodeName);
 
 Array *getArray(Node *node, Type *type);
@@ -58,5 +60,7 @@ void getVarDec(Node *node);
 void getReturnTypeOfFunction(Node *expOut, Node *ID);
 
 void checkRvalueInLeftSide(Node *Exp);
+
+void checkAssignmentTypeMatching(Node *leftExp, Node *rightExp);
 
 #endif
