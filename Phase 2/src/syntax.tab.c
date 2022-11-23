@@ -578,13 +578,13 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    49,    49,    55,    56,    58,    59,    60,    61,    63,
-      64,    68,    71,    75,    76,    80,    81,    83,    84,    85,
-      88,    89,    91,    95,    97,    98,   100,   101,   102,   103,
-     104,   105,   106,   107,   111,   112,   115,   116,   121,   122,
-     124,   125,   128,   129,   131,   136,   140,   144,   148,   152,
-     156,   160,   164,   168,   172,   176,   180,   184,   188,   192,
-     197,   198,   204,   210,   213,   216,   221,   225,   229,   233
+       0,    49,    49,    55,    56,    58,    59,    60,    61,    66,
+      67,    71,    74,    78,    79,    83,    84,    86,    87,    88,
+      91,    92,    94,    98,   100,   101,   103,   104,   105,   106,
+     107,   108,   109,   110,   114,   115,   118,   119,   124,   125,
+     127,   128,   131,   132,   134,   139,   143,   147,   151,   155,
+     159,   163,   167,   171,   175,   179,   183,   187,   191,   195,
+     200,   201,   207,   213,   216,   219,   224,   228,   232,   236
 };
 #endif
 
@@ -1617,480 +1617,483 @@ yyreduce:
 
   case 5:
 #line 58 "syntax.y"
-                                              {printf("Error type B at Line %d: Missing specifier\n",(yyloc).first_line); type_B_error=1;}
+                                   {printf("Error type B at Line %d: Missing specifier\n",(yyloc).first_line); type_B_error=1;}
 #line 1622 "syntax.tab.c"
     break;
 
   case 6:
 #line 59 "syntax.y"
-                                              {(yyval.node)=new Node(Node_Type::MEDIAN,"ExtDef","",(yyloc).first_line); (yyval.node)->addChild({(yyvsp[-2].node),(yyvsp[-1].node),(yyvsp[0].node)});}
+                                   {(yyval.node)=new Node(Node_Type::MEDIAN,"ExtDef","",(yyloc).first_line); (yyval.node)->addChild({(yyvsp[-2].node),(yyvsp[-1].node),(yyvsp[0].node)});}
 #line 1628 "syntax.tab.c"
     break;
 
   case 7:
 #line 60 "syntax.y"
-                                              {(yyval.node)=new Node(Node_Type::MEDIAN,"ExtDef","",(yyloc).first_line); (yyval.node)->addChild({(yyvsp[-1].node),(yyvsp[0].node)});}
+                                   {(yyval.node)=new Node(Node_Type::MEDIAN,"ExtDef","",(yyloc).first_line); (yyval.node)->addChild({(yyvsp[-1].node),(yyvsp[0].node)});}
 #line 1634 "syntax.tab.c"
     break;
 
   case 8:
 #line 61 "syntax.y"
-                                              {(yyval.node)=new Node(Node_Type::MEDIAN,"ExtDef","",(yyloc).first_line); (yyval.node)->addChild({(yyvsp[-2].node),(yyvsp[-1].node),(yyvsp[0].node)});}
-#line 1640 "syntax.tab.c"
+                                   {(yyval.node)=new Node(Node_Type::MEDIAN,"ExtDef","",(yyloc).first_line); 
+                                    (yyval.node)->addChild({(yyvsp[-2].node),(yyvsp[-1].node),(yyvsp[0].node)});
+                                    // ExtDefVisit_SFC($$);
+                                    }
+#line 1643 "syntax.tab.c"
     break;
 
   case 9:
-#line 63 "syntax.y"
+#line 66 "syntax.y"
                                               {(yyval.node)=new Node(Node_Type::MEDIAN,"ExtDecList","",(yyloc).first_line); (yyval.node)->addChild({(yyvsp[0].node)});}
-#line 1646 "syntax.tab.c"
+#line 1649 "syntax.tab.c"
     break;
 
   case 10:
-#line 64 "syntax.y"
+#line 67 "syntax.y"
                                               {(yyval.node)=new Node(Node_Type::MEDIAN,"ExtDecList","",(yyloc).first_line); (yyval.node)->addChild({(yyvsp[-2].node),(yyvsp[-1].node),(yyvsp[0].node)});}
-#line 1652 "syntax.tab.c"
+#line 1655 "syntax.tab.c"
     break;
 
   case 11:
-#line 68 "syntax.y"
+#line 71 "syntax.y"
                   {(yyval.node)=new Node(Node_Type::MEDIAN,"Specifier","",(yyloc).first_line); 
                    (yyval.node)->addChild({(yyvsp[0].node)});
                   }
-#line 1660 "syntax.tab.c"
+#line 1663 "syntax.tab.c"
     break;
 
   case 12:
-#line 71 "syntax.y"
+#line 74 "syntax.y"
                       {(yyval.node)=new Node(Node_Type::MEDIAN,"Specifier","",(yyloc).first_line); 
                        (yyval.node)->addChild({(yyvsp[0].node)});
                        }
-#line 1668 "syntax.tab.c"
+#line 1671 "syntax.tab.c"
     break;
 
   case 13:
-#line 75 "syntax.y"
+#line 78 "syntax.y"
                                               {(yyval.node)=new Node(Node_Type::MEDIAN,"StructSpecifier","",(yyloc).first_line); (yyval.node)->addChild({(yyvsp[-4].node),(yyvsp[-3].node),(yyvsp[-2].node),(yyvsp[-1].node),(yyvsp[0].node)});}
-#line 1674 "syntax.tab.c"
+#line 1677 "syntax.tab.c"
     break;
 
   case 14:
-#line 76 "syntax.y"
+#line 79 "syntax.y"
                                               {(yyval.node)=new Node(Node_Type::MEDIAN,"StructSpecifier","",(yyloc).first_line); (yyval.node)->addChild({(yyvsp[-1].node),(yyvsp[0].node)});}
-#line 1680 "syntax.tab.c"
+#line 1683 "syntax.tab.c"
     break;
 
   case 15:
-#line 80 "syntax.y"
+#line 83 "syntax.y"
                                               {(yyval.node)=new Node(Node_Type::MEDIAN,"VarDec","",(yyloc).first_line); (yyval.node)->addChild({(yyvsp[0].node)});}
-#line 1686 "syntax.tab.c"
+#line 1689 "syntax.tab.c"
     break;
 
   case 16:
-#line 81 "syntax.y"
+#line 84 "syntax.y"
                                               {(yyval.node)=new Node(Node_Type::MEDIAN,"VarDec","",(yyloc).first_line); (yyval.node)->addChild({(yyvsp[-3].node),(yyvsp[-2].node),(yyvsp[-1].node),(yyvsp[0].node)});}
-#line 1692 "syntax.tab.c"
+#line 1695 "syntax.tab.c"
     break;
 
   case 17:
-#line 83 "syntax.y"
+#line 86 "syntax.y"
                                               {(yyval.node)=new Node(Node_Type::MEDIAN,"FunDec","",(yyloc).first_line); (yyval.node)->addChild({(yyvsp[-2].node),(yyvsp[-1].node)}); printf("Error type B at Line %d: Missing closing parenthesis ')'\n",(yyloc).first_line); type_B_error=1;}
-#line 1698 "syntax.tab.c"
+#line 1701 "syntax.tab.c"
     break;
 
   case 18:
-#line 84 "syntax.y"
+#line 87 "syntax.y"
                                               {(yyval.node)=new Node(Node_Type::MEDIAN,"FunDec","",(yyloc).first_line); (yyval.node)->addChild({(yyvsp[-3].node),(yyvsp[-2].node),(yyvsp[-1].node),(yyvsp[0].node)});FunDecVisit((yyval.node));}
-#line 1704 "syntax.tab.c"
+#line 1707 "syntax.tab.c"
     break;
 
   case 19:
-#line 85 "syntax.y"
+#line 88 "syntax.y"
                                               {(yyval.node)=new Node(Node_Type::MEDIAN,"FunDec","",(yyloc).first_line); (yyval.node)->addChild({(yyvsp[-2].node),(yyvsp[-1].node),(yyvsp[0].node)});FunDecVisit((yyval.node));}
-#line 1710 "syntax.tab.c"
+#line 1713 "syntax.tab.c"
     break;
 
   case 20:
-#line 88 "syntax.y"
+#line 91 "syntax.y"
                                               {(yyval.node)=new Node(Node_Type::MEDIAN,"VarList","",(yyloc).first_line); (yyval.node)->addChild({(yyvsp[-2].node),(yyvsp[-1].node),(yyvsp[0].node)});}
-#line 1716 "syntax.tab.c"
+#line 1719 "syntax.tab.c"
     break;
 
   case 21:
-#line 89 "syntax.y"
+#line 92 "syntax.y"
                                               {(yyval.node)=new Node(Node_Type::MEDIAN,"VarList","",(yyloc).first_line); (yyval.node)->addChild({(yyvsp[0].node)});}
-#line 1722 "syntax.tab.c"
+#line 1725 "syntax.tab.c"
     break;
 
   case 22:
-#line 91 "syntax.y"
+#line 94 "syntax.y"
                                               {(yyval.node)=new Node(Node_Type::MEDIAN,"ParamDec","",(yyloc).first_line); (yyval.node)->addChild({(yyvsp[-1].node),(yyvsp[0].node)});}
-#line 1728 "syntax.tab.c"
+#line 1731 "syntax.tab.c"
     break;
 
   case 23:
-#line 95 "syntax.y"
+#line 98 "syntax.y"
                                               {(yyval.node)=new Node(Node_Type::MEDIAN,"CompSt","",(yyloc).first_line); (yyval.node)->addChild({(yyvsp[-3].node),(yyvsp[-2].node),(yyvsp[-1].node),(yyvsp[0].node)});}
-#line 1734 "syntax.tab.c"
+#line 1737 "syntax.tab.c"
     break;
 
   case 24:
-#line 97 "syntax.y"
+#line 100 "syntax.y"
                                               {(yyval.node)=new Node(Node_Type::NOTHING,"StmtList","",(yyloc).first_line);}
-#line 1740 "syntax.tab.c"
+#line 1743 "syntax.tab.c"
     break;
 
   case 25:
-#line 98 "syntax.y"
+#line 101 "syntax.y"
                                               {(yyval.node)=new Node(Node_Type::MEDIAN,"StmtList","",(yyloc).first_line); (yyval.node)->addChild({(yyvsp[-1].node),(yyvsp[0].node)});}
-#line 1746 "syntax.tab.c"
+#line 1749 "syntax.tab.c"
     break;
 
   case 26:
-#line 100 "syntax.y"
+#line 103 "syntax.y"
                                               {(yyval.node)=new Node(Node_Type::MEDIAN,"Stmt","",(yyloc).first_line); (yyval.node)->addChild({(yyvsp[-1].node),(yyvsp[0].node)});}
-#line 1752 "syntax.tab.c"
+#line 1755 "syntax.tab.c"
     break;
 
   case 27:
-#line 101 "syntax.y"
+#line 104 "syntax.y"
                                               {(yyval.node)=new Node(Node_Type::MEDIAN,"Stmt","",(yyloc).first_line); (yyval.node)->addChild({(yyvsp[0].node)});}
-#line 1758 "syntax.tab.c"
+#line 1761 "syntax.tab.c"
     break;
 
   case 28:
-#line 102 "syntax.y"
+#line 105 "syntax.y"
                                               {(yyval.node)=new Node(Node_Type::MEDIAN,"Stmt","",(yyloc).first_line); (yyval.node)->addChild({(yyvsp[-2].node),(yyvsp[-1].node)}); printf("Error type B at Line %d: Missing semicolon ';'\n",(yyloc).first_line); type_B_error = 1;}
-#line 1764 "syntax.tab.c"
+#line 1767 "syntax.tab.c"
     break;
 
   case 29:
-#line 103 "syntax.y"
+#line 106 "syntax.y"
                                               {(yyval.node)=new Node(Node_Type::MEDIAN,"Stmt","",(yyloc).first_line); (yyval.node)->addChild({(yyvsp[-2].node),(yyvsp[-1].node),(yyvsp[0].node)});}
-#line 1770 "syntax.tab.c"
+#line 1773 "syntax.tab.c"
     break;
 
   case 30:
-#line 104 "syntax.y"
+#line 107 "syntax.y"
                                               {(yyval.node)=new Node(Node_Type::MEDIAN,"Stmt","",(yyloc).first_line); (yyval.node)->addChild({(yyvsp[-4].node),(yyvsp[-3].node),(yyvsp[-2].node),(yyvsp[-1].node),(yyvsp[0].node)});}
-#line 1776 "syntax.tab.c"
+#line 1779 "syntax.tab.c"
     break;
 
   case 31:
-#line 105 "syntax.y"
+#line 108 "syntax.y"
                                               {(yyval.node)=new Node(Node_Type::MEDIAN,"Stmt","",(yyloc).first_line); (yyval.node)->addChild({(yyvsp[-6].node),(yyvsp[-5].node),(yyvsp[-4].node),(yyvsp[-3].node),(yyvsp[-2].node),(yyvsp[-1].node),(yyvsp[0].node)});}
-#line 1782 "syntax.tab.c"
+#line 1785 "syntax.tab.c"
     break;
 
   case 32:
-#line 106 "syntax.y"
+#line 109 "syntax.y"
                                               {(yyval.node)=new Node(Node_Type::MEDIAN,"Stmt","",(yyloc).first_line); (yyval.node)->addChild({(yyvsp[-4].node),(yyvsp[-3].node),(yyvsp[-2].node),(yyvsp[-1].node),(yyvsp[0].node)});}
-#line 1788 "syntax.tab.c"
+#line 1791 "syntax.tab.c"
     break;
 
   case 33:
-#line 107 "syntax.y"
+#line 110 "syntax.y"
                                               {(yyval.node)=new Node(Node_Type::MEDIAN,"Stmt","",(yyloc).first_line); (yyval.node)->addChild({(yyvsp[-8].node),(yyvsp[-7].node),(yyvsp[-6].node),(yyvsp[-5].node),(yyvsp[-4].node),(yyvsp[-3].node),(yyvsp[-2].node),(yyvsp[-1].node),(yyvsp[0].node)});}
-#line 1794 "syntax.tab.c"
+#line 1797 "syntax.tab.c"
     break;
 
   case 34:
-#line 111 "syntax.y"
+#line 114 "syntax.y"
                                               {(yyval.node)=new Node(Node_Type::NOTHING,"DefList","",(yyloc).first_line);}
-#line 1800 "syntax.tab.c"
+#line 1803 "syntax.tab.c"
     break;
 
   case 35:
-#line 112 "syntax.y"
+#line 115 "syntax.y"
                                               {(yyval.node)=new Node(Node_Type::MEDIAN,"DefList","",(yyloc).first_line); (yyval.node)->addChild({(yyvsp[-1].node),(yyvsp[0].node)});}
-#line 1806 "syntax.tab.c"
+#line 1809 "syntax.tab.c"
     break;
 
   case 36:
-#line 115 "syntax.y"
+#line 118 "syntax.y"
                                               {(yyval.node)=new Node(Node_Type::MEDIAN,"Def","",(yyloc).first_line); (yyval.node)->addChild({(yyvsp[-2].node),(yyvsp[-1].node)}); printf("Error type B at Line %d: Missing semicolon ';'\n",(yyloc).first_line); type_B_error=1;}
-#line 1812 "syntax.tab.c"
+#line 1815 "syntax.tab.c"
     break;
 
   case 37:
-#line 116 "syntax.y"
+#line 119 "syntax.y"
                             {(yyval.node)=new Node(Node_Type::MEDIAN,"Def","",(yyloc).first_line); 
                              (yyval.node)->addChild({(yyvsp[-2].node),(yyvsp[-1].node),(yyvsp[0].node)});
                              defVisit((yyval.node));
                             }
-#line 1821 "syntax.tab.c"
+#line 1824 "syntax.tab.c"
     break;
 
   case 38:
-#line 121 "syntax.y"
+#line 124 "syntax.y"
                                               {(yyval.node)=new Node(Node_Type::MEDIAN,"DecList","",(yyloc).first_line); (yyval.node)->addChild({(yyvsp[0].node)});}
-#line 1827 "syntax.tab.c"
+#line 1830 "syntax.tab.c"
     break;
 
   case 39:
-#line 122 "syntax.y"
+#line 125 "syntax.y"
                                               {(yyval.node)=new Node(Node_Type::MEDIAN,"DecList","",(yyloc).first_line); (yyval.node)->addChild({(yyvsp[-2].node),(yyvsp[-1].node),(yyvsp[0].node)});}
-#line 1833 "syntax.tab.c"
+#line 1836 "syntax.tab.c"
     break;
 
   case 40:
-#line 124 "syntax.y"
+#line 127 "syntax.y"
                                               {(yyval.node)=new Node(Node_Type::MEDIAN,"Dec","",(yyloc).first_line); (yyval.node)->addChild({(yyvsp[0].node)});}
-#line 1839 "syntax.tab.c"
+#line 1842 "syntax.tab.c"
     break;
 
   case 41:
-#line 125 "syntax.y"
+#line 128 "syntax.y"
                                               {(yyval.node)=new Node(Node_Type::MEDIAN,"Dec","",(yyloc).first_line); (yyval.node)->addChild({(yyvsp[-2].node),(yyvsp[-1].node),(yyvsp[0].node)});}
-#line 1845 "syntax.tab.c"
+#line 1848 "syntax.tab.c"
     break;
 
   case 42:
-#line 128 "syntax.y"
+#line 131 "syntax.y"
                                               {(yyval.node)=new Node(Node_Type::MEDIAN,"Args","",(yyloc).first_line); (yyval.node)->addChild({(yyvsp[-2].node),(yyvsp[-1].node),(yyvsp[0].node)});}
-#line 1851 "syntax.tab.c"
+#line 1854 "syntax.tab.c"
     break;
 
   case 43:
-#line 129 "syntax.y"
+#line 132 "syntax.y"
                                               {(yyval.node)=new Node(Node_Type::MEDIAN,"Args","",(yyloc).first_line); (yyval.node)->addChild({(yyvsp[0].node)});}
-#line 1857 "syntax.tab.c"
+#line 1860 "syntax.tab.c"
     break;
 
   case 44:
-#line 131 "syntax.y"
+#line 134 "syntax.y"
                     {(yyval.node)=new Node(Node_Type::MEDIAN,"Exp","",(yyloc).first_line); 
                       (yyval.node)->addChild({(yyvsp[-2].node),(yyvsp[-1].node),(yyvsp[0].node)});
                       checkRvalueInLeftSide((yyval.node));
                       checkAssignmentTypeMatching((yyvsp[-2].node),(yyvsp[0].node));
                     }
-#line 1867 "syntax.tab.c"
+#line 1870 "syntax.tab.c"
     break;
 
   case 45:
-#line 136 "syntax.y"
+#line 139 "syntax.y"
                     {(yyval.node)=new Node(Node_Type::MEDIAN,"Exp","",(yyloc).first_line); 
                      (yyval.node)->addChild({(yyvsp[-2].node),(yyvsp[-1].node),(yyvsp[0].node)});
                      setBoolOperatorType((yyval.node),(yyvsp[-2].node),(yyvsp[0].node));
                     }
-#line 1876 "syntax.tab.c"
+#line 1879 "syntax.tab.c"
     break;
 
   case 46:
-#line 140 "syntax.y"
+#line 143 "syntax.y"
                     {(yyval.node)=new Node(Node_Type::MEDIAN,"Exp","",(yyloc).first_line); 
                      (yyval.node)->addChild({(yyvsp[-2].node),(yyvsp[-1].node),(yyvsp[0].node)});
                      setBoolOperatorType((yyval.node),(yyvsp[-2].node),(yyvsp[0].node));
                     }
-#line 1885 "syntax.tab.c"
+#line 1888 "syntax.tab.c"
     break;
 
   case 47:
-#line 144 "syntax.y"
+#line 147 "syntax.y"
                     {(yyval.node)=new Node(Node_Type::MEDIAN,"Exp","",(yyloc).first_line); 
                      (yyval.node)->addChild({(yyvsp[-2].node),(yyvsp[-1].node),(yyvsp[0].node)});
                      setCompareOperatorType((yyval.node),(yyvsp[-2].node),(yyvsp[0].node));
                     }
-#line 1894 "syntax.tab.c"
+#line 1897 "syntax.tab.c"
     break;
 
   case 48:
-#line 148 "syntax.y"
+#line 151 "syntax.y"
                     {(yyval.node)=new Node(Node_Type::MEDIAN,"Exp","",(yyloc).first_line); 
                      (yyval.node)->addChild({(yyvsp[-2].node),(yyvsp[-1].node),(yyvsp[0].node)});
                      setCompareOperatorType((yyval.node),(yyvsp[-2].node),(yyvsp[0].node));
                     }
-#line 1903 "syntax.tab.c"
+#line 1906 "syntax.tab.c"
     break;
 
   case 49:
-#line 152 "syntax.y"
+#line 155 "syntax.y"
                     {(yyval.node)=new Node(Node_Type::MEDIAN,"Exp","",(yyloc).first_line); 
                      (yyval.node)->addChild({(yyvsp[-2].node),(yyvsp[-1].node),(yyvsp[0].node)});
                      setCompareOperatorType((yyval.node),(yyvsp[-2].node),(yyvsp[0].node));
                     }
-#line 1912 "syntax.tab.c"
+#line 1915 "syntax.tab.c"
     break;
 
   case 50:
-#line 156 "syntax.y"
+#line 159 "syntax.y"
                     {(yyval.node)=new Node(Node_Type::MEDIAN,"Exp","",(yyloc).first_line); 
                      (yyval.node)->addChild({(yyvsp[-2].node),(yyvsp[-1].node),(yyvsp[0].node)});
                      setCompareOperatorType((yyval.node),(yyvsp[-2].node),(yyvsp[0].node));
                     }
-#line 1921 "syntax.tab.c"
+#line 1924 "syntax.tab.c"
     break;
 
   case 51:
-#line 160 "syntax.y"
+#line 163 "syntax.y"
                     {(yyval.node)=new Node(Node_Type::MEDIAN,"Exp","",(yyloc).first_line); 
                      (yyval.node)->addChild({(yyvsp[-2].node),(yyvsp[-1].node),(yyvsp[0].node)});
                      setCompareOperatorType((yyval.node),(yyvsp[-2].node),(yyvsp[0].node));
                     }
-#line 1930 "syntax.tab.c"
+#line 1933 "syntax.tab.c"
     break;
 
   case 52:
-#line 164 "syntax.y"
+#line 167 "syntax.y"
                     {(yyval.node)=new Node(Node_Type::MEDIAN,"Exp","",(yyloc).first_line); 
                      (yyval.node)->addChild({(yyvsp[-2].node),(yyvsp[-1].node),(yyvsp[0].node)});
                      setCompareOperatorType((yyval.node),(yyvsp[-2].node),(yyvsp[0].node));
                     }
-#line 1939 "syntax.tab.c"
+#line 1942 "syntax.tab.c"
     break;
 
   case 53:
-#line 168 "syntax.y"
+#line 171 "syntax.y"
                     {(yyval.node)=new Node(Node_Type::MEDIAN,"Exp","",(yyloc).first_line); 
                      (yyval.node)->addChild({(yyvsp[-2].node),(yyvsp[-1].node),(yyvsp[0].node)});
                      setAlrthOperatorType((yyval.node),(yyvsp[-2].node),(yyvsp[0].node));
                     }
-#line 1948 "syntax.tab.c"
+#line 1951 "syntax.tab.c"
     break;
 
   case 54:
-#line 172 "syntax.y"
+#line 175 "syntax.y"
                     {(yyval.node)=new Node(Node_Type::MEDIAN,"Exp","",(yyloc).first_line); 
                      (yyval.node)->addChild({(yyvsp[-2].node),(yyvsp[-1].node),(yyvsp[0].node)});
                      setAlrthOperatorType((yyval.node),(yyvsp[-2].node),(yyvsp[0].node));
                     }
-#line 1957 "syntax.tab.c"
+#line 1960 "syntax.tab.c"
     break;
 
   case 55:
-#line 176 "syntax.y"
+#line 179 "syntax.y"
                     {(yyval.node)=new Node(Node_Type::MEDIAN,"Exp","",(yyloc).first_line); 
                      (yyval.node)->addChild({(yyvsp[-2].node),(yyvsp[-1].node),(yyvsp[0].node)});
                      setAlrthOperatorType((yyval.node),(yyvsp[-2].node),(yyvsp[0].node));
                     }
-#line 1966 "syntax.tab.c"
+#line 1969 "syntax.tab.c"
     break;
 
   case 56:
-#line 180 "syntax.y"
+#line 183 "syntax.y"
                     {(yyval.node)=new Node(Node_Type::MEDIAN,"Exp","",(yyloc).first_line); 
                      (yyval.node)->addChild({(yyvsp[-2].node),(yyvsp[-1].node),(yyvsp[0].node)});
                      setAlrthOperatorType((yyval.node),(yyvsp[-2].node),(yyvsp[0].node));
                     }
-#line 1975 "syntax.tab.c"
+#line 1978 "syntax.tab.c"
     break;
 
   case 57:
-#line 184 "syntax.y"
+#line 187 "syntax.y"
                     {(yyval.node)=new Node(Node_Type::MEDIAN,"Exp","",(yyloc).first_line); 
                      (yyval.node)->addChild({(yyvsp[-2].node),(yyvsp[-1].node),(yyvsp[0].node)});
                      (yyval.node)->type=(yyvsp[-1].node)->type;
                     }
-#line 1984 "syntax.tab.c"
+#line 1987 "syntax.tab.c"
     break;
 
   case 58:
-#line 188 "syntax.y"
+#line 191 "syntax.y"
                              {(yyval.node)=new Node(Node_Type::MEDIAN,"Exp","",(yyloc).first_line); 
                               (yyval.node)->addChild({(yyvsp[-1].node),(yyvsp[0].node)});
                               setAlrthOperatorType((yyval.node),(yyvsp[0].node));
                              }
-#line 1993 "syntax.tab.c"
+#line 1996 "syntax.tab.c"
     break;
 
   case 59:
-#line 192 "syntax.y"
+#line 195 "syntax.y"
                              {(yyval.node)=new Node(Node_Type::MEDIAN,"Exp","",(yyloc).first_line);
                               (yyval.node)->addChild({(yyvsp[-1].node),(yyvsp[0].node)});
                               setAlrthOperatorType((yyval.node),(yyvsp[0].node));
                             //   $$->type=$2->type; 
                              }
-#line 2003 "syntax.tab.c"
+#line 2006 "syntax.tab.c"
     break;
 
   case 60:
-#line 197 "syntax.y"
+#line 200 "syntax.y"
                              {(yyval.node)=new Node(Node_Type::MEDIAN,"Exp","",(yyloc).first_line); (yyval.node)->addChild({(yyvsp[-3].node),(yyvsp[-2].node),(yyvsp[-1].node)}); printf("Error type B at Line %d: Missing closing parenthesis ')'\n",(yyloc).first_line); type_B_error = 1;}
-#line 2009 "syntax.tab.c"
+#line 2012 "syntax.tab.c"
     break;
 
   case 61:
-#line 198 "syntax.y"
+#line 201 "syntax.y"
                     {checkExist_FUN((yyvsp[-3].node));
                      checkParam_FUN((yyvsp[-3].node),(yyvsp[-1].node));
                      (yyval.node)=new Node(Node_Type::MEDIAN,"Exp","",(yyloc).first_line); 
                      (yyval.node)->addChild({(yyvsp[-3].node),(yyvsp[-2].node),(yyvsp[-1].node),(yyvsp[0].node)});
                      getReturnTypeOfFunction((yyval.node),(yyvsp[-3].node));
                     }
-#line 2020 "syntax.tab.c"
+#line 2023 "syntax.tab.c"
     break;
 
   case 62:
-#line 204 "syntax.y"
+#line 207 "syntax.y"
                 {checkExist_FUN((yyvsp[-2].node));
                  checkParam_FUN((yyvsp[-2].node),nullptr);
                  (yyval.node)=new Node(Node_Type::MEDIAN,"Exp","",(yyloc).first_line); 
                  (yyval.node)->addChild({(yyvsp[-2].node),(yyvsp[-1].node),(yyvsp[0].node)});
                  getReturnTypeOfFunction((yyval.node),(yyvsp[-2].node));
                  }
-#line 2031 "syntax.tab.c"
+#line 2034 "syntax.tab.c"
     break;
 
   case 63:
-#line 210 "syntax.y"
+#line 213 "syntax.y"
                      {(yyval.node)=new Node(Node_Type::MEDIAN,"Exp","",(yyloc).first_line);
                       (yyval.node)->addChild({(yyvsp[-3].node),(yyvsp[-2].node),(yyvsp[-1].node),(yyvsp[0].node)});
                      }
-#line 2039 "syntax.tab.c"
+#line 2042 "syntax.tab.c"
     break;
 
   case 64:
-#line 213 "syntax.y"
+#line 216 "syntax.y"
                   {(yyval.node)=new Node(Node_Type::MEDIAN,"Exp","",(yyloc).first_line); 
                    (yyval.node)->addChild({(yyvsp[-2].node),(yyvsp[-1].node),(yyvsp[0].node)});
                   }
-#line 2047 "syntax.tab.c"
+#line 2050 "syntax.tab.c"
     break;
 
   case 65:
-#line 216 "syntax.y"
+#line 219 "syntax.y"
             {(yyval.node)=new Node(Node_Type::MEDIAN,"Exp","",(yyloc).first_line); 
             (yyval.node)->addChild({(yyvsp[0].node)});
             checkExists_ID((yyvsp[0].node));
             idToExp((yyval.node),(yyvsp[0].node));
             }
-#line 2057 "syntax.tab.c"
+#line 2060 "syntax.tab.c"
     break;
 
   case 66:
-#line 221 "syntax.y"
+#line 224 "syntax.y"
             {(yyval.node)=new Node(Node_Type::MEDIAN,"Exp","",(yyloc).first_line); 
              (yyval.node)->addChild({(yyvsp[0].node)});
              (yyval.node)->var = Type::getPrimitiveINT();
             }
-#line 2066 "syntax.tab.c"
+#line 2069 "syntax.tab.c"
     break;
 
   case 67:
-#line 225 "syntax.y"
+#line 228 "syntax.y"
             {(yyval.node)=new Node(Node_Type::MEDIAN,"Exp","",(yyloc).first_line); 
              (yyval.node)->addChild({(yyvsp[0].node)});
              (yyval.node)->var = Type::getPrimitiveFLOAT();
             }
-#line 2075 "syntax.tab.c"
+#line 2078 "syntax.tab.c"
     break;
 
   case 68:
-#line 229 "syntax.y"
+#line 232 "syntax.y"
             {(yyval.node)=new Node(Node_Type::MEDIAN,"Exp","",(yyloc).first_line); 
             (yyval.node)->addChild({(yyvsp[0].node)}); 
             (yyval.node)->var = Type::getPrimitiveCHAR();
             }
-#line 2084 "syntax.tab.c"
+#line 2087 "syntax.tab.c"
     break;
 
   case 69:
-#line 233 "syntax.y"
+#line 236 "syntax.y"
                {type_A_error = 1;}
-#line 2090 "syntax.tab.c"
+#line 2093 "syntax.tab.c"
     break;
 
 
-#line 2094 "syntax.tab.c"
+#line 2097 "syntax.tab.c"
 
       default: break;
     }
@@ -2328,7 +2331,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 235 "syntax.y"
+#line 238 "syntax.y"
 
 void yyerror(const char *s){
     // if (type_B_error){

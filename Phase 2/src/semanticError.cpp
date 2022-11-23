@@ -29,19 +29,28 @@ void nonMatchTypeBothSide_5(int lineNum)
     printf("Error type 5 at Line %d: unmatching types on both sides of assignment\n", lineNum);
 }
 
+// error type 6
 void rvalueLeftSetError_6(int lineNum)
 {
     printf("Error type 6 at Line %d: left side in assignment is rvalue\n", lineNum);
 }
 
+// error type 7
 void binaryOperatorNotValid_7(int lineNum)
 {
     printf("Error type 7 at Line %d: binary operation on invalid variables\n", lineNum);
 }
 
+// error type 7
 void singleOperatorNotValid_7(int lineNum)
 {
     printf("Error type 7 at Line %d: single operation on invalid variables\n", lineNum);
+}
+
+// error type 8
+void returnTypeDisMatch_8(int lineNum)
+{
+    printf("Error type 8 at Line %d: incompatiable return type\n", lineNum);
 }
 
 // error type 9

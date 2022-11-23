@@ -36,3 +36,5 @@ void setAlrthOperatorType(Node *expOut, Node *expLeft, Node *expRight);
 void setAlrthOperatorType(Node *expOut, Node *innerExp);
 
 bool checkIntegerType(Node *exp);
+
+vector<Node *> getReturnExpFromCompSt(Node *CompSt);

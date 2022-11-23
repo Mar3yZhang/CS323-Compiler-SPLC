@@ -118,10 +118,12 @@ void checkParam_FUN(Node *id, Node *args)
     }
 }
 
-void ExtDefVisit_SS(Node *node) {
+void ExtDefVisit_SS(Node *node)
+{
     // definition of Struct
-    //std::cout << "SS\n";
-    if (node->child[0]->child[0]->name == "TYPE") {
+    // std::cout << "SS\n";
+    if (node->child[0]->child[0]->name == "TYPE")
+    {
         // ignore the pureType's def likt `float;`
         return;
     }
@@ -129,23 +131,33 @@ void ExtDefVisit_SS(Node *node) {
     vector<Node *> namesofFileds;
     getNamesOfDefList(node, namesofFileds);
     auto fieldListOfType = getFiledListFromNodesVector(namesofFileds);
-    if (symbolTable.count(name) != 0) {
-        structRedefined_15(node->line_num,name.c_str());
-    } else {
+    if (symbolTable.count(name) != 0)
+    {
+        structRedefined_15(node->line_num, name.c_str());
+    }
+    else
+    {
         symbolTable[name] = new Type{name, CATEGORY::STRUCTURE, fieldListOfType};
     }
 }
 
-void getNamesOfDefList(Node *node, vector<Node *> &namesofFileds) {
-    if (!node->child[0]->child[0]->child[3]->child.empty()) {
+void getNamesOfDefList(Node *node, vector<Node *> &namesofFileds)
+{
+    if (!node->child[0]->child[0]->child[3]->child.empty())
+    {
         auto nodeofField = node->child[0]->child[0]->child[3];
-        while (nodeofField != nullptr && !nodeofField->child.empty() && nodeofField->name == "DefList") {
+        while (nodeofField != nullptr && !nodeofField->child.empty() && nodeofField->name == "DefList")
+        {
             auto declistNode = nodeofField->child[0]->child[1];
-            while (declistNode != nullptr && declistNode->name == "DecList") {
+            while (declistNode != nullptr && declistNode->name == "DecList")
+            {
                 namesofFileds.push_back(declistNode);
-                if (declistNode->child.size() == 3) {
+                if (declistNode->child.size() == 3)
+                {
                     declistNode = declistNode->child[2];
-                } else {
+                }
+                else
+                {
                     break;
                 }
             }
@@ -154,51 +166,81 @@ void getNamesOfDefList(Node *node, vector<Node *> &namesofFileds) {
     }
 }
 
-FieldList *getFiledListFromNodesVector(const vector<Node *> &vec) {
-    if (vec.empty()) {
+FieldList *getFiledListFromNodesVector(const vector<Node *> &vec)
+{
+    if (vec.empty())
+    {
         return nullptr;
     }
     vector<FieldList *> fieldVec;
-    for (const auto &item : vec) {
-        const auto name = getName(item,"decList");
+    for (const auto &item : vec)
+    {
+        const auto name = getName(item, "decList");
         fieldVec.push_back(new FieldList{name, symbolTable[name]});
         symbolTable.erase(name);
     }
-    for (auto i = static_cast<size_t>(0); i < vec.size() - 1; ++i) {
+    for (auto i = static_cast<size_t>(0); i < vec.size() - 1; ++i)
+    {
         fieldVec[i]->next = fieldVec[i + 1];
     }
     return fieldVec.front();
 }
 
 /// @brief 给函数添加上返回值类型
+// ExtDef: Specifier FunDec CompSt
+
 void ExtDefVisit_SFC(Node *ExtDef)
 {
-    Node *Specifier = ExtDef->child[0]; //表示返回值
-    CATEGORY category = Specifier->child[0]->name == "TYPE" ? CATEGORY::PRIMITIVE : CATEGORY::STRUCTURE;
-    switch (category)
-    {
-    case CATEGORY::PRIMITIVE:
-    {
 
-        Type *return_type = new Type("", CATEGORY::PRIMITIVE, string_to_prim[Specifier->child[0]->content]);
-        Node *FunDec = ExtDef->child[2];
-        if (symbolTable.count(getName(FunDec, "FunDec")) == 0)
+     
+    // printf("22222222222");
+    
+    Node *Specifier = ExtDef->child[0]; //表示返回值
+
+
+    
+    // printf("12312312312");
+
+    Type *returnType;
+    if (Specifier->child[0]->name == "TYPE")
+    {
+        string type = Specifier->child[0]->content;
+        if (type == "int")
         {
-            printf("找不到目标函数");
+            Type *returnType = Type::getPrimitiveINT();
+        }
+        else if (type == "float")
+        {
+            Type *returnType = Type::getPrimitiveFLOAT();
         }
         else
         {
-            Type *function = symbolTable[getName(FunDec, "FunDec")];
-            function->returnType = return_type;
+            Type *returnType = Type::getPrimitiveCHAR();
         }
+
+        Type *returnType = symbolTable[Specifier->child[0]->content]->returnType;
     }
-    case CATEGORY::STRUCTURE: //是结构体类型
+    else
     {
-        ///  TODO: 将结构体返回值添加到目标函数
-        break;
+        Node *StructSpecifier = Specifier->child[0];
+        Node *ID = StructSpecifier->child[1];
+        Type *returnType = symbolTable[ID->content]->returnType;
     }
-    default:
-        break;
+
+
+    Node *CompSt = ExtDef->child[2];
+    vector<Node *> Exps = getReturnExpFromCompSt(CompSt);
+    for (auto &&Exp : Exps)
+    {
+        if (Exp->var == nullptr)
+        {
+            returnTypeDisMatch_8(Exp->line_num);
+        }
+        else if (Exp->var != returnType)
+        {
+            returnTypeDisMatch_8(Exp->line_num);
+        }
+        /// TODO: 比较结构体的名字 和 数组的维数与结构
     }
 }
 
@@ -349,13 +391,16 @@ void defVisit(Node *def)
     }
 
     /// TODO: 完成结构体的访问
-    if (!def->child[0]->child[0]->child.empty()) {
+    if (!def->child[0]->child[0]->child.empty())
+    {
         string structName = def->child[0]->child[0]->child[1]->content;
-        if (symbolTable.count(structName) == 0) {
-            structNoDefinition_16(def->line_num,structName.c_str());
+        if (symbolTable.count(structName) == 0)
+        {
+            structNoDefinition_16(def->line_num, structName.c_str());
         }
-        if (decList->child[0]->child[0]->child.size() == 1) {
-                symbolTable[name] = symbolTable[structName];
+        if (decList->child[0]->child[0]->child.size() == 1)
+        {
+            symbolTable[name] = symbolTable[structName];
         }
     }
 
@@ -428,7 +473,7 @@ void checkAssignmentTypeMatching(Node *leftExp, Node *rightExp)
     if (leftType == nullptr || rightType == nullptr) // 说明左表达式或右表达式存在运算符错误
     {
 
-        printf("有左值或右值为空");
+        // printf("有左值或右值为空");
         return;
     }
     else if (leftType == rightType) // 说明赋值不存在错误

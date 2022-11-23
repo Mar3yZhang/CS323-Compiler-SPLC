@@ -227,11 +227,11 @@ void setAlrthOperatorType(Node *expOut, Node *expLeft, Node *expRight)
 
     if (a && b)
     {
-        expOut->var = new Type("", CATEGORY::PRIMITIVE, PRIM::INT);
+        expOut->var = Type::getPrimitiveINT();
     }
     else if (c && d)
     {
-        expOut->var = new Type("", CATEGORY::PRIMITIVE, PRIM::FLOAT);
+        expOut->var = Type::getPrimitiveFLOAT();
     }
     else
     {
@@ -251,11 +251,11 @@ void setAlrthOperatorType(Node *expOut, Node *innerExp)
 
         if (a)
         {
-            expOut->var = new Type("", CATEGORY::PRIMITIVE, PRIM::INT);
+            expOut->var = Type::getPrimitiveINT();
         }
         else if (b)
         {
-            expOut->var = new Type("", CATEGORY::PRIMITIVE, PRIM::FLOAT);
+            expOut->var = Type::getPrimitiveFLOAT();
         }
         else
         {
@@ -271,7 +271,7 @@ void setAlrthOperatorType(Node *expOut, Node *innerExp)
 
         if (a)
         {
-            expOut->var = new Type("", CATEGORY::PRIMITIVE, PRIM::INT);
+            expOut->var = Type::getPrimitiveINT();
         }
         else
         {
@@ -281,4 +281,24 @@ void setAlrthOperatorType(Node *expOut, Node *innerExp)
             }
         }
     }
+}
+
+/// @brief 将所有可能含有返回值的EXP节点以vector的形式返回
+vector<Node *> getReturnExpFromCompSt(Node *CompSt)
+{
+    Node *StmtList = CompSt->child[2];
+    Node *temp = StmtList;
+    vector<Node *> Exps;
+    while (temp->child.size() != 0) //还存在Stmt
+    {
+        Node *Stmt = temp->child[0];
+
+        if (Stmt->child.size() == 3 && Stmt->child[0]->name == "RETURN")
+        {
+            printf("找到Return关键字");
+            Exps.push_back(Stmt->child[1]);
+        }
+        temp = temp->child[1];
+    }
+    return Exps;
 }
