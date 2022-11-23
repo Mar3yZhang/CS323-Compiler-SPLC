@@ -126,7 +126,7 @@ ExtDef: error ExtDecList SEMI
     | Specifier FunDec CompSt
 */
 /// @brief 给函数添加上返回值类型
-void ExtDefVisit_SES(Node *ExtDef)
+void ExtDefVisit_SFC(Node *ExtDef)
 {
     Node *Specifier = ExtDef->child[0]; //表示返回值
     CATEGORY category = Specifier->child[0]->name == "TYPE" ? CATEGORY::PRIMITIVE : CATEGORY::STRUCTURE;

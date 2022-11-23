@@ -29,10 +29,6 @@ void checkParam_FUN(Node *id, Node *args);
 
 void extDefVisit(Node *node);
 
-void ExtDefVisit_SES(Node *node);
-
-void ExtDefVisit_SS(Node *node);
-
 void ExtDefVisit_SFC(Node *node);
 
 void FunDecVisit(Node *node);
