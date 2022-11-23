@@ -118,13 +118,58 @@ void checkParam_FUN(Node *id, Node *args)
     }
 }
 
-void extDefVisit(Node *node);
-/*
-ExtDef: error ExtDecList SEMI
-    | Specifier ExtDecList SEMI
-    | Specifier SEMI
-    | Specifier FunDec CompSt
-*/
+void ExtDefVisit_SS(Node *node) {
+    // definition of Struct
+    //std::cout << "SS\n";
+    if (node->child[0]->child[0]->name == "TYPE") {
+        // ignore the pureType's def likt `float;`
+        return;
+    }
+    string name = node->child[0]->child[0]->child[1]->content; // this is structName
+    vector<Node *> namesofFileds;
+    getNamesOfDefList(node, namesofFileds);
+    auto fieldListOfType = getFiledListFromNodesVector(namesofFileds);
+    if (symbolTable.count(name) != 0) {
+        structRedefined_15(node->line_num,name.c_str());
+    } else {
+        symbolTable[name] = new Type{name, CATEGORY::STRUCTURE, fieldListOfType};
+    }
+}
+
+void getNamesOfDefList(Node *node, vector<Node *> &namesofFileds) {
+    if (!node->child[0]->child[0]->child[3]->child.empty()) {
+        auto nodeofField = node->child[0]->child[0]->child[3];
+        while (nodeofField != nullptr && !nodeofField->child.empty() && nodeofField->name == "DefList") {
+            auto declistNode = nodeofField->child[0]->child[1];
+            while (declistNode != nullptr && declistNode->name == "DecList") {
+                namesofFileds.push_back(declistNode);
+                if (declistNode->child.size() == 3) {
+                    declistNode = declistNode->child[2];
+                } else {
+                    break;
+                }
+            }
+            nodeofField = nodeofField->child[1];
+        };
+    }
+}
+
+FieldList *getFiledListFromNodesVector(const vector<Node *> &vec) {
+    if (vec.empty()) {
+        return nullptr;
+    }
+    vector<FieldList *> fieldVec;
+    for (const auto &item : vec) {
+        const auto name = getName(item,"decList");
+        fieldVec.push_back(new FieldList{name, symbolTable[name]});
+        symbolTable.erase(name);
+    }
+    for (auto i = static_cast<size_t>(0); i < vec.size() - 1; ++i) {
+        fieldVec[i]->next = fieldVec[i + 1];
+    }
+    return fieldVec.front();
+}
+
 /// @brief 给函数添加上返回值类型
 void ExtDefVisit_SFC(Node *ExtDef)
 {
@@ -304,6 +349,15 @@ void defVisit(Node *def)
     }
 
     /// TODO: 完成结构体的访问
+    if (!def->child[0]->child[0]->child.empty()) {
+        string structName = def->child[0]->child[0]->child[1]->content;
+        if (symbolTable.count(structName) == 0) {
+            structNoDefinition_16(def->line_num,structName.c_str());
+        }
+        if (decList->child[0]->child[0]->child.size() == 1) {
+                symbolTable[name] = symbolTable[structName];
+        }
+    }
 
     /// TODO: 完成数组的访问
 }

@@ -4,7 +4,7 @@
 #include <string>
 #include <unordered_map>
 #include <iterator>
-#include "Type.hpp"
+#include "type.hpp"
 #include "Node.hpp"
 #include "SAUtill.hpp"
 #include "semanticError.hpp"
@@ -27,25 +27,21 @@ void checkExist_FUN(Node *id);
 
 void checkParam_FUN(Node *id, Node *args);
 
-void extDefVisit(Node *node);
+void ExtDefVisit_SES(Node *node);
 
-void ExtDefVisit_SFC(Node *node);
+void ExtDefVisit_SS(Node *node);
+
+void getNamesOfDefList(Node *node, vector<Node *> &namesofFileds);
+
+FieldList *getFiledListFromNodesVector(const vector<Node *> &vec);
+
+//void ExtDefVisit_SFC(Node *node);
 
 void FunDecVisit(Node *node);
 
 void getVarList(Node *node);
 
 void getParamDec(Node *node);
-// compst
-void getCompSt(Node *node);
-
-void getDefList(Node *node);
-
-void getStmtList(Node *node);
-
-void getStmt(Node *node);
-
-void getExp(Node *node);
 // def
 void defVisit(Node *node);
 
@@ -58,5 +54,7 @@ void getReturnTypeOfFunction(Node *expOut, Node *ID);
 void checkRvalueInLeftSide(Node *Exp);
 
 void checkAssignmentTypeMatching(Node *leftExp, Node *rightExp);
+
+void checkTypeOfDot(Node *expOut, Node *expIn, Node *ID);
 
 #endif
