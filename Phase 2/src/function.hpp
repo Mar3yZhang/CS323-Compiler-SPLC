@@ -2,7 +2,7 @@
 #define _function_HPP_
 #include <string>
 #include <vector>
-#include "Type.hpp"
+#include "type.hpp"
 #include <unordered_map>
 using std::string;
 using std::unordered_map;

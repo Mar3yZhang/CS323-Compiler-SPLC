@@ -1,4 +1,4 @@
-#include "Type.hpp"
+#include "type.hpp"
 
 Type::Type(string name, CATEGORY category, PRIM primitive)
 {

@@ -55,9 +55,10 @@ Program: ExtDefList{
 ExtDefList: /* to allow empty input */        {$$=new Node(Node_Type::NOTHING,"ExtDefList","",@$.first_line);}
     | ExtDef ExtDefList                       {$$=new Node(Node_Type::MEDIAN,"ExtDefList","",@$.first_line); $$->addChild({$1,$2});}
     ;         
+
 ExtDef: error ExtDecList SEMI      {printf("Error type B at Line %d: Missing specifier\n",@$.first_line); type_B_error=1;}
     | Specifier ExtDecList SEMI    {$$=new Node(Node_Type::MEDIAN,"ExtDef","",@$.first_line); $$->addChild({$1,$2,$3});}
-    | Specifier SEMI               {$$=new Node(Node_Type::MEDIAN,"ExtDef","",@$.first_line); $$->addChild({$1,$2});}
+    | Specifier SEMI               {$$=new Node(Node_Type::MEDIAN,"ExtDef","",@$.first_line); $$->addChild({$1,$2}); ExtDefVisit_SS($$);}
     | Specifier FunDec CompSt      {$$=new Node(Node_Type::MEDIAN,"ExtDef","",@$.first_line); 
                                     $$->addChild({$1,$2,$3});
                                     // ExtDefVisit_SFC($$);
@@ -134,7 +135,6 @@ Args: Exp COMMA Args                          {$$=new Node(Node_Type::MEDIAN,"Ar
 Exp: Exp ASSIGN Exp {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); 
                       $$->addChild({$1,$2,$3});
                       checkRvalueInLeftSide($$);
-                      checkAssignmentTypeMatching($1,$3);
                     }
     | Exp AND Exp   {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); 
                      $$->addChild({$1,$2,$3});
@@ -215,6 +215,7 @@ Exp: Exp ASSIGN Exp {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line);
                      }
     | Exp DOT ID  {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); 
                    $$->addChild({$1,$2,$3});
+                   checkTypeOfDot($$,$1,$3);
                   }
     | ID    {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); 
             $$->addChild({$1});

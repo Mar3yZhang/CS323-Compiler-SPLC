@@ -301,13 +301,17 @@ void FunDecVisit(Node *FunDec)
 
                     //注册参数列表中的参数到符号表上
                     symbolTable[ID] = param_type;
-
                     param.push_back(new FieldList((string) "", param_type)); // 基础类型的名字用不上
                     break;
                 }
                 case CATEGORY::STRUCTURE: //是结构体类型
                 {
                     ///  TODO: 实现结构体在符号表和函数中的注册
+                    string structName = cur_Specifier->child[0]->child[1]->content;
+                    if (symbolTable.count(ID) == 0) {
+                        structNoDefinition_16(VarDec->line_num,structName.c_str());
+                    }
+                    symbolTable[ID] = symbolTable[structName];
                     break;
                 }
                 default:
@@ -336,19 +340,6 @@ void FunDecVisit(Node *FunDec)
     }
 }
 
-void getVarList(Node *node);
-
-void getParamDec(Node *node);
-// compst
-void getCompSt(Node *node);
-
-void getDefList(Node *node);
-
-void getStmtList(Node *node);
-
-void getStmt(Node *node);
-
-void getExp(Node *node);
 
 /*
 Def
@@ -489,7 +480,6 @@ void checkAssignmentTypeMatching(Node *leftExp, Node *rightExp)
     {
         nonMatchTypeBothSide_5(leftExp->line_num);
     }
-
     /// TODO: 数组的赋值等价
     // else if (leftType->category == CATEGORY::ARRAY)
     // {
@@ -526,4 +516,31 @@ void checkAssignmentTypeMatching(Node *leftExp, Node *rightExp)
     {
         nonMatchTypeBothSide_5(leftExp->line_num);
     }
+}
+
+void checkTypeOfDot(Node *expOut, Node *expIn, Node *ID) {
+    if (expOut->name != "Exp") {
+        return;
+    }
+    if (expOut->child[0]->var == nullptr) {
+        return;
+    }
+    std::cout<<expOut->child[0]->var<<std::endl;
+    if (expOut->child[0]->var->category != CATEGORY::STRUCTURE) {
+        nonStructFVariable_13(expOut->line_num);
+    }
+    if (expIn->var->category != CATEGORY::STRUCTURE) {
+        nonStructFVariable_13(expIn->line_num);
+        return;
+    }
+    /*FieldList *fieldList = std::get<FieldList *>(expIn->type->category);
+    string idName = ID->content;
+    while (fieldList != nullptr) {
+        if (fieldList->name == idName) {
+            expOut->type = fieldList->type;
+            return;
+        }
+        fieldList = fieldList->next;
+    }
+    noSuchMember_14(expOut->line_num, idName);*/
 }
