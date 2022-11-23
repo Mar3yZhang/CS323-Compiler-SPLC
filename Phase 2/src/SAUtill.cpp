@@ -208,6 +208,7 @@ void setCompareOperatorType(Node *expOut, Node *expLeft, Node *expRight)
     if ((a && b) || (c && d))
     {
         expOut->var = new Type("", CATEGORY::PRIMITIVE, PRIM::INT);
+    }
     else
     {
         if (expLeft->var != nullptr && expRight->var != nullptr)

@@ -105,8 +105,8 @@ void checkParam_FUN(Node *id, Node *args)
         }
         else //参数个数匹配不上 报错
         {
-            int real = get_expect_param_num(function->foo.param);
-            int expect = get_real_param_num(args);
+            int expect = get_expect_param_num(function->foo.param);
+            int real = get_real_param_num(args);
             if (real != expect)
             {
                 invalidArgumentNumber_9(id->line_num, functionName, expect, real);
