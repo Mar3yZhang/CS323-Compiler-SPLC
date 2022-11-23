@@ -55,3 +55,19 @@ void invokeNonFunctionVariable_11(int lineNum, const std::string &name)
 {
     printf("Error type 11 at Line %d: invoking non-function variable: %s\n", lineNum, name.c_str());
 }
+
+void nonStructFVariable_13(int lineNum) {
+    printf("Error type 13 at Line %d: accessing with non-struct variable\n", lineNum);
+}
+
+void noSuchMember_14(int lineNum, const std::string &name) {
+    printf("Error type 14 at Line %d: no such member: %s\n", lineNum, name.c_str());
+}
+
+void structRedefined_15(int lineNum, const std::string &name) {
+    printf("Error type 15 at Line %d: redefine struct: %s\n", lineNum, name.c_str());
+}
+
+void structNoDefinition_16(int lineNum, const std::string &name) {
+    printf("Error type 16 at Line %d: struct %s haven't define\n", lineNum, name.c_str());
+}

@@ -31,3 +31,11 @@ void invalidArgumentNumber_9(int lineNum, const std::string &name, int expect, i
 
 // error type 11
 void invokeNonFunctionVariable_11(int lineNum, const std::string &name);
+
+void nonStructFVariable_13(int lineNum);
+
+void noSuchMember_14(int lineNum, const std::string &name);
+
+void structRedefined_15(int lineNum, const std::string &name);
+
+void structNoDefinition_16(int lineNum, const std::string &name);
