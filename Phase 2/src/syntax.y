@@ -131,6 +131,7 @@ Args: Exp COMMA Args                          {$$=new Node(Node_Type::MEDIAN,"Ar
 Exp: Exp ASSIGN Exp {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); 
                       $$->addChild({$1,$2,$3});
                       checkRvalueInLeftSide($$);
+                      checkAssignmentTypeMatching($1,$3);
                     }
     | Exp AND Exp   {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); 
                      $$->addChild({$1,$2,$3});

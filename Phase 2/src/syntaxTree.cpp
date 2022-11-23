@@ -368,4 +368,63 @@ void checkRvalueInLeftSide(Node *Exp)
 // Exp: Exp ASSIGN Exp 要先保证左右EXP的 var类型是有内容的 才能进行比较
 void checkAssignmentTypeMatching(Node *leftExp, Node *rightExp)
 {
+    Type *leftType = leftExp->var;
+    Type *rightType = rightExp->var;
+
+    if (leftType == nullptr || rightType == nullptr) // 说明左表达式或右表达式存在运算符错误
+    {
+
+        printf("有左值或右值为空");
+        return;
+    }
+    else if (leftType == rightType) // 说明赋值不存在错误
+    {
+        return;
+    }
+    else if (leftType->category != rightType->category)
+    {
+        nonMatchTypeBothSide_5(leftExp->line_num);
+    }
+    else if (leftType->category == CATEGORY::STRUCTURE &&
+             symbolTable[leftType->name]->name != symbolTable[rightType->name]->name)
+    {
+        nonMatchTypeBothSide_5(leftExp->line_num);
+    }
+
+    /// TODO: 数组的赋值等价
+    // else if (leftType->category == CATEGORY::ARRAY)
+    // {
+    //     vector<int> demensionLeftArray, demensionRightArray;
+    //     Type *insideLeftType, *insideRightType;
+    //     std::tie(demensionLeftArray, insideLeftType) = getArrayDemensionAndType(leftType);
+    //     std::tie(demensionRightArray, insideRightType) = getArrayDemensionAndType(rightType);
+    //     if (demensionLeftArray.size() != demensionRightArray.size() ||
+    //         std::equal(demensionLeftArray.cbegin(), demensionLeftArray.cend(), demensionRightArray.cbegin()))
+    //     {
+    //         func(lineNum);
+    //     }
+    //     else if (insideLeftType == nullptr || insideRightType == nullptr)
+    //     {
+    //         func(lineNum);
+    //     }
+    //     else if (insideRightType->category != insideLeftType->category)
+    //     {
+    //         func(lineNum);
+    //     }
+    //     else if (insideRightType->category == CATEGORY::PRIMITIVE && insideLeftType != insideRightType)
+    //     {
+    //         func(lineNum);
+    //     }
+    //     else if (insideRightType->category == CATEGORY::STRUCTURE)
+    //     {
+    //         if (insideLeftType->name != insideRightType->name)
+    //         {
+    //             func(lineNum);
+    //         }
+    //     }
+    // }
+    else
+    {
+        nonMatchTypeBothSide_5(leftExp->line_num);
+    }
 }
