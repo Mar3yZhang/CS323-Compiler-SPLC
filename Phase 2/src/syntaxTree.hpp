@@ -20,9 +20,10 @@ void idToExp(Node *exp, Node *id);
 string getName(Node *node, string nodeName);
 
 Array *getArray(Node *node, Type *type);
-
+Array *getArrayFromVarDec(Node *node, Type *type);
+void getArrayType(Node *expOut, Node *expIn, Node *Integer);
 void checkExists_ID(Node *node);
-
+void checkExists_Array(Node *Exp);
 void checkExist_FUN(Node *id);
 
 void checkParam_FUN(Node *id, Node *args);
