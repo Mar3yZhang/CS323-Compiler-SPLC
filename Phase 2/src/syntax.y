@@ -61,7 +61,7 @@ ExtDef: error ExtDecList SEMI      {printf("Error type B at Line %d: Missing spe
     | Specifier SEMI               {$$=new Node(Node_Type::MEDIAN,"ExtDef","",@$.first_line); $$->addChild({$1,$2}); ExtDefVisit_SS($$);}
     | Specifier FunDec CompSt      {$$=new Node(Node_Type::MEDIAN,"ExtDef","",@$.first_line); 
                                     $$->addChild({$1,$2,$3});
-                                    ExtDefVisit_SFC($$);
+                                    //ExtDefVisit_SFC($$);
                                     }
     ;         
 ExtDecList: VarDec                            {$$=new Node(Node_Type::MEDIAN,"ExtDecList","",@$.first_line); $$->addChild({$1});}
