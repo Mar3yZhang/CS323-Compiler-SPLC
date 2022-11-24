@@ -394,14 +394,14 @@ void FunDecVisit(Node *FunDec)
             {
                 ///  TODO:  实现数组在符号表和函数中的注册
 
-                // vector<Node *> VarDecs;
-                // while (cur_VarList->child.size() != 1) //还没有到最后的ID
-                // {
-                //     ParamsDecs.push_back(cur_VarList->child[0]); // VarDec -> ID | VarDec LB INT RB
-                //     cur_VarList = cur_VarList->child[2];
-                // }
-                // ParamsDecs.push_back(cur_VarList->child[0]);
-                // VarDecs.clear();
+                 vector<Node *> VarDecs;
+                 while (cur_VarList->child.size() != 1) //还没有到最后的ID
+                {
+                     ParamsDecs.push_back(cur_VarList->child[0]); // VarDec -> ID | VarDec LB INT RB
+                    cur_VarList = cur_VarList->child[2];
+                 }
+                 ParamsDecs.push_back(cur_VarList->child[0]);
+                 VarDecs.clear();
             }
         }
         // 将param拆包 封装为一个 fieldlist链表
