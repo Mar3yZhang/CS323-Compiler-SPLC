@@ -72,6 +72,34 @@ void checkExists_ID(Node *ID)
     }
 }
 
+void checkExists_Array(Node *id)
+{
+   if (id->child.size() == 1) {
+        string arrayName = (id->child[0]->content);
+        if (symbolTable.count(arrayName) != 0) {
+            // array
+            Type *arrayType = symbolTable[arrayName];
+            if (arrayType->category != CATEGORY::ARRAY) {
+                indexingOnNonArray_10((id->line_num));
+            }
+        } else {
+            indexingOnNonArray_10((id->line_num));
+        }
+    } else {
+        //multi-dementional array
+        
+        string arrayName = (id->child[0]->content);
+        Type *arrayType = symbolTable[arrayName];
+        if (symbolTable.count(arrayName)!=0){
+            if (arrayType == nullptr || arrayType->category != CATEGORY::ARRAY) {
+                indexingOnNonArray_10((id->line_num));
+            }
+        } else {
+            indexingOnNonArray_10((id->line_num));
+        }
+    } 
+}
+
 void checkExist_FUN(Node *id)
 {
     string name = id->content;
@@ -409,21 +437,43 @@ void defVisit(Node *def)
         }
 
     /// 暂时不考虑结构体和数组的情况
-        if (decList->child[0]->child[0]->child.size() == 1) {
-            string type_name = def->child[0]->child[0]->content;
-            if (type_name == "int")
-            {
-                symbolTable[name] = Type::getPrimitiveINT();
-            }
-            else if (type_name == "float")
-            {
-                symbolTable[name] = Type::getPrimitiveFLOAT();
-            }
-            else if (type_name == "char")
-            {
-                symbolTable[name] = Type::getPrimitiveCHAR();
-            }
+         string type_name = def->child[0]->child[0]->content;
+   
+    if (decList->child[0]->child[0]->child.size() == 1){
+        if (type_name == "int")
+        {
+            symbolTable[name] = Type::getPrimitiveINT();
         }
+        else if (type_name == "float")
+        {
+            symbolTable[name] = Type::getPrimitiveFLOAT();
+        }
+        else if (type_name == "char")
+        {
+            symbolTable[name] = Type::getPrimitiveCHAR();
+        }
+        
+    }else if (decList->child[0]->child[0]->child.size() >= 4){
+        // Array
+        Type* r = Type::getPrimitiveINT();
+        if (type_name == "int")
+        {
+            auto r = Type::getPrimitiveINT();
+        }
+        else if (type_name == "float")
+        {
+            auto r = Type::getPrimitiveFLOAT();
+        }
+        else if (type_name == "char")
+        {
+            auto r = Type::getPrimitiveCHAR();
+        }
+        symbolTable[name] = new Type(name, CATEGORY::ARRAY, getArrayFromVarDec(decList->child[0]->child[0], r));
+        //Error occurs when identifying an array     int arr[3] = 5;
+        if (decList->child[0]->child.size() == 3){//tested
+            nonMatchTypeBothSide_5(decList->line_num);
+        }
+    }
         if (decList->child.size() == 1) {
             break;
         }
@@ -453,7 +503,29 @@ void defVisit(Node *def)
 
     /// TODO: 完成数组的访问
 }
+Array *getArrayFromVarDec(Node *node, Type *type) {
+    if (node == nullptr || node->name != "VarDec") {
+        return nullptr;
+    } else {
+        // std::cout<<typeid((node->child[2]->content)).name <<"\n";
+        // int size = std::get<int>(node->child[2]->content);
+        int size = std::stoi(node->child[2]->content);
 
+
+        if (node->child[0]->child.size() == 1) {
+            return new Array(size,type);
+        } else {
+            return new Array(size, new Type("", CATEGORY::ARRAY, getArrayFromVarDec(node->child[0],type)));
+        }
+    }
+}
+
+void getArrayType(Node *expOut, Node *expIn, Node *Integer){
+    if (!checkIntegerType(Integer)){
+        indexingByNonInteger_12(expIn->line_num);
+        return;
+    }
+}
 void getReturnTypeOfFunction(Node *expOut, Node *ID)
 {
     string functionName = ID->content;
