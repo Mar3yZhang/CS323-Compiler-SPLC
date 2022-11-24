@@ -71,66 +71,20 @@ int get_real_param_num(Node *args)
     }
 }
 
-// 检查传入的两个type是否完全相同
-bool checkTypeMatching(Type *leftType, Type *rightType)
+/// @brief 返回一个tuple(vector<int>,type*)
+/// 通过vector来返回数组的几个维数
+std::tuple<vector<int>, Type *> getArrayDemensionAndType(Type *_type)
 {
-    if (leftType == nullptr || rightType == nullptr)
+    vector<int> demensions;
+    Type *temp = _type;
+    while (temp != nullptr && temp->foo.array != nullptr)
     {
-        return false;
+        auto tempArray = temp->foo.array;
+        temp = tempArray->base;
+        demensions.push_back(tempArray->size);
     }
-    else if (leftType == rightType)
-    {
-        return true;
-    }
-    else if (leftType->category != rightType->category)
-    {
-        return false;
-    }
-
-    /// TODO: 对数组和结构体类型判断的处理
-
-    // }
-    // else if (leftType->category == CATEGORY::STRUCTURE &&
-    //          symbolTable[leftType->name]->name != symbolTable[rightType->name]->name)
-    // {
-    //     return false;
-    // }
-    // else if (leftType->category == CATEGORY::ARRAY)
-    // {
-    //     vector<int> demensionLeftArray, demensionRightArray;
-    //     Type *insideLeftType, *insideRightType;
-    //     std::tie(demensionLeftArray, insideLeftType) = getArrayDemensionAndType(leftType);
-    //     std::tie(demensionRightArray, insideRightType) = getArrayDemensionAndType(rightType);
-    //     if (demensionLeftArray.size() != demensionRightArray.size() ||
-    //         std::equal(demensionLeftArray.cbegin(), demensionLeftArray.cend(), demensionRightArray.cbegin()))
-    //     {
-    //         return false;
-    //     }
-    //     else if (insideLeftType == nullptr || insideRightType == nullptr)
-    //     {
-    //         return false;
-    //     }
-    //     else if (insideRightType->category != insideLeftType->category)
-    //     {
-    //         return false;
-    //     }
-    //     else if (insideRightType->category == CATEGORY::PRIMITIVE && insideLeftType != insideRightType)
-    //     {
-    //         return false;
-    //     }
-    //     else if (insideRightType->category == CATEGORY::STRUCTURE)
-    //     {
-    //         if (insideLeftType->name != insideRightType->name)
-    //         {
-    //             return false;
-    //         }
-    //     }
-    // }
-    else
-    {
-        return false;
-    }
-}
+    return std::tuple<vector<int>, Type *>(demensions, temp);
+};
 
 /// @brief 检查EXP的var是否是整数类型
 bool checkIntegerType(Node *exp)

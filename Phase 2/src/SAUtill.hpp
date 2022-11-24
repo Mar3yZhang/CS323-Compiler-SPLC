@@ -25,8 +25,6 @@ int get_expect_param_num(FieldList *param);
 
 int get_real_param_num(Node *args);
 
-bool checkTypeMatching(Type *leftType, Type *rightType);
-
 void setBoolOperatorType(Node *expOut, Node *expLeft, Node *expRight);
 
 void setCompareOperatorType(Node *expOut, Node *expLeft, Node *expRight);
@@ -38,3 +36,5 @@ void setAlrthOperatorType(Node *expOut, Node *innerExp);
 bool checkIntegerType(Node *exp);
 
 vector<Node *> getReturnExpFromCompSt(Node *CompSt);
+
+std::tuple<vector<int>, Type *> getArrayDemensionAndType(Type *_type);

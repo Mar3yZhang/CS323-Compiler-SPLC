@@ -25,6 +25,7 @@
         "streambuf": "cpp",
         "system_error": "cpp",
         "iostream": "cpp",
-        "iterator": "cpp"
+        "iterator": "cpp",
+        "tuple": "cpp"
     }
 }

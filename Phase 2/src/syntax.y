@@ -61,7 +61,7 @@ ExtDef: error ExtDecList SEMI      {printf("Error type B at Line %d: Missing spe
     | Specifier SEMI               {$$=new Node(Node_Type::MEDIAN,"ExtDef","",@$.first_line); $$->addChild({$1,$2}); ExtDefVisit_SS($$);}
     | Specifier FunDec CompSt      {$$=new Node(Node_Type::MEDIAN,"ExtDef","",@$.first_line); 
                                     $$->addChild({$1,$2,$3});
-                                    //ExtDefVisit_SFC($$);
+                                    // ExtDefVisit_SFC($$);
                                     }
     ;         
 ExtDecList: VarDec                            {$$=new Node(Node_Type::MEDIAN,"ExtDecList","",@$.first_line); $$->addChild({$1});}
@@ -126,7 +126,9 @@ DecList: Dec                                  {$$=new Node(Node_Type::MEDIAN,"De
     | Dec COMMA DecList                       {$$=new Node(Node_Type::MEDIAN,"DecList","",@$.first_line); $$->addChild({$1,$2,$3});}
     ;         
 Dec: VarDec                                   {$$=new Node(Node_Type::MEDIAN,"Dec","",@$.first_line); $$->addChild({$1});}
-    | VarDec ASSIGN Exp                       {$$=new Node(Node_Type::MEDIAN,"Dec","",@$.first_line); $$->addChild({$1,$2,$3});checkAssignmentTypeMatching($1, $3);}
+    | VarDec ASSIGN Exp  {$$=new Node(Node_Type::MEDIAN,"Dec","",@$.first_line); 
+                          $$->addChild({$1,$2,$3});
+                         }
     ;         
 /* Expression */          
 Args: Exp COMMA Args                          {$$=new Node(Node_Type::MEDIAN,"Args","",@$.first_line); $$->addChild({$1,$2,$3});}
@@ -135,6 +137,7 @@ Args: Exp COMMA Args                          {$$=new Node(Node_Type::MEDIAN,"Ar
 Exp: Exp ASSIGN Exp {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); 
                       $$->addChild({$1,$2,$3});
                       checkRvalueInLeftSide($$);
+                      checkAssignmentTypeMatching($1, $3);
                     }
     | Exp AND Exp   {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); 
                      $$->addChild({$1,$2,$3});
@@ -197,7 +200,10 @@ Exp: Exp ASSIGN Exp {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line);
                               setAlrthOperatorType($$,$2);
                             //   $$->type=$2->type; 
                              }
-    | ID LP Args error       {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1,$2,$3}); printf("Error type B at Line %d: Missing closing parenthesis ')'\n",@$.first_line); type_B_error = 1;}
+    | ID LP Args error {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1,$2,$3}); 
+                        printf("Error type B at Line %d: Missing closing parenthesis ')'\n",@$.first_line);
+                        type_B_error = 1;
+                       }
     | ID LP Args RP {checkExist_FUN($1);
                      checkParam_FUN($1,$3);
                      $$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); 
