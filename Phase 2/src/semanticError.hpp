@@ -32,8 +32,13 @@ void returnTypeDisMatch_8(int lineNum);
 // error type 9
 void invalidArgumentNumber_9(int lineNum, const std::string &name, int expect, int actually);
 
+//error type 10
+void indexingOnNonArray_10(int lineNum);
+
 // error type 11
 void invokeNonFunctionVariable_11(int lineNum, const std::string &name);
+
+void indexingByNonInteger_12(int lineNum);
 
 void nonStructFVariable_13(int lineNum);
 
