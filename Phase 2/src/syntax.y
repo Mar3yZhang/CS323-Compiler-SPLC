@@ -126,7 +126,7 @@ DecList: Dec                                  {$$=new Node(Node_Type::MEDIAN,"De
     | Dec COMMA DecList                       {$$=new Node(Node_Type::MEDIAN,"DecList","",@$.first_line); $$->addChild({$1,$2,$3});}
     ;         
 Dec: VarDec                                   {$$=new Node(Node_Type::MEDIAN,"Dec","",@$.first_line); $$->addChild({$1});}
-    | VarDec ASSIGN Exp                       {$$=new Node(Node_Type::MEDIAN,"Dec","",@$.first_line); $$->addChild({$1,$2,$3});}
+    | VarDec ASSIGN Exp                       {$$=new Node(Node_Type::MEDIAN,"Dec","",@$.first_line); $$->addChild({$1,$2,$3});checkAssignmentTypeMatching($1, $3);}
     ;         
 /* Expression */          
 Args: Exp COMMA Args                          {$$=new Node(Node_Type::MEDIAN,"Args","",@$.first_line); $$->addChild({$1,$2,$3});}
