@@ -212,6 +212,8 @@ Exp: Exp ASSIGN Exp {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line);
                  }
     | Exp LB Exp RB  {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line);
                       $$->addChild({$1,$2,$3,$4});
+		      checkExists_Array($1);
+                      getArrayType($$,$1,$3);
                      }
     | Exp DOT ID  {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); 
                    $$->addChild({$1,$2,$3});
