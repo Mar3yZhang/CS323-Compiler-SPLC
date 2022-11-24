@@ -59,12 +59,18 @@ void invalidArgumentNumber_9(int lineNum, const std::string &name, int expect, i
     printf("Error type 9 at Line %d: invalid argument number for %s, expect %d, got %d\n", lineNum, name.c_str(),
            expect, actually);
 }
-
+void indexingOnNonArray_10(int lineNum)
+{
+    printf("Error type 10 at Line %d: indexing on non-array variable\n", lineNum);
+}
 void invokeNonFunctionVariable_11(int lineNum, const std::string &name)
 {
     printf("Error type 11 at Line %d: invoking non-function variable: %s\n", lineNum, name.c_str());
 }
-
+void indexingByNonInteger_12(int lineNum)
+{
+    printf("Error type 12 at Line %d: indexing by non-integer\n", lineNum);
+}
 void nonStructFVariable_13(int lineNum) {
     printf("Error type 13 at Line %d: accessing with non-struct variable\n", lineNum);
 }
