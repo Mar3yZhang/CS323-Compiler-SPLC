@@ -37,4 +37,6 @@ bool checkIntegerType(Node *exp);
 
 vector<Node *> getReturnExpFromCompSt(Node *CompSt);
 
+vector<Node *> getReturnExpFromStmt(Node *Stmt);
+
 std::tuple<vector<int>, Type *> getArrayDemensionAndType(Type *_type);

@@ -30,7 +30,7 @@
 
 
 %type <node> Program ExtDefList
-%type <node> ExtDef ExtDecList Specifier StructSpecifier VarDec
+%type <node> ExtDef ExtDecList Specifier StructSpecifier VarDec CompFunDec
 %type <node> FunDec VarList ParamDec CompSt StmtList Stmt DefList
 %type <node> Def DecList Dec Args Exp
 
@@ -59,11 +59,17 @@ ExtDefList: /* to allow empty input */        {$$=new Node(Node_Type::NOTHING,"E
 ExtDef: error ExtDecList SEMI      {printf("Error type B at Line %d: Missing specifier\n",@$.first_line); type_B_error=1;}
     | Specifier ExtDecList SEMI    {$$=new Node(Node_Type::MEDIAN,"ExtDef","",@$.first_line); $$->addChild({$1,$2,$3});}
     | Specifier SEMI               {$$=new Node(Node_Type::MEDIAN,"ExtDef","",@$.first_line); $$->addChild({$1,$2}); ExtDefVisit_SS($$);}
-    | Specifier FunDec CompSt      {$$=new Node(Node_Type::MEDIAN,"ExtDef","",@$.first_line); 
-                                    $$->addChild({$1,$2,$3});
-                                    // ExtDefVisit_SFC($$);
-                                    }
+    | CompFunDec CompSt            {$$=new Node(Node_Type::MEDIAN,"ExtDef","",@$.first_line); 
+                                    $$->addChild({$1->child[0], $1->child[1], $2});
+                                    checkReturnType($$);
+                                   }
     ;         
+CompFunDec: Specifier FunDec  {
+    {$$=new Node(Node_Type::MEDIAN,"CompFunDec","",@$.first_line);
+     $$->addChild({$1,$2});
+     ExtDefVisit_SFC($$);
+    }
+}
 ExtDecList: VarDec                            {$$=new Node(Node_Type::MEDIAN,"ExtDecList","",@$.first_line); $$->addChild({$1});}
     | VarDec COMMA ExtDecList                 {$$=new Node(Node_Type::MEDIAN,"ExtDecList","",@$.first_line); $$->addChild({$1,$2,$3});}
     ;         

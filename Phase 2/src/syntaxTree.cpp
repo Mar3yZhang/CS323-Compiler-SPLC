@@ -154,7 +154,6 @@ void checkParam_FUN(Node *id, Node *args)
         }
 
         ///  TODO: 这里需要处理类型不匹配的问题 type 9.2，建议先把Args展开成vector
-        ///  TODO: type 11 需要先向符号表注册非函数变量
     }
 }
 void ExtDefVisit_SES(Node *node)
@@ -308,45 +307,64 @@ FieldList *getFiledListFromNodesVector(const vector<Node *> &vec)
 /// @brief 给函数添加上返回值类型
 // ExtDef: Specifier FunDec CompSt
 
-void ExtDefVisit_SFC(Node *ExtDef)
+void ExtDefVisit_SFC(Node *CompFunDec)
 {
 
-    // printf("22222222222");
-
-    Node *Specifier = ExtDef->child[0]; //表示返回值
-
-    // printf("12312312312");
-
-    Type *returnType;
+    Node *Specifier = CompFunDec->child[0]; //表示返回值
+    Node *FunDec = CompFunDec->child[1];
+    Type *returnType = nullptr;
     if (Specifier->child[0]->name == "TYPE")
     {
         string type = Specifier->child[0]->content;
         if (type == "int")
         {
-            Type *returnType = Type::getPrimitiveINT();
+            returnType = Type::getPrimitiveINT();
         }
         else if (type == "float")
         {
-            Type *returnType = Type::getPrimitiveFLOAT();
+            returnType = Type::getPrimitiveFLOAT();
         }
         else
         {
-            Type *returnType = Type::getPrimitiveCHAR();
+            returnType = Type::getPrimitiveCHAR();
         }
-
-        Type *returnType = symbolTable[Specifier->child[0]->content]->returnType;
+        symbolTable[FunDec->child[0]->content]->returnType = returnType;
     }
     else
     {
+        /// TODO: 这里的returnType永远为空，逻辑存在错误
         Node *StructSpecifier = Specifier->child[0];
         Node *ID = StructSpecifier->child[1];
-        Type *returnType = symbolTable[ID->content]->returnType;
-    }
 
+        /// TODO: 需要向符号表注册正确的returnType
+        symbolTable[ID->content]->returnType = returnType;
+    }
+    CompFunDec->child[0]->var = returnType;
+    CompFunDec->child[1]->var = returnType;
+}
+
+/// @brief 这里逻辑有问题
+void checkReturnType(Node *ExtDef)
+{
+
+    /// @brief 这里应该找调用的函数
+    Node *Specifer = ExtDef->child[0];
+    Type *returnType = Specifer->var;
     Node *CompSt = ExtDef->child[2];
+
+    // // 检查返回值放到最后操作
     vector<Node *> Exps = getReturnExpFromCompSt(CompSt);
     for (auto &&Exp : Exps)
     {
+        // print_map_keys();
+
+        // printf("--------------\n");
+        // printf("当前返回值EXP:\n");
+        // Node::print(Exp, 0);
+        // printf("预期返回值Type:\n");
+        // std::cout << (returnType == nullptr) << std::endl;
+        // printf("--------------\n");
+
         if (Exp->var == nullptr)
         {
             returnTypeDisMatch_8(Exp->line_num);
@@ -355,13 +373,11 @@ void ExtDefVisit_SFC(Node *ExtDef)
         {
             returnTypeDisMatch_8(Exp->line_num);
         }
-        /// TODO: 比较结构体的名字 和 数组的维数与结构
     }
 }
 
 /// @brief FunDec -> ID LP VarList RP | ID LP RP
 /// 这里只拿到了函数的名字，没有拿到参数列表的具体内容
-/// TODO: 将函数的内容填充完整
 /* declarator
 VarDec -> ID | VarDec LB INT RB
 FunDec -> ID LP VarList RP | ID LP RP

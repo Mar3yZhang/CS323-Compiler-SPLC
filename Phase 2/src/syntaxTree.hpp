@@ -32,9 +32,7 @@ void ExtDefVisit_SES(Node *node);
 
 void ExtDefVisit_SS(Node *node);
 
-void ExtDefVisit_SFC(Node *node);
-
-void Specifier_FunDec_Recv_SF(Node *node);
+void ExtDefVisit_SFC(Node *ExtDef);
 
 void getNamesOfDefList(Node *node, vector<Node *> &namesofFileds);
 
@@ -59,5 +57,7 @@ void checkRvalueInLeftSide(Node *Exp);
 void checkAssignmentTypeMatching(Node *outExp, Node *leftExp, Node *rightExp);
 
 void checkTypeOfDot(Node *expOut, Node *expIn, Node *ID);
+
+void checkReturnType(Node *ExtDef);
 
 #endif

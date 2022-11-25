@@ -243,14 +243,57 @@ vector<Node *> getReturnExpFromCompSt(Node *CompSt)
     vector<Node *> Exps;
     while (temp->child.size() != 0) //还存在Stmt
     {
-        Node *Stmt = temp->child[0];
 
-        if (Stmt->child.size() == 3 && Stmt->child[0]->name == "RETURN")
+        Node *Stmt = temp->child[0];
+        vector<Node *> innerExps = getReturnExpFromStmt(Stmt);
+
+        for (auto &&i : innerExps)
         {
-            printf("找到Return关键字");
-            Exps.push_back(Stmt->child[1]);
+            Exps.push_back(i);
         }
+
         temp = temp->child[1];
+    }
+    return Exps;
+}
+
+vector<Node *> getReturnExpFromStmt(Node *Stmt)
+{
+    vector<Node *> Exps;
+    if (Stmt->child.size() == 1)
+    {
+        Node *subCompSt = Stmt->child[0];
+        vector<Node *> tempVector = getReturnExpFromCompSt(subCompSt);
+        for (auto &&i : tempVector)
+        {
+            Exps.push_back(i);
+        }
+    }
+    else if (Stmt->child.size() == 5 && (Stmt->child[0]->name == "IF"|| Stmt->child[0]->name == "WHILE"))
+    {
+        vector<Node *> tempVector1 = getReturnExpFromStmt(Stmt->child[4]);
+        for (auto &&i : tempVector1)
+        {
+            Exps.push_back(i);
+        }
+    }
+    else if (Stmt->child.size() == 7 && Stmt->child[0]->name == "IF")
+    {
+        vector<Node *> tempVector1 = getReturnExpFromStmt(Stmt->child[4]);
+        vector<Node *> tempVector2 = getReturnExpFromStmt(Stmt->child[6]);
+        for (auto &&i : tempVector1)
+        {
+            Exps.push_back(i);
+        }
+        for (auto &&i : tempVector2)
+        {
+            Exps.push_back(i);
+        }
+    }
+    else if (Stmt->child.size() == 3 && Stmt->child[0]->name == "RETURN")
+    {
+        // printf("找到Return关键字");
+        Exps.push_back(Stmt->child[1]);
     }
     return Exps;
 }
