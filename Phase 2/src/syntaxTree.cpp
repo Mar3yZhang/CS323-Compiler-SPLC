@@ -91,22 +91,11 @@ void checkExists_Array(Node *id)
         {
             indexingOnNonArray_10((id->line_num));
         }
-    }
-    else
-    {
-        // multi-dementional array
-
-        string arrayName = (id->child[0]->content);
-        Type *arrayType = symbolTable[arrayName];
-        if (symbolTable.count(arrayName) != 0)
-        {
-            if (arrayType == nullptr || arrayType->category != CATEGORY::ARRAY)
-            {
-                indexingOnNonArray_10((id->line_num));
-            }
-        }
-        else
-        {
+    } else {
+        //multi-dementional array
+        //string arrayName = (id->child[0]->content);
+        Type *arrayType = id->var;
+        if (arrayType == nullptr || arrayType->category != CATEGORY::ARRAY) {
             indexingOnNonArray_10((id->line_num));
         }
     }
@@ -169,24 +158,27 @@ void ExtDefVisit_SES(Node *node)
             {
                 variableRedefined_3(node->line_num, name);
             }
-            if (extDecList->child[0]->child[0]->child.empty())
+            Type* r = Type::getPrimitiveINT();
+            if (type_name == "int")
             {
-                if (type_name == "int")
-                {
-                    symbolTable[name] = Type::getPrimitiveINT();
-                }
-                else if (type_name == "float")
-                {
-                    symbolTable[name] = Type::getPrimitiveFLOAT();
-                }
-                else if (type_name == "char")
-                {
-                    symbolTable[name] = Type::getPrimitiveCHAR();
-                }
+                auto r = Type::getPrimitiveINT();
             }
-            else
+            else if (type_name == "float")
             {
-                // TODO
+                auto r = Type::getPrimitiveFLOAT();
+            }
+            else if (type_name == "char")
+            {
+                auto r = Type::getPrimitiveCHAR();
+            }
+            if (extDecList->child[0]->child[0]->child.empty()) {
+                
+                symbolTable[name] = r;
+            } else {
+                //TODO 
+                symbolTable[name] = new Type(name, CATEGORY::ARRAY,
+                                         getArrayFromVarDec(extDecList->child[0],
+                                                            r));
             }
             if (extDecList->child.size() == 1)
             {
@@ -221,10 +213,11 @@ void ExtDefVisit_SES(Node *node)
                 {
                     // Struct with variable definition
                     symbolTable[variableName] = symbolTable[structName];
-                }
-                else
-                {
-                    // Struct with variable definition - with Array
+                } else {
+                    //Struct with variable definition - with Array
+                    symbolTable[variableName] = new Type(variableName, CATEGORY::ARRAY,
+                                                     getArrayFromVarDec(extDecList->child[0],
+                                                                        symbolTable[structName]));
                 }
                 if (extDecList->child.size() == 1)
                 {
@@ -465,9 +458,12 @@ void FunDecVisit(Node *FunDec)
             else //是数组类型
             {
                 ///  TODO:  实现数组在符号表和函数中的注册
-
-                vector<Node *> VarDecs;
-                while (cur_VarList->child.size() != 1) //还没有到最后的ID
+                string ID = getName(VarDec,"VarDec");
+                Type *param_type = new Type(ID, CATEGORY::PRIMITIVE, string_to_prim[cur_Specifier->child[0]->content]);
+                symbolTable[ID] = new Type(ID, CATEGORY::ARRAY,
+                                                  getArrayFromVarDec(VarDec, param_type));
+                 vector<Node *> VarDecs;
+                 while (cur_VarList->child.size() != 1) //还没有到最后的ID
                 {
                     ParamsDecs.push_back(cur_VarList->child[0]); // VarDec -> ID | VarDec LB INT RB
                     cur_VarList = cur_VarList->child[2];
@@ -576,6 +572,10 @@ void defVisit(Node *def)
                 if (defList->child[0]->child[0]->child.size() == 1)
                 {
                     symbolTable[variableName] = symbolTable[structName];
+                } else {
+                    symbolTable[variableName] = new Type(variableName, CATEGORY::ARRAY,
+                                                     getArrayFromVarDec(decList->child[0]->child[0],
+                                                                        symbolTable[structName]));
                 }
                 if (decList->child.size() == 1)
                 {
@@ -610,12 +610,29 @@ Array *getArrayFromVarDec(Node *node, Type *type)
     }
 }
 
-void getArrayType(Node *expOut, Node *expIn, Node *Integer)
-{
-    if (!checkIntegerType(Integer))
-    {
+void getArrayType(Node *expOut, Node *expIn, Node *Integer){
+    if (!checkIntegerType(Integer)){
+        expOut->var = nullptr;
         indexingByNonInteger_12(expIn->line_num);
         return;
+    }
+    if (expOut->child.size() == 1) {
+        string arrayName = expOut->child[0]->content;
+        if (symbolTable.count(arrayName) != 0) {
+            Type *arrayType = symbolTable[arrayName];
+            if (arrayType->category == CATEGORY::ARRAY) {
+                expOut->var = arrayType;
+            }
+        } 
+    } else {
+        Type *arrayType = expIn->var;
+        if (arrayType == nullptr) {
+            expOut->var = static_cast<Type *>( nullptr);
+            return;
+        }
+        if (arrayType->category == CATEGORY::ARRAY) {
+            expOut->var = arrayType->foo.array->base;
+        }
     }
 }
 void getReturnTypeOfFunction(Node *expOut, Node *ID)
