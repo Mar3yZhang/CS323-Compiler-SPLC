@@ -40,8 +40,6 @@ void getNamesOfDefList(Node *node, vector<Node *> &namesofFileds);
 
 FieldList *getFiledListFromNodesVector(const vector<Node *> &vec);
 
-
-
 void FunDecVisit(Node *node);
 
 void getVarList(Node *node);
@@ -58,7 +56,7 @@ void getReturnTypeOfFunction(Node *expOut, Node *ID);
 
 void checkRvalueInLeftSide(Node *Exp);
 
-void checkAssignmentTypeMatching(Node *leftExp, Node *rightExp);
+void checkAssignmentTypeMatching(Node *outExp, Node *leftExp, Node *rightExp);
 
 void checkTypeOfDot(Node *expOut, Node *expIn, Node *ID);
 

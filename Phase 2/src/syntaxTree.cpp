@@ -21,6 +21,7 @@ void idToExp(Node *exp, Node *id)
         return;
     }
     exp->var = symbolTable[id->content];
+    // std::cout << id->content << std::endl;
 }
 
 string getName(Node *node, string nodeName)
@@ -310,7 +311,7 @@ FieldList *getFiledListFromNodesVector(const vector<Node *> &vec)
 void ExtDefVisit_SFC(Node *ExtDef)
 {
 
-    printf("22222222222");
+    // printf("22222222222");
 
     Node *Specifier = ExtDef->child[0]; //表示返回值
 
@@ -410,8 +411,20 @@ void FunDecVisit(Node *FunDec)
                 {
                 case CATEGORY::PRIMITIVE:
                 {
-
-                    Type *param_type = new Type(ID, CATEGORY::PRIMITIVE, string_to_prim[cur_Specifier->child[0]->content]);
+                    Type *param_type = Type::getPrimitiveINT();
+                    switch (string_to_prim[cur_Specifier->child[0]->content])
+                    {
+                    case PRIM::INT:
+                        param_type = Type::getPrimitiveINT();
+                        break;
+                    case PRIM::CHAR:
+                        param_type = Type::getPrimitiveCHAR();
+                        break;
+                    case PRIM::FLOAT:
+                        param_type = Type::getPrimitiveFLOAT();
+                        break;
+                    }
+                    // Type *param_type = new Type(ID, CATEGORY::PRIMITIVE, string_to_prim[cur_Specifier->child[0]->content]);
 
                     //注册参数列表中的参数到符号表上
                     symbolTable[ID] = param_type;
@@ -643,20 +656,29 @@ void checkRvalueInLeftSide(Node *Exp)
 
 // Exp: TYPE 5
 // Exp: Exp ASSIGN Exp 要先保证左右EXP的 var类型是有内容的 才能进行比较
-void checkAssignmentTypeMatching(Node *leftExp, Node *rightExp)
+void checkAssignmentTypeMatching(Node *outExp, Node *leftExp, Node *rightExp)
 {
     Type *leftType = leftExp->var;
     Type *rightType = rightExp->var;
 
+    // printf("--------------\n");
+    // printf("外层表达式:\n");
+    // Node::print(outExp, 0);
+    // printf("左表达式:\n");
+    // Node::print(leftExp, 0);
+    // printf("右表达式:\n");
+    // Node::print(rightExp, 0);
+    // printf("--------------\n");
+
     if (leftType == nullptr || rightType == nullptr) // 说明左表达式或右表达式存在运算符错误
     {
-
         // printf("有左值或右值为空");
-        // nonMatchTypeBothSide_5(leftExp->line_num);
+        nonMatchTypeBothSide_5(leftExp->line_num);
         return;
     }
-    else if (leftType == rightType) // 说明赋值不存在错误
+    else if (leftType == rightType) // 说明赋值不存在错误,这里需要考虑以下单例的问题
     {
+        outExp->var = leftExp->var;
         return;
     }
     else if (leftType->category != rightType->category)

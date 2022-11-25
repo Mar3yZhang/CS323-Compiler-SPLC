@@ -131,13 +131,13 @@ Dec: VarDec                                   {$$=new Node(Node_Type::MEDIAN,"De
                          }
     ;         
 /* Expression */          
-Args: Exp COMMA Args                          {$$=new Node(Node_Type::MEDIAN,"Args","",@$.first_line); $$->addChild({$1,$2,$3});}
-    | Exp                                     {$$=new Node(Node_Type::MEDIAN,"Args","",@$.first_line); $$->addChild({$1});}
+Args: Exp COMMA Args {$$=new Node(Node_Type::MEDIAN,"Args","",@$.first_line); $$->addChild({$1,$2,$3});}
+    | Exp            {$$=new Node(Node_Type::MEDIAN,"Args","",@$.first_line); $$->addChild({$1});}
     ;         
 Exp: Exp ASSIGN Exp {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); 
                       $$->addChild({$1,$2,$3});
                       checkRvalueInLeftSide($$);
-                      checkAssignmentTypeMatching($1, $3);
+                      checkAssignmentTypeMatching($$,$1,$3);
                     }
     | Exp AND Exp   {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); 
                      $$->addChild({$1,$2,$3});
@@ -193,12 +193,13 @@ Exp: Exp ASSIGN Exp {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line);
                     }
     | MINUS Exp %prec UMINUS {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); 
                               $$->addChild({$1,$2});
+                              $$->var=$2->var; 
                               setAlrthOperatorType($$,$2);
                              }
     | NOT Exp                {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line);
                               $$->addChild({$1,$2});
+                              $$->var=$2->var; 
                               setAlrthOperatorType($$,$2);
-                            //   $$->type=$2->type; 
                              }
     | ID LP Args error {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); $$->addChild({$1,$2,$3}); 
                         printf("Error type B at Line %d: Missing closing parenthesis ')'\n",@$.first_line);
@@ -218,7 +219,7 @@ Exp: Exp ASSIGN Exp {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line);
                  }
     | Exp LB Exp RB  {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line);
                       $$->addChild({$1,$2,$3,$4});
-		      checkExists_Array($1);
+		              checkExists_Array($1);
                       getArrayType($$,$1,$3);
                      }
     | Exp DOT ID  {$$=new Node(Node_Type::MEDIAN,"Exp","",@$.first_line); 

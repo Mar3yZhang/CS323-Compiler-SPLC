@@ -98,8 +98,7 @@ bool checkIntegerType(Node *exp)
     }
     else
     {
-        if (exp->var->category == CATEGORY::PRIMITIVE &&
-            exp->var->foo.primitive == PRIM::INT)
+        if (exp->var == Type::getPrimitiveINT())
         {
             return true;
         }
@@ -121,8 +120,7 @@ bool checkFloatType(Node *exp)
     }
     else
     {
-        if (exp->var->category == CATEGORY::PRIMITIVE &&
-            exp->var->foo.primitive == PRIM::FLOAT)
+        if (exp->var == Type::getPrimitiveFLOAT())
         {
             return true;
         }
@@ -141,7 +139,7 @@ void setBoolOperatorType(Node *expOut, Node *expLeft, Node *expRight)
 
     if (a && b)
     {
-        expOut->var = expLeft->var;
+        expOut->var = Type::getPrimitiveINT();
     }
     else
     {
@@ -161,7 +159,7 @@ void setCompareOperatorType(Node *expOut, Node *expLeft, Node *expRight)
 
     if ((a && b) || (c && d))
     {
-        expOut->var = new Type("", CATEGORY::PRIMITIVE, PRIM::INT);
+        expOut->var = Type::getPrimitiveINT();
     }
     else
     {

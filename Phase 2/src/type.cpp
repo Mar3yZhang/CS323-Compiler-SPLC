@@ -1,5 +1,9 @@
 #include "type.hpp"
 
+Type *_int_ = new Type("", CATEGORY::PRIMITIVE, PRIM::INT);
+Type *_float_ = new Type("", CATEGORY::PRIMITIVE, PRIM::FLOAT);
+Type *_char_ = new Type("", CATEGORY::PRIMITIVE, PRIM::CHAR);
+
 Type::Type(string name, CATEGORY category, PRIM primitive)
 {
     this->name = name;
@@ -27,15 +31,15 @@ Type::Type(string name, CATEGORY category, FieldList *param, Type *returnType)
 }
 Type *Type::getPrimitiveINT()
 {
-    return new Type("", CATEGORY::PRIMITIVE, PRIM::INT);
+    return _int_;
 }
 Type *Type::getPrimitiveCHAR()
 {
-    return new Type("", CATEGORY::PRIMITIVE, PRIM::CHAR);
+    return _float_;
 }
 Type *Type::getPrimitiveFLOAT()
 {
-    return new Type("", CATEGORY::PRIMITIVE, PRIM::FLOAT);
+    return _char_;
 }
 
 Array::Array(int size, Type *base)
