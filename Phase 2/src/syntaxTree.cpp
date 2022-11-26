@@ -582,6 +582,9 @@ void defVisit(Node *def)
         {
             do
             {
+                if (symbolTable.count(variableName) != 0) {
+                    variableRedefined_3(def->line_num, variableName.c_str());
+                }
                 if (defList->child[0]->child[0]->child.size() == 1)
                 {
                     symbolTable[variableName] = symbolTable[structName];
