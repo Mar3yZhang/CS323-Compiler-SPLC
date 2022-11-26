@@ -91,11 +91,14 @@ void checkExists_Array(Node *id)
         {
             indexingOnNonArray_10((id->line_num));
         }
-    } else {
-        //multi-dementional array
-        //string arrayName = (id->child[0]->content);
+    }
+    else
+    {
+        // multi-dementional array
+        // string arrayName = (id->child[0]->content);
         Type *arrayType = id->var;
-        if (arrayType == nullptr || arrayType->category != CATEGORY::ARRAY) {
+        if (arrayType == nullptr || arrayType->category != CATEGORY::ARRAY)
+        {
             indexingOnNonArray_10((id->line_num));
         }
     }
@@ -147,8 +150,10 @@ void checkParam_FUN(Node *id, Node *args)
 }
 void ExtDefVisit_SES(Node *node)
 {
-    if (node->child[0]->child[0]->child.empty())
+    Node *specifier = node->child[0];
+    if ((specifier->child[0]->child.size()) == 0)
     {
+        // 其他基本类型的注册
         Node *extDecList = node->child[1];
         string name = getName(extDecList, "ExtDecList");
         string type_name = node->child[0]->child[0]->content;
@@ -158,7 +163,8 @@ void ExtDefVisit_SES(Node *node)
             {
                 variableRedefined_3(node->line_num, name);
             }
-            Type* r = Type::getPrimitiveINT();
+
+            Type *r = Type::getPrimitiveINT();
             if (type_name == "int")
             {
                 auto r = Type::getPrimitiveINT();
@@ -171,24 +177,27 @@ void ExtDefVisit_SES(Node *node)
             {
                 auto r = Type::getPrimitiveCHAR();
             }
-            if (extDecList->child[0]->child[0]->child.empty()) {
-                
+            if (extDecList->child[0]->child[0]->child.empty())
+            {
                 symbolTable[name] = r;
-            } else {
-                //TODO 
+            }
+            else
+            {
+                // TODO
                 symbolTable[name] = new Type(name, CATEGORY::ARRAY,
-                                         getArrayFromVarDec(extDecList->child[0],
-                                                            r));
+                                             getArrayFromVarDec(extDecList->child[0],
+                                                                r));
             }
             if (extDecList->child.size() == 1)
             {
                 break;
             }
-            extDecList = extDecList->child[2];
+            extDecList = extDecList->child[1];
             name = getName(extDecList, "ExtDecList");
         } while (true);
     }
     else
+    // 结构体的注册
     {
         string structName = node->child[0]->child[0]->child[1]->content;
         Node *extDecList = node->child[1];
@@ -205,19 +214,23 @@ void ExtDefVisit_SES(Node *node)
         {
             do
             {
+
                 if (symbolTable.count(variableName) != 0)
                 {
                     variableRedefined_3(node->line_num, variableName);
                 }
+
                 if (extDecList->child[0]->child.size() == 1)
                 {
                     // Struct with variable definition
                     symbolTable[variableName] = symbolTable[structName];
-                } else {
-                    //Struct with variable definition - with Array
+                }
+                else
+                {
+                    // Struct with variable definition - with Array
                     symbolTable[variableName] = new Type(variableName, CATEGORY::ARRAY,
-                                                     getArrayFromVarDec(extDecList->child[0],
-                                                                        symbolTable[structName]));
+                                                         getArrayFromVarDec(extDecList->child[0],
+                                                                            symbolTable[structName]));
                 }
                 if (extDecList->child.size() == 1)
                 {
@@ -458,12 +471,12 @@ void FunDecVisit(Node *FunDec)
             else //是数组类型
             {
                 ///  TODO:  实现数组在符号表和函数中的注册
-                string ID = getName(VarDec,"VarDec");
+                string ID = getName(VarDec, "VarDec");
                 Type *param_type = new Type(ID, CATEGORY::PRIMITIVE, string_to_prim[cur_Specifier->child[0]->content]);
                 symbolTable[ID] = new Type(ID, CATEGORY::ARRAY,
-                                                  getArrayFromVarDec(VarDec, param_type));
-                 vector<Node *> VarDecs;
-                 while (cur_VarList->child.size() != 1) //还没有到最后的ID
+                                           getArrayFromVarDec(VarDec, param_type));
+                vector<Node *> VarDecs;
+                while (cur_VarList->child.size() != 1) //还没有到最后的ID
                 {
                     ParamsDecs.push_back(cur_VarList->child[0]); // VarDec -> ID | VarDec LB INT RB
                     cur_VarList = cur_VarList->child[2];
@@ -572,10 +585,12 @@ void defVisit(Node *def)
                 if (defList->child[0]->child[0]->child.size() == 1)
                 {
                     symbolTable[variableName] = symbolTable[structName];
-                } else {
+                }
+                else
+                {
                     symbolTable[variableName] = new Type(variableName, CATEGORY::ARRAY,
-                                                     getArrayFromVarDec(decList->child[0]->child[0],
-                                                                        symbolTable[structName]));
+                                                         getArrayFromVarDec(decList->child[0]->child[0],
+                                                                            symbolTable[structName]));
                 }
                 if (decList->child.size() == 1)
                 {
@@ -610,27 +625,36 @@ Array *getArrayFromVarDec(Node *node, Type *type)
     }
 }
 
-void getArrayType(Node *expOut, Node *expIn, Node *Integer){
-    if (!checkIntegerType(Integer)){
+void getArrayType(Node *expOut, Node *expIn, Node *Integer)
+{
+    if (!checkIntegerType(Integer))
+    {
         expOut->var = nullptr;
         indexingByNonInteger_12(expIn->line_num);
         return;
     }
-    if (expOut->child.size() == 1) {
+    if (expOut->child.size() == 1)
+    {
         string arrayName = expOut->child[0]->content;
-        if (symbolTable.count(arrayName) != 0) {
+        if (symbolTable.count(arrayName) != 0)
+        {
             Type *arrayType = symbolTable[arrayName];
-            if (arrayType->category == CATEGORY::ARRAY) {
+            if (arrayType->category == CATEGORY::ARRAY)
+            {
                 expOut->var = arrayType;
             }
-        } 
-    } else {
+        }
+    }
+    else
+    {
         Type *arrayType = expIn->var;
-        if (arrayType == nullptr) {
-            expOut->var = static_cast<Type *>( nullptr);
+        if (arrayType == nullptr)
+        {
+            expOut->var = static_cast<Type *>(nullptr);
             return;
         }
-        if (arrayType->category == CATEGORY::ARRAY) {
+        if (arrayType->category == CATEGORY::ARRAY)
+        {
             expOut->var = arrayType->foo.array->base;
         }
     }
@@ -693,15 +717,6 @@ void checkAssignmentTypeMatching(Node *outExp, Node *leftExp, Node *rightExp)
 {
     Type *leftType = leftExp->var;
     Type *rightType = rightExp->var;
-
-    // printf("--------------\n");
-    // printf("外层表达式:\n");
-    // Node::print(outExp, 0);
-    // printf("左表达式:\n");
-    // Node::print(leftExp, 0);
-    // printf("右表达式:\n");
-    // Node::print(rightExp, 0);
-    // printf("--------------\n");
 
     if (leftType == nullptr || rightType == nullptr) // 说明左表达式或右表达式存在运算符错误
     {

@@ -57,7 +57,10 @@ ExtDefList: /* to allow empty input */        {$$=new Node(Node_Type::NOTHING,"E
     ;         
 
 ExtDef: error ExtDecList SEMI      {printf("Error type B at Line %d: Missing specifier\n",@$.first_line); type_B_error=1;}
-    | Specifier ExtDecList SEMI    {$$=new Node(Node_Type::MEDIAN,"ExtDef","",@$.first_line); $$->addChild({$1,$2,$3});}
+    | Specifier ExtDecList SEMI    {$$=new Node(Node_Type::MEDIAN,"ExtDef","",@$.first_line); 
+                                    $$->addChild({$1,$2,$3});
+                                    ExtDefVisit_SES($$);
+                                   }
     | Specifier SEMI               {$$=new Node(Node_Type::MEDIAN,"ExtDef","",@$.first_line); $$->addChild({$1,$2}); ExtDefVisit_SS($$);}
     | CompFunDec CompSt            {$$=new Node(Node_Type::MEDIAN,"ExtDef","",@$.first_line); 
                                     $$->addChild({$1->child[0], $1->child[1], $2});
@@ -281,11 +284,12 @@ int main(int argc, char **argv) {
             //printf("\nParsing complete\n");
             //printf("\n\nAbstract Syntex Tree: \n");
 
-
             // 是否选择打印语法分析树：
             //Node::print(ast_root,0);
+            // 是否打印语义分析符号表
+            // print_map_keys();
         }else{
-            // printf("\nParsing failed\n");
+            printf("\nParsing failed\n");
         }
         
     }
