@@ -1,5 +1,0 @@
-int global;
-int glo2;
-int parms(){ 
-    global = 2;
-}
