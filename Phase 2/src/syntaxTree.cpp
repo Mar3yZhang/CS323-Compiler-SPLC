@@ -184,7 +184,7 @@ void ExtDefVisit_SES(Node *node)
             else
             {
                 // TODO
-                symbolTable[name] = new Type(name, CATEGORY::ARRAY,
+                symbolTable[name] = new Type("", CATEGORY::ARRAY,
                                              getArrayFromVarDec(extDecList->child[0],
                                                                 r));
             }
@@ -228,7 +228,7 @@ void ExtDefVisit_SES(Node *node)
                 else
                 {
                     // Struct with variable definition - with Array
-                    symbolTable[variableName] = new Type(variableName, CATEGORY::ARRAY,
+                    symbolTable[variableName] = new Type("", CATEGORY::ARRAY,
                                                          getArrayFromVarDec(extDecList->child[0],
                                                                             symbolTable[structName]));
                 }
@@ -373,7 +373,8 @@ void checkReturnType(Node *ExtDef)
 
         if (Exp->var == nullptr)
         {
-            returnTypeDisMatch_8(Exp->line_num);
+            // returnTypeDisMatch_8(Exp->line_num);
+            // 非空指针compiler会报其他错误
         }
         else if (Exp->var != returnType)
         {
@@ -472,9 +473,21 @@ void FunDecVisit(Node *FunDec)
             {
                 ///  TODO:  实现数组在符号表和函数中的注册
                 string ID = getName(VarDec, "VarDec");
-                Type *param_type = new Type(ID, CATEGORY::PRIMITIVE, string_to_prim[cur_Specifier->child[0]->content]);
-                symbolTable[ID] = new Type(ID, CATEGORY::ARRAY,
-                                           getArrayFromVarDec(VarDec, param_type));
+                Type *param_type;
+                switch (string_to_prim[cur_Specifier->child[0]->content])
+                {
+                case PRIM::INT:
+                    param_type = Type::getPrimitiveINT();
+                    break;
+                case PRIM::CHAR:
+                    param_type = Type::getPrimitiveCHAR();
+                    break;
+                case PRIM::FLOAT:
+                    param_type = Type::getPrimitiveFLOAT();
+                    break;
+                }
+                // Type *param_type = new Type(ID, CATEGORY::PRIMITIVE, string_to_prim[cur_Specifier->child[0]->content]);
+                symbolTable[ID] = new Type("", CATEGORY::ARRAY, getArrayFromVarDec(VarDec, param_type));
                 vector<Node *> VarDecs;
                 while (cur_VarList->child.size() != 1) //还没有到最后的ID
                 {
@@ -540,6 +553,11 @@ void defVisit(Node *def)
             else if (decList->child[0]->child[0]->child.size() >= 4)
             {
                 // Array
+
+                // printf("++++++++++++++");
+                // std::cout << type_name << std::endl;
+                // printf("++++++++++++++");
+
                 Type *r = Type::getPrimitiveINT();
                 if (type_name == "int")
                 {
@@ -553,7 +571,8 @@ void defVisit(Node *def)
                 {
                     auto r = Type::getPrimitiveCHAR();
                 }
-                symbolTable[name] = new Type(name, CATEGORY::ARRAY, getArrayFromVarDec(decList->child[0]->child[0], r));
+
+                symbolTable[name] = new Type("", CATEGORY::ARRAY, getArrayFromVarDec(decList->child[0]->child[0], r));
                 // Error occurs when identifying an array     int arr[3] = 5;
                 if (decList->child[0]->child.size() == 3)
                 { // tested
@@ -582,7 +601,8 @@ void defVisit(Node *def)
         {
             do
             {
-                if (symbolTable.count(variableName) != 0) {
+                if (symbolTable.count(variableName) != 0)
+                {
                     variableRedefined_3(def->line_num, variableName.c_str());
                 }
                 if (defList->child[0]->child[0]->child.size() == 1)
@@ -619,6 +639,7 @@ Array *getArrayFromVarDec(Node *node, Type *type)
 
         if (node->child[0]->child.size() == 1)
         {
+
             return new Array(size, type);
         }
         else
@@ -630,27 +651,39 @@ Array *getArrayFromVarDec(Node *node, Type *type)
 
 void getArrayType(Node *expOut, Node *expIn, Node *Integer)
 {
+    //说明是别名
+    if (Integer->child[0]->name == "ID")
+    {
+        Type *type = symbolTable[Integer->child[0]->content];
+        if (type != Type::getPrimitiveINT())
+        {
+            indexingByNonInteger_12(expIn->line_num);
+            return;
+        }
+    }
+
     if (!checkIntegerType(Integer))
     {
         expOut->var = nullptr;
         indexingByNonInteger_12(expIn->line_num);
         return;
     }
-    if (expOut->child.size() == 1)
+    else if (Integer->child.size() == 1)
     {
-        string arrayName = expOut->child[0]->content;
+        string arrayName = expIn->child[0]->content;
         if (symbolTable.count(arrayName) != 0)
         {
             Type *arrayType = symbolTable[arrayName];
-            if (arrayType->category == CATEGORY::ARRAY)
+            if (arrayType->category == CATEGORY::ARRAY && arrayType->foo.array->base != nullptr)
             {
-                expOut->var = arrayType;
+            
+                expOut->var = arrayType->foo.array->base;
             }
         }
     }
     else
     {
-        Type *arrayType = expIn->var;
+        Type *arrayType = Integer->var;
         if (arrayType == nullptr)
         {
             expOut->var = static_cast<Type *>(nullptr);
@@ -658,9 +691,27 @@ void getArrayType(Node *expOut, Node *expIn, Node *Integer)
         }
         if (arrayType->category == CATEGORY::ARRAY)
         {
-            expOut->var = arrayType->foo.array->base;
+            Type *temp = Integer->var;
+            while (temp != nullptr && temp->foo.array != nullptr &&
+                   temp->foo.array->base->category == CATEGORY::ARRAY)
+            {
+                temp = temp->foo.array->base;
+            }
+            if (temp->category == CATEGORY::PRIMITIVE)
+            {
+                expOut->var = temp->foo.array->base;
+            }
         }
     }
+
+    // printf("--------------\n");
+    // printf("EXP0:\n");
+    // Node::print(expOut, 0);
+    // printf("EXP1:\n");
+    // Node::print(expIn, 0);
+    // printf("EXP2:\n");
+    // Node::print(Integer, 0);
+    // printf("--------------\n");
 }
 void getReturnTypeOfFunction(Node *expOut, Node *ID)
 {
@@ -720,6 +771,22 @@ void checkAssignmentTypeMatching(Node *outExp, Node *leftExp, Node *rightExp)
 {
     Type *leftType = leftExp->var;
     Type *rightType = rightExp->var;
+
+    // printf("--------------\n");
+    // printf("EXP0:\n");
+    // Node::print(outExp, 0);
+    // printf("EXP1:\n");
+    // Node::print(leftExp, 0);
+    // printf("EXP2:\n");
+    // Node::print(rightExp, 0);
+    // printf("--------------\n");
+
+    // printf("INT");
+    // std::cout << Type::getPrimitiveINT() << std::endl;
+    // printf("CHAR");
+    // std::cout << Type::getPrimitiveCHAR() << std::endl;
+    // printf("FLOAT");
+    // std::cout << Type::getPrimitiveFLOAT() << std::endl;
 
     if (leftType == nullptr || rightType == nullptr) // 说明左表达式或右表达式存在运算符错误
     {
@@ -781,7 +848,6 @@ void checkAssignmentTypeMatching(Node *outExp, Node *leftExp, Node *rightExp)
 
 void checkTypeOfDot(Node *expOut, Node *expIn, Node *ID)
 {
-    // std::cout<<expOut->child[0]->var<<std::endl;
     if (expOut->name == "Exp" && expOut->child[0]->var != nullptr &&
         expOut->child[0]->var->category != CATEGORY::STRUCTURE)
     {
