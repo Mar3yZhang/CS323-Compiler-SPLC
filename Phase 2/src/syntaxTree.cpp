@@ -164,18 +164,18 @@ void ExtDefVisit_SES(Node *node)
                 variableRedefined_3(node->line_num, name);
             }
 
-            Type *r = Type::getPrimitiveINT();
+            Type *r = nullptr;
             if (type_name == "int")
             {
-                auto r = Type::getPrimitiveINT();
+                r = Type::getPrimitiveINT();
             }
             else if (type_name == "float")
             {
-                auto r = Type::getPrimitiveFLOAT();
+                r = Type::getPrimitiveFLOAT();
             }
             else if (type_name == "char")
             {
-                auto r = Type::getPrimitiveCHAR();
+                r = Type::getPrimitiveCHAR();
             }
             if (extDecList->child[0]->child[0]->child.empty())
             {
@@ -434,7 +434,7 @@ void FunDecVisit(Node *FunDec)
                 {
                 case CATEGORY::PRIMITIVE:
                 {
-                    Type *param_type = Type::getPrimitiveINT();
+                    Type *param_type = nullptr;
                     switch (string_to_prim[cur_Specifier->child[0]->content])
                     {
                     case PRIM::INT:
@@ -553,23 +553,18 @@ void defVisit(Node *def)
             else if (decList->child[0]->child[0]->child.size() >= 4)
             {
                 // Array
-
-                // printf("++++++++++++++");
-                // std::cout << type_name << std::endl;
-                // printf("++++++++++++++");
-
-                Type *r = Type::getPrimitiveINT();
+                Type *r = nullptr;
                 if (type_name == "int")
                 {
-                    auto r = Type::getPrimitiveINT();
+                    r = Type::getPrimitiveINT();
                 }
                 else if (type_name == "float")
                 {
-                    auto r = Type::getPrimitiveFLOAT();
+                    r = Type::getPrimitiveFLOAT();
                 }
                 else if (type_name == "char")
                 {
-                    auto r = Type::getPrimitiveCHAR();
+                    r = Type::getPrimitiveCHAR();
                 }
 
                 symbolTable[name] = new Type("", CATEGORY::ARRAY, getArrayFromVarDec(decList->child[0]->child[0], r));
