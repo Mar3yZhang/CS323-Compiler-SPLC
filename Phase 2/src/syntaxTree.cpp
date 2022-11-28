@@ -430,6 +430,10 @@ void FunDecVisit(Node *FunDec)
             {
                 string ID = VarDec->child[0]->content;
                 CATEGORY category = cur_Specifier->child[0]->name == "TYPE" ? CATEGORY::PRIMITIVE : CATEGORY::STRUCTURE;
+                if (symbolTable.count(ID) == 0)
+                {
+                    structNoDefinition_16(VarDec->line_num, structName.c_str());
+                }
                 switch (category)
                 {
                 case CATEGORY::PRIMITIVE:
@@ -473,6 +477,9 @@ void FunDecVisit(Node *FunDec)
             {
                 ///  TODO:  实现数组在符号表和函数中的注册
                 string ID = getName(VarDec, "VarDec");
+                if (symbolTable.count(ID) != 0) {
+                    variableRedefined_3(cur_VarList->line_num, ID.c_str());
+                }
                 Type *param_type;
                 switch (string_to_prim[cur_Specifier->child[0]->content])
                 {
