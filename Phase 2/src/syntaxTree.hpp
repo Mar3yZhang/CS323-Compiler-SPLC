@@ -19,7 +19,6 @@ void idToExp(Node *exp, Node *id);
 
 string getName(Node *node, string nodeName);
 
-Array *getArray(Node *node, Type *type);
 Array *getArrayFromVarDec(Node *node, Type *type);
 void getArrayType(Node *expOut, Node *expIn, Node *Integer);
 void checkExists_ID(Node *node);

@@ -241,7 +241,7 @@ vector<Node *> getReturnExpFromCompSt(Node *CompSt)
     Node *StmtList = CompSt->child[2];
     Node *temp = StmtList;
     vector<Node *> Exps;
-    while (temp->child.size() != 0) //还存在Stmt
+    while (!temp->child.empty()) //还存在Stmt
     {
 
         Node *Stmt = temp->child[0];
