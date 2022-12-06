@@ -2395,7 +2395,7 @@ int main(int argc, char **argv) {
             // 是否打印语义分析符号表
             // print_map_keys();
         }else{
-            printf("\nParsing failed\n");
+            // printf("\nParsing failed\n");
         }
         
     }

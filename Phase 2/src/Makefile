@@ -22,4 +22,5 @@ splc:
 	$(CPP) $(Type) $(Node) $(SemanticError) $(Function) $(SyntaxTree) $(SAUtill) syntax.tab.c -lfl -ly -o ../bin/splc
 clean:
 	@rm -rf ../bin/
-.PHONY: spl
+.PHONY: splc
+all: splc

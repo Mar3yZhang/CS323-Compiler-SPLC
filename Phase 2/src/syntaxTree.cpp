@@ -432,7 +432,7 @@ void FunDecVisit(Node *FunDec)
                 CATEGORY category = cur_Specifier->child[0]->name == "TYPE" ? CATEGORY::PRIMITIVE : CATEGORY::STRUCTURE;
                 if (symbolTable.count(ID) == 0)
                 {
-                    structNoDefinition_16(VarDec->line_num, structName.c_str());
+                    structNoDefinition_16(VarDec->line_num, "");
                 }
                 switch (category)
                 {
