@@ -32,6 +32,19 @@ void Node::print(Node *node, long depth)
     case Node_Type::MEDIAN:
         print_name(depth, node->name);
         std::cout << " (" << node->line_num << ")" << std::endl;
+        
+        if (node->name == "Exp")
+        {
+            if (node->var == nullptr)
+            {
+                std::cout << "nullptr" << std::endl;
+            }
+            else
+            {
+                std::cout << node->var << std::endl;
+            }
+        }
+
         break;
     case Node_Type::OTHER:
         print_name(depth, node->name);

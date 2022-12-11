@@ -1,3 +1,5 @@
+#ifndef _NODE_HPP_
+#define _NODE_HPP_
 #include <string>
 #include <iostream>
 #include <vector>
@@ -25,7 +27,6 @@ public:
     int line_num;              // the line in the context
     std::vector<Node *> child; // the children of the node
     Type *var = nullptr;
-    Function *func = nullptr;
 
 public:
     explicit Node(enum Node_Type type, std::string name, const char *content, int line);
@@ -33,3 +34,4 @@ public:
     void addChild(std::initializer_list<Node *> childs);
     static void print(Node *node, long depth);
 };
+#endif

@@ -1,0 +1,5 @@
+int test_2_r15()
+{
+  struct Child Amy;
+  return 0;
+}
