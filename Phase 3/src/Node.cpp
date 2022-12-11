@@ -1,4 +1,4 @@
-#include "Node.hpp"
+#include "../include/Node.hpp"
 
 Node::Node(Node_Type type, std::string name, const char *content, int line)
     : type(type), name(std::move(name)), content(content), line_num(line) {}

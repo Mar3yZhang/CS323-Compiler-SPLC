@@ -1,4 +1,4 @@
-#include "type.hpp"
+#include "../include/type.hpp"
 
 Type *_int_ = new Type("", CATEGORY::PRIMITIVE, PRIM::INT);
 Type *_float_ = new Type("", CATEGORY::PRIMITIVE, PRIM::FLOAT);

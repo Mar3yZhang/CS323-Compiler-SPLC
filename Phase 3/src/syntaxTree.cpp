@@ -1,4 +1,4 @@
-#include "syntaxTree.hpp"
+#include "../include/syntaxTree.hpp"
 
 /// @brief debug 用
 void print_map_keys() {

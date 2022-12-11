@@ -1,4 +1,4 @@
-#include "semanticError.hpp"
+#include "../include/semanticError.hpp"
 
 void variableNoDefinition_1(int lineNum, const std::string &name)
 {

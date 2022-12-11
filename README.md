@@ -18,7 +18,4 @@
 | 其他优化     | chore:    |
 
 #Overleaf link
-phase1
 https://www.overleaf.com/6374397145ptfnhpmmnbbn
-phase2
-https://www.overleaf.com/6169715151kbdbqkrjbfsf

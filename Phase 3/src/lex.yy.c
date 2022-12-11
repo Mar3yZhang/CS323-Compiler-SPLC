@@ -646,7 +646,7 @@ char *yytext;
     // macro 
     #define EXIT_OK 0
     #define EXIT_FAIL 1
-    #include "Node.hpp"
+    #include "../include/Node.hpp"
     #include "string.h"
     #include "syntax.tab.h"
 
