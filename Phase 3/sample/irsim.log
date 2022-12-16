@@ -1,0 +1,44 @@
+[DEBUG] 2022-12-15 19:40:47,620 (irsim.py 620): Parsed arguments: {'irpath': 'test01.ir', 'inputs': '', 'logpath': 'irsim.log'}
+[INFO] 2022-12-15 19:40:47,629 (irsim.py 567): File loaded successfully
+[ERROR] 2022-12-15 19:40:56,505 (irsim.py 581): An error occurred at line 2: Illegal memory access
+[WARNING] 2022-12-15 19:40:58,441 (irsim.py 574): Program Counter goes out of bound. The running program will be terminated instantly
+[WARNING] 2022-12-15 19:40:58,960 (irsim.py 574): Program Counter goes out of bound. The running program will be terminated instantly
+[WARNING] 2022-12-15 19:40:59,308 (irsim.py 574): Program Counter goes out of bound. The running program will be terminated instantly
+[WARNING] 2022-12-15 19:40:59,582 (irsim.py 574): Program Counter goes out of bound. The running program will be terminated instantly
+[WARNING] 2022-12-15 19:40:59,824 (irsim.py 574): Program Counter goes out of bound. The running program will be terminated instantly
+[WARNING] 2022-12-15 19:41:00,023 (irsim.py 574): Program Counter goes out of bound. The running program will be terminated instantly
+[WARNING] 2022-12-15 19:41:00,211 (irsim.py 574): Program Counter goes out of bound. The running program will be terminated instantly
+[WARNING] 2022-12-15 19:41:00,395 (irsim.py 574): Program Counter goes out of bound. The running program will be terminated instantly
+[WARNING] 2022-12-15 19:41:00,551 (irsim.py 574): Program Counter goes out of bound. The running program will be terminated instantly
+[WARNING] 2022-12-15 19:41:00,724 (irsim.py 574): Program Counter goes out of bound. The running program will be terminated instantly
+[WARNING] 2022-12-15 19:41:00,896 (irsim.py 574): Program Counter goes out of bound. The running program will be terminated instantly
+[ERROR] 2022-12-15 19:41:03,269 (irsim.py 581): An error occurred at line 2: Illegal memory access
+[ERROR] 2022-12-15 19:41:05,237 (irsim.py 581): An error occurred at line 2: Illegal memory access
+[ERROR] 2022-12-15 19:41:08,380 (irsim.py 581): An error occurred at line 2: Illegal memory access
+[ERROR] 2022-12-15 19:41:08,699 (irsim.py 581): An error occurred at line 2: Illegal memory access
+[WARNING] 2022-12-15 19:41:13,439 (irsim.py 574): Program Counter goes out of bound. The running program will be terminated instantly
+[WARNING] 2022-12-15 19:41:13,596 (irsim.py 574): Program Counter goes out of bound. The running program will be terminated instantly
+[INFO] 2022-12-15 19:41:14,149 (irsim.py 567): KeyboardInterrupt raised, quit program
+[DEBUG] 2022-12-15 19:41:16,889 (irsim.py 620): Parsed arguments: {'irpath': 'test01.ir', 'inputs': '', 'logpath': 'irsim.log'}
+[INFO] 2022-12-15 19:41:16,892 (irsim.py 567): File loaded successfully
+[ERROR] 2022-12-15 19:41:25,557 (irsim.py 581): An error occurred at line 2: Illegal memory access
+[ERROR] 2022-12-15 19:41:26,556 (irsim.py 581): An error occurred at line 2: Illegal memory access
+[ERROR] 2022-12-15 19:41:28,738 (irsim.py 581): An error occurred at line 2: Illegal memory access
+[ERROR] 2022-12-15 19:41:29,540 (irsim.py 581): An error occurred at line 2: Illegal memory access
+[ERROR] 2022-12-15 19:41:29,970 (irsim.py 581): An error occurred at line 2: Illegal memory access
+[INFO] 2022-12-15 19:41:39,870 (irsim.py 567): KeyboardInterrupt raised, quit program
+[DEBUG] 2022-12-15 19:42:01,936 (irsim.py 620): Parsed arguments: {'irpath': 'test01.ir', 'inputs': '1', 'logpath': 'irsim.log'}
+[INFO] 2022-12-15 19:42:01,938 (irsim.py 567): File loaded successfully
+[INFO] 2022-12-15 19:42:12,675 (irsim.py 567): Program has exited gracefully
+[INFO] 2022-12-15 19:42:12,676 (irsim.py 567): Total instructions = 10
+[ERROR] 2022-12-15 19:42:13,583 (irsim.py 581): An error occurred at line 2: Illegal memory access
+[ERROR] 2022-12-15 19:42:15,200 (irsim.py 581): An error occurred at line 2: Illegal memory access
+[ERROR] 2022-12-15 19:42:15,776 (irsim.py 581): An error occurred at line 2: Illegal memory access
+[ERROR] 2022-12-15 19:42:16,162 (irsim.py 581): An error occurred at line 2: Illegal memory access
+[ERROR] 2022-12-15 19:42:16,488 (irsim.py 581): An error occurred at line 2: Illegal memory access
+[ERROR] 2022-12-15 19:42:17,083 (irsim.py 581): An error occurred at line 2: Illegal memory access
+[INFO] 2022-12-15 19:42:20,277 (irsim.py 567): KeyboardInterrupt raised, quit program
+[DEBUG] 2022-12-15 19:51:37,201 (irsim.py 620): Parsed arguments: {'irpath': 'test01.ir', 'inputs': '1', 'logpath': 'irsim.log'}
+[INFO] 2022-12-15 19:51:37,203 (irsim.py 567): File loaded successfully
+[INFO] 2022-12-15 19:51:39,395 (irsim.py 567): Program has exited gracefully
+[INFO] 2022-12-15 19:51:39,395 (irsim.py 567): Total instructions = 10
