@@ -7,10 +7,10 @@ SRC_PATH=src
 BIN_PATH=bin
 
 Node = Node.cpp
-SAUtill = semantic_analysis/SAUtill.cpp
-SyntaxTree = semantic_analysis/syntaxTree.cpp
-SemanticError = semantic_analysis/semanticError.cpp
-Type = semantic_analysis/Type.cpp
+SAUtill = semantic-analysis/SAUtill.cpp
+SyntaxTree = semantic-analysis/syntaxTree.cpp
+SemanticError = semantic-analysis/semanticError.cpp
+Type = semantic-analysis/Type.cpp
 Main = main.cpp
 
 splc:
