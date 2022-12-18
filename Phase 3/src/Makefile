@@ -6,11 +6,11 @@ BISON=bison
 SRC_PATH=src
 BIN_PATH=bin
 
-Type = Type.cpp
 Node = Node.cpp
-SAUtill = SAUtill.cpp
-SyntaxTree = syntaxTree.cpp
-SemanticError = semanticError.cpp
+SAUtill = semantic_analysis/SAUtill.cpp
+SyntaxTree = semantic_analysis/syntaxTree.cpp
+SemanticError = semantic_analysis/semanticError.cpp
+Type = semantic_analysis/Type.cpp
 Main = main.cpp
 
 splc:

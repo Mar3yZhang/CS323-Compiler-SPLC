@@ -39,7 +39,7 @@ public:
         Array *array;
         FieldList *structure;
         FieldList *param;
-    } foo;
+    } foo{};
     Type *returnType = nullptr;
 
 public:

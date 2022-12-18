@@ -1,4 +1,4 @@
-#include "../include/syntaxTree.hpp"
+#include "../../include/syntaxTree.hpp"
 
 /// @brief debug 用
 void print_map_keys() {
@@ -54,7 +54,7 @@ void checkExists_Array(Node *id) {
         string arrayName = (id->child[0]->content);
         if (symbolTable.count(arrayName) != 0) {
             // array
-            Type * arrayType = symbolTable[arrayName];
+            Type *arrayType = symbolTable[arrayName];
             if (arrayType->category != CATEGORY::ARRAY) {
                 indexingOnNonArray_10((id->line_num));
             }
@@ -64,7 +64,7 @@ void checkExists_Array(Node *id) {
     } else {
         // multi-dementional array
         // string arrayName = (id->child[0]->content);
-        Type * arrayType = id->var;
+        Type *arrayType = id->var;
         if (arrayType == nullptr || arrayType->category != CATEGORY::ARRAY) {
             indexingOnNonArray_10((id->line_num));
         }
@@ -89,7 +89,7 @@ void checkParam_FUN(Node *id, Node *args) {
         return;
     } else {
         //这里先处理数字不匹配的问题
-        Type * function = symbolTable[functionName];
+        Type *function = symbolTable[functionName];
         if (get_expect_param_num(function->foo.param) == 0 && args == nullptr) //都是不需要参数
         {
             return;
@@ -118,7 +118,7 @@ void ExtDefVisit_SES(Node *node) {
                 variableRedefined_3(node->line_num, name);
             }
 
-            Type * r = nullptr;
+            Type *r = nullptr;
             if (type_name == "int") {
                 r = Type::getPrimitiveINT();
             } else if (type_name == "float") {
@@ -237,7 +237,7 @@ void ExtDefVisit_SFC(Node *CompFunDec) {
 
     Node *Specifier = CompFunDec->child[0]; //表示返回值
     Node *FunDec = CompFunDec->child[1];
-    Type * returnType = nullptr;
+    Type *returnType = nullptr;
     if (Specifier->child[0]->name == "TYPE") {
         string type = Specifier->child[0]->content;
         if (type == "int") {
@@ -265,7 +265,7 @@ void checkReturnType(Node *ExtDef) {
 
     /// @brief 这里应该找调用的函数
     Node *Specifer = ExtDef->child[0];
-    Type * returnType = Specifer->var;
+    Type *returnType = Specifer->var;
     Node *CompSt = ExtDef->child[2];
 
     // // 检查返回值放到最后操作
@@ -298,7 +298,7 @@ VarList -> ParamDec COMMA VarList| ParamDec
 ParamDec -> Specifier VarDec
 */
 void FunDecVisit(Node *FunDec) {
-    Type * function = new Type("", CATEGORY::FUNCTION, nullptr, nullptr);
+    Type *function = new Type("", CATEGORY::FUNCTION, nullptr, nullptr);
 
     // Node *ID = FunDec->child[0];
     // function->name = ID->content;
@@ -337,7 +337,7 @@ void FunDecVisit(Node *FunDec) {
                 }
                 switch (category) {
                     case CATEGORY::PRIMITIVE: {
-                        Type * param_type = nullptr;
+                        Type *param_type = nullptr;
                         switch (string_to_prim[cur_Specifier->child[0]->content]) {
                             case PRIM::INT:
                                 param_type = Type::getPrimitiveINT();
@@ -375,7 +375,7 @@ void FunDecVisit(Node *FunDec) {
                 if (symbolTable.count(ID) != 0) {
                     variableRedefined_3(cur_VarList->line_num, ID);
                 }
-                Type * param_type;
+                Type *param_type;
                 switch (string_to_prim[cur_Specifier->child[0]->content]) {
                     case PRIM::INT:
                         param_type = Type::getPrimitiveINT();
@@ -442,7 +442,7 @@ void defVisit(Node *def) {
                 }
             } else if (decList->child[0]->child[0]->child.size() >= 4) {
                 // Array
-                Type * r = nullptr;
+                Type *r = nullptr;
                 if (type_name == "int") {
                     r = Type::getPrimitiveINT();
                 } else if (type_name == "float") {
@@ -511,7 +511,7 @@ Array *getArrayFromVarDec(Node *node, Type *type) {
 void getArrayType(Node *expOut, Node *expIn, Node *Integer) {
     //说明是别名
     if (Integer->child[0]->name == "ID") {
-        Type * type = symbolTable[Integer->child[0]->content];
+        Type *type = symbolTable[Integer->child[0]->content];
         if (type != Type::getPrimitiveINT()) {
             indexingByNonInteger_12(expIn->line_num);
             return;
@@ -525,20 +525,20 @@ void getArrayType(Node *expOut, Node *expIn, Node *Integer) {
     } else if (Integer->child.size() == 1) {
         string arrayName = expIn->child[0]->content;
         if (symbolTable.count(arrayName) != 0) {
-            Type * arrayType = symbolTable[arrayName];
+            Type *arrayType = symbolTable[arrayName];
             if (arrayType->category == CATEGORY::ARRAY && arrayType->foo.array->base != nullptr) {
 
                 expOut->var = arrayType->foo.array->base;
             }
         }
     } else {
-        Type * arrayType = Integer->var;
+        Type *arrayType = Integer->var;
         if (arrayType == nullptr) {
             expOut->var = static_cast<Type *>(nullptr);
             return;
         }
         if (arrayType->category == CATEGORY::ARRAY) {
-            Type * temp = Integer->var;
+            Type *temp = Integer->var;
             while (temp != nullptr && temp->foo.array != nullptr &&
                    temp->foo.array->base->category == CATEGORY::ARRAY) {
                 temp = temp->foo.array->base;
@@ -564,7 +564,7 @@ void getReturnTypeOfFunction(Node *expOut, Node *ID) {
     if (symbolTable.count(functionName) == 0 || symbolTable[functionName]->category != CATEGORY::FUNCTION) {
         return;
     }
-    Type * returnType = symbolTable[functionName]->returnType;
+    Type *returnType = symbolTable[functionName]->returnType;
     expOut->var = returnType;
 }
 
@@ -603,8 +603,8 @@ void checkRvalueInLeftSide(Node *Exp) {
 // Exp: TYPE 5
 // Exp: Exp ASSIGN Exp 要先保证左右EXP的 var类型是有内容的 才能进行比较
 void checkAssignmentTypeMatching(Node *outExp, Node *leftExp, Node *rightExp) {
-    Type * leftType = leftExp->var;
-    Type * rightType = rightExp->var;
+    Type *leftType = leftExp->var;
+    Type *rightType = rightExp->var;
 
     // printf("--------------\n");
     // printf("EXP0:\n");
@@ -641,7 +641,7 @@ void checkAssignmentTypeMatching(Node *outExp, Node *leftExp, Node *rightExp) {
         /// TODO: 数组的赋值等价
     else if (leftType->category == CATEGORY::ARRAY) {
         vector<int> demensionLeftArray, demensionRightArray;
-        Type * insideLeftType, *insideRightType;
+        Type *insideLeftType, *insideRightType;
         std::tie(demensionLeftArray, insideLeftType) = getArrayDemensionAndType(leftType);
         std::tie(demensionRightArray, insideRightType) = getArrayDemensionAndType(rightType);
         if (demensionLeftArray.size() != demensionRightArray.size() ||

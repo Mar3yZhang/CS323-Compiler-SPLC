@@ -16,17 +16,20 @@ int main(int argc, char **argv) {
         // printf("\nTokens: \n");
         yyrestart(f);
         if (!yyparse() && (!type_A_error) && (!type_B_error)) {
-            //printf("\nParsing complete\n");
-            //printf("\n\nAbstract Syntex Tree: \n");
+
+//            printf("\nParsing complete\n");
+//            printf("\n\nAbstract Syntex Tree: \n");
 
             // 是否选择打印语法分析树：
             //Node::print(ast_root,0);
-            // 是否打印语义分析符号表
-            // print_map_keys();
-        } else {
-            // printf("\nParsing failed\n");
-        }
 
+
+            // 是否打印语义分析符号表
+            print_map_keys();
+
+        } else {
+            printf("\nParsing failed\n");
+        }
     }
     return 0;
 }
