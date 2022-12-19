@@ -21,11 +21,14 @@ int main(int argc, char **argv) {
 //            printf("\n\nAbstract Syntex Tree: \n");
 
             // 是否选择打印语法分析树：
-            //Node::print(ast_root,0);
-
+            Node::print(root_node, 0);
 
             // 是否打印语义分析符号表
             print_map_keys();
+
+            // 是否翻译为三地址码
+            translate_to_tac();
+            print_tac_ir();
 
         } else {
             printf("\nParsing failed\n");

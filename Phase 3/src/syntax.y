@@ -3,17 +3,18 @@
     #include <unordered_map>
     #include "lex.yy.c"
     #include "../include/syntaxTree.hpp"
+    #include "../include/ir-util.hpp"
 
     using std::string;
     using std::unordered_map;
     #define YY_NO_UNPUT
     void yyerror(const char *s);
-    Node* ast_root;
     bool type_A_error = 0;
     bool type_B_error = 0;
     void lineinfor(void);
     Node* root_node;
     unordered_map<string,Type*> symbolTable;
+    vector<TAC *> ir_tac;
     extern int isError;
     #define PARSER_error_OUTPUT stdout
 %}
@@ -49,7 +50,7 @@
 Program: ExtDefList{
     $$ = new Node(Node_Type::MEDIAN,"Program","",@$.first_line);
     $$->addChild({$1});
-    ast_root = $$;
+    root_node = $$;
 }
 ;       
 ExtDefList: /* to allow empty input */        {$$=new Node(Node_Type::NOTHING,"ExtDefList","",@$.first_line);}
@@ -61,18 +62,18 @@ ExtDef: error ExtDecList SEMI      {printf("Error type B at Line %d: Missing spe
                                     $$->addChild({$1,$2,$3});
                                     ExtDefVisit_SES($$);
                                    }
-    | Specifier SEMI               {$$=new Node(Node_Type::MEDIAN,"ExtDef","",@$.first_line); $$->addChild({$1,$2}); ExtDefVisit_SS($$);}
+    | Specifier SEMI               {$$=new Node(Node_Type::MEDIAN,"ExtDef","",@$.first_line); 
+                                    $$->addChild({$1,$2}); 
+                                    ExtDefVisit_SS($$);}
     | CompFunDec CompSt            {$$=new Node(Node_Type::MEDIAN,"ExtDef","",@$.first_line); 
                                     $$->addChild({$1->child[0], $1->child[1], $2});
                                     checkReturnType($$);
                                    }
     ;         
-CompFunDec: Specifier FunDec  {
-    {$$=new Node(Node_Type::MEDIAN,"CompFunDec","",@$.first_line);
-     $$->addChild({$1,$2});
-     ExtDefVisit_SFC($$);
-    }
-}
+CompFunDec: Specifier FunDec  { $$=new Node(Node_Type::MEDIAN,"CompFunDec","",@$.first_line);
+                                $$->addChild({$1,$2});
+                                ExtDefVisit_SFC($$);
+                              }
 ExtDecList: VarDec                            {$$=new Node(Node_Type::MEDIAN,"ExtDecList","",@$.first_line); $$->addChild({$1});}
     | VarDec COMMA ExtDecList                 {$$=new Node(Node_Type::MEDIAN,"ExtDecList","",@$.first_line); $$->addChild({$1,$2,$3});}
     ;         

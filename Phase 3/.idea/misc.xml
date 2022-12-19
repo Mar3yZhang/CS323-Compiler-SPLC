@@ -9,6 +9,8 @@
   <component name="MakefileSettings">
     <option name="linkedExternalProjectsSettings">
       <MakefileProjectSettings>
+        <option name="buildDirectory" value="" />
+        <option name="buildOptions" value="-j8" />
         <option name="buildTarget" value="splc" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/src" />
         <option name="modules">

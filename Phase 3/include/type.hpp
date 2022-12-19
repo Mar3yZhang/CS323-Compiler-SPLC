@@ -62,7 +62,7 @@ public:
 
 class Array {
 public:
-    int size;
+    int size = 0;
     Type *base = nullptr;
 
 public:
