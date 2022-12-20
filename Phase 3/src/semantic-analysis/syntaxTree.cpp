@@ -101,8 +101,6 @@ void checkParam_FUN(Node *id, Node *args) {
                 invalidArgumentNumber_9(id->line_num, functionName, expect, real);
             }
         }
-
-        ///  TODO: 这里需要处理类型不匹配的问题 type 9.2，建议先把Args展开成vector
     }
 }
 
@@ -129,7 +127,6 @@ void ExtDefVisit_SES(Node *node) {
             if (extDecList->child[0]->child[0]->child.empty()) {
                 symbolTable[name] = r;
             } else {
-                // TODO
                 symbolTable[name] = new Type("", CATEGORY::ARRAY,
                                              getArrayFromVarDec(extDecList->child[0],
                                                                 r));
@@ -249,11 +246,8 @@ void ExtDefVisit_SFC(Node *CompFunDec) {
         }
         symbolTable[FunDec->child[0]->content]->returnType = returnType;
     } else {
-        /// TODO: 这里的returnType永远为空，逻辑存在错误
         Node *StructSpecifier = Specifier->child[0];
         Node *ID = StructSpecifier->child[1];
-
-        /// TODO: 需要向符号表注册正确的returnType
         symbolTable[ID->content]->returnType = returnType;
     }
     CompFunDec->child[0]->var = returnType;
@@ -313,7 +307,7 @@ void FunDecVisit(Node *FunDec) {
     {
         symbolTable[function->name] = function;
         return;
-    } else /// 有参数列表 ID LP VarList RP TODO:从VarList中获取信息
+    } else
     {
         vector<Node *> ParamsDecs;
         Node *cur_VarList = FunDec->child[2];
@@ -358,7 +352,6 @@ void FunDecVisit(Node *FunDec) {
                     }
                     case CATEGORY::STRUCTURE: //是结构体类型
                     {
-                        ///  TODO: 实现结构体在符号表和函数中的注册
                         string structName = cur_Specifier->child[0]->child[1]->content;
                         if (symbolTable.count(ID) == 0) {
                             structNoDefinition_16(VarDec->line_num, structName);
@@ -638,7 +631,6 @@ void checkAssignmentTypeMatching(Node *outExp, Node *leftExp, Node *rightExp) {
                symbolTable[leftType->name]->name != symbolTable[rightType->name]->name) {
         nonMatchTypeBothSide_5(leftExp->line_num);
     }
-        /// TODO: 数组的赋值等价
     else if (leftType->category == CATEGORY::ARRAY) {
         vector<int> demensionLeftArray, demensionRightArray;
         Type *insideLeftType, *insideRightType;

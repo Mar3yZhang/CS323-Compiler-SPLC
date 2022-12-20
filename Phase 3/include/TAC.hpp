@@ -9,7 +9,7 @@ using namespace std;
 /*
 Basic Instructions
 LABEL x :               define a label x
-FUNCTION f :            define a function f
+FUNCTION x :            define a function x
 x := y                  assign value of y to x
 x := y + z              arithmetic addition
 x := y - z              arithmetic subtraction

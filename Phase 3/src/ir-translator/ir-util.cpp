@@ -31,7 +31,7 @@ void TAC::print() const {
 void translate_to_tac() {
     Node *Program = root_node;
     Node *ExtDefList = Program->child[0];
-    for (auto *ExtDef: ExtDefList_to_vector(ExtDefList)) {
+    for (auto *ExtDef: list_to_vector(ExtDefList)) {
         Node *Specifier = ExtDef->child[0];
         Node *FunDec = ExtDef->child[1];
         Node *CompSt = ExtDef->child[2];
@@ -39,32 +39,23 @@ void translate_to_tac() {
         CompFunDec->child.push_back(Specifier);
         CompFunDec->child.push_back(FunDec);
         translate_func_dec(CompFunDec);
+        translate_compst(CompSt);
     }
 }
 
 void print_tac_ir() {
     cout << ir_tac.size() << " TAC in total !" << endl;
-    int counter = 1;
+    cout << " Num: " << ir_tac.size() << endl;
     for (auto *temp: ir_tac) {
-        cout << " Num: " << counter << endl;
         temp->print();
-        counter++;
     }
 }
 
-vector<Node *> ExtDefList_to_vector(Node *ExtDefList) {
+vector<Node *> list_to_vector(Node *List) {
     vector<Node *> result;
-
-    //TODO:需要处理特判
-
-    if (ExtDefList->name != "ExtDefList") {
-        cerr << "Error! The input Node is not ExtDefList!" << endl;
-        cerr << "Error! The input Node is " << ExtDefList->name << " !" << endl;
-        return result;
-    }
-    while (!ExtDefList->child.empty()) {
-        result.push_back(ExtDefList->child[0]);
-        ExtDefList = ExtDefList->child[1];
+    while (!List->child.empty()) {
+        result.push_back(List->child[0]);
+        List = List->child[1];
     }
     return result;
 }
