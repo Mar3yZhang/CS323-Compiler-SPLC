@@ -31,8 +31,8 @@ splc:
 	@chmod +x ../$(BIN_PATH)/splc
 	$(BISON) -d syntax.y
 	$(FLEX) lex.l
-	
-	$(CPP) $(Type) $(Node) $(SemanticError) $(SyntaxTree) $(SAUtill) $(TAC) $(Main) -lfl -ly -o ../$(BIN_PATH)/splc
+
+	$(CPP) $(Type) $(Node) $(SemanticError) $(SyntaxTree) $(SAUtill) $(TAC) $(Main) -lfl -ly -o ../$(BIN_PATH)/splc -g
 clean:
 	@rm -rf ../bin/
 .PHONY: splc

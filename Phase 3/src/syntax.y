@@ -69,7 +69,10 @@ ExtDef: error ExtDecList SEMI      {printf("Error type B at Line %d: Missing spe
                                     $$->addChild({$1->child[0], $1->child[1], $2});
                                     checkReturnType($$);
                                    }
-    ;         
+    ;   
+
+//实际结果是: ExtDef: Specifier FunDec 
+
 CompFunDec: Specifier FunDec  { $$=new Node(Node_Type::MEDIAN,"CompFunDec","",@$.first_line);
                                 $$->addChild({$1,$2});
                                 ExtDefVisit_SFC($$);

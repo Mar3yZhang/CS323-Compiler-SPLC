@@ -32,16 +32,23 @@ void translate_to_tac() {
     Node *Program = root_node;
     Node *ExtDefList = Program->child[0];
     for (auto *ExtDef: ExtDefList_to_vector(ExtDefList)) {
-        Node *CompFunDec = ExtDef->child[0];
-        Node *CompSt = ExtDef->child[1];
-
+        Node *Specifier = ExtDef->child[0];
+        Node *FunDec = ExtDef->child[1];
+        Node *CompSt = ExtDef->child[2];
+        Node *CompFunDec = new Node(Node_Type::NOTHING, "CompFunDec", "", FunDec->line_num);
+        CompFunDec->child.push_back(Specifier);
+        CompFunDec->child.push_back(FunDec);
         translate_func_dec(CompFunDec);
     }
 }
 
 void print_tac_ir() {
+    cout << ir_tac.size() << " TAC in total !" << endl;
+    int counter = 1;
     for (auto *temp: ir_tac) {
+        cout << " Num: " << counter << endl;
         temp->print();
+        counter++;
     }
 }
 
