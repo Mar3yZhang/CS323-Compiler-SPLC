@@ -31,4 +31,13 @@ void translate_func_varlist(Node *VarList);
 
 void translate_compst(Node *CompSt);
 
+void translate_EXP(Node *Exp, const string &reg);
+
+TAC *translate_exp_int(Node *Exp);
+
+TAC *translate_exp_id(Node *Exp);
+
+TAC *translate_exp_minus(Node *Exp);
+
+
 std::ostream &operator<<(std::ostream &lhs, TAC_TYPE type);

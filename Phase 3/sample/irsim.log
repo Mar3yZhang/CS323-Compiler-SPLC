@@ -128,3 +128,23 @@
 [INFO] 2022-12-20 20:48:24,932 (irsim.py 567): Total instructions = 10
 [ERROR] 2022-12-20 20:48:30,556 (irsim.py 581): An error occurred at line 2: Illegal memory access
 [ERROR] 2022-12-20 20:48:30,938 (irsim.py 581): An error occurred at line 2: Illegal memory access
+[DEBUG] 2022-12-20 21:40:32,852 (irsim.py 620): Parsed arguments: {'irpath': 'test01.ir', 'inputs': '4', 'logpath': 'irsim.log'}
+[INFO] 2022-12-20 21:40:32,857 (irsim.py 567): File loaded successfully
+[INFO] 2022-12-20 21:40:57,531 (irsim.py 567): KeyboardInterrupt raised, quit program
+[DEBUG] 2022-12-20 21:41:04,966 (irsim.py 620): Parsed arguments: {'irpath': 'test02.ir', 'inputs': '4', 'logpath': 'irsim.log'}
+[INFO] 2022-12-20 21:41:04,971 (irsim.py 567): File loaded successfully
+[INFO] 2022-12-20 21:41:49,994 (irsim.py 567): KeyboardInterrupt raised, quit program
+[DEBUG] 2022-12-20 21:41:56,254 (irsim.py 620): Parsed arguments: {'irpath': 'test02.ir', 'inputs': '4', 'logpath': 'irsim.log'}
+[INFO] 2022-12-20 21:41:56,259 (irsim.py 567): File loaded successfully
+[INFO] 2022-12-20 21:43:25,753 (irsim.py 567): Program has exited gracefully
+[INFO] 2022-12-20 21:43:25,754 (irsim.py 567): Total instructions = 37
+[ERROR] 2022-12-20 21:43:28,200 (irsim.py 581): An error occurred at line 15: Illegal memory access
+[DEBUG] 2022-12-20 21:43:38,747 (irsim.py 620): Parsed arguments: {'irpath': 'test02.ir', 'inputs': '4', 'logpath': 'irsim.log'}
+[INFO] 2022-12-20 21:43:38,753 (irsim.py 567): File loaded successfully
+[INFO] 2022-12-20 21:46:42,730 (irsim.py 567): Program has exited gracefully
+[INFO] 2022-12-20 21:46:42,731 (irsim.py 567): Total instructions = 37
+[ERROR] 2022-12-20 21:46:43,100 (irsim.py 581): An error occurred at line 15: Illegal memory access
+[INFO] 2022-12-20 21:46:43,617 (irsim.py 567): KeyboardInterrupt raised, quit program
+[DEBUG] 2022-12-20 21:48:39,641 (irsim.py 620): Parsed arguments: {'irpath': 'test02.ir', 'inputs': '4', 'logpath': 'irsim.log'}
+[INFO] 2022-12-20 21:48:39,646 (irsim.py 567): File loaded successfully
+[INFO] 2022-12-20 21:54:19,470 (irsim.py 567): KeyboardInterrupt raised, quit program

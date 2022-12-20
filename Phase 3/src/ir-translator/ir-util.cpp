@@ -62,13 +62,13 @@ vector<Node *> list_to_vector(Node *List) {
 
 // 这里的返回寄存器操作需要优化
 string get_vital_register() {
-    auto reg = "v" + to_string(v_regs);
+    string reg = "v" + to_string(v_regs);
     v_regs++;
     return reg;
 }
 
 string get_temp_register() {
-    auto reg = "t" + to_string(t_regs);
+    string reg = "t" + to_string(t_regs);
     t_regs++;
     return reg;
 }
