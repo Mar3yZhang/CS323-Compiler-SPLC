@@ -11,7 +11,7 @@ void translate_args(Node *Exp,vector<TAC*> argList) {
     }
 }
 
-void translate_exp_func(Node *Exp,const string &reg) {
+void translate_exp_func(Node *Exp) {
     if (Exp->name != "Exp") {
         cerr << "Error! The input Node is not Exp!" << endl;
         cerr << "Error! The input Node is " << Exp->name << " ! " << endl;
