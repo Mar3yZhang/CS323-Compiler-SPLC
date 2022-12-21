@@ -15,6 +15,9 @@
     Node* root_node;
     unordered_map<string,Type*> symbolTable;
     vector<TAC *> ir_tac;
+    unordered_map<string, int> id_int_mapper;
+    unordered_map<int, string> int_reg_mapper;
+    unordered_map<string, string> param_id_reg_mapper;
     extern int isError;
     #define PARSER_error_OUTPUT stdout
 %}
@@ -101,8 +104,7 @@ FunDec: ID LP error                           {$$=new Node(Node_Type::MEDIAN,"Fu
     | ID LP VarList RP                        {$$=new Node(Node_Type::MEDIAN,"FunDec","",@$.first_line); $$->addChild({$1,$2,$3,$4});FunDecVisit($$);}
     | ID LP RP                                {$$=new Node(Node_Type::MEDIAN,"FunDec","",@$.first_line); $$->addChild({$1,$2,$3});FunDecVisit($$);}
     ;         
-VarList:  
-    ParamDec COMMA VarList                    {$$=new Node(Node_Type::MEDIAN,"VarList","",@$.first_line); $$->addChild({$1,$2,$3});}
+VarList:ParamDec COMMA VarList                    {$$=new Node(Node_Type::MEDIAN,"VarList","",@$.first_line); $$->addChild({$1,$2,$3});}
     | ParamDec                                {$$=new Node(Node_Type::MEDIAN,"VarList","",@$.first_line); $$->addChild({$1});}
     ;         
 ParamDec: Specifier VarDec                    {$$=new Node(Node_Type::MEDIAN,"ParamDec","",@$.first_line); $$->addChild({$1,$2});}

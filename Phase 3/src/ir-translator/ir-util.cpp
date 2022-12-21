@@ -45,7 +45,6 @@ void translate_to_tac() {
 
 void print_tac_ir() {
     cout << ir_tac.size() << " TAC in total !" << endl;
-    cout << " Num: " << ir_tac.size() << endl;
     for (auto *temp: ir_tac) {
         temp->print();
     }
@@ -67,17 +66,27 @@ string get_vital_register() {
     return reg;
 }
 
-string get_temp_register() {
-    string reg = "t" + to_string(t_regs);
-    t_regs++;
-    return reg;
-}
+//string get_vital_register(int content) {
+//    if (reg_has_int(content)) { // 当前数值不存在于任何一个寄存器
+//        return int_reg_mapper[content];
+//    } else {
+//        string reg = get_vital_register();
+//        int_reg_mapper[content] = reg;
+//        return reg;
+//    }
+//}
+
+/// 存在存有整数int的寄存器：
+//bool reg_has_int(int content) {
+//    return int_reg_mapper.count(content) != 0;
+//}
 
 string get_label() {
     string reg = "label" + to_string(labels);
     labels++;
     return reg;
 }
+
 
 std::ostream &operator<<(std::ostream &lhs, TAC_TYPE type) {
     switch (type) {
@@ -125,6 +134,9 @@ std::ostream &operator<<(std::ostream &lhs, TAC_TYPE type) {
             break;
         case TAC_TYPE::WRITE:
             lhs << "WRITE";
+            break;
+        case TAC_TYPE::ASSIGN_INT:
+            lhs << "ASSIGN_INT";
             break;
     }
     return lhs;

@@ -5,6 +5,9 @@ using namespace std;
 void translate_compst(Node *CompSt) {
     Node *DefList = CompSt->child[1]; //暂时用不上
     Node *StmtList = CompSt->child[2];
+    for (auto *Def: list_to_vector(DefList)) {
+        translate_Def(Def);
+    }
     for (auto *Stmt: list_to_vector(StmtList)) {
         translate_Stmt(Stmt);
     }
@@ -18,7 +21,7 @@ void translate_Stmt(Node *Stmt) {
         return;
     }
     switch (Stmt->child.size()) {
-        case 3: {
+        case 3: { // RETURN Exp SEMI
             Node *Exp = Stmt->child[1];
             // TODO: 需要translate_exp(Exp,reg);来得知节点exp1值存在哪个reg
             //translate_exp(Exp,reg);
@@ -26,7 +29,7 @@ void translate_Stmt(Node *Stmt) {
             break;
         }
         case 5: {
-            if (Stmt->child[0]->name == "IF") { // if
+            if (Stmt->child[0]->name == "IF") { // IF LP Exp RP Stmt
                 Node *Stmt1 = Stmt->child[4];
                 string label1 = get_label();
                 string label2 = get_label();
@@ -34,7 +37,7 @@ void translate_Stmt(Node *Stmt) {
                 ir_tac.push_back(new TAC(label1, "", "", TAC_TYPE::LABEL));
                 translate_Stmt(Stmt1);
                 ir_tac.push_back(new TAC(label2, "", "", TAC_TYPE::LABEL));
-            } else {
+            } else { // WHILE LP Exp RP Stmt
                 Node *Stmt1 = Stmt->child[4];
                 string label1 = get_label();
                 string label2 = get_label();
@@ -48,7 +51,7 @@ void translate_Stmt(Node *Stmt) {
             }
             break;
         }
-        case 7: {
+        case 7: { //IF LP Exp RP Stmt1 ELSE Stmt2
             Node *Stmt1 = Stmt->child[4];
             Node *Stmt2 = Stmt->child[6];
             string label1 = get_label();

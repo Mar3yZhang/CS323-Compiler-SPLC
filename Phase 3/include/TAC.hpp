@@ -39,6 +39,7 @@ enum class TAC_TYPE;
 enum class TAC_TYPE {
     LABEL,
     FUNCTION,
+    ASSIGN_INT,
     ASSIGN,
     ADDITION,
     SUBTRACTION,

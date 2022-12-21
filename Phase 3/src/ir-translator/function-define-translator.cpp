@@ -25,10 +25,16 @@ void translate_func_varlist(Node *VarList) {
     vector<Node *> ParamDecVector;
     while (VarList->child.size() != 1) {
         ParamDecVector.push_back(VarList->child[0]);
+        VarList = VarList->child[2];
     }
     ParamDecVector.push_back(VarList->child[0]);
-    for (int i = 0; i < ParamDecVector.size(); ++i) {
+    for (auto *ParamDec: ParamDecVector) {
         ///@berief: 生成Param TAC
-        ir_tac.push_back(new TAC(get_vital_register(), "", "", TAC_TYPE::PARAM));
+        Node *VarDec = ParamDec->child[1];
+        Node *ID = VarDec->child[0];
+        assert(ID->name == "ID");   //这里只考虑int
+        string reg = get_vital_register();
+        param_id_reg_mapper[ID->content] = reg;
+        ir_tac.push_back(new TAC(reg, "", "", TAC_TYPE::PARAM));
     }
 }

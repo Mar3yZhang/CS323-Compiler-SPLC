@@ -1,0 +1,12 @@
+FUNCTION main:
+t1 := #0
+t2 := #5
+t3 := t2 + #2
+t4 := t2 * t3
+t5 := t2 * t4
+WRITE t5
+t6 = 1
+t7 = t5 / t2
+t8 = t7 + t6
+WRITE t8
+\
