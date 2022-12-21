@@ -93,6 +93,7 @@ typedef unsigned int flex_uint32_t;
 
 /* begin standard C++ headers. */
 
+/* TODO: this is always defined, so inline it */
 #define yyconst const
 
 #if defined(__GNUC__) && __GNUC__ >= 3
@@ -1689,6 +1690,7 @@ static int yy_get_next_buffer (void)
     void yy_switch_to_buffer  (YY_BUFFER_STATE  new_buffer )
 {
     
+	/* TODO. We should be able to replace this entire function body
 	 * with
 	 *		yypop_buffer_state();
 	 *		yypush_buffer_state(new_buffer);

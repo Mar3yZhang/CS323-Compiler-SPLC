@@ -58,7 +58,7 @@ void translate_exp_id(Node *Exp, const string &reg) {
 }
 
 void translate_exp_minus(Node *Exp, const string &reg) {
-    translate_basic_exp(Exp, get_vital_register());
+    translate_basic_exp(Exp->child[1], get_vital_register());
     TAC *tac = new TAC("0", reg, "", TAC_TYPE::SUBTRACTION);
     ir_tac.push_back(tac);
 }
