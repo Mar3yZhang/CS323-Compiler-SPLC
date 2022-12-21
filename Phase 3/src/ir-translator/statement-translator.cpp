@@ -23,9 +23,10 @@ void translate_Stmt(Node *Stmt) {
     switch (Stmt->child.size()) {
         case 3: { // RETURN Exp SEMI
             Node *Exp = Stmt->child[1];
-            // TODO: 需要translate_exp(Exp,reg);来得知节点exp1值存在哪个reg
-            //translate_exp(Exp,reg);
-            ir_tac.push_back(new TAC("exp->name", "", "", TAC_TYPE::RETURN));
+            string reg = get_vital_register();
+            // TODO: 需要translate_exp(Exp,reg);来得知节点exp1值存在哪个reg FINISH BY ZQ
+            translate_basic_exp(Exp, reg);
+            ir_tac.push_back(new TAC(reg, "", "", TAC_TYPE::RETURN));
             break;
         }
         case 5: {

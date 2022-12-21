@@ -8,6 +8,7 @@
 #include <set>
 #include <vector>
 #include <cassert>
+#include <algorithm>
 
 using namespace std;
 
@@ -27,6 +28,8 @@ extern unordered_map<string, string> param_id_reg_mapper;
 
 ///@将list转换为vector
 vector<Node *> list_to_vector(Node *List);
+
+bool isNumber(const string &str);
 
 void translate_to_tac();
 
@@ -57,7 +60,7 @@ void translate_exp_minus(Node *Exp, const string &reg);
 
 void translate_exp_assign_exp(Node *Exp, const string &reg);
 
-void translate_exp_plus_exp(Node *Exp, const string &reg);
+void translate_exp_plus_sub_mul_div_exp(Node *Exp, const string &reg);
 
 void translate_args(Node *Exp, vector<TAC *> argList);
 
@@ -69,4 +72,4 @@ void translate_Dec(Node *Dec);
 
 void translate_Stmt(Node *Stmt);
 
-std::ostream &operator<<(std::ostream &lhs, TAC_TYPE type);
+std::ostream &operator<<(std::ostream &lhs, const TAC *tac);

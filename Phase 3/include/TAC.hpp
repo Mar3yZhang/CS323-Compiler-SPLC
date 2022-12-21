@@ -39,7 +39,6 @@ enum class TAC_TYPE;
 enum class TAC_TYPE {
     LABEL,
     FUNCTION,
-    ASSIGN_INT,
     ASSIGN,
     ADDITION,
     SUBTRACTION,
@@ -63,14 +62,14 @@ public:
     enum TAC_TYPE type;
 
 public:
-    explicit TAC(string X, string Y, string Z, TAC_TYPE type);
+    explicit TAC(const string& X, const string& Y, const string& Z, TAC_TYPE type);
 
     void print() const;
 
+    static string preprocess_operand(const string &str);
+
     ~TAC() = default;
 };
-
-
 
 
 #endif //PHASE_3_TAC_H

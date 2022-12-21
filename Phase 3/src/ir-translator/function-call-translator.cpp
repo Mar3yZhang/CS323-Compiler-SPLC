@@ -3,9 +3,10 @@
 void translate_args(Node *Exp, vector<TAC *> argList) {
 
     Node *Exp1 = Exp->child[0];
-    /// TODO: 需要translate_exp(Exp,reg);来得知节点exp1值存在哪个reg
-    //translate_exp(Exp,reg);
-    argList.push_back(new TAC("exp_reg", "", "", TAC_TYPE::ARG));
+    /// TODO: 需要translate_exp(Exp,reg);来得知节点exp1值存在哪个reg FINISH BY ZQ
+    string reg = get_vital_register();
+    translate_basic_exp(Exp, reg);
+    argList.push_back(new TAC(reg, "", "", TAC_TYPE::ARG));
     if (Exp->child.size() > 3) {
         translate_args(Exp1, argList);
     }
