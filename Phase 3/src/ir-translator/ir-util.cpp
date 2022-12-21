@@ -73,6 +73,11 @@ string get_temp_register() {
     return reg;
 }
 
+string get_label() {
+    string reg = "label" + to_string(labels);
+    labels++;
+    return reg;
+}
 
 std::ostream &operator<<(std::ostream &lhs, TAC_TYPE type) {
     switch (type) {

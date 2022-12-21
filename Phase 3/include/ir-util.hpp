@@ -25,6 +25,8 @@ string get_vital_register();
 
 string get_temp_register();
 
+string get_label();
+
 void translate_func_dec(Node *CompFunDec);
 
 void translate_func_varlist(Node *VarList);
@@ -39,5 +41,10 @@ TAC *translate_exp_id(Node *Exp);
 
 TAC *translate_exp_minus(Node *Exp);
 
+void translate_args(Node *Exp,vector<TAC*> argList);
+
+void translate_exp_func(Node *Exp);
+
+void translate_Stmt(Node *Stmt);
 
 std::ostream &operator<<(std::ostream &lhs, TAC_TYPE type);
