@@ -3,7 +3,7 @@
 using namespace std;
 
 void translate_compst(Node *CompSt) {
-    Node *DefList = CompSt->child[1]; //暂时用不上
+    Node *DefList = CompSt->child[1];
     Node *StmtList = CompSt->child[2];
     for (auto *Def: list_to_vector(DefList)) {
         translate_Def(Def);
@@ -14,7 +14,6 @@ void translate_compst(Node *CompSt) {
 }
 
 void translate_Stmt(Node *Stmt) {
-    // TODO
     if (Stmt->name != "Stmt") {
         cerr << "Error! The input Node is not Stmt!" << endl;
         cerr << "Error! The input Node is " << Stmt->name << " ! " << endl;
@@ -32,19 +31,25 @@ void translate_Stmt(Node *Stmt) {
         case 5: {
             if (Stmt->child[0]->name == "IF") { // IF LP Exp RP Stmt
                 Node *Stmt1 = Stmt->child[4];
+                Node *Exp = Stmt->child[2];
+                assert(Exp->name == "Exp");
                 string label1 = get_label();
                 string label2 = get_label();
-                // TODO:需要translate_cond_exp(Exp,label1,label2);
+                // TODO:需要translate_cond_exp(Exp,label1,label2); FINISH BY ZQ
+                translate_cond_Exp(Exp, label1, label2);
                 ir_tac.push_back(new TAC(label1, "", "", TAC_TYPE::LABEL));
                 translate_Stmt(Stmt1);
                 ir_tac.push_back(new TAC(label2, "", "", TAC_TYPE::LABEL));
             } else { // WHILE LP Exp RP Stmt
                 Node *Stmt1 = Stmt->child[4];
+                Node *Exp = Stmt->child[2];
+                assert(Exp->name == "Exp");
                 string label1 = get_label();
                 string label2 = get_label();
                 string label3 = get_label();
                 ir_tac.push_back(new TAC(label1, "", "", TAC_TYPE::LABEL));
-                // TODO:需要translate_cond_exp(Exp,label2,label3);
+                // TODO:需要translate_cond_exp(Exp,label2,label3); FINISH BY ZQ
+                translate_cond_Exp(Exp, label2, label3);
                 ir_tac.push_back(new TAC(label2, "", "", TAC_TYPE::LABEL));
                 translate_Stmt(Stmt1);
                 ir_tac.push_back(new TAC(label1, "", "", TAC_TYPE::GOTO));
@@ -55,10 +60,13 @@ void translate_Stmt(Node *Stmt) {
         case 7: { //IF LP Exp RP Stmt1 ELSE Stmt2
             Node *Stmt1 = Stmt->child[4];
             Node *Stmt2 = Stmt->child[6];
+            Node *Exp = Stmt->child[2];
+            assert(Exp->name == "Exp");
             string label1 = get_label();
             string label2 = get_label();
             string label3 = get_label();
-            // TODO:需要translate_cond_exp(Exp,label1,label2);
+            // TODO:需要translate_cond_exp(Exp,label1,label2); FINISH BY ZQ
+            translate_cond_Exp(Exp, label1, label2);
             ir_tac.push_back(new TAC(label1, "", "", TAC_TYPE::LABEL));
             translate_Stmt(Stmt1);
             ir_tac.push_back(new TAC(label3, "", "", TAC_TYPE::GOTO));

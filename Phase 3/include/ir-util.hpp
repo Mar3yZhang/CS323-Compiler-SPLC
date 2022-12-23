@@ -60,11 +60,25 @@ void translate_exp_minus(Node *Exp, const string &reg);
 
 void translate_exp_assign_exp(Node *Exp, const string &reg);
 
+void translate_exp_func_write(Node *Exp, const string &reg);
+
 void translate_exp_plus_sub_mul_div_exp(Node *Exp, const string &reg);
 
 void translate_args(Node *Exp, vector<TAC *> argList);
 
-void translate_exp_func(Node *Exp);
+void translate_exp_func(Node *Exp, const string &reg);
+
+void translate_exp_func_read(Node *Exp, const string &reg);
+
+void preprocess_translate_cond_Exp(Node *Exp, const string &reg);
+
+void translate_cond_Exp_AND(Node *Exp, const string &label_t, const string &label_f);
+
+void translate_cond_Exp_OR(Node *Exp, const string &label_t, const string &label_f);
+
+void translate_cond_Exp_Compares(Node *Exp, const string &label_t, const string &label_f);
+
+void translate_cond_Exp(Node *Exp, const string &label_t, const string &label_f);
 
 void translate_Def(Node *Def);
 

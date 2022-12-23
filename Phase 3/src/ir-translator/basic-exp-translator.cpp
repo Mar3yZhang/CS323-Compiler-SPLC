@@ -3,6 +3,7 @@
 
 /// @使用指定的寄存器来存储EXP的结果
 void translate_basic_exp(Node *Exp, const string &reg) {
+    // TODO: 这里有一个例外的BUG
     switch (Exp->child.size()) {
         case 1: {
             if (Exp->child[0]->name == "INT") { // int
@@ -15,52 +16,62 @@ void translate_basic_exp(Node *Exp, const string &reg) {
             break;
         }
         case 2: {
+            if (Exp->child[0]->name == "NOT") {
+                preprocess_translate_cond_Exp(Exp, reg);
+            }
             if (Exp->child[0]->name == "MINUS") {
                 translate_exp_minus(Exp, reg);
             }
+            break;
         }
         case 3: {
+            Node *ID = Exp->child[0];
             string opt = Exp->child[1]->name;
+
             if (opt == "ASSIGN") {
                 translate_exp_assign_exp(Exp, reg);
-            } else if (opt == "PLUS" || opt == "MINUS"
-                       || opt == "MUL" || opt == "DIV") {
+            }
+
+            if (opt == "PLUS" || opt == "MINUS"
+                || opt == "MUL" || opt == "DIV") {
                 translate_exp_plus_sub_mul_div_exp(Exp, reg);
+            }
+
+            if (opt == "LT" || opt == "LE" || opt == "GT"
+                || opt == "GE" || opt == "NE" || opt == "EQ") {
+                preprocess_translate_cond_Exp(Exp, reg);
+            }
+
+            if (ID->name == "ID") {
+                translate_exp_func(Exp, reg);
             }
             break;
         }
-        //todo:其他二元操作的实现
+        case 4: {
+            Node *ID = Exp->child[0];
+            if (ID->name == "ID") {
+                translate_exp_func(Exp, reg);
+            }
+            break;
+        }
     }
-//    return tac;
 }
 
 void translate_exp_int(Node *Exp, const string &reg) {
-//    int content = stoi(Exp->child[0]->content);
-//     if (!reg_has_int(content)) {
-    TAC *tac = new TAC(reg, Exp->child[0]->content, "", TAC_TYPE::ASSIGN);
-    ir_tac.push_back(tac);
-//    }
+    ir_tac.push_back(new TAC(reg, Exp->child[0]->content, "", TAC_TYPE::ASSIGN));
 }
 
 void translate_exp_id(Node *Exp, const string &reg) {
     Node *ID = Exp->child[0];
     string id = ID->content;
     if (param_id_reg_mapper.count(id) != 0) {  //是传参的寄存器对应的值，不需要额外处理
-        TAC *tac = new TAC(reg, param_id_reg_mapper[id], "", TAC_TYPE::ASSIGN);
-        ir_tac.push_back(tac);
+        ir_tac.push_back(new TAC(reg, param_id_reg_mapper[id], "", TAC_TYPE::ASSIGN));
     }
-
-//    if () {
-//
-//    }
-    // 这里不需要生成新的三地址码，只需要传回id的内部值
-    // 这里的绑定会在赋值时完成
 }
 
 void translate_exp_minus(Node *Exp, const string &reg) {
     translate_basic_exp(Exp->child[1], get_vital_register());
-    TAC *tac = new TAC("0", reg, "", TAC_TYPE::SUBTRACTION);
-    ir_tac.push_back(tac);
+    ir_tac.push_back(new TAC("0", reg, "", TAC_TYPE::SUBTRACTION));
 }
 
 void translate_exp_assign_exp(Node *Exp, const string &reg) {
@@ -72,10 +83,8 @@ void translate_exp_assign_exp(Node *Exp, const string &reg) {
     string new_reg = get_vital_register();
 
     translate_basic_exp(Exp2, new_reg);
-    TAC *tac1 = new TAC(var_reg, new_reg, "", TAC_TYPE::ASSIGN);
-    TAC *tac2 = new TAC(reg, var_reg, "", TAC_TYPE::ASSIGN);
-    ir_tac.push_back(tac1);
-    ir_tac.push_back(tac2);
+    ir_tac.push_back(new TAC(var_reg, new_reg, "", TAC_TYPE::ASSIGN));
+    ir_tac.push_back(new TAC(reg, var_reg, "", TAC_TYPE::ASSIGN));
 }
 
 void translate_exp_plus_sub_mul_div_exp(Node *Exp, const string &reg) {
@@ -100,4 +109,16 @@ void translate_exp_plus_sub_mul_div_exp(Node *Exp, const string &reg) {
         tac = new TAC(reg, reg1, reg2, TAC_TYPE::DIVISION);
     }
     ir_tac.push_back(tac);
+}
+
+
+void preprocess_translate_cond_Exp(Node *Exp, const string &reg) {
+    const string &lb1 = get_label();
+    const string &lb2 = get_label();
+    TAC *code0 = new TAC(reg, "0", "", TAC_TYPE::ASSIGN);
+    ir_tac.push_back(code0);
+    translate_cond_Exp(Exp, lb1, lb2);
+    ir_tac.push_back(new TAC(lb1, "", "", TAC_TYPE::LABEL));
+    ir_tac.push_back(new TAC(reg, "1", "", TAC_TYPE::ASSIGN));
+    ir_tac.push_back(new TAC(lb2, "", "", TAC_TYPE::LABEL));
 }

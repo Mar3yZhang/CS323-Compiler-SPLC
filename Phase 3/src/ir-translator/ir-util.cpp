@@ -128,9 +128,6 @@ std::ostream &operator<<(std::ostream &lhs, const TAC *tac) {
         case TAC_TYPE::GOTO:
             lhs << "GOTO " << tac->X;
             break;
-        case TAC_TYPE::CONDITION: /// TODO: 这里的枚举打印需要根据条件来拓展
-//            lhs << "IF " << tac->X << " := " << tac->Y << " / " << tac->Z;
-            break;
         case TAC_TYPE::RETURN:
             lhs << "RETURN " << tac->X;
             break;
@@ -148,6 +145,24 @@ std::ostream &operator<<(std::ostream &lhs, const TAC *tac) {
             break;
         case TAC_TYPE::WRITE:
             lhs << "WRITE " << tac->X;
+            break;
+        case TAC_TYPE::CONDITION_LT:
+            lhs << "IF " << tac->X << " < " << tac->Y << " GOTO " << tac->Z;
+            break;
+        case TAC_TYPE::CONDITION_LE:
+            lhs << "IF " << tac->X << " <= " << tac->Y << " GOTO " << tac->Z;
+            break;
+        case TAC_TYPE::CONDITION_GT:
+            lhs << "IF " << tac->X << " > " << tac->Y << " GOTO " << tac->Z;
+            break;
+        case TAC_TYPE::CONDITION_GE:
+            lhs << "IF " << tac->X << " >= " << tac->Y << " GOTO " << tac->Z;
+            break;
+        case TAC_TYPE::CONDITION_NE:
+            lhs << "IF " << tac->X << " != " << tac->Y << " GOTO " << tac->Z;
+            break;
+        case TAC_TYPE::CONDITION_EQ:
+            lhs << "IF " << tac->X << " == " << tac->Y << " GOTO " << tac->Z;
             break;
     }
     return lhs;

@@ -45,7 +45,12 @@ enum class TAC_TYPE {
     MULTIPLICATION,
     DIVISION,
     GOTO,
-    CONDITION,
+    CONDITION_LT,
+    CONDITION_LE,
+    CONDITION_GT,
+    CONDITION_GE,
+    CONDITION_NE,
+    CONDITION_EQ,
     RETURN,
     PARAM,
     ARG,
@@ -62,7 +67,7 @@ public:
     enum TAC_TYPE type;
 
 public:
-    explicit TAC(const string& X, const string& Y, const string& Z, TAC_TYPE type);
+    explicit TAC(const string &X, const string &Y, const string &Z, TAC_TYPE type);
 
     void print() const;
 
