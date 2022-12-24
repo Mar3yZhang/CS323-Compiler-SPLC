@@ -1,0 +1,54 @@
+FUNCTION mod :
+PARAM v1
+PARAM v2
+v4 := v1
+v8 := v1
+v9 := v2
+v6 := v8 / v9
+v7 := v2
+v5 := v6 * v7
+v3 := v4 - v5
+RETURN v3
+FUNCTION DigitSum :
+PARAM v10
+v11 := v10
+v12 := #0
+IF v11 == v12 GOTO label1
+GOTO label2
+LABEL label1 :
+v13 := #0
+RETURN v13
+LABEL label2 :
+v17 := v10
+v18 := #10
+ARG v18
+ARG v17
+v15 := CALL mod
+v20 := v10
+v21 := #10
+v19 := v20 / v21
+ARG v19
+v16 := CALL DigitSum
+v14 := v15 + v16
+RETURN v14
+FUNCTION main :
+READ v24
+v22 := v24
+v23 := v22
+v25 := v22
+v26 := #0
+IF v25 < v26 GOTO label3
+GOTO label4
+LABEL label3 :
+v29 := #1
+v28 := #0 - v29
+WRITE v28
+GOTO label5
+LABEL label4 :
+v32 := v22
+ARG v32
+v31 := CALL DigitSum
+WRITE v31
+LABEL label5 :
+v33 := #0
+RETURN v33

@@ -57,9 +57,10 @@ void translate_args_exp(Node *Args, vector<string> &argList) {
 
 void translate_args_exp_comma_args(Node *Args, vector<string> &argList) {
     Node *Exp = Args->child[0];
+    Node *Args1 = Args->child[2];
     assert(Exp->name == "Exp");
     string reg = get_vital_register();
     translate_basic_exp(Exp, reg);
     argList.push_back(reg);
-    translate_args(Args, argList);
+    translate_args(Args1, argList);
 }

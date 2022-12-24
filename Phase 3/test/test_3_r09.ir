@@ -1,87 +1,208 @@
 FUNCTION mod :
 PARAM v1
 PARAM v2
-v4 := v1
-v8 := v1
-v9 := v2
-v6 := v8 / v9
-v7 := v2
-v5 := v6 * v7
-v3 := v4 - v5
-RETURN v11
+v5 := v1
+v9 := v1
+v10 := v2
+v7 := v9 / v10
+v8 := v2
+v6 := v7 * v8
+v4 := v5 - v6
+v3 := v4
+v3 := v3
+v12 := v3
+v11 := v12
+v11 := v11
+v13 := v3
+RETURN v13
 FUNCTION power :
-PARAM v12
-PARAM v13
-v17 := #1
-v18 := v13
-v15 := v17 + v18ADDITION
-v16 := v13
-v14 := v15 - v16
+PARAM v14
+PARAM v15
+v20 := #1
+v21 := v15
+v18 := v20 + v21
+v19 := v15
+v17 := v18 - v19
+v16 := v17
+v16 := v16
 LABEL label1 :
-v19 := v13
-IF v19 > v20 GOTO label2
+v22 := v15
+v32 := v16
+v33 := v16
+v30 := v32 - v33
+v31 := #90
+v28 := v30 + v31
+v29 := #89
+v26 := v28 - v29
+v27 := #1
+v24 := v26 + v27
+v25 := #2
+v23 := v24 - v25
+IF v22 > v23 GOTO label2
 GOTO label3
 LABEL label2 :
+v36 := v16
+v37 := v14
+v35 := v36 * v37
+v16 := v35
+v34 := v16
+v46 := #2
+v47 := #1
+v44 := v46 * v47
+v45 := v15
+v42 := v44 * v45
+v48 := #1
+v49 := v15
+v43 := v48 * v49
+v40 := v42 - v43
+v41 := #1
+v39 := v40 - v41
+v15 := v39
+v38 := v15
 GOTO label1
 LABEL label3 :
-RETURN v21
+v50 := v16
+RETURN v50
 FUNCTION getNumDigits :
-PARAM v22
-v23 := #0
-v24 := v22
-v25 := #0
-IF v24 < v25 GOTO label4
+PARAM v51
+v53 := #0
+v52 := v53
+v52 := v52
+v54 := v51
+v55 := #0
+IF v54 < v55 GOTO label4
 GOTO label5
 LABEL label4 :
-v27 := #1
-#0 := v26 - #
-RETURN v26
+v57 := #1
+v56 := #0 - v57
+RETURN v56
 LABEL label5 :
 LABEL label6 :
-v28 := v22
-v29 := #0
-IF v28 > v29 GOTO label7
+v58 := v51
+v59 := #0
+IF v58 > v59 GOTO label7
 GOTO label8
 LABEL label7 :
+v62 := v51
+v63 := #10
+v61 := v62 / v63
+v51 := v61
+v60 := v51
+v66 := v52
+v67 := #2
+v65 := v66 + v67
+v52 := v65
+v64 := v52
+v70 := v52
+v71 := #2
+v69 := v70 + v71
+v52 := v69
+v68 := v52
+v74 := v52
+v75 := #3
+v73 := v74 - v75
+v52 := v73
+v72 := v52
 GOTO label6
 LABEL label8 :
-RETURN v30
+v76 := v52
+RETURN v76
 FUNCTION isNarcissistic :
-PARAM v31
-v36 := #1
-v37 := v31
-v34 := v36 + v37ADDITION
-v35 := #1
-v33 := v34 - v35
-v32 := CALL getNumDigits
-v38 := #0
-v39 := v31
+PARAM v77
+v83 := #1
+v84 := v77
+v81 := v83 + v84
+v82 := #1
+v80 := v81 - v82
+ARG v80
+v79 := CALL getNumDigits
+v78 := v79
+v78 := v78
+v86 := #0
+v85 := v86
+v85 := v85
+v88 := v77
+v87 := v88
+v87 := v87
 LABEL label9 :
-v41 := #0
-IF v40 > v41 GOTO label10
+v90 := v87
+v91 := #0
+IF v90 > v91 GOTO label10
 GOTO label11
 LABEL label10 :
+v94 := v87
+v95 := #10
+ARG v95
+ARG v94
+v93 := CALL mod
+v89 := v93
+v92 := v89
+v100 := v87
+v101 := v89
+v98 := v100 - v101
+v99 := #10
+v97 := v98 / v99
+v87 := v97
+v96 := v87
+v104 := v85
+v106 := v89
+v107 := v78
+ARG v107
+ARG v106
+v105 := CALL power
+v103 := v104 + v105
+v85 := v103
+v102 := v85
 GOTO label9
 LABEL label11 :
-v43 := v31
-IF v42 == v43 GOTO label12
+v108 := v85
+v109 := v77
+IF v108 == v109 GOTO label12
 GOTO label13
 LABEL label12 :
-v44 := #1
-RETURN v44
+v110 := #1
+RETURN v110
 GOTO label14
 LABEL label13 :
-v45 := #0
-RETURN v45
+v111 := #0
+RETURN v111
 LABEL label14 :
 FUNCTION main :
-v46 := #0
-v47 := #300
+v113 := #0
+v112 := v113
+v112 := v112
+v115 := #300
+v114 := v115
+v114 := v114
 LABEL label15 :
-v49 := #500
-IF v48 < v49 GOTO label16
+v116 := v114
+v117 := #500
+IF v116 < v117 GOTO label16
 GOTO label17
 LABEL label16 :
+v120 := v114
+ARG v120
+v118 := CALL isNarcissistic
+v119 := #1
+IF v118 == v119 GOTO label18
+GOTO label19
+LABEL label18 :
+v122 := v114
+WRITE v122
+v125 := v112
+v126 := #1
+v124 := v125 + v126
+v112 := v124
+v123 := v112
+LABEL label19 :
+v129 := v114
+v130 := #1
+v128 := v129 + v130
+v114 := v128
+v127 := v114
 GOTO label15
 LABEL label17 :
-RETURN v50
+v132 := v112
+WRITE v132
+v133 := v112
+RETURN v133

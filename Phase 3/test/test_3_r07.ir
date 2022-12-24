@@ -1,0 +1,125 @@
+FUNCTION gcd1 :
+PARAM v1
+PARAM v2
+v7 := v1
+v11 := v1
+v12 := v2
+v9 := v11 / v12
+v10 := v2
+v8 := v9 * v10
+v6 := v7 - v8
+v4 := v6
+v5 := v4
+LABEL label1 :
+v13 := v4
+v14 := #0
+IF v13 != v14 GOTO label2
+GOTO label3
+LABEL label2 :
+v16 := v2
+v1 := v16
+v15 := v1
+v18 := v4
+v2 := v18
+v17 := v2
+v21 := v1
+v25 := v1
+v26 := v2
+v23 := v25 / v26
+v24 := v2
+v22 := v23 * v24
+v20 := v21 - v22
+v4 := v20
+v19 := v4
+GOTO label1
+LABEL label3 :
+v28 := v2
+v3 := v28
+v27 := v3
+v29 := v3
+RETURN v29
+FUNCTION gcd2 :
+PARAM v30
+PARAM v31
+v33 := #0
+v32 := v33
+v32 := v32
+v34 := v30
+v35 := v31
+IF v34 > v35 GOTO label4
+GOTO label5
+LABEL label4 :
+v38 := v30
+v42 := v30
+v43 := v31
+v40 := v42 / v43
+v41 := v31
+v39 := v40 * v41
+v37 := v38 - v39
+v32 := v37
+v36 := v32
+v44 := v32
+v45 := #0
+IF v44 == v45 GOTO label7
+GOTO label8
+LABEL label7 :
+v46 := v31
+RETURN v46
+GOTO label9
+LABEL label8 :
+v48 := v31
+v49 := v32
+ARG v49
+ARG v48
+v47 := CALL gcd2
+RETURN v47
+LABEL label9 :
+GOTO label6
+LABEL label5 :
+v52 := v31
+v56 := v31
+v57 := v30
+v54 := v56 / v57
+v55 := v30
+v53 := v54 * v55
+v51 := v52 - v53
+v32 := v51
+v50 := v32
+v58 := v32
+v59 := #0
+IF v58 == v59 GOTO label10
+GOTO label11
+LABEL label10 :
+v60 := v30
+RETURN v60
+GOTO label12
+LABEL label11 :
+v62 := v30
+v63 := v32
+ARG v63
+ARG v62
+v61 := CALL gcd2
+RETURN v61
+LABEL label12 :
+LABEL label6 :
+FUNCTION main :
+READ v65
+v64 := v65
+v64 := v64
+READ v67
+v66 := v67
+v66 := v66
+v70 := v64
+v71 := v66
+ARG v71
+ARG v70
+v69 := CALL gcd1
+WRITE v69
+v74 := v64
+v75 := v66
+ARG v75
+ARG v74
+v73 := CALL gcd2
+WRITE v73
+v76 := #0
+RETURN v76
