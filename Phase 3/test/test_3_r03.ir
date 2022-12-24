@@ -1,0 +1,70 @@
+FUNCTION main :
+v2 := #30
+v1 := v2
+v1 := v1
+v4 := #0
+v3 := v4
+v3 := v3
+v6 := #1
+v5 := v6
+v5 := v5
+v8 := #1
+v7 := v8
+v7 := v7
+LABEL label1 :
+v9 := v7
+v10 := v1
+IF v9 <= v10 GOTO label2
+GOTO label3
+LABEL label2 :
+LABEL label4 :
+v11 := v5
+v12 := v7
+IF v11 <= v12 GOTO label5
+GOTO label6
+LABEL label5 :
+v13 := v7
+v17 := v7
+v18 := v5
+v15 := v17 / v18
+v16 := v5
+v14 := v15 * v16
+IF v13 == v14 GOTO label7
+GOTO label8
+LABEL label7 :
+v21 := v3
+v22 := #1
+v20 := v21 + v22
+v3 := v20
+v19 := v3
+LABEL label8 :
+v25 := v5
+v26 := #1
+v24 := v25 + v26
+v5 := v24
+v23 := v5
+GOTO label4
+LABEL label6 :
+v27 := v3
+v28 := #2
+IF v27 == v28 GOTO label9
+GOTO label10
+LABEL label9 :
+v30 := v7
+WRITE v30
+LABEL label10 :
+v32 := #1
+v5 := v32
+v31 := v5
+v34 := #0
+v3 := v34
+v33 := v3
+v37 := v7
+v38 := #1
+v36 := v37 + v38
+v7 := v36
+v35 := v7
+GOTO label1
+LABEL label3 :
+v39 := #0
+RETURN v39

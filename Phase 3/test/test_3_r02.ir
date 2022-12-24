@@ -88,3 +88,152 @@ LABEL label6 :
 LABEL label3 :
 v5 := #0
 RETURN v5
+FUNCTION main :
+READ v4
+v2 := v4
+v3 := v2
+READ v6
+v1 := v6
+v5 := v1
+v7 := v2
+v11 := v2
+v12 := #100
+v9 := v11 / v12
+v10 := #100
+v8 := v9 * v10
+IF v7 == v8 GOTO label1
+GOTO label2
+LABEL label1 :
+v13 := v2
+v17 := v2
+v18 := #400
+v15 := v17 / v18
+v16 := #400
+v14 := v15 * v16
+IF v13 == v14 GOTO label4
+GOTO label5
+LABEL label4 :
+v19 := v1
+v20 := #2
+IF v19 == v20 GOTO label7
+GOTO label8
+LABEL label7 :
+v22 := #29
+WRITE v22
+GOTO label9
+LABEL label8 :
+v23 := v1
+v27 := v1
+v28 := #2
+v25 := v27 / v28
+v26 := #2
+v24 := v25 * v26
+IF v23 == v24 GOTO label10
+GOTO label11
+LABEL label10 :
+v30 := #30
+WRITE v30
+GOTO label12
+LABEL label11 :
+v32 := #31
+WRITE v32
+LABEL label12 :
+LABEL label9 :
+GOTO label6
+LABEL label5 :
+v33 := v1
+v34 := #2
+IF v33 == v34 GOTO label13
+GOTO label14
+LABEL label13 :
+v36 := #28
+WRITE v36
+GOTO label15
+LABEL label14 :
+v37 := v1
+v41 := v1
+v42 := #2
+v39 := v41 / v42
+v40 := #2
+v38 := v39 * v40
+IF v37 == v38 GOTO label16
+GOTO label17
+LABEL label16 :
+v44 := #30
+WRITE v44
+GOTO label18
+LABEL label17 :
+v46 := #31
+WRITE v46
+LABEL label18 :
+LABEL label15 :
+LABEL label6 :
+GOTO label3
+LABEL label2 :
+v47 := v2
+v51 := v2
+v52 := #4
+v49 := v51 / v52
+v50 := #4
+v48 := v49 * v50
+IF v47 == v48 GOTO label19
+GOTO label20
+LABEL label19 :
+v53 := v1
+v54 := #2
+IF v53 == v54 GOTO label22
+GOTO label23
+LABEL label22 :
+v56 := #29
+WRITE v56
+GOTO label24
+LABEL label23 :
+v57 := v1
+v61 := v1
+v62 := #2
+v59 := v61 / v62
+v60 := #2
+v58 := v59 * v60
+IF v57 == v58 GOTO label25
+GOTO label26
+LABEL label25 :
+v64 := #30
+WRITE v64
+GOTO label27
+LABEL label26 :
+v66 := #31
+WRITE v66
+LABEL label27 :
+LABEL label24 :
+GOTO label21
+LABEL label20 :
+v67 := v1
+v68 := #2
+IF v67 == v68 GOTO label28
+GOTO label29
+LABEL label28 :
+v70 := #28
+WRITE v70
+GOTO label30
+LABEL label29 :
+v71 := v1
+v75 := v1
+v76 := #2
+v73 := v75 / v76
+v74 := #2
+v72 := v73 * v74
+IF v71 == v72 GOTO label31
+GOTO label32
+LABEL label31 :
+v78 := #30
+WRITE v78
+GOTO label33
+LABEL label32 :
+v80 := #31
+WRITE v80
+LABEL label33 :
+LABEL label30 :
+LABEL label21 :
+LABEL label3 :
+v81 := #0
+RETURN v81

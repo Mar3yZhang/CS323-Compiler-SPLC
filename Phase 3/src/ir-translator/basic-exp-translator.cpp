@@ -26,7 +26,6 @@ void translate_basic_exp(Node *Exp, const string &reg) {
         case 3: {
             Node *ID = Exp->child[0];
             string opt = Exp->child[1]->name;
-
             if (opt == "ASSIGN") {
                 translate_exp_assign_exp(Exp, reg);
             }
@@ -43,6 +42,12 @@ void translate_basic_exp(Node *Exp, const string &reg) {
 
             if (ID->name == "ID") {
                 translate_exp_func(Exp, reg);
+            }
+            Node *LP = Exp->child[0];
+            Node *Exp1 = Exp->child[1];
+            Node *RP = Exp->child[2];
+            if (LP->name == "LP" && RP->name == "RP") {
+                translate_basic_exp(Exp1,reg);
             }
             break;
         }
@@ -69,8 +74,9 @@ void translate_exp_id(Node *Exp, const string &reg) {
 }
 
 void translate_exp_minus(Node *Exp, const string &reg) {
-    translate_basic_exp(Exp->child[1], get_vital_register());
-    ir_tac.push_back(new TAC("0", reg, "", TAC_TYPE::SUBTRACTION));
+    string reg1 = get_vital_register();
+    translate_basic_exp(Exp->child[1],reg1);
+    ir_tac.push_back(new TAC(reg, "0",reg1, TAC_TYPE::SUBTRACTION));
 }
 
 void translate_exp_assign_exp(Node *Exp, const string &reg) {

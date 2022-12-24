@@ -1,48 +1,46 @@
 FUNCTION main :
-v1 := #0
-v2 := #0
-RETURN v2
-FUNCTION main :
-v2 := #0
-# := v2
-v1 := #
-v3 := #0
-RETURN v3
-FUNCTION main :
-v2 := #0
-# := v2
-v1 := #
-v4 := #5
-# := v4
-v3 := #
-v9 := #
-v10 := #
-v7 := v9 * v10
-v6 := v7 * v8
-# := v6
-v5 := #
-v12 := #
-WRITE v12
-v17 := #
-v18 := #
-v15 := v17 / v18
-v16 := #1
-v14 := v15 + v16ADDITION
-# := v14
-v13 := #
-v20 := #
-WRITE v20
-v27 := #
-v28 := #
-v25 := v27 + v28ADDITION
-v29 := #
-v30 := #3
-v26 := v29 * v30
-v23 := v25 - v26
-v22 := v23 + v24ADDITION
-# := v22
-v21 := #
-v32 := #
-WRITE v32
-v33 := #0
-RETURN v33
+v5 := #0
+v4 := v5
+v4 := v4
+v7 := #5
+v1 := v7
+v6 := v1
+v12 := v1
+v13 := v1
+v10 := v12 * v13
+v14 := v1
+v15 := #2
+v11 := v14 + v15
+v9 := v10 * v11
+v2 := v9
+v8 := v2
+v17 := v2
+WRITE v17
+v22 := v2
+v23 := v1
+v20 := v22 / v23
+v21 := #1
+v19 := v20 + v21
+v3 := v19
+v18 := v3
+v25 := v3
+WRITE v25
+v32 := v1
+v33 := v2
+v30 := v32 + v33
+v34 := v3
+v35 := #3
+v31 := v34 * v35
+v28 := v30 - v31
+v38 := v2
+v39 := v1
+v36 := v38 / v39
+v37 := #4
+v29 := v36 - v37
+v27 := v28 + v29
+v4 := v27
+v26 := v4
+v41 := v4
+WRITE v41
+v42 := #0
+RETURN v42

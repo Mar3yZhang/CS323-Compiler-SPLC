@@ -33,13 +33,13 @@ void translate_exp_func_write(Node *Exp, const string &reg) {
     string tp = get_vital_register();
     Node *Args = Exp->child[2];
     Node *Exp1 = Args->child[0];
-    assert(Exp1->name == "Exp" && Exp1->child.size() == 1);
+    assert(Exp1->name == "Exp");
     translate_basic_exp(Exp1, tp);
     ir_tac.push_back(new TAC(tp, "", "", TAC_TYPE::WRITE));
 }
 
 
-void translate_args(Node *Args, const vector<string> &argList) {
+void translate_args(Node *Args, vector<string> &argList) {
     if (Args->child.size() == 1) {
         translate_args_exp(Args, argList);
     } else {
@@ -47,7 +47,7 @@ void translate_args(Node *Args, const vector<string> &argList) {
     }
 }
 
-void translate_args_exp(Node *Args, vector<string> argList) {
+void translate_args_exp(Node *Args, vector<string> &argList) {
     Node *Exp = Args->child[0];
     assert(Exp->name == "Exp");
     string reg = get_vital_register();
@@ -55,7 +55,7 @@ void translate_args_exp(Node *Args, vector<string> argList) {
     argList.push_back(reg);
 }
 
-void translate_args_exp_comma_args(Node *Args, vector<string> argList) {
+void translate_args_exp_comma_args(Node *Args, vector<string> &argList) {
     Node *Exp = Args->child[0];
     assert(Exp->name == "Exp");
     string reg = get_vital_register();

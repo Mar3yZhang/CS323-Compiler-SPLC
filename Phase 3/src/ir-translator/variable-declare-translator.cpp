@@ -23,16 +23,21 @@ void translate_Dec(Node *Dec) {
     Node *VarDec = Dec->child[0];
     if (Dec->child.size() == 1) {   //Dec: VarDec
         if (VarDec->child.size() == 1) { // ID
-//            Node *ID = VarDec->child[0];
-//            assert(ID->name == "ID");
-//            id_int_mapper[ID->content] = INT32_MIN;
+            Node *ID = VarDec->child[0];
+            assert(ID->name == "ID");
+            param_id_reg_mapper[ID->content] = get_vital_register();
         } else { //  VarDec LB INT RB
             // TODO: 这里如果考虑数组需要补充逻辑
         }
     } else {    //Dec: VarDec ASSIGN Exp 不考虑数组时等效 Exp ASSIGN Exp
         // TODO: 这里如果考虑数组需要补充逻辑
         assert(Dec->child[1]->name == "ASSIGN");
-        translate_exp_assign_exp(Dec, get_vital_register());
+        Node *VarDec = Dec->child[0];
+        Node *ID = VarDec->child[0];
+        string reg = get_vital_register();
+        param_id_reg_mapper[ID->content] = reg;
+        translate_exp_assign_exp(Dec, reg);
+        
 //        translate_basic_exp(Exp, get_vital_register());
 //        if (VarDec->child.size() == 1) { // ID
 //            Node *ID = VarDec->child[0];

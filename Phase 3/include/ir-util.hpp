@@ -65,11 +65,11 @@ void translate_exp_func_write(Node *Exp, const string &reg);
 
 void translate_exp_plus_sub_mul_div_exp(Node *Exp, const string &reg);
 
-void translate_args(Node *Args, const vector<string>& argList);
+void translate_args(Node *Args, vector<string> &argList);
 
-void translate_args_exp(Node *Args, vector<string> argList);
+void translate_args_exp(Node *Args, vector<string> &argList);
 
-void translate_args_exp_comma_args(Node *Args, vector<string> argList);
+void translate_args_exp_comma_args(Node *Args, vector<string> &argList);
 
 void translate_exp_func(Node *Exp, const string &reg);
 
