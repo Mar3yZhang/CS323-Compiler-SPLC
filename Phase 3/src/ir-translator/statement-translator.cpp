@@ -20,10 +20,21 @@ void translate_Stmt(Node *Stmt) {
         return;
     }
     switch (Stmt->child.size()) {
+        case 1: {   // CompSt
+            assert(Stmt->child[0]->name == "CompSt");
+            Node *CompSt = Stmt->child[0];
+            translate_compst(CompSt);
+            break;
+        }
+        case 2: {   // Exp SEMI
+            assert(Stmt->child[0]->name == "Exp");
+            Node *Exp = Stmt->child[0];
+            translate_basic_exp(Exp, get_vital_register());
+            break;
+        }
         case 3: { // RETURN Exp SEMI
             Node *Exp = Stmt->child[1];
             string reg = get_vital_register();
-            // TODO: 需要translate_exp(Exp,reg);来得知节点exp1值存在哪个reg FINISH BY ZQ
             translate_basic_exp(Exp, reg);
             ir_tac.push_back(new TAC(reg, "", "", TAC_TYPE::RETURN));
             break;
@@ -35,7 +46,6 @@ void translate_Stmt(Node *Stmt) {
                 assert(Exp->name == "Exp");
                 string label1 = get_label();
                 string label2 = get_label();
-                // TODO:需要translate_cond_exp(Exp,label1,label2); FINISH BY ZQ
                 translate_cond_Exp(Exp, label1, label2);
                 ir_tac.push_back(new TAC(label1, "", "", TAC_TYPE::LABEL));
                 translate_Stmt(Stmt1);
@@ -48,7 +58,6 @@ void translate_Stmt(Node *Stmt) {
                 string label2 = get_label();
                 string label3 = get_label();
                 ir_tac.push_back(new TAC(label1, "", "", TAC_TYPE::LABEL));
-                // TODO:需要translate_cond_exp(Exp,label2,label3); FINISH BY ZQ
                 translate_cond_Exp(Exp, label2, label3);
                 ir_tac.push_back(new TAC(label2, "", "", TAC_TYPE::LABEL));
                 translate_Stmt(Stmt1);
@@ -65,7 +74,6 @@ void translate_Stmt(Node *Stmt) {
             string label1 = get_label();
             string label2 = get_label();
             string label3 = get_label();
-            // TODO:需要translate_cond_exp(Exp,label1,label2); FINISH BY ZQ
             translate_cond_Exp(Exp, label1, label2);
             ir_tac.push_back(new TAC(label1, "", "", TAC_TYPE::LABEL));
             translate_Stmt(Stmt1);

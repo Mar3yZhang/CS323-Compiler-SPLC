@@ -3,7 +3,6 @@
 
 /// @使用指定的寄存器来存储EXP的结果
 void translate_basic_exp(Node *Exp, const string &reg) {
-    // TODO: 这里有一个例外的BUG
     switch (Exp->child.size()) {
         case 1: {
             if (Exp->child[0]->name == "INT") { // int

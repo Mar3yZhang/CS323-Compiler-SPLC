@@ -9,6 +9,7 @@
 #include <vector>
 #include <cassert>
 #include <algorithm>
+#include <fstream>
 
 using namespace std;
 
@@ -91,3 +92,5 @@ void translate_Dec(Node *Dec);
 void translate_Stmt(Node *Stmt);
 
 std::ostream &operator<<(std::ostream &lhs, const TAC *tac);
+
+void dump_ir_file(const char* path);

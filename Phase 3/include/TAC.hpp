@@ -69,8 +69,6 @@ public:
 public:
     explicit TAC(const string &X, const string &Y, const string &Z, TAC_TYPE type);
 
-    void print() const;
-
     static string preprocess_operand(const string &str);
 
     ~TAC() = default;

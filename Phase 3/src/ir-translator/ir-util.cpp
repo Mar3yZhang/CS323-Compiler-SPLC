@@ -2,7 +2,6 @@
 #include <utility>
 
 #include "../../include/ir-util.hpp"
-
 using namespace std;
 
 
@@ -24,12 +23,6 @@ TAC::TAC(const string &X, const string &Y, const string &Z, TAC_TYPE type)
 
 string TAC::preprocess_operand(const string &str) {
     return isNumber(str) ? ("#" + str) : str;
-}
-
-
-void TAC::print() const {
-    cout << "---------------------------------------" << endl;
-    cout << this << endl;
 }
 
 bool isNumber(const string &str) {
@@ -58,7 +51,8 @@ void translate_to_tac() {
 void print_tac_ir() {
     cout << ir_tac.size() << " TAC in total !" << endl;
     for (auto *temp: ir_tac) {
-        temp->print();
+        cout << "---------------------------------------" << endl;
+        cout << temp << endl;
     }
 }
 
@@ -103,10 +97,6 @@ string get_label() {
 
 std::ostream &operator<<(std::ostream &lhs, const TAC *tac) {
     switch (tac->type) {
-        case TAC_TYPE::ADDITION:
-            lhs << tac->X << " := " << tac->Y << " + " << tac->Z;
-            lhs << "ADDITION";
-            break;
         case TAC_TYPE::LABEL:
             lhs << "LABEL " << tac->X << " :";
             break;
@@ -115,6 +105,9 @@ std::ostream &operator<<(std::ostream &lhs, const TAC *tac) {
             break;
         case TAC_TYPE::ASSIGN:
             lhs << tac->X << " := " << tac->Y;
+            break;
+        case TAC_TYPE::ADDITION:
+            lhs << tac->X << " := " << tac->Y << " + " << tac->Z;
             break;
         case TAC_TYPE::SUBTRACTION:
             lhs << tac->X << " := " << tac->Y << " - " << tac->Z;
@@ -166,6 +159,20 @@ std::ostream &operator<<(std::ostream &lhs, const TAC *tac) {
             break;
     }
     return lhs;
+}
+
+// 传入 argv[1]
+void dump_ir_file(const char* path){
+    ofstream dataFile;
+    string path_str = path;
+    string newStr = path_str.replace(path_str.size() -3, 3, "ir");
+    dataFile.open(newStr, ofstream::app);
+    // 朝TXT文档中写入数据
+    for (auto * tac: ir_tac) {
+        dataFile << tac <<  endl;
+    }
+    // 关闭文档
+    dataFile.close();
 }
 
 

@@ -1,6 +1,9 @@
 #include "syntax.tab.c"
 
 int main(int argc, char **argv) {
+
+   std::cout << "input path: " << argv[1] << std::endl;
+
     if (argc <= 1) {
         printf("no input path");
         return 1;
@@ -29,6 +32,8 @@ int main(int argc, char **argv) {
             // 是否翻译为三地址码
             translate_to_tac();
             print_tac_ir();
+            // 导出三地址码为IR
+            dump_ir_file(argv[1]) ;
 
         } else {
             printf("\nParsing failed\n");
