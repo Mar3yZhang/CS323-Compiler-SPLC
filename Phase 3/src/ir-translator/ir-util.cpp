@@ -138,7 +138,7 @@ std::ostream &operator<<(std::ostream &lhs, const TAC *tac) {
             lhs << "ARG " << tac->X;
             break;
         case TAC_TYPE::CALL:
-            lhs << tac->X << " := CALL " << tac->Z;
+            lhs << tac->X << " := CALL " << tac->Y;
             break;
         case TAC_TYPE::READ:
             lhs << "READ " << tac->X;

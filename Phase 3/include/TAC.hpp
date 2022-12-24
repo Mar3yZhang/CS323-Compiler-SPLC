@@ -20,7 +20,7 @@ IF x [relop] y GOTO z   if the condition (binary boolean) is true, jump to label
 RETURN x                exit the current function and return value x
 PARAM x                 declare a function parameter
 ARG x                   pass argument x
-x := CALL f             call a function, assign the return value to x
+x := CALL y             call a function, assign the return value to x
 READ x                  read x from console
 WRITE x                 print the value of x to console
 
