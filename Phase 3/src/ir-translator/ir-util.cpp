@@ -2,13 +2,11 @@
 #include <utility>
 
 #include "../../include/ir-util.hpp"
+
 using namespace std;
 
 
 // 寄存器和label的管理需要优化
-//set<int> v_regs;
-//set<int> t_regs;
-//set<int> labels;
 
 int v_regs = 1;
 int t_regs = 1;
@@ -27,7 +25,9 @@ string TAC::preprocess_operand(const string &str) {
 
 bool isNumber(const string &str) {
     for (char const &c: str) {
-        if (std::isdigit(c) == 0) return false;
+        if (std::isdigit(c) == 0 or str.empty()) {
+            return false;
+        }
     }
     return true;
 }
@@ -162,14 +162,14 @@ std::ostream &operator<<(std::ostream &lhs, const TAC *tac) {
 }
 
 // 传入 argv[1]
-void dump_ir_file(const char* path){
+void dump_ir_file(const char *path) {
     ofstream dataFile;
     string path_str = path;
-    string newStr = path_str.replace(path_str.size() -3, 3, "ir");
-    dataFile.open(newStr, ofstream::app);
+    string newStr = path_str.replace(path_str.size() - 3, 3, "ir");
+    dataFile.open(newStr, ofstream::trunc);
     // 朝TXT文档中写入数据
-    for (auto * tac: ir_tac) {
-        dataFile << tac <<  endl;
+    for (auto *tac: ir_tac) {
+        dataFile << tac << endl;
     }
     // 关闭文档
     dataFile.close();
