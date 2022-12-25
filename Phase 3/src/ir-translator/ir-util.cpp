@@ -9,7 +9,6 @@ using namespace std;
 // 寄存器和label的管理需要优化
 
 int v_regs = 1;
-int t_regs = 1;
 int labels = 1;
 
 
@@ -46,6 +45,11 @@ void translate_to_tac() {
         translate_func_dec(CompFunDec);
         translate_compst(CompSt);
     }
+
+    // Optimization
+
+    duplicated_assign_optimization();
+
 }
 
 void print_tac_ir() {
@@ -71,22 +75,6 @@ string get_vital_register() {
     v_regs++;
     return reg;
 }
-
-///TODO:之后再考虑优化
-//string get_vital_register(int content) {
-//    if (reg_has_int(content)) { // 当前数值不存在于任何一个寄存器
-//        return int_reg_mapper[content];
-//    } else {
-//        string reg = get_vital_register();
-//        int_reg_mapper[content] = reg;
-//        return reg;
-//    }
-//}
-
-/// 存在存有整数int的寄存器：
-//bool reg_has_int(int content) {
-//    return int_reg_mapper.count(content) != 0;
-//}
 
 string get_label() {
     string reg = "label" + to_string(labels);
@@ -170,9 +158,76 @@ void dump_ir_file(const char *path) {
     // 朝TXT文档中写入数据
     for (auto *tac: ir_tac) {
         dataFile << tac << endl;
+        delete tac;
     }
     // 关闭文档
     dataFile.close();
 }
 
 
+///// @完成对label的优化
+///// @去除连续的label
+//void label_optimization() {
+//
+//}
+
+///// @去除自己对自己赋值的TAC
+void duplicated_assign_optimization() {
+    unordered_map<string, string> reg_mapper; // x -> y
+    vector<TAC *> erase_list; //待删除指令集合
+    int mapper_opt = true;
+    // 当前的优化方法没法优化具有循环的程序
+    for (auto *tac: ir_tac) {
+        if (tac->type == TAC_TYPE::WRITE) {
+            mapper_opt = false;
+        }
+    }
+
+    auto map = [](unordered_map<string, string> mapper, string str) {
+        if (mapper.count(str) == 0) {
+            return str;
+        } else {
+            return mapper[str];
+        }
+    };
+
+
+    auto print_map_keys = [](const unordered_map<string, string> &mapper) {
+        std::cout << "----------------------------" << std::endl;
+        int counter = 0;
+        for (auto &kv: mapper) {
+            counter++;
+            std::cout << "key" << counter << ": " << kv.first
+                      << " value" << counter << ": " << kv.second << std::endl;
+        }
+        std::cout << "----------------------------" << std::endl;
+    };
+    for (auto *temp_tac: ir_tac) {
+        if (temp_tac->type == TAC_TYPE::ASSIGN) {
+            string x = temp_tac->X;
+            string y = temp_tac->Y;
+            if (x == y) {
+                erase_list.push_back(temp_tac);
+            } else {
+                if (x.find('v') != string::npos     // 两个操作数都是寄存器 包含v
+                    && y.find('v') != string::npos && mapper_opt) {
+                    if (reg_mapper.count(y) != 0) { // 级联映射
+                        reg_mapper[x] = reg_mapper[y];
+                    } else {
+                        reg_mapper[x] = y;
+                    }
+                    erase_list.push_back(temp_tac);
+                }
+            }
+        } else {
+            temp_tac->X = map(reg_mapper, temp_tac->X);
+            temp_tac->Y = map(reg_mapper, temp_tac->Y);
+            temp_tac->Z = map(reg_mapper, temp_tac->Z);
+        }
+    }
+    auto size = ir_tac.size();
+    for (auto *tac: erase_list) {
+        std::remove(ir_tac.begin(), ir_tac.end(), tac);
+        ir_tac.resize(--size);
+    }
+}

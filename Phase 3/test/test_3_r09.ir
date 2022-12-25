@@ -9,10 +9,8 @@ v8 := v2
 v6 := v7 * v8
 v4 := v5 - v6
 v3 := v4
-v3 := v3
 v12 := v3
 v11 := v12
-v11 := v11
 v13 := v3
 RETURN v13
 FUNCTION power :
@@ -24,7 +22,6 @@ v18 := v20 + v21
 v19 := v15
 v17 := v18 - v19
 v16 := v17
-v16 := v16
 LABEL label1 :
 v22 := v15
 v32 := v16
@@ -67,7 +64,6 @@ FUNCTION getNumDigits :
 PARAM v51
 v53 := #0
 v52 := v53
-v52 := v52
 v54 := v51
 v55 := #0
 IF v54 < v55 GOTO label4
@@ -117,13 +113,10 @@ v80 := v81 - v82
 ARG v80
 v79 := CALL getNumDigits
 v78 := v79
-v78 := v78
 v86 := #0
 v85 := v86
-v85 := v85
 v88 := v77
 v87 := v88
-v87 := v87
 LABEL label9 :
 v90 := v87
 v91 := #0
@@ -170,10 +163,8 @@ LABEL label14 :
 FUNCTION main :
 v113 := #0
 v112 := v113
-v112 := v112
 v115 := #300
 v114 := v115
-v114 := v114
 LABEL label15 :
 v116 := v114
 v117 := #500

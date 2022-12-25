@@ -10,18 +10,13 @@
 #include <cassert>
 #include <algorithm>
 #include <fstream>
+#include <list>
 
 using namespace std;
 
 extern vector<TAC *> ir_tac;
 
 extern Node *root_node;
-
-/// @将id和变量内容
-//extern unordered_map<string, int> id_int_mapper;
-
-/// @将数字和存入的寄存器做映射
-//extern unordered_map<int, string> int_reg_mapper;
 
 /// @将id和存入的寄存器做映射专门用于函数传入参数
 extern unordered_map<string, string> param_id_reg_mapper;
@@ -40,8 +35,6 @@ bool reg_has_int(int content);
 
 // 这里的返回寄存器操作需要优化
 string get_vital_register();
-
-string get_vital_register(int content);
 
 string get_label();
 
@@ -94,3 +87,7 @@ void translate_Stmt(Node *Stmt);
 std::ostream &operator<<(std::ostream &lhs, const TAC *tac);
 
 void dump_ir_file(const char* path);
+
+void label_optimization();
+
+void duplicated_assign_optimization();
