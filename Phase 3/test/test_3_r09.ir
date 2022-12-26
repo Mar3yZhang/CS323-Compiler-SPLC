@@ -73,7 +73,6 @@ v57 := #1
 v56 := #0 - v57
 RETURN v56
 LABEL label5 :
-LABEL label6 :
 v58 := v51
 v59 := #0
 IF v58 > v59 GOTO label7
@@ -99,7 +98,7 @@ v75 := #3
 v73 := v74 - v75
 v52 := v73
 v72 := v52
-GOTO label6
+GOTO label5
 LABEL label8 :
 v76 := v52
 RETURN v76

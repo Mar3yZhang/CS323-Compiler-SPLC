@@ -13,7 +13,6 @@ v10 := v1
 IF v9 <= v10 GOTO label2
 GOTO label3
 LABEL label2 :
-LABEL label4 :
 v11 := v5
 v12 := v7
 IF v11 <= v12 GOTO label5
@@ -39,7 +38,7 @@ v26 := #1
 v24 := v25 + v26
 v5 := v24
 v23 := v5
-GOTO label4
+GOTO label2
 LABEL label6 :
 v27 := v3
 v28 := #2

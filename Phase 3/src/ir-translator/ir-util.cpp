@@ -49,6 +49,7 @@ void translate_to_tac() {
     // Optimization
 
     duplicated_assign_optimization();
+    label_optimization();
 
 }
 
@@ -167,9 +168,44 @@ void dump_ir_file(const char *path) {
 
 ///// @完成对label的优化
 ///// @去除连续的label
-//void label_optimization() {
-//
-//}
+void label_optimization() {
+    vector<TAC *> erase_list;
+    string temp;
+    int mapper_opt = true;
+    TAC_TYPE tac_types[6] = {TAC_TYPE::CONDITION_LT,
+    TAC_TYPE::CONDITION_LE,
+    TAC_TYPE::CONDITION_GT,
+    TAC_TYPE::CONDITION_GE,
+    TAC_TYPE::CONDITION_NE,
+    TAC_TYPE::CONDITION_EQ};
+    for (auto *tac: ir_tac) {
+        if (tac->type == TAC_TYPE::LABEL) {
+            if (mapper_opt == false) {
+                for (auto *temp_tac: ir_tac) {
+                    if (temp_tac->type == TAC_TYPE::GOTO && temp_tac->X == tac->X) {
+                        temp_tac->X = temp;
+                    }
+                    for (int i = 0;i < 6;++i) {
+                        if (temp_tac->type == tac_types[i] && temp_tac->Z == tac->X) {
+                            temp_tac->Z = temp;
+                        }
+                    }
+                }
+                erase_list.push_back(tac);
+            } else {
+                temp = tac->X;
+            }
+            mapper_opt = false;
+        } else {
+            mapper_opt = true;
+        }
+    }
+    auto size = ir_tac.size();
+    for (auto *tac: erase_list) {
+        std::remove(ir_tac.begin(), ir_tac.end(), tac);
+        ir_tac.resize(--size);
+    }
+}
 
 ///// @去除自己对自己赋值的TAC
 void duplicated_assign_optimization() {

@@ -73,7 +73,7 @@ ARG v48
 v47 := CALL gcd2
 RETURN v47
 LABEL label9 :
-GOTO label6
+GOTO label12
 LABEL label5 :
 v52 := v31
 v56 := v31
@@ -100,7 +100,6 @@ ARG v62
 v61 := CALL gcd2
 RETURN v61
 LABEL label12 :
-LABEL label6 :
 FUNCTION main :
 READ v65
 v64 := v65

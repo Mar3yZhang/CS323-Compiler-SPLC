@@ -1,20 +1,36 @@
 FUNCTION sqr :
 PARAM v1
-v2 := v1 * v1
+v3 := v1
+v4 := v1
+v2 := v3 * v4
 RETURN v2
 FUNCTION cbc :
 PARAM v5
-v7 := v5 * v5
-v6 := v7 * v5
+v9 := v5
+v10 := v5
+v7 := v9 * v10
+v8 := v5
+v6 := v7 * v8
 RETURN v6
 FUNCTION main :
 READ v14
-WRITE v14
-ARG v14
+v11 := v14
+v13 := v11
+v16 := v11
+WRITE v16
+v19 := v11
+ARG v19
 v18 := CALL sqr
-WRITE v18
-ARG v14
+v12 := v18
+v17 := v12
+v21 := v12
+WRITE v21
+v24 := v11
+ARG v24
 v23 := CALL cbc
-WRITE v23
+v12 := v23
+v22 := v12
+v26 := v12
+WRITE v26
 v27 := #0
 RETURN v27

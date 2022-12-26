@@ -1,47 +1,79 @@
 FUNCTION main :
 v10 := #1
+v6 := v10
+v9 := v6
 v12 := #2
+v7 := v12
+v11 := v7
 v14 := #3
+v8 := v14
+v13 := v8
 v16 := #1
+v2 := v16
+v15 := v2
 v18 := #1
+v3 := v18
+v17 := v3
 READ v20
+v5 := v20
+v19 := v5
+v21 := v5
 v22 := #1
-IF v20 < v22 GOTO label1
+IF v21 < v22 GOTO label1
 GOTO label2
 LABEL label1 :
 v24 := #0
 WRITE v24
-GOTO label3
+GOTO label9
 LABEL label2 :
+v25 := v5
 v26 := #1
-IF v20 == v26 GOTO label4
+IF v25 == v26 GOTO label4
 GOTO label7
 LABEL label7 :
+v27 := v5
 v28 := #2
-IF v20 == v28 GOTO label4
+IF v27 == v28 GOTO label4
 GOTO label5
 LABEL label4 :
 v30 := #1
 WRITE v30
-GOTO label6
+GOTO label9
 LABEL label5 :
+v31 := v5
 v32 := #2
-IF v20 > v32 GOTO label8
+IF v31 > v32 GOTO label8
 GOTO label9
 LABEL label8 :
 v34 := #3
+v1 := v34
+v33 := v1
 LABEL label10 :
-IF v34 <= v20 GOTO label11
+v35 := v1
+v36 := v5
+IF v35 <= v36 GOTO label11
 GOTO label12
 LABEL label11 :
-v38 := v16 + v18
+v39 := v2
+v40 := v3
+v38 := v39 + v40
+v4 := v38
+v37 := v4
+v42 := v3
+v2 := v42
+v41 := v2
+v44 := v4
+v3 := v44
+v43 := v3
+v47 := v1
 v48 := #1
-v46 := v34 + v48
+v46 := v47 + v48
+v1 := v46
+v45 := v1
 GOTO label10
 LABEL label12 :
-WRITE v38
+v50 := v4
+WRITE v50
 LABEL label9 :
-LABEL label6 :
-LABEL label3 :
 v51 := #0
 RETURN v51
