@@ -48,9 +48,8 @@ void translate_to_tac() {
 
     // Optimization
 
-    duplicated_assign_optimization();
     label_optimization();
-
+    duplicated_assign_optimization();
 }
 
 void print_tac_ir() {
@@ -173,11 +172,11 @@ void label_optimization() {
     string temp;
     int mapper_opt = true;
     TAC_TYPE tac_types[6] = {TAC_TYPE::CONDITION_LT,
-    TAC_TYPE::CONDITION_LE,
-    TAC_TYPE::CONDITION_GT,
-    TAC_TYPE::CONDITION_GE,
-    TAC_TYPE::CONDITION_NE,
-    TAC_TYPE::CONDITION_EQ};
+                             TAC_TYPE::CONDITION_LE,
+                             TAC_TYPE::CONDITION_GT,
+                             TAC_TYPE::CONDITION_GE,
+                             TAC_TYPE::CONDITION_NE,
+                             TAC_TYPE::CONDITION_EQ};
     for (auto *tac: ir_tac) {
         if (tac->type == TAC_TYPE::LABEL) {
             if (mapper_opt == false) {
@@ -185,8 +184,8 @@ void label_optimization() {
                     if (temp_tac->type == TAC_TYPE::GOTO && temp_tac->X == tac->X) {
                         temp_tac->X = temp;
                     }
-                    for (int i = 0;i < 6;++i) {
-                        if (temp_tac->type == tac_types[i] && temp_tac->Z == tac->X) {
+                    for (auto &tac_type: tac_types) {
+                        if (temp_tac->type == tac_type && temp_tac->Z == tac->X) {
                             temp_tac->Z = temp;
                         }
                     }
@@ -211,13 +210,7 @@ void label_optimization() {
 void duplicated_assign_optimization() {
     unordered_map<string, string> reg_mapper; // x -> y
     vector<TAC *> erase_list; //待删除指令集合
-    int mapper_opt = true;
     // 当前的优化方法没法优化具有循环的程序
-    for (auto *tac: ir_tac) {
-        if (tac->type == TAC_TYPE::WRITE) {
-            mapper_opt = false;
-        }
-    }
 
     auto map = [](unordered_map<string, string> mapper, string str) {
         if (mapper.count(str) == 0) {
@@ -225,18 +218,6 @@ void duplicated_assign_optimization() {
         } else {
             return mapper[str];
         }
-    };
-
-
-    auto print_map_keys = [](const unordered_map<string, string> &mapper) {
-        std::cout << "----------------------------" << std::endl;
-        int counter = 0;
-        for (auto &kv: mapper) {
-            counter++;
-            std::cout << "key" << counter << ": " << kv.first
-                      << " value" << counter << ": " << kv.second << std::endl;
-        }
-        std::cout << "----------------------------" << std::endl;
     };
     for (auto *temp_tac: ir_tac) {
         if (temp_tac->type == TAC_TYPE::ASSIGN) {
@@ -246,7 +227,7 @@ void duplicated_assign_optimization() {
                 erase_list.push_back(temp_tac);
             } else {
                 if (x.find('v') != string::npos     // 两个操作数都是寄存器 包含v
-                    && y.find('v') != string::npos && mapper_opt) {
+                    && y.find('v') != string::npos && !has_loop) {
                     if (reg_mapper.count(y) != 0) { // 级联映射
                         reg_mapper[x] = reg_mapper[y];
                     } else {
@@ -261,6 +242,17 @@ void duplicated_assign_optimization() {
             temp_tac->Z = map(reg_mapper, temp_tac->Z);
         }
     }
+
+    for (auto *temp_tac: ir_tac) {
+        if (temp_tac->type == TAC_TYPE::ASSIGN) {
+            string x = temp_tac->X;
+            string y = temp_tac->Y;
+            if (x == y) {
+                erase_list.push_back(temp_tac);
+            }
+        }
+    }
+
     auto size = ir_tac.size();
     for (auto *tac: erase_list) {
         std::remove(ir_tac.begin(), ir_tac.end(), tac);

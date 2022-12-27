@@ -59,7 +59,3 @@ v38 := #1
 v36 := v37 + v38
 v7 := v36
 v35 := v7
-GOTO label1
-LABEL label3 :
-v39 := #0
-RETURN v39

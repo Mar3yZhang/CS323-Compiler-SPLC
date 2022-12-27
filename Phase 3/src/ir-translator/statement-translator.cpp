@@ -51,6 +51,9 @@ void translate_Stmt(Node *Stmt) {
                 translate_Stmt(Stmt1);
                 ir_tac.push_back(new TAC(label2, "", "", TAC_TYPE::LABEL));
             } else { // WHILE LP Exp RP Stmt
+                // 有while循环
+                has_loop = true;
+
                 Node *Stmt1 = Stmt->child[4];
                 Node *Exp = Stmt->child[2];
                 assert(Exp->name == "Exp");

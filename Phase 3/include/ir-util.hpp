@@ -21,6 +21,8 @@ extern Node *root_node;
 /// @将id和存入的寄存器做映射专门用于函数传入参数
 extern unordered_map<string, string> param_id_reg_mapper;
 
+// 判断当前的程序是否有while循环，如果有，reg优化将失效
+extern bool has_loop;
 
 ///@将list转换为vector
 vector<Node *> list_to_vector(Node *List);
@@ -30,8 +32,6 @@ bool isNumber(const string &str);
 void translate_to_tac();
 
 void print_tac_ir();
-
-bool reg_has_int(int content);
 
 // 这里的返回寄存器操作需要优化
 string get_vital_register();

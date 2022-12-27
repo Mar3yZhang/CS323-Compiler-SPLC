@@ -18,6 +18,7 @@
     unordered_map<string, int> id_int_mapper;
     unordered_map<int, string> int_reg_mapper;
     unordered_map<string, string> param_id_reg_mapper;
+    bool has_loop = false;
     extern int isError;
     #define PARSER_error_OUTPUT stdout
 %}
