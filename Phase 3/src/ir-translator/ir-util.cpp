@@ -48,8 +48,8 @@ void translate_to_tac() {
 
     // Optimization
 
-    label_optimization();
     duplicated_assign_optimization();
+    label_optimization();
 }
 
 void print_tac_ir() {
@@ -208,54 +208,66 @@ void label_optimization() {
 
 ///// @去除自己对自己赋值的TAC
 void duplicated_assign_optimization() {
-    unordered_map<string, string> reg_mapper; // x -> y
-    vector<TAC *> erase_list; //待删除指令集合
-    // 当前的优化方法没法优化具有循环的程序
-
-    auto map = [](unordered_map<string, string> mapper, string str) {
-        if (mapper.count(str) == 0) {
-            return str;
-        } else {
-            return mapper[str];
-        }
-    };
-    for (auto *temp_tac: ir_tac) {
-        if (temp_tac->type == TAC_TYPE::ASSIGN) {
-            string x = temp_tac->X;
-            string y = temp_tac->Y;
-            if (x == y) {
-                erase_list.push_back(temp_tac);
-            } else {
-                if (x.find('v') != string::npos     // 两个操作数都是寄存器 包含v
-                    && y.find('v') != string::npos && !has_loop) {
-                    if (reg_mapper.count(y) != 0) { // 级联映射
-                        reg_mapper[x] = reg_mapper[y];
-                    } else {
-                        reg_mapper[x] = y;
-                    }
+    if (has_loop) {
+        vector<TAC *> erase_list; //待删除指令集合
+        for (auto *temp_tac: ir_tac) {
+            if (temp_tac->type == TAC_TYPE::ASSIGN) {
+                string x = temp_tac->X;
+                string y = temp_tac->Y;
+                if (x == y
+                    && x.find('v') != string::npos     // 两个操作数都是寄存器 包含v
+                    && y.find('v') != string::npos) {
                     erase_list.push_back(temp_tac);
                 }
             }
-        } else {
-            temp_tac->X = map(reg_mapper, temp_tac->X);
-            temp_tac->Y = map(reg_mapper, temp_tac->Y);
-            temp_tac->Z = map(reg_mapper, temp_tac->Z);
         }
-    }
+        auto size = ir_tac.size();
+        for (auto *tac: erase_list) {
+            std::remove(ir_tac.begin(), ir_tac.end(), tac);
+            ir_tac.resize(--size);
+        }
+        return;
+    } else {
 
-    for (auto *temp_tac: ir_tac) {
-        if (temp_tac->type == TAC_TYPE::ASSIGN) {
-            string x = temp_tac->X;
-            string y = temp_tac->Y;
-            if (x == y) {
-                erase_list.push_back(temp_tac);
+        unordered_map<string, string> reg_mapper; // x -> y
+        vector<TAC *> erase_list; //待删除指令集合
+        // 当前的优化方法没法优化具有循环的程序
+
+        auto map = [](unordered_map<string, string> mapper, string str) {
+            if (mapper.count(str) == 0) {
+                return str;
+            } else {
+                return mapper[str];
+            }
+        };
+        for (auto *temp_tac: ir_tac) {
+            if (temp_tac->type == TAC_TYPE::ASSIGN) {
+                string x = temp_tac->X;
+                string y = temp_tac->Y;
+                if (x == y) {
+                    erase_list.push_back(temp_tac);
+                } else {
+                    if (x.find('v') != string::npos     // 两个操作数都是寄存器 包含v
+                        && y.find('v') != string::npos) {
+                        if (reg_mapper.count(y) != 0) { // 级联映射
+                            reg_mapper[x] = reg_mapper[y];
+                        } else {
+                            reg_mapper[x] = y;
+                        }
+                        erase_list.push_back(temp_tac);
+                    }
+                }
+            } else {
+                temp_tac->X = map(reg_mapper, temp_tac->X);
+                temp_tac->Y = map(reg_mapper, temp_tac->Y);
+                temp_tac->Z = map(reg_mapper, temp_tac->Z);
             }
         }
-    }
 
-    auto size = ir_tac.size();
-    for (auto *tac: erase_list) {
-        std::remove(ir_tac.begin(), ir_tac.end(), tac);
-        ir_tac.resize(--size);
+        auto size = ir_tac.size();
+        for (auto *tac: erase_list) {
+            std::remove(ir_tac.begin(), ir_tac.end(), tac);
+            ir_tac.resize(--size);
+        }
     }
 }

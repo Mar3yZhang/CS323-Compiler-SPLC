@@ -1,12 +1,16 @@
 FUNCTION main :
 v2 := #30
 v1 := v2
+v1 := v1
 v4 := #0
 v3 := v4
+v3 := v3
 v6 := #1
 v5 := v6
+v5 := v5
 v8 := #1
 v7 := v8
+v7 := v7
 LABEL label1 :
 v9 := v7
 v10 := v1
@@ -59,3 +63,7 @@ v38 := #1
 v36 := v37 + v38
 v7 := v36
 v35 := v7
+GOTO label1
+LABEL label3 :
+v39 := #0
+RETURN v39

@@ -20,3 +20,4 @@ v29 := v36 - v37
 v27 := v28 + v29
 WRITE v27
 v42 := #0
+RETURN v42

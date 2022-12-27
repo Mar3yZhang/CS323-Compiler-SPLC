@@ -1,19 +1,15 @@
 FUNCTION main :
 READ v3
-v1 := v3
-v2 := v1
-v4 := v1
 v5 := #0
-IF v4 > v5 GOTO label1
+IF v3 > v5 GOTO label1
 GOTO label2
 LABEL label1 :
 v7 := #1
 WRITE v7
 GOTO label6
 LABEL label2 :
-v8 := v1
 v9 := #0
-IF v8 < v9 GOTO label4
+IF v3 < v9 GOTO label4
 GOTO label5
 LABEL label4 :
 v12 := #1

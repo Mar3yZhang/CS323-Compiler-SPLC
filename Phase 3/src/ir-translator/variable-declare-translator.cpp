@@ -37,18 +37,5 @@ void translate_Dec(Node *Dec) {
         string reg = get_vital_register();
         param_id_reg_mapper[ID->content] = reg;
         translate_exp_assign_exp(Dec, reg);
-        
-//        translate_basic_exp(Exp, get_vital_register());
-//        if (VarDec->child.size() == 1) { // ID
-//            Node *ID = VarDec->child[0];
-//            assert(ID->name == "ID");
-//            id_int_mapper[ID->content] = exp_value;
-//            string reg = int_reg_mapper[exp_value];
-//            TAC *tac = new TAC(get_vital_register(exp_value), reg, "", TAC_TYPE::ASSIGN);
-//            ir_tac.push_back(tac);
-//        }
-//        else{ //  VarDec LB INT RB
-//            // TODO: 这里如果考虑数组需要补充逻辑
-//        }
     }
 }
