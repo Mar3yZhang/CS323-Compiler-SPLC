@@ -1,4 +1,3 @@
-
 CC=gcc
 CPP = g++ -std=c++17
 FLEX=flex
@@ -24,6 +23,9 @@ statement-translator =  ir-translator/statement-translator.cpp
 variable-declare-translator =  ir-translator/variable-declare-translator.cpp
 ir-util =  ir-translator/ir-util.cpp
 
+MIPS32 =  $(mips-asm)
+mips-asm =  target-code-generation/mipsAsm.cpp
+
 splc:
 	@rm -rf ../$(BIN_PATH)
 	@mkdir ../$(BIN_PATH)
@@ -32,7 +34,7 @@ splc:
 	$(BISON) -d syntax.y
 	$(FLEX) lex.l
 
-	$(CPP) $(Type) $(Node) $(SemanticError) $(SyntaxTree) $(SAUtill) $(TAC) $(Main) -lfl -ly -o ../$(BIN_PATH)/splc -g
+	$(CPP) $(Type) $(Node) $(SemanticError) $(SyntaxTree) $(SAUtill) $(TAC) $(MIPS32) $(Main) -lfl -ly -o ../$(BIN_PATH)/splc -g
 clean:
 	@rm -rf ../bin/
 .PHONY: splc

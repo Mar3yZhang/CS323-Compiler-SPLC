@@ -4,6 +4,8 @@
     #include "lex.yy.c"
     #include "../include/syntaxTree.hpp"
     #include "../include/ir-util.hpp"
+    #include "../include/mipsAsm.hpp"
+    #include "../include/mipsAsmStrs.hpp"
 
     using std::string;
     using std::unordered_map;
@@ -21,6 +23,9 @@
     bool has_loop = false;
     extern int isError;
     #define PARSER_error_OUTPUT stdout
+
+    mipsAsm mips_asm;
+
 %}
 
 //%locations

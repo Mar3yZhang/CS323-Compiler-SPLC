@@ -47,8 +47,8 @@ int translate_to_tac() {
     }
 
     // Optimization
-
-    duplicated_assign_optimization();
+    // 这里暂时放弃reg优化，否则
+//    duplicated_assign_optimization();
     label_optimization();
     return v_regs;
 }

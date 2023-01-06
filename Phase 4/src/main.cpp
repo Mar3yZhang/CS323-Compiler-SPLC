@@ -1,8 +1,8 @@
 #include "syntax.tab.c"
-#include "mips_code_generation.cpp"
+
 int main(int argc, char **argv) {
 
-   std::cout << "input path: " << argv[1] << std::endl;
+    std::cout << "input path: " << argv[1] << std::endl;
 
     if (argc <= 1) {
         printf("no input path");
@@ -24,21 +24,23 @@ int main(int argc, char **argv) {
 //            printf("\n\nAbstract Syntex Tree: \n");
 
             // 是否选择打印语法分析树：
-            Node::print(root_node, 0);
+//            Node::print(root_node, 0);
 
-            // 是否打印语义分析符号表
-            print_map_keys();
+//             是否打印语义分析符号表
+//            print_map_keys();
 
             // 是否翻译为三地址码
-            int variable_num = translate_to_tac();
-            print_tac_ir();
-            std::cout << ir_tac.size() << std::endl;
-            std::cout << variable_num << std::endl;
-            // 导出三地址码为IR
-           // dump_ir_file(argv[1]) ;
-            print_data_func();
+            translate_to_tac();
+            // 是否导出三地址码为IR
+            dump_ir_file(argv[1]);
 
-            print_mips_code(ir_tac);
+
+//            print_data_func();
+//            print_mips_code(ir_tac);
+
+            // 是否打印翻译的MIPS32
+            translate_to_mips32();
+
         } else {
             printf("\nParsing failed\n");
         }
