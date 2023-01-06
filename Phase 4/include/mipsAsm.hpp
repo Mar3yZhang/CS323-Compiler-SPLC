@@ -19,8 +19,6 @@ public:
 
     void output_intercodes();
 
-    static void add_intercodes(const vector<TAC *> &ircodes);
-
 private:
     unordered_set<string> vari_names;
 
@@ -29,6 +27,8 @@ private:
 
 std::pair<int, string> new_temp_with_order();
 
-static string new_temp();
+void tac_vector_preprocess(vector<vector<TAC *>> &ircodes_vec_ref);
+
+string get_asm_str(const string &str);
 
 #pragma clang diagnostic pop
