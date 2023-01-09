@@ -124,8 +124,8 @@ void mipsAsm::output_intercodes() {
         unordered_map<string, int32_t> param_to_reg{};
         const auto load_vari_to_register = [&param_to_reg](int32_t order, const string &operand) {
             // 操作数只有可能为 v# or #
-            if (isNumber(operand)) {  // 是常数
-                if (atoi(operand.c_str()) == 0) {
+            if (operand.find('#') != string::npos && isNumber(operand.substr(1))) {// 是常数
+                if (atoi(operand.substr(1).c_str()) == 0) {
                     return string("move $t").append(std::to_string(order)).append(",$zero");
                 }else{
                     // TODO: 这里存在漏洞
