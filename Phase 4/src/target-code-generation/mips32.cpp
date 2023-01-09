@@ -1,6 +1,6 @@
-#include "../../include/mipsAsm.hpp"
+#include "../../include/mips32.hpp"
 #include "../../include/ir-util.hpp"
-#include "../../include/mipsAsmStrs.hpp"
+#include "../../include/mips32-util.hpp"
 #include <unordered_map>
 #include <iostream>
 
@@ -21,17 +21,17 @@ inline static const string pre_build_func =
 
 inline static constexpr int32_t begin_sign = 0;
 
-extern mipsAsm mips_asm;
+extern mips32 mips32;
 
 
 void translate_to_mips32() {
-    mips_asm.scan_symbolTable();
-    mips_asm.outputDataAndText();
-    mips_asm.output_intercodes();
+    mips32.scan_symbolTable();
+    mips32.outputDataAndText();
+    mips32.output_intercodes();
 }
 
 
-void mipsAsm::outputDataAndText() {
+void mips32::outputDataAndText() {
     std::cout << pre_build_data << std::endl;
     for (const auto &vari_name: this->vari_names) {
         printf("_%s: .word 0\n", vari_name.c_str());
@@ -39,11 +39,11 @@ void mipsAsm::outputDataAndText() {
     std::cout << pre_build_func << std::endl;
 }
 
-void mipsAsm::insert_vari(const std::string &str) {
+void mips32::insert_vari(const std::string &str) {
     this->vari_names.insert(str);
 }
 
-void mipsAsm::scan_symbolTable() {
+void mips32::scan_symbolTable() {
     for (const auto &[key, value]: symbolTable) {
         if (value->category == CATEGORY::PRIMITIVE &&
             value->foo.primitive == PRIM::INT) {
@@ -108,6 +108,7 @@ void tac_vector_preprocess(vector<vector<TAC *>> &ircodes_vec_ref) {
             current_tac_vec = new vector<TAC *>;
             current_tac_vec->push_back(tac);
         } else {
+            assert(current_tac_vec != nullptr);
             current_tac_vec->push_back(tac);
         }
     }
@@ -117,7 +118,7 @@ void tac_vector_preprocess(vector<vector<TAC *>> &ircodes_vec_ref) {
     }
 }
 
-void mipsAsm::output_intercodes() {
+void mips32::output_intercodes() {
     // 先将IR根据Function划分
     tac_vector_preprocess(ircodes_vec);
     for (const auto &ircodes: ircodes_vec) {
@@ -127,7 +128,7 @@ void mipsAsm::output_intercodes() {
             if (operand.find('#') != string::npos && isNumber(operand.substr(1))) {// 是常数
                 if (atoi(operand.substr(1).c_str()) == 0) {
                     return string("move $t").append(std::to_string(order)).append(",$zero");
-                }else{
+                } else {
                     // TODO: 这里存在漏洞
                     return string("move $t").append(std::to_string(order)).append(",$zero");
                 }

@@ -24,7 +24,7 @@ variable-declare-translator =  ir-translator/variable-declare-translator.cpp
 ir-util =  ir-translator/ir-util.cpp
 
 MIPS32 =  $(mips-asm)
-mips-asm =  target-code-generation/mipsAsm.cpp
+mips-asm =  target-code-generation/mips32.cpp
 
 splc:
 	@rm -rf ../$(BIN_PATH)

@@ -4,8 +4,8 @@
     #include "lex.yy.c"
     #include "../include/syntaxTree.hpp"
     #include "../include/ir-util.hpp"
-    #include "../include/mipsAsm.hpp"
-    #include "../include/mipsAsmStrs.hpp"
+    #include "../include/mips32-util.hpp"
+    #include "../include/mips32.hpp"
 
     using std::string;
     using std::unordered_map;
@@ -24,7 +24,7 @@
     extern int isError;
     #define PARSER_error_OUTPUT stdout
 
-    mipsAsm mips_asm;
+    mips32 mips32;
 
 %}
 

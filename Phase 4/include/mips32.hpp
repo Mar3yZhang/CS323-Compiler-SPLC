@@ -11,7 +11,7 @@ using namespace std;
 
 void translate_to_mips32();
 
-class mipsAsm {
+class mips32 {
 public:
     void outputDataAndText();
 
