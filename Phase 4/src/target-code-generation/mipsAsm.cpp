@@ -226,11 +226,11 @@ void mipsAsm::output_intercodes() {
                     printf("    %s\n", load_vari_to_register(0, tac->X).c_str());
                     printf("    %s\n", load_vari_to_register(1, tac->Y).c_str());
                     static const unordered_map<TAC_TYPE, string> operandtoStr{
-                            {TAC_TYPE::CONDITION_EQ, "blt"},
-                            {TAC_TYPE::CONDITION_GE, "ble"},
+                            {TAC_TYPE::CONDITION_EQ, "beq"},
+                            {TAC_TYPE::CONDITION_GE, "bge"},
                             {TAC_TYPE::CONDITION_GT, "bgt"},
-                            {TAC_TYPE::CONDITION_LE, "bge"},
-                            {TAC_TYPE::CONDITION_LT, "bne"},
+                            {TAC_TYPE::CONDITION_LE, "ble"},
+                            {TAC_TYPE::CONDITION_LT, "blt"},
                             {TAC_TYPE::CONDITION_NE, "beq"}
                     };
                     printf("    %s  $t0,$t1,%s\n\n",
