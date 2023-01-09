@@ -160,7 +160,7 @@ void dump_ir_file(const char *path) {
     // 朝TXT文档中写入数据
     for (auto *tac: ir_tac) {
         dataFile << tac << endl;
-        delete tac;
+        //delete tac;
     }
     // 关闭文档
     dataFile.close();
