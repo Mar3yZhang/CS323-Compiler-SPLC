@@ -50,6 +50,36 @@ void mipsAsm::scan_symbolTable() {
             this->insert_vari(key);
         }
     }
+    for (const auto *tac: ir_tac) {
+        switch (tac->type) {
+            case TAC_TYPE::PARAM: {
+                this->insert_vari(tac->X);
+                break;
+            }
+            case TAC_TYPE::ASSIGN: {
+                this->insert_vari(tac->X);
+                break;
+            }
+            case TAC_TYPE::ADDITION:
+            case TAC_TYPE::MULTIPLICATION:
+            case TAC_TYPE::SUBTRACTION:
+            case TAC_TYPE::DIVISION: {
+                this->insert_vari(tac->X);
+                break;
+            }
+            case TAC_TYPE::READ: {
+                this->insert_vari(tac->X);
+                break;
+            }
+            case TAC_TYPE::CALL: {
+                this->insert_vari(tac->X);
+                break;
+            }
+            default: {
+                break;
+            }
+        }
+    }
     const auto [temp_num, _] = new_temp_with_order();
     for (auto i = 0; i < temp_num - 1; ++i) {
         this->insert_vari(string("t").append(std::to_string(i)));
@@ -130,8 +160,8 @@ void mipsAsm::output_intercodes() {
                 }
                 case TAC_TYPE::FUNCTION: {
                     // exp: main
-                    printf("%s:",tac->X.c_str());
-                    //cout << TAC->X << ":" << endl;
+                    //printf("%s:",tac->X.c_str());
+                    cout << tac->X << ":" << endl;
                     cout << function_begin << endl << endl;
                     break;
                 }
@@ -205,7 +235,7 @@ void mipsAsm::output_intercodes() {
                     };
                     printf("    %s  $t0,$t1,%s\n\n",
                            operandtoStr.at(tac->type).c_str(),
-                           get_asm_str(tac->Z).c_str()
+                           tac->Z.c_str()
                     );
                     break;
                 }
