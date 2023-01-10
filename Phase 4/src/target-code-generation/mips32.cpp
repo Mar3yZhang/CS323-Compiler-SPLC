@@ -13,18 +13,19 @@ static vector<vector<TAC *>> ircodes_vec;
 
 inline static const string pre_build_data =
 
-#include "preBuiltData.asm"
+#include "pre-built-data.asm"
 
 inline static const string pre_build_func =
 
-#include "preBuiltFunc.asm"
+#include "pre-built-func.asm"
 
 inline static constexpr int32_t begin_sign = 0;
 
+
 extern mips32 mips32;
 
-
-void translate_to_mips32() {
+void translate_to_mips32(const char *path) {
+    mips32.dump_s_file(path);
     mips32.scan_symbolTable();
     mips32.outputDataAndText();
     mips32.output_intercodes();
@@ -120,6 +121,9 @@ void tac_vector_preprocess(vector<vector<TAC *>> &ircodes_vec_ref) {
 
 void mips32::output_intercodes() {
     // 先将IR根据Function划分
+
+
+    string gap = "    ";
     tac_vector_preprocess(ircodes_vec);
     for (const auto &ircodes: ircodes_vec) {
         unordered_map<string, int32_t> param_to_reg{};
@@ -161,23 +165,21 @@ void mips32::output_intercodes() {
                 }
                 case TAC_TYPE::FUNCTION: {
                     // exp: main
-                    //printf("%s:",tac->X.c_str());
-                    cout << tac->X << ":" << endl;
-                    cout << function_begin << endl << endl;
+                    printf("%s:\n",tac->X.c_str());
+                    printf("%s\n\n", function_begin);
+//                    cout << tac->X << ":" << endl;
+//                    cout << function_begin << endl << endl;
                     break;
                 }
                 case TAC_TYPE::ASSIGN: {
                     string left_op = tac->X;
                     string right_op = tac->Y;
                     if (right_op.find('#') != string::npos && isNumber(right_op.substr(1))) {  // 是常数
-                        cout << "    li   $t0," << get_asm_str(right_op) << endl;
-//                        printf("    li   $t0,%s\n", get_asm_str(right_op).c_str());
+                        printf("    li   $t0,%s\n", get_asm_str(right_op).c_str());
                     } else {  // 是临时param V#
-                        cout << "    lw   $t0," << get_asm_str(right_op) << endl;
-//                        printf("    lw   $t0,%s\n", get_asm_str(right_op).c_str());
+                        printf("    lw   $t0,%s\n", get_asm_str(right_op).c_str());
                     }
-                    cout << "    sw   $t0," << get_asm_str(left_op) << endl << endl;
-//                    printf("    sw   $t0,%s\n\n", get_asm_str(left_op).c_str());
+                    printf("    sw   $t0,%s\n\n", get_asm_str(left_op).c_str());
                     break;
                 }
                 case TAC_TYPE::ADDITION:
@@ -185,14 +187,10 @@ void mips32::output_intercodes() {
                 case TAC_TYPE::SUBTRACTION:
                 case TAC_TYPE::DIVISION: {
                     const string &bioOp_name = BioOpNodes.at(tac->type);
-                    cout << "    " << load_vari_to_register(0, tac->Y) << endl;
-                    cout << "    " << load_vari_to_register(1, tac->Z) << endl;
-                    cout << "    " << bioOp_name << "  " << "$t2,$t0,$t1" << endl;
-                    cout << "    sw   $t2," << get_asm_str(tac->X) << endl << endl;
-//                    printf("    %s\n", load_vari_to_register(0, TAC->Y).c_str());
-//                    printf("    %s\n", load_vari_to_register(1, TAC->Z).c_str());
-//                    printf("    %s  $t2,$t0,$t1\n", bioOp_name.c_str());
-//                    printf("    sw   $t2,%s\n\n", get_asm_str(TAC->X).c_str());
+                    printf("    %s\n", load_vari_to_register(0, tac->Y).c_str());
+                    printf("    %s\n", load_vari_to_register(1, tac->Z).c_str());
+                    printf("    %s  $t2,$t0,$t1\n", bioOp_name.c_str());
+                    printf("    sw   $t2,%s\n\n", get_asm_str(tac->X).c_str());
                     break;
                 }
                 case TAC_TYPE::RETURN: {
@@ -259,6 +257,14 @@ void mips32::output_intercodes() {
             }
         }
     }
+}
+
+void mips32::dump_s_file(const char *path) {
+    string path_str = path;
+    string newStr = path_str.replace(path_str.size() - 3, 3, "s");
+    fflush(stdout);
+    setvbuf(stdout, NULL, _IONBF, 0);
+    freopen(newStr.c_str(), "w", stdout);//打印到串口
 }
 
 std::pair<int, string> new_temp_with_order() {

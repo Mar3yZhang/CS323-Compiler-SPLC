@@ -9,7 +9,7 @@
 
 using namespace std;
 
-void translate_to_mips32();
+void translate_to_mips32(const char *path);
 
 class mips32 {
 public:
@@ -19,6 +19,7 @@ public:
 
     void output_intercodes();
 
+    void dump_s_file(const char *path);
 private:
     unordered_set<string> vari_names;
 

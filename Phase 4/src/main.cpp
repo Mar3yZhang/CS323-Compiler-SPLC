@@ -39,7 +39,7 @@ int main(int argc, char **argv) {
 //            print_mips_code(ir_tac);
 
             // 是否打印翻译的MIPS32
-            translate_to_mips32();
+            translate_to_mips32(argv[1]);
 
         } else {
             printf("\nParsing failed\n");
