@@ -121,9 +121,6 @@ void tac_vector_preprocess(vector<vector<TAC *>> &ircodes_vec_ref) {
 
 void mips32::output_intercodes() {
     // 先将IR根据Function划分
-
-
-    string gap = "    ";
     tac_vector_preprocess(ircodes_vec);
     for (const auto &ircodes: ircodes_vec) {
         unordered_map<string, int32_t> param_to_reg{};
@@ -133,7 +130,6 @@ void mips32::output_intercodes() {
                 if (atoi(operand.substr(1).c_str()) == 0) {
                     return string("move $t").append(std::to_string(order)).append(",$zero");
                 } else {
-                    // TODO: 这里存在漏洞
                     return string("move $t").append(std::to_string(order)).append(",$zero");
                 }
             } else {  // 是临时param V#
@@ -167,8 +163,6 @@ void mips32::output_intercodes() {
                     // exp: main
                     printf("%s:\n",tac->X.c_str());
                     printf("%s\n\n", function_begin);
-//                    cout << tac->X << ":" << endl;
-//                    cout << function_begin << endl << endl;
                     break;
                 }
                 case TAC_TYPE::ASSIGN: {

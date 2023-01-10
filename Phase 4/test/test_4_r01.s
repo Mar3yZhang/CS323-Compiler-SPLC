@@ -381,7 +381,7 @@ label2:
     lw $t0,84($sp)
     sw $t0,_p3
     lw $t0,88($sp)
-    sw $t0,_v12
+    sw $t0,_v121
     lw $t0,92($sp)
     sw $t0,_p2
     lw $t0,96($sp)
