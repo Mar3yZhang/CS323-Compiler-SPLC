@@ -1,6 +1,6 @@
 # CS323-Compiler-SPLC
 
-This is the course projects for CS323-Compilers from SUSTech CSE department.
+:smile This is the course projects for CS323-Compilers from SUSTech CSE department.
 
 + SPLC is the abbreviation of SUSTech Programming Language Compiler
 
