@@ -1,14 +1,14 @@
 # CS323-Compiler-SPLC
 
-🥹 This is the course projects for CS323-Compilers from SUSTech CSE department.
+This is the course projects for CS323-Compilers from SUSTech CSE department.
 
 + 😆 SPLC is the abbreviation of SUSTech Programming Language Compiler
 
 + 😃 SPL: A self-defined compiler for programming langauge SPL (C without some basic grammers or syntactic sugar. Eg: array, pointer...)：
  
-+ The project goal is to design a compiler for the SPL.
++ 🐯 The project goal is to design a compiler for the SPL.
 
-+ Progress:
++ 💻 Progress:
 
   + Phase 1️⃣: Add lexical analysis and syntactic analysis function to the SPLC
   
