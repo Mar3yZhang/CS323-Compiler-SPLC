@@ -21,4 +21,4 @@ This is the course projects for CS323-Compilers from SUSTech CSE department.
 
 Phase 4️⃣ Ref: https://github.com/Certseeds/CS323_Compilers_2020F 
 
-Thank you for reading!
+Thank you for your reading!
